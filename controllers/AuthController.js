@@ -6,38 +6,38 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
 // Configuração do Transporter de E-mail
+
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: process.env.SMTP_PORT || 587,
-    secure: false, // true para 465, false para outras portas
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
-});
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: false, // true para 465, false para outras portas
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+   }});
 
 class AuthController {
-    constructor(db) { 
-        this.db = db; 
+    constructor(db) {
+        this.db = db;
     }
 
     async login(req, res) {
         const { nomeEmpresa, email, senha } = req.body;
-        
+
         try {
             // 1. Login Super Admin (Credenciais Fixas)
             if (email === 'admin@saas.com' && senha === '123456') {
-                return res.json({ 
-                    success: true, 
-                    role: 'super_admin', 
-                    redirectUrl: '/super-admin', 
+                return res.json({
+                    success: true,
+                    role: 'super_admin',
+                    redirectUrl: '/super-admin',
                     empresaId: 1,
                     empresaNome: 'Sistema',
-                    usuario: { 
+                    usuario: {
                         id: 0,
-                        nome: 'Super Admin', 
+                        nome: 'Super Admin',
                         email: 'admin@saas.com',
-                        is_admin: 1 
+                        is_admin: 1
                     },
                     config: {
                         logo: null,
@@ -80,16 +80,16 @@ class AuthController {
 
             // 6. Valida a Senha (Suporta texto puro legado E bcrypt hash)
             let senhaValida = false;
-            
+
             if (user.senha === senha) {
                 // Senha em texto puro (LEGADO - migração automática)
                 senhaValida = true;
-                
+
                 // Atualiza para hash bcrypt (melhora de segurança)
                 const hash = await bcrypt.hash(senha, 10);
                 await this.db.execute('UPDATE usuarios_painel SET senha = ? WHERE id = ?', [hash, user.id]);
                 console.log(`[Auth] Senha do usuário ${user.email} migrada para bcrypt`);
-                
+
             } else if (user.senha.startsWith('$2')) {
                 // Senha já em bcrypt
                 senhaValida = await bcrypt.compare(senha, user.senha);
@@ -108,16 +108,16 @@ class AuthController {
             }
 
             // 8. Retorna Sessão Completa
-            res.json({ 
-                success: true, 
-                role: 'cliente', 
-                redirectUrl: '/crm', 
-                empresaId: user.empresa_id, 
+            res.json({
+                success: true,
+                role: 'cliente',
+                redirectUrl: '/crm',
+                empresaId: user.empresa_id,
                 empresaNome: user.empresa_nome,
-                config: { 
-                    logo: user.logo_url, 
-                    cor: user.cor_primaria || '#4f46e5', 
-                    msgs: mensagensPadrao 
+                config: {
+                    logo: user.logo_url,
+                    cor: user.cor_primaria || '#4f46e5',
+                    msgs: mensagensPadrao
                 },
                 usuario: {
                     id: user.id,
@@ -127,28 +127,28 @@ class AuthController {
                 }
             });
 
-        } catch (e) { 
+        } catch (e) {
             console.error('[Auth] Erro no login:', e);
-            res.status(500).json({ error: 'Erro interno do servidor. Tente novamente.' }); 
+            res.status(500).json({ error: 'Erro interno do servidor. Tente novamente.' });
         }
     }
 
     // Recuperação de Senha
     async esqueciSenha(req, res) {
         const { email } = req.body;
-        
+
         try {
             // 1. Verifica se o usuário existe
             const [users] = await this.db.execute(
-                'SELECT id, nome, email FROM usuarios_painel WHERE email = ?', 
+                'SELECT id, nome, email FROM usuarios_painel WHERE email = ?',
                 [email]
             );
-            
+
             if (users.length === 0) {
                 // Por segurança, não revelamos se o email existe
-                return res.json({ 
-                    success: true, 
-                    message: 'Se o email existir, você receberá instruções de recuperação.' 
+                return res.json({
+                    success: true,
+                    message: 'Se o email existir, você receberá instruções de recuperação.'
                 });
             }
 
@@ -156,13 +156,13 @@ class AuthController {
 
             // 2. Gera uma nova senha aleatória (8 caracteres hexadecimais)
             const novaSenhaTemp = crypto.randomBytes(4).toString('hex');
-            
+
             // 3. Criptografa a nova senha
             const hash = await bcrypt.hash(novaSenhaTemp, 10);
 
             // 4. Salva no banco
             await this.db.execute(
-                "UPDATE usuarios_painel SET senha = ? WHERE id = ?", 
+                "UPDATE usuarios_painel SET senha = ? WHERE id = ?",
                 [hash, user.id]
             );
 
@@ -184,31 +184,31 @@ class AuthController {
                         </div>
                     `
                 });
-                
-                res.json({ 
-                    success: true, 
-                    message: `Uma nova senha foi enviada para ${email}` 
+
+                res.json({
+                    success: true,
+                    message: `Uma nova senha foi enviada para ${email}`
                 });
-                
+
             } else {
                 // Fallback para desenvolvimento (mostra no console)
                 console.log(`[DEBUG EMAIL] Nova senha para ${email}: ${novaSenhaTemp}`);
-                res.json({ 
-                    success: true, 
-                    message: 'Senha resetada com sucesso! (SMTP não configurado, verifique o console do servidor)' 
+                res.json({
+                    success: true,
+                    message: 'Senha resetada com sucesso! (SMTP não configurado, verifique o console do servidor)'
                 });
             }
 
-        } catch(e) { 
+        } catch(e) {
             console.error('[Auth] Erro ao recuperar senha:', e);
-            res.status(500).json({ error: 'Erro ao processar solicitação.' }); 
+            res.status(500).json({ error: 'Erro ao processar solicitação.' });
         }
     }
 
     // Troca de Senha (Para usuário logado)
     async trocarSenha(req, res) {
         const { userId, novaSenha } = req.body;
-        
+
         try {
             if (!userId || !novaSenha) {
                 return res.status(400).json({ error: 'Dados incompletos' });
@@ -216,15 +216,15 @@ class AuthController {
 
             const hash = await bcrypt.hash(novaSenha, 10);
             await this.db.execute(
-                "UPDATE usuarios_painel SET senha = ? WHERE id = ?", 
+                "UPDATE usuarios_painel SET senha = ? WHERE id = ?",
                 [hash, userId]
             );
-            
+
             res.json({ success: true, message: 'Senha alterada com sucesso!' });
-            
-        } catch(e) { 
+
+        } catch(e) {
             console.error('[Auth] Erro ao trocar senha:', e);
-            res.status(500).json({ error: e.message }); 
+            res.status(500).json({ error: e.message });
         }
     }
 }

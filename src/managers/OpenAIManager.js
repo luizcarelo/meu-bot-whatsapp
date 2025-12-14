@@ -10,7 +10,7 @@ class OpenAIManager {
         try {
             // 1. Busca configuração da empresa
             const [rows] = await this.db.execute(
-                "SELECT openai_key, openai_prompt, openai_ativo FROM empresas WHERE id = ?", 
+                "SELECT openai_key, openai_prompt, openai_ativo FROM empresas WHERE id = ?",
                 [empresaId]
             );
 

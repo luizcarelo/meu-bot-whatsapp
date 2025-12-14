@@ -36,10 +36,10 @@ const app = express();
 const server = http.createServer(app);
 
 // Configuração do Socket.IO com CORS e Buffer otimizado
-const io = new Server(server, { 
-    cors: { 
+const io = new Server(server, {
+    cors: {
         origin: "*", // Em produção, restrinja para o domínio do seu frontend
-        methods: ["GET", "POST"] 
+        methods: ["GET", "POST"]
     },
     maxHttpBufferSize: 1e8, // 100MB para uploads via socket se necessário
     pingTimeout: 60000 // Aumenta tolerância para conexões lentas
@@ -64,8 +64,8 @@ app.use('/', indexRoutes);
 
 try {
     // Injeção de Dependências nas Rotas da API
-    const apiRoutes = require('./routes/api')(sessionManager, db); 
-    app.use('/api', apiRoutes); 
+    const apiRoutes = require('./routes/api')(sessionManager, db);
+    app.use('/api', apiRoutes);
 } catch (error) {
     console.error("❌ Erro crítico ao carregar rotas da API:", error);
 }
@@ -102,7 +102,7 @@ server.listen(PORT, async () => {
     console.log(`🌐 URL: https://chatbot.lcsolucoesdigital.com.br:${PORT}`);
     console.log(`📅 Data: ${new Date().toLocaleString('pt-BR')}`);
     console.log(`============================================`);
-    
+
     // Auto-Reconexão das Sessões WhatsApp
     console.log('⏳ Iniciando restauração de sessões do WhatsApp...');
     try {

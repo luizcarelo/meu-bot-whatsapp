@@ -23,7 +23,7 @@ class AdminController {
             // 1. KPIs PRINCIPAIS
             // ============================================
             const [kpis] = await this.db.execute(`
-                SELECT 
+                SELECT
                     (SELECT COUNT(*) FROM empresas WHERE id != 1) as total_empresas,
                     (SELECT COUNT(*) FROM empresas WHERE id != 1 AND ativo = 1) as ativas,
                     (SELECT COUNT(*) FROM empresas WHERE id != 1 AND ativo = 0) as bloqueadas,
@@ -36,12 +36,12 @@ class AdminController {
             // 2. LISTA DE CLIENTES COM MÉTRICAS
             // ============================================
             const [clientes] = await this.db.execute(`
-                SELECT 
-                    e.id, 
-                    e.nome, 
-                    e.plano, 
-                    e.limite_usuarios, 
-                    e.ativo, 
+                SELECT
+                    e.id,
+                    e.nome,
+                    e.plano,
+                    e.limite_usuarios,
+                    e.ativo,
                     e.created_at,
                     e.whatsapp_status,
                     u.email as admin_email,
@@ -50,7 +50,7 @@ class AdminController {
                     (SELECT COUNT(*) FROM mensagens WHERE empresa_id = e.id) as total_msgs,
                     (SELECT COUNT(*) FROM contatos WHERE empresa_id = e.id) as total_contatos,
                     (SELECT COUNT(*) FROM contatos WHERE empresa_id = e.id AND status_atendimento = 'ATENDENDO') as em_atendimento
-                FROM empresas e 
+                FROM empresas e
                 LEFT JOIN usuarios_painel u ON u.empresa_id = e.id AND u.is_admin = 1
                 WHERE e.id != 1
                 GROUP BY e.id
@@ -63,8 +63,7 @@ class AdminController {
             const clientesFormatados = clientes.map(cliente => ({
                 ...cliente,
                 created_at: new Date(cliente.created_at).toLocaleDateString('pt-BR'),
-                uso_percentual: Math.round((cliente.total_users / cliente.limite_usuarios) * 100),
-                status_whatsapp: cliente.whatsapp_status || 'DESCONECTADO'
+                uso_percentual: Math.round(((cliente.total_users || 0) / (cliente.limite_usuarios || 1)) * 100),                status_whatsapp: cliente.whatsapp_status || 'DESCONECTADO'
             }));
 
             res.json({
@@ -184,11 +183,11 @@ class AdminController {
                 // ============================================
                 const [resEmp] = await conn.execute(
                     `INSERT INTO empresas (
-                        nome, 
-                        plano, 
-                        limite_usuarios, 
-                        ativo, 
-                        mensagens_padrao, 
+                        nome,
+                        plano,
+                        limite_usuarios,
+                        ativo,
+                        mensagens_padrao,
                         welcome_media_type,
                         cor_primaria,
                         msg_ausencia,
@@ -197,7 +196,7 @@ class AdminController {
                         horario_fim,
                         dias_funcionamento,
                         created_at
-                    ) VALUES (?, ?, ?, 1, ?, 'texto', '#4f46e5', 
+                    ) VALUES (?, ?, ?, 1, ?, 'texto', '#4f46e5',
                         'Olá! Nosso horário de atendimento é de segunda a sexta, das 8h às 18h. Retornaremos assim que possível.',
                         'Obrigado pelo contato! Por favor, avalie nosso atendimento de 1 a 5.',
                         '08:00', '18:00', ?, NOW())`,
@@ -237,11 +236,11 @@ class AdminController {
                     const s = setores[i];
                     await conn.execute(
                         `INSERT INTO setores (
-                            empresa_id, 
-                            nome, 
-                            mensagem_saudacao, 
-                            padrao, 
-                            cor, 
+                            empresa_id,
+                            nome,
+                            mensagem_saudacao,
+                            padrao,
+                            cor,
                             ordem
                         ) VALUES (?, ?, ?, 0, ?, ?)`,
                         [empId, s.nome, s.msg, s.cor, i]
@@ -282,9 +281,9 @@ class AdminController {
                 for (const r of rapidas) {
                     await conn.execute(
                         `INSERT INTO mensagens_rapidas (
-                            empresa_id, 
-                            titulo, 
-                            conteudo, 
+                            empresa_id,
+                            titulo,
+                            conteudo,
                             atalho
                         ) VALUES (?, ?, ?, ?)`,
                         [empId, r.titulo, r.conteudo, r.atalho]
@@ -299,11 +298,11 @@ class AdminController {
 
                 await conn.execute(
                     `INSERT INTO usuarios_painel (
-                        empresa_id, 
-                        nome, 
-                        email, 
-                        senha, 
-                        is_admin, 
+                        empresa_id,
+                        nome,
+                        email,
+                        senha,
+                        is_admin,
                         cargo,
                         ativo,
                         created_at
@@ -392,8 +391,8 @@ class AdminController {
             // 3. ATUALIZAR EMPRESA
             // ============================================
             await this.db.execute(
-                `UPDATE empresas 
-                SET nome = ?, plano = ?, limite_usuarios = ?, updated_at = NOW() 
+                `UPDATE empresas
+                SET nome = ?, plano = ?, limite_usuarios = ?, updated_at = NOW()
                 WHERE id = ?`,
                 [nome, plano, limite, id]
             );
@@ -403,8 +402,8 @@ class AdminController {
             // ============================================
             if (admin_email) {
                 await this.db.execute(
-                    `UPDATE usuarios_painel 
-                    SET email = ? 
+                    `UPDATE usuarios_painel
+                    SET email = ?
                     WHERE empresa_id = ? AND is_admin = 1`,
                     [admin_email, id]
                 );
@@ -418,8 +417,8 @@ class AdminController {
                 const senhaHash = await bcrypt.hash(admin_senha_nova, 10);
 
                 await this.db.execute(
-                    `UPDATE usuarios_painel 
-                    SET senha = ? 
+                    `UPDATE usuarios_painel
+                    SET senha = ?
                     WHERE empresa_id = ? AND is_admin = 1`,
                     [senhaHash, id]
                 );

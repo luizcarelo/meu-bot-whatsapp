@@ -1,7 +1,7 @@
 class CrmController {
-    constructor(db, sessionManager) { 
-        this.db = db; 
-        this.sm = sessionManager; 
+    constructor(db, sessionManager) {
+        this.db = db;
+        this.sm = sessionManager;
     }
 
     emitirAtualizacao(empresaId, dados) {
@@ -64,63 +64,63 @@ class CrmController {
         }
     }
 
-    async getContatos(req, res) {
-        const userId = req.headers['x-user-id'];
-        const statusFiltro = req.query.status; 
-        
-        // Verifica se é admin
-        const [users] = await this.db.execute('SELECT is_admin FROM usuarios_painel WHERE id = ?', [userId]);
-        // is_admin pode vir como 1/0 (número) ou true/false (boolean), convertemos para booleano
-        const isAdmin = users[0] && (users[0].is_admin == 1 || users[0].is_admin === true);
 
-        let sql = `
-            SELECT c.*, 
-            (SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg, 
-            (SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
-            s.nome as nome_setor,
-            s.cor as cor_setor,
-            u.nome as nome_atendente
-            FROM contatos c 
-            LEFT JOIN setores s ON c.setor_id = s.id
-            LEFT JOIN usuarios_painel u ON c.atendente_id = u.id
-            WHERE c.empresa_id = ? 
-        `;
+async getContatos(req, res) {
+  const userId = req.headers['x-user-id'];
+  const statusFiltro = req.query.status;
 
-        if (statusFiltro === 'meus') {
-            // Meus: Apenas os que eu estou atendendo
-            sql += ` AND c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ${this.db.escape(userId)}`;
-        } else if (statusFiltro === 'fila') {
-            // Fila:
-            // Se for Admin: Vê TODA a fila.
-            // Se NÃO for Admin: Vê apenas a fila dos setores que ele pertence.
-            sql += ` AND c.status_atendimento = 'FILA'`;
-            
-            if (!isAdmin) {
-                sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ${this.db.escape(userId)})`;
-            }
-        } else if (statusFiltro === 'todos') {
-            // Todos (para Admin supervisionar ou histórico)
-            // Admin vê tudo. Usuário comum não deveria ver esta aba ou veria vazio/apenas os seus? 
-            // Vamos assumir que 'todos' mostra atendimentos ativos de outros colegas se for admin.
-            if (isAdmin) {
-               // Admin vê tudo que não está finalizado/fechado ou pode ver tudo mesmo
-               // Vou deixar ver tudo que está 'ATENDENDO' ou 'FILA' ou 'ABERTO'
-               sql += ` AND c.status_atendimento IN ('ATENDENDO', 'FILA', 'ABERTO')`;
-            } else {
-               // Usuário normal na aba 'todos' vê apenas o que ele pode ver (fila dele + meus)
-               sql += ` AND (
-                   (c.status_atendimento = 'FILA' AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ${this.db.escape(userId)}))
-                   OR 
-                   (c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ${this.db.escape(userId)})
-               )`;
-            }
-        }
+  try {
+    const [users] = await this.db.execute(
+      'SELECT is_admin FROM usuarios_painel WHERE id = ?',
+      [userId]
+    );
+    const isAdmin = users[0] && (users[0].is_admin == 1 || users[0].is_admin === true);
 
-        sql += ` ORDER BY CASE WHEN ordenacao IS NULL THEN 0 ELSE 1 END, ordenacao DESC`;
-        
-        const [rows] = await this.db.execute(sql, [req.empresaId]);
-        res.json(rows);
+    let sql = `
+      SELECT c.*,
+        (SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,
+        (SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
+        s.nome as nome_setor,
+        s.cor as cor_setor,
+        u.nome as nome_atendente
+      FROM contatos c
+      LEFT JOIN setores s ON c.setor_id = s.id
+      LEFT JOIN usuarios_painel u ON c.atendente_id = u.id
+      WHERE c.empresa_id = ?
+    `;
+    const params = [req.empresaId];
+
+    if (statusFiltro === 'meus') {
+      sql += ` AND c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?`;
+      params.push(userId);
+    } else if (statusFiltro === 'fila') {
+      sql += ` AND c.status_atendimento = 'FILA'`;
+      if (!isAdmin) {
+        sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;
+        params.push(userId);
+      }
+    } else if (statusFiltro === 'todos') {
+      if (isAdmin) {
+        sql += ` AND c.status_atendimento IN ('ATENDENDO','FILA','ABERTO')`;
+      } else {
+        sql += ` AND (
+          (c.status_atendimento = 'FILA' AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?))
+          OR
+          (c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?)
+        )`;
+        params.push(userId, userId);
+      }
     }
+
+       sql += ` ORDER BY CASE WHEN ordenacao IS NULL THEN 0 ELSE 1 END, ordenacao DESC`;
+
+    const [rows] = await this.db.execute(sql, params);
+    res.json(rows);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Erro ao buscar contatos' });
+  }
+}
 
     // --- FLUXO DE ATENDIMENTO ---
 
@@ -130,12 +130,12 @@ class CrmController {
         try {
             // Admin pode roubar (force take over)
             // Usuário só assume se estiver na fila ou se não tiver dono
-            
+
             await this.db.execute(
                 `UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
                 [atendenteId, req.empresaId, telefone]
             );
-            
+
             // Notifica no chat
             const sock = this.sm.getSession(req.empresaId);
             if(sock) {
@@ -164,9 +164,9 @@ class CrmController {
                 `UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?`,
                 [setorId, req.empresaId, telefone]
             );
-            
+
             await this.db.execute(`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`, [req.empresaId, telefone, `🔄 *Transferido para setor:* ${setor[0]?.nome}`]);
-            
+
             this.emitirAtualizacao(req.empresaId, { action: 'transferir', telefone });
             res.json({ success: true });
         } catch(e) { res.status(500).json({error: e.message}); }
@@ -208,7 +208,7 @@ class CrmController {
                 `UPDATE contatos SET status_atendimento = 'AGUARDANDO_AVALIACAO' WHERE empresa_id = ? AND telefone = ?`,
                 [req.empresaId, telefone]
             );
-            
+
             const sock = this.sm.getSession(req.empresaId);
             if (sock) {
                 await sock.sendMessage(telefone, { text: msgEncerramento });
@@ -225,7 +225,7 @@ class CrmController {
     async getConfig(req, res) {
         try {
             const [rows] = await this.db.execute(
-                'SELECT nome, nome_sistema, logo_url, cor_primaria, mensagens_padrao, msg_ausencia, msg_avaliacao, horario_inicio, horario_fim, dias_funcionamento, welcome_media_url, welcome_media_type, whatsapp_numero, whatsapp_status, whatsapp_updated_at, openai_key, openai_prompt, openai_ativo FROM empresas WHERE id = ?', 
+                'SELECT nome, nome_sistema, logo_url, cor_primaria, mensagens_padrao, msg_ausencia, msg_avaliacao, horario_inicio, horario_fim, dias_funcionamento, welcome_media_url, welcome_media_type, whatsapp_numero, whatsapp_status, whatsapp_updated_at, openai_key, openai_prompt, openai_ativo FROM empresas WHERE id = ?',
                 [req.empresaId]
             );
             const dados = rows[0];
@@ -244,7 +244,7 @@ class CrmController {
         if(mensagens) { updateFields.push('mensagens_padrao = ?'); updateValues.push(mensagens); }
         if(msg_ausencia !== undefined) { updateFields.push('msg_ausencia = ?'); updateValues.push(msg_ausencia); }
         if(msg_avaliacao !== undefined) { updateFields.push('msg_avaliacao = ?'); updateValues.push(msg_avaliacao); }
-        
+
         if(horario_inicio) { updateFields.push('horario_inicio = ?'); updateValues.push(horario_inicio); }
         if(horario_fim) { updateFields.push('horario_fim = ?'); updateValues.push(horario_fim); }
         if(dias) { updateFields.push('dias_funcionamento = ?'); updateValues.push(dias); }
@@ -292,10 +292,10 @@ class CrmController {
     async sendBroadcast(req, res) {
         const { mensagem } = req.body;
         if (!mensagem) return res.status(400).json({ error: 'Mensagem vazia' });
-        
+
         try {
             const [contatos] = await this.db.execute(
-                'SELECT telefone FROM contatos WHERE empresa_id = ?', 
+                'SELECT telefone FROM contatos WHERE empresa_id = ?',
                 [req.empresaId]
             );
 
@@ -318,13 +318,13 @@ class CrmController {
 
     // --- SETORES ---
 
-    async getSetores(req, res) { 
-        const [rows] = await this.db.execute('SELECT * FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC', [req.empresaId]); 
-        res.json(rows); 
+    async getSetores(req, res) {
+        const [rows] = await this.db.execute('SELECT * FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC', [req.empresaId]);
+        res.json(rows);
     }
-    
-    async createSetor(req, res) { 
-        const { nome, mensagem, cor } = req.body; 
+
+    async createSetor(req, res) {
+        const { nome, mensagem, cor } = req.body;
         let mediaUrl = null;
         let mediaType = null;
 
@@ -337,10 +337,10 @@ class CrmController {
         }
 
         await this.db.execute(
-            'INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, media_url, media_type, cor) VALUES (?, ?, ?, 0, ?, ?, ?)', 
+            'INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, media_url, media_type, cor) VALUES (?, ?, ?, 0, ?, ?, ?)',
             [req.empresaId, nome, mensagem, mediaUrl, mediaType, cor || '#cbd5e1']
-        ); 
-        res.json({success:true}); 
+        );
+        res.json({success:true});
     }
 
     async updateSetor(req, res) {
@@ -405,34 +405,36 @@ class CrmController {
 
     // --- USUÁRIOS E EQUIPE ---
 
-    async getAtendentes(req, res) { 
+    async getAtendentes(req, res) {
         const [rows] = await this.db.execute(`
             SELECT u.id, u.nome, u.email, u.is_admin, u.telefone, u.cargo, u.ativo,
-            (SELECT GROUP_CONCAT(s.nome SEPARATOR ', ') 
-             FROM usuarios_setores us 
-             JOIN setores s ON us.setor_id = s.id 
+            (SELECT GROUP_CONCAT(s.nome SEPARATOR ', ')
+             FROM usuarios_setores us
+             JOIN setores s ON us.setor_id = s.id
              WHERE us.usuario_id = u.id) as setores,
-             (SELECT GROUP_CONCAT(s.id SEPARATOR ',') 
-             FROM usuarios_setores us 
-             JOIN setores s ON us.setor_id = s.id 
+             (SELECT GROUP_CONCAT(s.id SEPARATOR ',')
+             FROM usuarios_setores us
+             JOIN setores s ON us.setor_id = s.id
              WHERE us.usuario_id = u.id) as setores_ids
-            FROM usuarios_painel u 
-            WHERE u.empresa_id = ?`, [req.empresaId]); 
-        res.json(rows); 
+            FROM usuarios_painel u
+            WHERE u.empresa_id = ?`, [req.empresaId]);
+        res.json(rows);
     }
 
     async createAtendente(req, res) {
+        const bcrypt = require('bcryptjs');
+        const senhaHash = await bcrypt.hash(senha, 10);
         const { nome, email, senha, is_admin, setores, telefone, cargo, ativo } = req.body;
         const [emp] = await this.db.execute('SELECT limite_usuarios FROM empresas WHERE id = ?', [req.empresaId]);
         const [qtd] = await this.db.execute('SELECT COUNT(*) as total FROM usuarios_painel WHERE empresa_id = ?', [req.empresaId]);
         if (qtd[0].total >= emp[0].limite_usuarios) return res.status(400).json({ error: 'Limite atingido.' });
-        
+
         const conn = await this.db.getConnection();
         try {
             await conn.beginTransaction();
             const [resUser] = await conn.execute(
-                'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-                [req.empresaId, nome, email, senha, is_admin ? 1 : 0, telefone, cargo, ativo ? 1 : 0]
+                'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                [req.empresaId, nome, email, senhaHash, is_admin ? 1 : 0, telefone, cargo, ativo ? 1 : 0]
             );
             if (setores && Array.isArray(setores)) {
                 for (const sId of setores) {
@@ -449,9 +451,9 @@ class CrmController {
         }
     }
 
-    async deleteAtendente(req, res) { 
-        await this.db.execute('DELETE FROM usuarios_painel WHERE id=? AND empresa_id=?', [req.params.id, req.empresaId]); 
-        res.json({ success: true }); 
+    async deleteAtendente(req, res) {
+        await this.db.execute('DELETE FROM usuarios_painel WHERE id=? AND empresa_id=?', [req.params.id, req.empresaId]);
+        res.json({ success: true });
     }
 
     // --- OUTROS ---
@@ -475,15 +477,15 @@ class CrmController {
     async getAvaliacoes(req, res) {
         try {
             const [media] = await this.db.execute(
-                `SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacoes WHERE empresa_id = ?`, 
+                `SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacoes WHERE empresa_id = ?`,
                 [req.empresaId]
             );
             const [lista] = await this.db.execute(
-                `SELECT a.*, u.nome as nome_atendente, c.nome as nome_cliente 
-                 FROM avaliacoes a 
-                 LEFT JOIN usuarios_painel u ON a.atendente_id = u.id 
+                `SELECT a.*, u.nome as nome_atendente, c.nome as nome_cliente
+                 FROM avaliacoes a
+                 LEFT JOIN usuarios_painel u ON a.atendente_id = u.id
                  LEFT JOIN contatos c ON a.contato_telefone = c.telefone AND c.empresa_id = a.empresa_id
-                 WHERE a.empresa_id = ? 
+                 WHERE a.empresa_id = ?
                  ORDER BY a.data_avaliacao DESC LIMIT 50`,
                 [req.empresaId]
             );
@@ -492,9 +494,24 @@ class CrmController {
                 total: media[0].total,
                 lista: lista
             });
-        } catch(e) { 
+        } catch(e) {
             console.error(e);
-            res.status(500).json({ error: e.message }); 
+            res.status(500).json({ error: e.message });
+        }
+    }
+    
+    async getAgenda(req, res) {
+        try {
+            const [rows] = await this.db.execute(`
+                SELECT c.*, s.nome as nome_setor
+                FROM contatos c
+                LEFT JOIN setores s ON c.setor_id = s.id
+                WHERE c.empresa_id = ?
+                ORDER BY c.nome ASC
+            `, [req.empresaId]);
+            res.json(rows);
+        } catch (e) {
+            res.status(500).json({ error: 'Erro ao carregar agenda' });
         }
     }
 }

@@ -6,13 +6,13 @@
 /**
  * Middleware de autenticação para proteger rotas
  * Verifica se a empresa está identificada no header
- * 
+ *
  * @param {Object} req - Request object
  * @param {Object} res - Response object
  * @param {Function} next - Next middleware
  */
 module.exports = (req, res, next) => {
-    
+
     // ============================================
     // ROTAS PÚBLICAS (SEM AUTENTICAÇÃO)
     // ============================================
@@ -40,7 +40,7 @@ module.exports = (req, res, next) => {
 
     // Valida se o ID da empresa foi fornecido
     if (!empresaId || isNaN(empresaId)) {
-        return res.status(401).json({ 
+        return res.status(401).json({
             error: 'Acesso não autorizado',
             message: 'ID da empresa não fornecido ou inválido',
             code: 'EMPRESA_ID_MISSING'
@@ -67,7 +67,7 @@ module.exports = (req, res, next) => {
  */
 module.exports.isAdmin = async (req, res, next) => {
     if (!req.userId) {
-        return res.status(403).json({ 
+        return res.status(403).json({
             error: 'Acesso negado',
             message: 'Esta ação requer autenticação de usuário'
         });
@@ -79,9 +79,9 @@ module.exports.isAdmin = async (req, res, next) => {
         // TODO: Implementar verificação de admin no banco
         next();
     } catch (err) {
-        return res.status(500).json({ 
+        return res.status(500).json({
             error: 'Erro ao verificar permissões',
-            message: err.message 
+            message: err.message
         });
     }
 };
