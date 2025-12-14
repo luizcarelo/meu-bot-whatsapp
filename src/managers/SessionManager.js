@@ -1,6 +1,6 @@
 // ============================================
 // Arquivo: src/managers/SessionManager.js
-// Descrição: Núcleo de conexão WhatsApp (Baileys)
+// Descrição: Núcleo de conexão WhatsApp (Baileys) - Versão Final (Fluxo Corrigido & Mídia & Transcrição & Envio de Áudio)
 // ============================================
 
 const {
@@ -11,6 +11,7 @@ const {
     downloadMediaMessage,
     makeCacheableSignalKeyStore,
     delay,
+    generateWAMessageFromContent,
     proto
 } = require('@whiskeysockets/baileys');
 const pino = require('pino');
@@ -20,6 +21,14 @@ const { estaNoHorario } = require('../utils/atendimento');
 const QRCode = require('qrcode');
 const OpenAIManager = require('./OpenAIManager');
 
+// ==============================================================================
+// CONFIGURAÇÃO DE TIPO DE MENU
+// 'texto'  -> Lista numerada simples (Recomendado: 100% compatível e sem bugs)
+// 'native' -> Botão azul moderno (Pode ter instabilidade no Web/iOS antigo)
+// 'botoes' -> Botões visíveis (Apenas se tiver até 3 opções)
+// ==============================================================================
+const TIPO_MENU = 'texto'; 
+
 class SessionManager {
     constructor(io, db) {
         this.io = io;
@@ -27,46 +36,47 @@ class SessionManager {
         this.sessions = new Map();
         this.rootDir = process.cwd();
         this.msgRetryCounterCache = new Map();
-
-        // Cache de tentativas de reconexão para evitar loops
         this.reconnectAttempts = new Map();
-
-        // Inicializa IA Manager
         this.aiManager = new OpenAIManager(db);
 
-        // Verificação de inatividade (Cron Job interno)
+        // Verificação de inatividade a cada minuto
         setInterval(() => this.verificarInatividade(), 60000);
     }
 
     // ============================================
-    // HELPERS E UTILITÁRIOS
+    // HELPERS
     // ============================================
 
-    emitirMensagemEnviada(empresaId, remoteJid, conteudo, tipo = 'texto', urlMidia = null) {
-        this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
-            remoteJid,
-            fromMe: true,
-            conteudo,
-            tipo,
-            urlMidia,
-            timestamp: Date.now() / 1000,
-            status: 'sended'
-        });
+    emitirMensagemEnviada(empresaId, remoteJid, conteudo, tipo = 'texto', urlMidia = null, fromMe = true) {
+        if (!this.io) {
+            console.warn('[SessionManager] IO não inicializado.');
+            return;
+        }
+        try {
+            this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
+                remoteJid,
+                fromMe: fromMe,
+                conteudo,
+                tipo,
+                urlMidia,
+                timestamp: Date.now() / 1000,
+                status: 'sended'
+            });
+        } catch (e) { console.error('Erro emitirMensagemEnviada:', e); }
     }
 
     formatarMensagem(texto, nomeCliente) {
-        if(!texto) return "";
+        if (!texto) return "";
         return texto.replace(/{{nome}}/g, nomeCliente || 'Cliente');
     }
 
     // ============================================
-    // GESTÃO DE INATIVIDADE
+    // INATIVIDADE
     // ============================================
 
     async verificarInatividade() {
         try {
             const TEMPO_LIMITE_MINUTOS = 30;
-
             const sql = `
                 SELECT c.id, c.empresa_id, c.telefone, c.nome, c.status_atendimento,
                        (SELECT MAX(data_hora) FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id) as ultima_interacao
@@ -74,7 +84,6 @@ class SessionManager {
                 WHERE c.status_atendimento IN ('ATENDENDO', 'FILA', 'ABERTO')
                 HAVING ultima_interacao < DATE_SUB(NOW(), INTERVAL ? MINUTE)
             `;
-
             const [contatosInativos] = await this.db.execute(sql, [TEMPO_LIMITE_MINUTOS]);
 
             if (contatosInativos.length > 0) {
@@ -98,43 +107,32 @@ class SessionManager {
 
             if (sock) {
                 await sock.sendMessage(remoteJid, { text: msgEncerramento });
-                this.emitirMensagemEnviada(empresaId, remoteJid, msgEncerramento);
+                // Mensagem do sistema (fromMe = true)
+                this.emitirMensagemEnviada(empresaId, remoteJid, msgEncerramento, 'sistema', null, true);
             }
 
-            await this.db.execute(
-                `INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)`,
-                [empresaId, remoteJid, msgEncerramento]
-            );
+            await this.db.execute(`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)`, [empresaId, remoteJid, msgEncerramento]);
+            await this.db.execute(`UPDATE contatos SET status_atendimento = 'ABERTO', setor_id = NULL, atendente_id = NULL WHERE id = ?`, [contato.id]);
 
-            await this.db.execute(
-                `UPDATE contatos SET status_atendimento = 'ABERTO', setor_id = NULL, atendente_id = NULL WHERE id = ?`,
-                [contato.id]
-            );
+            if (this.io) this.io.to(`empresa_${empresaId}`).emit('atualizar_lista', { action: 'inatividade', telefone: remoteJid });
 
-            this.io.to(`empresa_${empresaId}`).emit('atualizar_lista', { action: 'inatividade', telefone: remoteJid });
-
-        } catch (e) {
-            console.error(`[Inatividade] Erro ID ${contato.id}:`, e.message);
-        }
+        } catch (e) { console.error(`[Inatividade] Erro ID ${contato.id}:`, e.message); }
     }
 
     // ============================================
-    // NÚCLEO DA SESSÃO WHATSAPP
+    // CONEXÃO BAILEYS
     // ============================================
 
     async reconnectAllSessions() {
         try {
             const [empresas] = await this.db.execute("SELECT id, nome FROM empresas WHERE ativo = 1 AND whatsapp_status != 'DESCONECTADO'");
             if (empresas.length === 0) return console.log('✅ Nenhuma sessão para restaurar.');
-
             console.log(`🔄 Restaurando ${empresas.length} sessões...`);
-
             for (const emp of empresas) {
                 const authPath = path.join(this.rootDir, 'auth_sessions', `empresa_${emp.id}`);
-                // Verifica se a pasta existe e não está vazia
                 if (fs.existsSync(authPath) && fs.readdirSync(authPath).length > 0) {
                     await this.startSession(emp.id);
-                    await delay(2000); // Delay escalar para não saturar CPU
+                    await delay(2000); 
                 } else {
                     await this.updateDbStatus(emp.id, 'DESCONECTADO');
                 }
@@ -144,39 +142,26 @@ class SessionManager {
 
     async deleteSession(empresaId) {
         console.log(`[Session] Removendo sessão da Empresa ${empresaId}`);
-
-        // 1. Fecha Socket
         if (this.sessions.has(empresaId)) {
             try {
                 const sock = this.sessions.get(empresaId);
                 sock.end(undefined);
-                // Força destruição do WS se existir
-                if(sock.ws) sock.ws.terminate();
-            } catch(e) { console.error('Erro ao fechar socket:', e.message); }
+                if (sock.ws) sock.ws.terminate();
+            } catch (e) { console.error('Erro ao fechar socket:', e.message); }
             this.sessions.delete(empresaId);
         }
-
-        // 2. Remove Arquivos
         const authPath = path.join(this.rootDir, 'auth_sessions', `empresa_${empresaId}`);
         if (fs.existsSync(authPath)) {
-            try {
-                fs.rmSync(authPath, { recursive: true, force: true });
-            } catch (e) {
-                console.error(`Erro ao deletar pasta ${authPath}:`, e.message);
-                // Tenta fallback para renomear se estiver travado (Windows/Linux locks)
-                try { fs.renameSync(authPath, `${authPath}_deleted_${Date.now()}`); } catch(ex) {}
-            }
+            try { fs.rmSync(authPath, { recursive: true, force: true }); } 
+            catch (e) { try { fs.renameSync(authPath, `${authPath}_deleted_${Date.now()}`); } catch (ex) { } }
         }
-
-        // 3. Atualiza DB e Frontend
-        this.io.to(`empresa_${empresaId}`).emit('status_conn', { status: 'offline' });
+        if (this.io) this.io.to(`empresa_${empresaId}`).emit('status_conn', { status: 'offline' });
         await this.updateDbStatus(empresaId, 'DESCONECTADO');
         this.reconnectAttempts.delete(empresaId);
         return true;
     }
 
     async startSession(empresaId) {
-        // Se já existe sessão ativa, retorna ela
         if (this.sessions.has(empresaId)) return this.sessions.get(empresaId);
 
         const authPath = path.join(this.rootDir, 'auth_sessions', `empresa_${empresaId}`);
@@ -187,64 +172,42 @@ class SessionManager {
 
         const sock = makeWASocket({
             version,
-            logger: pino({ level: 'silent' }), // 'debug' em dev se precisar
+            logger: pino({ level: 'silent' }),
             printQRInTerminal: false,
-            auth: {
-                creds: state.creds,
-                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }))
-            },
-            browser: ["SaaS CRM", "Chrome", "10.0"],
+            auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" })) },
+            browser: ["Sistemas de Gestão", "Chrome", "120.0"], 
             connectTimeoutMs: 60000,
             keepAliveIntervalMs: 30000,
             syncFullHistory: false,
             generateHighQualityLinkPreview: true,
             msgRetryCounterCache: this.msgRetryCounterCache,
-            getMessage: async (key) => {
-                // Necessário para re-envio de mensagens e estabilidade
-                return { conversation: 'system_placeholder' };
-            }
+            getMessage: async (key) => ({ conversation: 'hello' })
         });
 
-        // Evento de Atualização de Conexão
         sock.ev.on('connection.update', async (update) => {
             const { connection, lastDisconnect, qr } = update;
-
-            if (qr) {
-                // Envia QR Code para o frontend
-                QRCode.toDataURL(qr).then(url => {
-                    this.io.to(`empresa_${empresaId}`).emit('qrcode', { qrBase64: url });
-                });
+            if (qr && this.io) {
+                QRCode.toDataURL(qr).then(url => { this.io.to(`empresa_${empresaId}`).emit('qrcode', { qrBase64: url }); });
                 await this.updateDbStatus(empresaId, 'AGUARDANDO_QR');
             }
-
             if (connection === 'close') {
                 const reason = lastDisconnect?.error?.output?.statusCode;
                 this.sessions.delete(empresaId);
-                this.io.to(`empresa_${empresaId}`).emit('status_conn', { status: 'offline' });
-
+                if (this.io) this.io.to(`empresa_${empresaId}`).emit('status_conn', { status: 'offline' });
                 const shouldReconnect = reason !== DisconnectReason.loggedOut && reason !== 401 && reason !== 403;
-
                 if (shouldReconnect) {
-                    // Lógica de Backoff Exponencial Simples
                     const attempts = (this.reconnectAttempts.get(empresaId) || 0) + 1;
                     this.reconnectAttempts.set(empresaId, attempts);
-
-                    const delayMs = Math.min(attempts * 2000, 30000); // Max 30s
-                    console.log(`[Empresa ${empresaId}] Desconectado (${reason}). Reconectando em ${delayMs/1000}s... (Tentativa ${attempts})`);
-
+                    const delayMs = Math.min(attempts * 2000, 30000);
                     setTimeout(() => this.startSession(empresaId), delayMs);
                 } else {
-                    console.log(`[Empresa ${empresaId}] Sessão encerrada permanentemente (${reason}).`);
                     await this.updateDbStatus(empresaId, 'DESCONECTADO');
-                    await this.deleteSession(empresaId); // Limpa arquivos
+                    await this.deleteSession(empresaId);
                 }
-
             } else if (connection === 'open') {
-                console.log(`[Empresa ${empresaId}] Conexão Estabelecida 🟢`);
-                this.reconnectAttempts.set(empresaId, 0); // Reseta tentativas
+                this.reconnectAttempts.set(empresaId, 0);
                 this.sessions.set(empresaId, sock);
-                this.io.to(`empresa_${empresaId}`).emit('status_conn', { status: 'online' });
-
+                if (this.io) this.io.to(`empresa_${empresaId}`).emit('status_conn', { status: 'online' });
                 const userJid = sock.user?.id ? sock.user.id.split(':')[0] : '';
                 await this.updateDbStatus(empresaId, 'CONECTADO', userJid);
             }
@@ -252,7 +215,9 @@ class SessionManager {
 
         sock.ev.on('creds.update', saveCreds);
 
-        // Processamento de Mensagens
+        // ============================================
+        // PROCESSAMENTO DE MENSAGENS (UPSERT)
+        // ============================================
         sock.ev.on('messages.upsert', async ({ messages }) => {
             try {
                 const msg = messages[0];
@@ -260,223 +225,237 @@ class SessionManager {
 
                 const remoteJid = msg.key.remoteJid;
                 const pushName = msg.pushName || remoteJid.split('@')[0];
-
-                let conteudo = '';
-                let tipo = 'texto';
-                let urlMidia = null;
-
+                let conteudo = '', tipo = 'texto', urlMidia = null;
                 const m = msg.message;
 
-                // Tratamento de Tipos de Mensagem (Compatibilidade Baileys v6+)
-                if (m.conversation) conteudo = m.conversation;
-                else if (m.extendedTextMessage) conteudo = m.extendedTextMessage.text;
-                else if (m.imageMessage) {
-                    tipo = 'imagem';
-                    conteudo = m.imageMessage.caption || '[Imagem]';
-                    urlMidia = await this.salvarMidia(msg, empresaId);
-                }
-                else if (m.videoMessage) {
-                    tipo = 'video';
-                    conteudo = m.videoMessage.caption || '[Vídeo]';
-                    urlMidia = await this.salvarMidia(msg, empresaId);
-                }
-                else if (m.audioMessage) {
-                    tipo = 'audio';
-                    conteudo = '[Áudio]';
-                    urlMidia = await this.salvarMidia(msg, empresaId);
-                }
-                else if (m.documentMessage) {
-                    tipo = 'documento';
-                    conteudo = m.documentMessage.fileName || '[Arquivo]';
-                    urlMidia = await this.salvarMidia(msg, empresaId);
-                }
-                else if (m.stickerMessage) {
-                    tipo = 'sticker';
-                    conteudo = '[Figurinha]';
-                    urlMidia = await this.salvarMidia(msg, empresaId);
-                }
-                // Tratamento de Respostas Interativas (Listas/Botões)
-                else if (m.interactiveResponseMessage) {
+                // --- HELPER: Extração de Citação (Reply) ---
+                const getQuote = (msgObj) => {
                     try {
-                        const params = JSON.parse(m.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson);
-                        conteudo = params.id;
+                        if (msgObj.contextInfo && msgObj.contextInfo.quotedMessage) {
+                            const q = msgObj.contextInfo.quotedMessage;
+                            const text = q.conversation || q.extendedTextMessage?.text || (q.imageMessage ? '[Imagem]' : (q.audioMessage ? '[Áudio]' : (q.videoMessage ? '[Vídeo]' : '[Mídia]')));
+                            if (text) {
+                                return `> ↳ _Respondendo: ${text.substring(0, 45).replace(/\n/g, ' ')}${text.length>45?'...':''}_\n\n`;
+                            }
+                        }
+                    } catch(e) {}
+                    return '';
+                };
+
+                // Extração de Conteúdo
+                if (m.conversation) {
+                    conteudo = m.conversation;
+                } 
+                else if (m.extendedTextMessage) {
+                    conteudo = getQuote(m.extendedTextMessage) + m.extendedTextMessage.text;
+                } 
+                else if (m.imageMessage) { 
+                    tipo = 'imagem'; 
+                    conteudo = getQuote(m.imageMessage) + (m.imageMessage.caption || '[Imagem]'); 
+                    urlMidia = await this.salvarMidia(msg, empresaId); 
+                }
+                else if (m.videoMessage) { 
+                    tipo = 'video'; 
+                    conteudo = getQuote(m.videoMessage) + (m.videoMessage.caption || '[Vídeo]'); 
+                    urlMidia = await this.salvarMidia(msg, empresaId); 
+                }
+                else if (m.audioMessage) { 
+                    tipo = 'audio'; 
+                    urlMidia = await this.salvarMidia(msg, empresaId); 
+                    
+                    // --- INTEGRAÇÃO COM TRANSCRIÇÃO (WHISPER) ---
+                    try {
+                        // Converte caminho relativo para absoluto para o fs
+                        if (urlMidia) {
+                            const cleanPath = urlMidia.replace(/^\/uploads\//, ''); // Remove '/uploads/' inicial se existir duplicado
+                            const fullPath = path.join(this.rootDir, 'public', urlMidia.startsWith('/') ? urlMidia.substring(1) : urlMidia);
+                            
+                            // Aguarda um pouco para garantir que o arquivo foi escrito
+                            await delay(1000); 
+                            
+                            const textoTranscrito = await this.aiManager.transcreverAudio(empresaId, fullPath);
+                            
+                            if (textoTranscrito && typeof textoTranscrito === 'string') {
+                                conteudo = `🎤 *Transcrição:* ${textoTranscrito}`;
+                            } else if (textoTranscrito && textoTranscrito.text) {
+                                conteudo = `🎤 *Transcrição:* ${textoTranscrito.text}`;
+                            } else {
+                                conteudo = '[Áudio]';
+                            }
+                        }
                     } catch (e) {
-                        conteudo = m.interactiveResponseMessage.body?.text || '';
+                        console.error('[SessionManager] Erro ao transcrever áudio:', e);
+                        conteudo = '[Áudio]';
                     }
                 }
-                else if (m.listResponseMessage) conteudo = m.listResponseMessage.singleSelectReply.selectedRowId;
+                else if (m.documentMessage) { 
+                    tipo = 'documento'; 
+                    conteudo = getQuote(m.documentMessage) + (m.documentMessage.fileName || '[Arquivo]'); 
+                    urlMidia = await this.salvarMidia(msg, empresaId); 
+                }
+                else if (m.stickerMessage) { 
+                    tipo = 'sticker'; 
+                    conteudo = '[Figurinha]'; 
+                    urlMidia = await this.salvarMidia(msg, empresaId); 
+                }
+                else if (m.interactiveResponseMessage) {
+                    try {
+                        const nativeFlow = m.interactiveResponseMessage.nativeFlowResponseMessage;
+                        if (nativeFlow?.paramsJson) conteudo = JSON.parse(nativeFlow.paramsJson).id;
+                        else if (m.interactiveResponseMessage.body) conteudo = m.interactiveResponseMessage.body.text;
+                    } catch (e) { conteudo = ''; }
+                } 
+                else if (m.listResponseMessage) conteudo = m.listResponseMessage.singleSelectReply?.selectedRowId;
                 else if (m.buttonsResponseMessage) conteudo = m.buttonsResponseMessage.selectedButtonId;
+                else if (m.templateButtonReplyMessage) conteudo = m.templateButtonReplyMessage.selectedId;
 
-                // Ignora mensagens vazias ou de protocolo desconhecido
                 if (!conteudo && !urlMidia) return;
 
-                // Persistência e Lógica de CRM
+                // Gestão de Contato
                 const [contatoExistente] = await this.db.execute(
-                    'SELECT id, setor_id, status_atendimento, foto_perfil, atendente_id FROM contatos WHERE empresa_id = ? AND telefone = ?',
+                    'SELECT id, setor_id, status_atendimento, foto_perfil, atendente_id, last_welcome_at FROM contatos WHERE empresa_id = ? AND telefone = ?',
                     [empresaId, remoteJid]
                 );
-                
-try {
-  // 1) Config da empresa
-  const [empRows] = await this.db.execute(
-    "SELECT nome, mensagens_padrao, msg_ausencia, welcome_media_url, welcome_media_type, horario_inicio, horario_fim, dias_funcionamento FROM empresas WHERE id = ?",
-    [empresaId]
-  );
-  const emp = empRows[0];
-  if (!emp) { /* sem empresa -> nada a fazer */ }
 
-  // 2) Contato + last_welcome_at
-  const [contRows] = await this.db.execute(
-    "SELECT id, last_welcome_at FROM contatos WHERE empresa_id = ? AND telefone = ?",
-    [empresaId, remoteJid]
-  );
-  let contatoId = contRows[0]?.id;
-  let lastWelcomeAt = contRows[0]?.last_welcome_at;
+                let welcomeEnviado = false; 
 
-  if (!contatoId) {
-    const [ins] = await this.db.execute(
-      "INSERT INTO contatos (empresa_id, telefone, status_atendimento, created_at) VALUES (?, ?, 'ABERTO', NOW())",
-      [empresaId, remoteJid]
-    );
-    contatoId = ins.insertId;
-    lastWelcomeAt = null;
-  }
+                // --- FLUXO PRINCIPAL ---
+                try {
+                    const [empRows] = await this.db.execute(
+                        "SELECT nome, mensagens_padrao, msg_ausencia, welcome_media_url, welcome_media_type, horario_inicio, horario_fim, dias_funcionamento FROM empresas WHERE id = ?",
+                        [empresaId]
+                    );
+                    const emp = empRows[0];
+                    let contatoId = contatoExistente[0]?.id;
+                    let lastWelcomeAt = contatoExistente[0]?.last_welcome_at;
 
-  // 3) Decide se precisa enviar boas-vindas (24h)
-  const precisaWelcome = (() => {
-    if (!lastWelcomeAt) return true;
-    const horas = (Date.now() - new Date(lastWelcomeAt).getTime()) / 3600000;
-    return horas >= 24;
-  })();
+                    if (!contatoId) {
+                        const [ins] = await this.db.execute(
+                            "INSERT INTO contatos (empresa_id, telefone, nome, status_atendimento, created_at) VALUES (?, ?, ?, 'ABERTO', NOW())",
+                            [empresaId, remoteJid, pushName]
+                        );
+                        contatoId = ins.insertId;
+                    }
 
-  // 4) Lista de setores (para mensagem e interpretação)
-  const [setores] = await this.db.execute(
-    "SELECT id, nome, mensagem_saudacao, cor FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC",
-    [empresaId]
-  );
+                    const precisaWelcome = !lastWelcomeAt || ((Date.now() - new Date(lastWelcomeAt).getTime()) / 3600000 >= 24);
+                    const [setores] = await this.db.execute(
+                        "SELECT id, nome, mensagem_saudacao, cor, media_url, media_type FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC",
+                        [empresaId]
+                    );
 
-  // 5) Se o cliente respondeu com número (ex.: "1"), transfere direto
-  const numSel = parseInt((conteudo || "").trim(), 10);
-  if (!isNaN(numSel) && numSel >= 1 && numSel <= setores.length) {
-    const setorEscolhido = setores[numSel - 1];
-    await this.db.execute(
-      "UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?",
-      [setorEscolhido.id, empresaId, remoteJid]
-    );
+                    // 1. VERIFICA SE É UMA SELEÇÃO DE MENU (NÚMERO)
+                    const numSel = parseInt((conteudo || "").trim(), 10);
+                    
+                    if (!isNaN(numSel) && numSel >= 1 && numSel <= setores.length) {
+                        const setorEscolhido = setores[numSel - 1];
+                        
+                        await this.db.execute(
+                            "UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?",
+                            [setorEscolhido.id, empresaId, remoteJid]
+                        );
 
-    const aviso = `🔄 Transferido para setor: *${setorEscolhido.nome}*`;
-    await sock.sendMessage(remoteJid, { text: aviso });
-    await this.db.execute(
-      "INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)",
-      [empresaId, remoteJid, aviso]
-    );
-    this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
-      remoteJid: remoteJid, fromMe: true, tipo: 'sistema',
-      conteudo: aviso, timestamp: Math.floor(Date.now() / 1000)
-    });
-    // Não segue com boas-vindas se já houve seleção
-  } else if (precisaWelcome) {
-    const inHorario = estaNoHorario(emp);
-    let boasVindasText = "Olá! Seja bem-vindo(a).";
-    try {
-      const padrao = JSON.parse(emp.mensagens_padrao || "[]");
-      const msgBV = padrao.find(p => String(p.titulo || "").toLowerCase() === "boasvindas");
-      if (msgBV?.texto) boasVindasText = msgBV.texto;
-    } catch {}
-    const ausenciaText = emp.msg_ausencia || "Estamos fora do horário. Retornaremos assim que possível.";
+                        const aviso = `🔄 Transferido para setor: *${setorEscolhido.nome}*`;
+                        await sock.sendMessage(remoteJid, { text: aviso });
+                        
+                        if(setorEscolhido.mensagem_saudacao) {
+                            const msgSetor = this.formatarMensagem(setorEscolhido.mensagem_saudacao, pushName);
+                            await sock.sendMessage(remoteJid, { text: msgSetor });
+                            this.emitirMensagemEnviada(empresaId, remoteJid, msgSetor, 'sistema', null, true);
+                        }
 
-    const listaSetoresTexto = setores.length
-      ? "Setores disponíveis:\n" + setores.map((s, i) => `${i + 1}) ${s.nome}`).join("\n")
-      : "No momento, não há setores cadastrados.";
+                        if (setorEscolhido.media_url) {
+                            const safePath = path.join(this.rootDir, 'public', setorEscolhido.media_url.replace(/^\//, ''));
+                            if (fs.existsSync(safePath)) {
+                                try {
+                                    const fileBuffer = fs.readFileSync(safePath);
+                                    const mediaMsg = setorEscolhido.media_type === 'imagem' ? { image: fileBuffer } : 
+                                                     (setorEscolhido.media_type === 'audio' ? { audio: fileBuffer, mimetype: 'audio/mp4', ptt: true } : { document: fileBuffer, fileName: 'Arquivo' });
+                                    await sock.sendMessage(remoteJid, mediaMsg);
+                                } catch(e) {}
+                            }
+                        }
 
-    const textoFinal = inHorario
-      ? `${boasVindasText}\n\n${listaSetoresTexto}\n\n*Responda com o número do setor para continuar.*`
-      : `${ausenciaText}\n\n${listaSetoresTexto}`;
+                        await this.db.execute("INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)", [empresaId, remoteJid, aviso]);
+                        // Correção: fromMe = true para mensagens do sistema
+                        this.emitirMensagemEnviada(empresaId, remoteJid, aviso, 'sistema', null, true);
+                        if(this.io) this.io.to(`empresa_${empresaId}`).emit('atualizar_lista', { action: 'mover_fila' });
+                        
+                        welcomeEnviado = true; // Impede que o fallback processe isso
 
-    // envia texto
-    await sock.sendMessage(remoteJid, { text: textoFinal });
-    await this.db.execute(
-      "INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)",
-      [empresaId, remoteJid, textoFinal]
-    );
-    this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
-      remoteJid: remoteJid, fromMe: true, tipo: 'sistema',
-      conteudo: textoFinal, timestamp: Math.floor(Date.now() / 1000)
-    });
+                    } else if (precisaWelcome && emp) {
+                        // 2. ENVIA BOAS VINDAS + MENU
+                        const inHorario = estaNoHorario(emp);
+                        let boasVindasText = "Olá! Seja bem-vindo(a).";
+                        try {
+                            const padrao = JSON.parse(emp.mensagens_padrao || "[]");
+                            const msgBV = padrao.find(p => String(p.titulo || "").toLowerCase() === "boasvindas");
+                            if (msgBV?.texto) boasVindasText = this.formatarMensagem(msgBV.texto, pushName);
+                        } catch { }
+                        
+                        const ausenciaText = emp.msg_ausencia || "Estamos fora do horário. Retornaremos assim que possível.";
 
-    // mídia opcional
-    if (emp.welcome_media_url && emp.welcome_media_type) {
-      const safePath = path.join(this.rootDir, "public", emp.welcome_media_url.replace(/^\/+/, ""));
-      const type = String(emp.welcome_media_type).toLowerCase();
-      const msgSend =
-        (type === "imagem") ? { image: { url: safePath }, caption: boasVindasText } :
-        (type === "video")  ? { video: { url: safePath }, caption: boasVindasText } :
-        (type === "audio")  ? { audio: { url: safePath } } :
-                              { document: { url: safePath }, caption: boasVindasText };
-      await sock.sendMessage(remoteJid, msgSend);
-      // emitir registro sintético (se quiser)
-      this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
-        remoteJid: remoteJid, fromMe: true, tipo: type,
-        conteudo: "[Mídia Boas-Vindas]", urlMidia: emp.welcome_media_url,
-        timestamp: Math.floor(Date.now() / 1000)
-      });
-    }
+                        if (!inHorario) {
+                            await sock.sendMessage(remoteJid, { text: ausenciaText });
+                            await this.db.execute("INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)", [empresaId, remoteJid, ausenciaText]);
+                            this.emitirMensagemEnviada(empresaId, remoteJid, ausenciaText, 'sistema', null, true);
+                        } else {
+                            if (emp.welcome_media_url) {
+                                const safePath = path.join(this.rootDir, "public", emp.welcome_media_url.replace(/^\/+/, ""));
+                                if(fs.existsSync(safePath)) {
+                                    try {
+                                        const fileBuffer = fs.readFileSync(safePath);
+                                        const type = String(emp.welcome_media_type).toLowerCase();
+                                        const msgSend = (type === "imagem") ? { image: fileBuffer, caption: boasVindasText } :
+                                                        (type === "video") ? { video: fileBuffer, caption: boasVindasText } :
+                                                        (type === "audio") ? { audio: fileBuffer, mimetype: 'audio/mp4', ptt: true } :
+                                                                            { document: fileBuffer, caption: boasVindasText, fileName: 'Arquivo' };
+                                        await sock.sendMessage(remoteJid, msgSend);
+                                        this.emitirMensagemEnviada(empresaId, remoteJid, boasVindasText || '[Mídia]', type, emp.welcome_media_url, true);
+                                        boasVindasText = ""; 
+                                    } catch (err) { console.error("Erro mídia welcome", err.message); }
+                                }
+                            }
 
-    // marca última boas-vindas
-    await this.db.execute("UPDATE contatos SET last_welcome_at = NOW() WHERE id = ?", [contatoId]);
-  }
-} catch (e) {
-  console.error("[WelcomeFlow] Erro:", e.message);
-}
+                            if (boasVindasText) {
+                                await sock.sendMessage(remoteJid, { text: boasVindasText });
+                                this.emitirMensagemEnviada(empresaId, remoteJid, boasVindasText, 'sistema', null, true);
+                            }
 
+                            if(setores.length > 0) {
+                                await this.enviarMenu(sock, remoteJid, setores, TIPO_MENU);
+                                this.emitirMensagemEnviada(empresaId, remoteJid, "[Menu de Opções]", 'sistema', null, true);
+                            }
+                        }
+                        await this.db.execute("UPDATE contatos SET last_welcome_at = NOW() WHERE id = ?", [contatoId]);
+                        welcomeEnviado = true; // Marca que o fluxo de boas vindas ocorreu
+                    }
 
-                // Atualiza Foto de Perfil (Opcional, pode ser pesado)
+                } catch (e) { console.error("[WelcomeFlow] Erro:", e); }
+
+                // Salva contato e mensagem
                 let fotoPerfil = contatoExistente[0]?.foto_perfil;
-                if (!fotoPerfil) {
-                    try { fotoPerfil = await sock.profilePictureUrl(remoteJid, 'image'); } catch (e) {}
-                }
+                if (!fotoPerfil) try { fotoPerfil = await sock.profilePictureUrl(remoteJid, 'image'); } catch (e) { }
+                if (contatoExistente.length > 0) await this.db.execute(`UPDATE contatos SET foto_perfil=?, nome=? WHERE empresa_id=? AND telefone=?`, [fotoPerfil, pushName, empresaId, remoteJid]);
+                await this.db.execute(`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, ?, ?, ?, ?)`, [empresaId, remoteJid, 0, tipo, conteudo, urlMidia]);
+                
+                // CORREÇÃO CRÍTICA: fromMe = false para mensagens que CHEGAM do cliente
+                this.emitirMensagemEnviada(empresaId, remoteJid, conteudo, tipo, urlMidia, false);
 
-                if (contatoExistente.length === 0) {
-                    await this.db.execute(
-                        `INSERT INTO contatos (empresa_id, telefone, nome, status_atendimento, foto_perfil) VALUES (?, ?, ?, 'ABERTO', ?)`,
-                        [empresaId, remoteJid, pushName, fotoPerfil]
-                    );
-                } else {
-                    await this.db.execute(
-                        `UPDATE contatos SET foto_perfil=?, nome=? WHERE empresa_id=? AND telefone=?`,
-                        [fotoPerfil, pushName, empresaId, remoteJid]
-                    );
-                }
-
-                await this.db.execute(
-                    `INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, ?, ?, ?, ?)`,
-                    [empresaId, remoteJid, 0, tipo, conteudo, urlMidia]
-                );
-
-                this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
-                    remoteJid,
-                    fromMe: false,
-                    conteudo,
-                    tipo,
-                    urlMidia,
-                    pushName,
-                    foto: fotoPerfil,
-                    timestamp: msg.messageTimestamp
-                });
-
-                // Roteamento de Chatbot
+                // 3. FALLBACK: CHATBOT E AVALIAÇÃO
                 const contatoAtual = contatoExistente[0] || { setor_id: null, status_atendimento: 'ABERTO', atendente_id: null };
 
                 if (contatoAtual.status_atendimento === 'AGUARDANDO_AVALIACAO') {
                     await this.processarAvaliacao(sock, empresaId, remoteJid, conteudo, contatoAtual);
-                } else if (contatoAtual.status_atendimento === 'ABERTO' || contatoAtual.status_atendimento === 'FILA') {
-                    // Processa apenas se não estiver sendo atendido por humano
-                    await this.processarAutoResposta(sock, empresaId, remoteJid, conteudo, contatoAtual, tipo, pushName);
+                } 
+                // CORREÇÃO: Só chama o auto-resposta se NÃO acabou de enviar o Welcome e NÃO é uma seleção de menu
+                else if (!welcomeEnviado && (contatoAtual.status_atendimento === 'ABERTO' || contatoAtual.status_atendimento === 'FILA') && conteudo) {
+                    const num = parseInt(conteudo);
+                    if (isNaN(num)) {
+                        await this.processarAutoResposta(sock, empresaId, remoteJid, conteudo, contatoAtual, pushName);
+                    }
                 }
 
-            } catch (e) {
-                console.error(`[Erro Msg Upsert Empresa ${empresaId}]:`, e.message);
-            }
+            } catch (e) { console.error(`[Erro Msg Upsert]:`, e); }
         });
 
         this.sessions.set(empresaId, sock);
@@ -484,135 +463,77 @@ try {
     }
 
     // ============================================
-    // LÓGICA DE CHATBOT (MENU & IA)
+    // MENU UNIFICADO
     // ============================================
-
-    async processarAutoResposta(sock, empresaId, remoteJid, textoRecebido, contato, tipoMensagem, nomeCliente) {
+    async enviarMenu(sock, remoteJid, setores, tipo = 'texto') {
         try {
-            // Se já tem setor, não manda menu, a menos que seja para sair da fila (opcional)
-            if (contato.setor_id) return;
-
-            const [setores] = await this.db.execute('SELECT id, nome, mensagem_saudacao, media_url, media_type FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC', [empresaId]);
-
-            let opcao = -1;
-            const numeroMatch = textoRecebido ? textoRecebido.toString().match(/^\d+$/) : null;
-            if(numeroMatch) opcao = parseInt(numeroMatch[0]);
-
-            const setorEscolhido = (opcao > 0 && opcao <= setores.length) ? setores[opcao - 1] : null;
-
-            if (setorEscolhido) {
-                // --> Cliente escolheu uma opção válida
-                await sock.sendPresenceUpdate('composing', remoteJid);
-                await delay(500);
-
-                const txtSetor = this.formatarMensagem(setorEscolhido.mensagem_saudacao || `Transferido para ${setorEscolhido.nome}.`, nomeCliente);
-                await sock.sendMessage(remoteJid, { text: txtSetor });
-                this.emitirMensagemEnviada(empresaId, remoteJid, txtSetor);
-
-                if(setorEscolhido.media_url) {
-                    const safePath = path.join(this.rootDir, 'public', setorEscolhido.media_url.replace(/^\//, ''));
-                    if(fs.existsSync(safePath)) {
-                        const mediaMsg = setorEscolhido.media_type === 'imagem'
-                            ? { image: { url: safePath } }
-                            : { audio: { url: safePath }, mimetype: 'audio/mp4', ptt: true };
-                        await sock.sendMessage(remoteJid, mediaMsg);
-                        this.emitirMensagemEnviada(empresaId, remoteJid, '[Mídia do Setor]', setorEscolhido.media_type, setorEscolhido.media_url);
-                    }
-                }
-
-                await this.db.execute('UPDATE contatos SET setor_id = ?, status_atendimento = "FILA" WHERE empresa_id = ? AND telefone = ?', [setorEscolhido.id, empresaId, remoteJid]);
-                this.io.to(`empresa_${empresaId}`).emit('atualizar_lista', { action: 'mover_fila' });
-
-            } else {
-                // --> Cliente mandou mensagem genérica: Tenta IA ou Manda Menu
-
-                // 1. Tenta IA primeiro (se ativado)
-                const iaResponse = await this.aiManager.getResponse(empresaId, textoRecebido, remoteJid);
-
-                if (iaResponse) {
-                    await sock.sendPresenceUpdate('composing', remoteJid);
-                    await delay(1000);
-                    await sock.sendMessage(remoteJid, { text: iaResponse });
-                    await this.db.execute(`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`, [empresaId, remoteJid, iaResponse]);
-                    this.emitirMensagemEnviada(empresaId, remoteJid, iaResponse);
-                    return; // Se a IA respondeu, não manda menu
-                }
-
-                // 2. Se IA não configurada ou falhou, manda Menu
-                if (setores.length === 0) return; // Sem setores, sem menu
-
-                const [empresa] = await this.db.execute('SELECT welcome_media_url, welcome_media_type, mensagens_padrao FROM empresas WHERE id = ?', [empresaId]);
-
-                let textoBoasVindas = "Olá {{nome}}! 👋\nComo podemos ajudar?";
-                try {
-                    const msgs = JSON.parse(empresa[0].mensagens_padrao || '[]');
-                    const bemVindo = msgs.find(m => m.titulo === 'boasvindas');
-                    if(bemVindo) textoBoasVindas = bemVindo.texto;
-                } catch(e) {}
-
-                textoBoasVindas = this.formatarMensagem(textoBoasVindas, nomeCliente);
-
-                // Envia Mídia de Boas Vindas se houver
-                if(empresa[0].welcome_media_url) {
-                    const safePath = path.join(this.rootDir, 'public', empresa[0].welcome_media_url.replace(/^\//, ''));
-                    if(fs.existsSync(safePath)) {
-                        const msgMedia = empresa[0].welcome_media_type === 'video'
-                            ? { video: { url: safePath }, caption: textoBoasVindas }
-                            : { image: { url: safePath }, caption: textoBoasVindas };
-
-                        await sock.sendMessage(remoteJid, msgMedia);
-                        this.emitirMensagemEnviada(empresaId, remoteJid, '[Mídia Boas-Vindas]', empresa[0].welcome_media_type);
-
-                        // Se enviou mídia com legenda, o texto já foi. Se não, precisaríamos enviar o menu abaixo.
-                        // Para simplificar, vamos enviar o menu interativo com texto breve.
-                        textoBoasVindas = "Selecione uma opção abaixo:";
-                    }
-                }
-
-                // Montagem do Menu Interativo (Native Flow)
-                const rows = setores.map((s, idx) => ({
-                    header: "",
-                    title: `${idx + 1}. ${s.nome}`,
-                    description: s.mensagem_saudacao ? s.mensagem_saudacao.substring(0, 30) + "..." : "",
-                    id: `${idx + 1}`
-                }));
-
-                const interactiveMessage = {
+            if (tipo === 'texto') {
+                let txt = "MENU DE OPÇÕES:\n\n";
+                setores.forEach((s, i) => { txt += `*${i + 1}*. ${s.nome}\n`; });
+                txt += "\nDigite o número da opção desejada.";
+                await sock.sendMessage(remoteJid, { text: txt });
+            } else if (tipo === 'lista' || tipo === 'native') {
+                // Implementação de lista (compatível com Native Flow)
+                const sections = [{
+                    title: "Departamentos",
+                    rows: setores.map((s, idx) => ({
+                        header: "", title: s.nome, description: s.mensagem_saudacao ? s.mensagem_saudacao.substring(0, 50) + "..." : "", id: `${idx + 1}`
+                    }))
+                }];
+                const msgContent = generateWAMessageFromContent(remoteJid, {
                     viewOnceMessage: {
                         message: {
-                            messageContextInfo: {
-                                deviceListMetadata: {},
-                                deviceListMetadataVersion: 2
-                            },
                             interactiveMessage: {
-                                body: { text: textoBoasVindas },
+                                body: { text: "Por favor, escolha o departamento:" },
                                 footer: { text: "Atendimento Automático" },
-                                header: { title: "", subtitle: "", hasMediaAttachment: false },
+                                header: { title: "MENU", subtitle: "", hasMediaAttachment: false },
                                 nativeFlowMessage: {
-                                    buttons: [
-                                        {
-                                            name: "single_select",
-                                            buttonParamsJson: JSON.stringify({
-                                                title: "MENU DE OPÇÕES",
-                                                sections: [
-                                                    {
-                                                        title: "Escolha um departamento",
-                                                        rows: rows
-                                                    }
-                                                ]
-                                            })
-                                        }
-                                    ]
+                                    buttons: [{ name: "single_select", buttonParamsJson: JSON.stringify({ title: "Ver Opções", sections }) }]
                                 }
                             }
                         }
                     }
-                };
-
-                await sock.relayMessage(remoteJid, interactiveMessage, {});
-                this.emitirMensagemEnviada(empresaId, remoteJid, "[Menu Interativo Enviado]");
+                }, {});
+                await sock.relayMessage(remoteJid, msgContent.message, { messageId: msgContent.key.id });
             }
-        } catch (e) { console.error(`[Chatbot Erro Empresa ${empresaId}]`, e.message); }
+        } catch (e) {
+            console.error("Erro ao enviar menu:", e);
+            // Fallback robusto para texto
+            let txt = "MENU DE OPÇÕES:\n\n";
+            setores.forEach((s, i) => { txt += `*${i + 1}*. ${s.nome}\n`; });
+            txt += "\nResponda com o número.";
+            await sock.sendMessage(remoteJid, { text: txt });
+        }
+    }
+
+    // ============================================
+    // CHATBOT E FALLBACK
+    // ============================================
+    async processarAutoResposta(sock, empresaId, remoteJid, textoRecebido, contato, nomeCliente) {
+        try {
+            if (contato.setor_id) return;
+
+            // 1. Tenta IA
+            const iaResponse = await this.aiManager.getResponse(empresaId, textoRecebido, remoteJid);
+            if (iaResponse) {
+                await sock.sendPresenceUpdate('composing', remoteJid);
+                await delay(1500);
+                await sock.sendMessage(remoteJid, { text: iaResponse });
+                await this.db.execute(`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`, [empresaId, remoteJid, iaResponse]);
+                // Correção: fromMe = true para IA
+                this.emitirMensagemEnviada(empresaId, remoteJid, iaResponse, 'texto', null, true);
+                return;
+            }
+
+            // 2. Se IA não respondeu, re-envia o menu (Recuperação)
+            const [setores] = await this.db.execute("SELECT id, nome, mensagem_saudacao FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC", [empresaId]);
+            if(setores.length > 0) {
+                await this.enviarMenu(sock, remoteJid, setores, TIPO_MENU);
+                // Correção: fromMe = true para Menu
+                this.emitirMensagemEnviada(empresaId, remoteJid, "[Menu Re-enviado]", 'sistema', null, true);
+            }
+            
+        } catch (e) { console.error(`[Chatbot Erro]:`, e.message); }
     }
 
     async processarAvaliacao(sock, empresaId, remoteJid, texto, contato) {
@@ -622,14 +543,15 @@ try {
                 await this.db.execute(`INSERT INTO avaliacoes (empresa_id, contato_telefone, atendente_id, nota) VALUES (?, ?, ?, ?)`, [empresaId, remoteJid, contato.atendente_id, nota]);
                 const msg = "Obrigado pela sua avaliação! 🌟";
                 await sock.sendMessage(remoteJid, { text: msg });
-                this.emitirMensagemEnviada(empresaId, remoteJid, msg);
+                // Correção: fromMe = true
+                this.emitirMensagemEnviada(empresaId, remoteJid, msg, 'texto', null, true);
                 await this.db.execute(`UPDATE contatos SET status_atendimento = 'ABERTO', atendente_id = NULL, setor_id = NULL WHERE empresa_id = ? AND telefone = ?`, [empresaId, remoteJid]);
-                this.io.to(`empresa_${empresaId}`).emit('atualizar_lista', { action: 'finalizado' });
-            } catch (e) { console.error("Erro avaliação", e); }
+                if (this.io) this.io.to(`empresa_${empresaId}`).emit('atualizar_lista', { action: 'finalizado' });
+            } catch (e) {}
         } else {
             const msg = "Por favor, digite uma nota válida de 1 a 5.";
             await sock.sendMessage(remoteJid, { text: msg });
-            this.emitirMensagemEnviada(empresaId, remoteJid, msg);
+            this.emitirMensagemEnviada(empresaId, remoteJid, msg, 'texto', null, true);
         }
     }
 
@@ -640,28 +562,23 @@ try {
             if (numero) { sql += ', whatsapp_numero = ?'; params.push(numero); }
             sql += ' WHERE id = ?'; params.push(empresaId);
             await this.db.execute(sql, params);
-        } catch (e) { console.error("Erro updateDbStatus:", e.message); }
+        } catch (e) { }
     }
 
     async salvarMidia(msg, empresaId) {
         try {
-            const buffer = await downloadMediaMessage(msg, 'buffer', { }, { logger: pino({ level: 'silent' }) });
+            const buffer = await downloadMediaMessage(msg, 'buffer', {}, { logger: pino({ level: 'silent' }) });
             const pasta = path.join(this.rootDir, 'public/uploads', `empresa_${empresaId}`);
             if (!fs.existsSync(pasta)) fs.mkdirSync(pasta, { recursive: true });
-
             let ext = '.bin';
             if (msg.message.imageMessage) ext = '.jpg';
             else if (msg.message.audioMessage) ext = '.mp3';
             else if (msg.message.videoMessage) ext = '.mp4';
             else if (msg.message.documentMessage) ext = '.' + (msg.message.documentMessage.fileName?.split('.').pop() || 'bin');
-
             const fileName = `media_${Date.now()}${ext}`;
             await fs.promises.writeFile(path.join(pasta, fileName), buffer);
             return `/uploads/empresa_${empresaId}/${fileName}`;
-        } catch (error) {
-            console.error("Erro ao salvar mídia:", error.message);
-            return null;
-        }
+        } catch (error) { return null; }
     }
 
     getSession(empresaId) { return this.sessions.get(empresaId); }

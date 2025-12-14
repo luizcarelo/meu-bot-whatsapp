@@ -76,18 +76,24 @@ async getContatos(req, res) {
     );
     const isAdmin = users[0] && (users[0].is_admin == 1 || users[0].is_admin === true);
 
-    let sql = `
-      SELECT c.*,
-        (SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,
-        (SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
-        s.nome as nome_setor,
-        s.cor as cor_setor,
-        u.nome as nome_atendente
-      FROM contatos c
-      LEFT JOIN setores s ON c.setor_id = s.id
-      LEFT JOIN usuarios_painel u ON c.atendente_id = u.id
-      WHERE c.empresa_id = ?
-    `;
+let sql = `
+  SELECT c.*,
+    (SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,
+    (SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
+    s.nome as nome_setor,
+    s.cor as cor_setor,
+    u.nome as nome_atendente,
+    (
+        SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))
+        FROM contatos_etiquetas ce
+        JOIN etiquetas e ON ce.etiqueta_id = e.id
+        WHERE ce.contato_id = c.id
+    ) as tags
+  FROM contatos c
+  LEFT JOIN setores s ON c.setor_id = s.id
+  LEFT JOIN usuarios_painel u ON c.atendente_id = u.id
+  WHERE c.empresa_id = ?
+`;
     const params = [req.empresaId];
 
     if (statusFiltro === 'meus') {
@@ -514,5 +520,70 @@ async getContatos(req, res) {
             res.status(500).json({ error: 'Erro ao carregar agenda' });
         }
     }
-}
+        // Listar etiquetas da empresa
+        async getEtiquetas(req, res) {
+        try {
+            const [rows] = await this.db.execute(
+                'SELECT * FROM etiquetas WHERE empresa_id = ? ORDER BY nome ASC',
+                [req.empresaId]
+            );
+            res.json(rows);
+        } catch (e) { res.status(500).json({ error: e.message }); }
+    }
+
+    // Criar nova etiqueta
+    async createEtiqueta(req, res) {
+        const { nome, cor } = req.body;
+        if (!nome) return res.status(400).json({ error: 'Nome obrigatório' });
+        try {
+            await this.db.execute(
+                'INSERT INTO etiquetas (empresa_id, nome, cor) VALUES (?, ?, ?)',
+                [req.empresaId, nome, cor || '#64748b']
+            );
+            res.json({ success: true });
+        } catch (e) { res.status(500).json({ error: e.message }); }
+    }
+
+    // Excluir etiqueta
+    async deleteEtiqueta(req, res) {
+        const { id } = req.params;
+        try {
+            await this.db.execute('DELETE FROM etiquetas WHERE id = ? AND empresa_id = ?', [id, req.empresaId]);
+            res.json({ success: true });
+        } catch (e) { res.status(500).json({ error: e.message }); }
+    }
+
+    // Associar/Desassociar etiqueta a um contato
+    async toggleEtiquetaContato(req, res) {
+        const { contatoId, etiquetaId } = req.body;
+        try {
+            // Verifica se já existe
+            const [exists] = await this.db.execute(
+                'SELECT * FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',
+                [contatoId, etiquetaId]
+            );
+
+            if (exists.length > 0) {
+                // Remove
+                await this.db.execute(
+                    'DELETE FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',
+                    [contatoId, etiquetaId]
+                );
+                res.json({ success: true, action: 'removed' });
+            } else {
+                // Adiciona
+                await this.db.execute(
+                    'INSERT INTO contatos_etiquetas (contato_id, etiqueta_id, empresa_id) VALUES (?, ?, ?)',
+                    [contatoId, etiquetaId, req.empresaId]
+                );
+                res.json({ success: true, action: 'added' });
+            }
+            
+            // Atualiza lista para todos
+            // (Opcional: enviar evento socket específico para atualizar só aquele contato)
+            
+        } catch (e) { res.status(500).json({ error: e.message }); }
+    }
+    }
+
 module.exports = CrmController;

@@ -198,6 +198,12 @@ module.exports = (sessionManager, db) => {
     router.delete('/crm/mensagens-rapidas/:id', (req, res) =>
         crmCtrl.deleteQuickMessage(req, res)
     );
+    
+    // ROTAS DE ETIQUETAS (TAGS)
+    router.get('/crm/etiquetas', (req, res) => crmCtrl.getEtiquetas(req, res));
+    router.post('/crm/etiquetas', (req, res) => crmCtrl.createEtiqueta(req, res));
+    router.delete('/crm/etiquetas/:id', (req, res) => crmCtrl.deleteEtiqueta(req, res));
+    router.post('/crm/etiquetas/toggle', (req, res) => crmCtrl.toggleEtiquetaContato(req, res));
 
     // ============================================
     // ROTAS DO CRM - SETORES

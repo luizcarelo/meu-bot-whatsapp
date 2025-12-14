@@ -13,6 +13,9 @@ const fs = require('fs');
 
 // Configuração de Logs e Tratamento de Exceções Globais
 process.on('uncaughtException', (err) => {
+    // Ignora erro de porta em uso aqui pois será tratado no server.on('error')
+    if (err.code === 'EADDRINUSE') return;
+    
     console.error('❌ ERRO CRÍTICO NÃO TRATADO:', err);
     // Em produção, considerar reiniciar o processo via PM2
 });
@@ -95,8 +98,47 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Recurso não encontrado' });
 });
 
+// ============================================
+// GRACEFUL SHUTDOWN (Encerramento Limpo)
+// ============================================
+async function gracefulShutdown(signal) {
+    console.log(`\n🛑 Recebido ${signal}. Encerrando servidor...`);
+    try {
+        await require('./config/db').closePool();
+        console.log('✅ Conexões com banco fechadas.');
+        
+        // Encerra a sessão do socket.io e http
+        io.close();
+        server.close();
+        
+        console.log('👋 Processo finalizado.');
+        process.exit(0); // Força o encerramento do processo Node (mata timers pendentes)
+    } catch (err) {
+        console.error('❌ Erro ao encerrar:', err);
+        process.exit(1);
+    }
+}
+
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
 // Inicialização do Servidor
 const PORT = process.env.PORT || 50010;
+
+// TRATAMENTO DE ERRO DE PORTA EM USO
+server.on('error', (e) => {
+    if (e.code === 'EADDRINUSE') {
+        console.error(`\n❌ ERRO FATAL: A porta ${PORT} já está em uso!`);
+        console.error(`⚠️  O servidor anterior não foi encerrado corretamente.`);
+        console.error(`\n🛠️  SOLUÇÃO RÁPIDA:`);
+        console.error(`   Execute: node script/force_stop.js`);
+        console.error(`   E tente novamente: npm start\n`);
+        process.exit(1);
+    } else {
+        console.error('❌ Erro desconhecido no servidor HTTP:', e);
+    }
+});
+
 server.listen(PORT, async () => {
     console.log(`\n🚀 SISTEMA DE GESTÃO SAAS INICIADO`);
     console.log(`🌐 URL: https://chatbot.lcsolucoesdigital.com.br:${PORT}`);
