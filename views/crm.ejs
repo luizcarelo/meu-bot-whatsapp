@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="<%= typeof isMobile !== 'undefined' && isMobile ? 'mobile-mode' : 'desktop-mode' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4f46e5">
+    <title><%= titulo %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        const IS_MOBILE_ROUTE = <%= typeof isMobile !== 'undefined' ? isMobile : false %>;
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' } } } }
+    </script>
+    <style>
+        :root { --color-primary: #4f46e5; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; overscroll-behavior-y: none; }
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+        .msg-bubble { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 14px; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); position: relative; }
+        .msg-in { background: #ffffff; border-radius: 0 10px 10px 10px; align-self: flex-start; }
+        .msg-out { background: #d9fdd3; border-radius: 10px 0 10px 10px; align-self: flex-end; }
+        .dark .msg-in { background: #202c33; color: #e9edef; } .dark .msg-out { background: #005c4b; color: #e9edef; }
+        .chat-background { background-color: #efeae2; background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png"); opacity: 0.9; }
+        .dark .chat-background { background-color: #0b141a; background-blend-mode: soft-light; opacity: 1; }
+        .recording-anim { animation: pulse-red 1.5s infinite; }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        .modal-tab-active { background-color: #f3f4f6; color: #4f46e5; font-weight: bold; border-bottom: 2px solid #4f46e5; }
+        .dark .modal-tab-active { background-color: #1e293b; color: #818cf8; border-bottom: 2px solid #818cf8; }
+    </style>
+</head>
+<body class="h-screen flex flex-col text-slate-800 overflow-hidden bg-white dark:bg-slate-900">
+
+    <div id="toast" class="fixed top-5 right-5 z-[999] bg-slate-800 text-white px-4 py-3 rounded shadow-lg transform translate-x-full transition duration-300 flex items-center gap-3 border-l-4 border-indigo-500"><i class="fas fa-info-circle"></i> <span id="toast-msg">...</span></div>
+
+    <div class="flex h-full w-full relative overflow-hidden">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="w-full md:w-96 bg-white border-r flex flex-col z-20 shadow-lg dark:bg-slate-900 dark:border-slate-700 absolute md:relative h-full transition-transform duration-300 flex-shrink-0">
+            <div class="p-4 bg-slate-100 dark:bg-slate-800 border-b dark:border-slate-700 h-16 flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-2">
+                    <img id="crm-logo" class="w-8 h-8 rounded object-cover hidden">
+                    <h2 class="font-bold text-sm dark:text-white" id="crm-empresa-nome">Carregando...</h2>
+                </div>
+                <div class="flex gap-3 text-slate-500 items-center">
+                    <button onclick="toggleNewChatModal()" title="Nova Conversa" class="hover:text-indigo-600 transition transform hover:scale-110"><i class="fas fa-plus-circle text-lg"></i></button>
+                    <button onclick="abrirAgenda()" title="Agenda Global" class="hover:text-indigo-600 transition"><i class="fas fa-address-book"></i></button>
+                    <button onclick="toggleDarkMode()" title="Tema"><i class="fas fa-moon"></i></button>
+                    <button onclick="logout()" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-around border-b bg-white dark:bg-slate-900 text-[11px] uppercase font-bold shrink-0">
+                <button onclick="mudarAbaFila('meus')" id="tab-meus" class="tab-active py-3 flex-1 hover:bg-slate-50 dark:hover:bg-slate-800">Meus</button>
+                <button onclick="mudarAbaFila('fila')" id="tab-fila" class="tab-inactive py-3 flex-1 hover:bg-slate-50 dark:hover:bg-slate-800">Fila</button>
+                <button onclick="mudarAbaFila('todos')" id="tab-todos" class="tab-inactive py-3 flex-1 hover:bg-slate-50 dark:hover:bg-slate-800">Todos</button>
+            </div>
+            <div class="p-2 shrink-0">
+                <input id="input-busca" onkeyup="filtrarContatos()" placeholder="Procurar..." class="w-full bg-slate-100 dark:bg-slate-800 rounded px-3 py-2 text-sm outline-none dark:text-white focus:ring-2 focus:ring-indigo-500 transition">
+            </div>
+            <div id="lista-contatos" class="flex-1 overflow-y-auto min-h-0 scroll-smooth"></div>
+            <div id="sidebar-footer" class="p-2 border-t dark:border-slate-700 bg-slate-50 dark:bg-slate-800 shrink-0 mt-auto">
+                 <button id="btn-admin-panel" onclick="window.location.href='/admin/painel'" class="hidden w-full bg-slate-200 text-slate-700 text-xs py-3 rounded font-bold hover:bg-slate-300 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600 transition flex items-center justify-center gap-2 shadow-sm">
+                    <i class="fas fa-cog"></i> ADMINISTRAÇÃO
+                </button>
+            </div>
+        </div>
+
+        <!-- CHAT AREA -->
+        <div id="chat-wrapper" class="absolute inset-0 z-30 bg-white dark:bg-slate-950 w-full h-full flex flex-col md:static md:flex-1 transition-transform duration-300 transform translate-x-full md:translate-x-0">
+            <div class="h-16 bg-white dark:bg-slate-800 border-b dark:border-slate-700 flex items-center px-3 justify-between shadow-sm z-10 shrink-0">
+                <div class="flex items-center gap-2 min-w-0 flex-1">
+                    <button onclick="voltarLista()" class="md:hidden text-slate-500 p-2 hover:bg-slate-100 rounded-full transition"><i class="fas fa-arrow-left"></i></button>
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500 font-bold" id="avatar-chat"><i class="fas fa-user"></i></div>
+                    <div class="min-w-0 cursor-pointer" onclick="toggleCRM()">
+                        <h3 id="chat-title" class="font-bold text-sm dark:text-white truncate">Selecione...</h3>
+                        <p id="chat-status" class="text-xs text-slate-400 truncate">...</p>
+                    </div>
+                </div>
+                
+                <!-- BOTÕES DE AÇÃO (CRÍTICO) -->
+                <div class="flex items-center gap-2 shrink-0" id="chat-actions">
+                    <button onclick="assumirTicket()" id="btn-assumir" class="hidden bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow transition flex items-center gap-1"><i class="fas fa-hand-paper"></i> ASSUMIR</button>
+                    <div id="actions-atendendo" class="hidden flex gap-2">
+                        <button onclick="abrirModalTransfer()" class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center hover:bg-orange-200 transition shadow-sm" title="Transferir"><i class="fas fa-exchange-alt"></i></button>
+                        <button onclick="encerrarTicket()" class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition shadow-sm" title="Encerrar"><i class="fas fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-bg" class="flex-1 chat-background relative overflow-hidden flex flex-col">
+                <div id="chat-box" class="flex-1 overflow-y-auto p-4 flex flex-col gap-2 scroll-smooth pb-4"></div>
+            </div>
+
+            <div id="input-area" class="bg-white dark:bg-slate-800 p-2 border-t dark:border-slate-700 hidden relative shrink-0">
+                <div id="quick-msgs-popup" class="absolute bottom-20 left-2 bg-white dark:bg-slate-800 rounded-lg shadow-xl border dark:border-slate-600 w-64 max-h-60 overflow-y-auto hidden z-50 animate-fade-in">
+                    <div class="p-2 border-b dark:border-slate-600 text-xs font-bold text-slate-500 dark:text-slate-300 bg-slate-50 dark:bg-slate-700">Mensagens Rápidas</div>
+                    <div id="quick-msgs-list"></div>
+                </div>
+                <div id="audio-recorder-ui" class="hidden flex items-center gap-3 p-2 bg-slate-100 dark:bg-slate-700 rounded-lg mb-2 shadow-inner">
+                    <div class="w-3 h-3 rounded-full bg-red-500 recording-anim"></div>
+                    <span id="recording-time" class="text-sm font-mono dark:text-white font-bold">00:00</span>
+                    <button onclick="cancelarAudio()" class="text-red-500 text-sm ml-auto font-bold hover:underline">Cancelar</button>
+                    <button onclick="enviarAudioGravado()" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fas fa-paper-plane text-xs"></i></button>
+                </div>
+                <div class="flex items-end gap-2" id="text-input-ui">
+                    <button onclick="toggleQuickMsgs()" class="cursor-pointer text-yellow-500 p-3 hover:text-yellow-600 transition hover:bg-yellow-50 rounded-full" title="Mensagens Rápidas"><i class="fas fa-bolt text-xl"></i></button>
+                    <label class="cursor-pointer text-slate-400 p-3 hover:text-indigo-500 transition hover:bg-indigo-50 rounded-full" title="Anexar Arquivo"><i class="fas fa-paperclip text-xl"></i><input type="file" id="file-upload" class="hidden" onchange="enviarArquivo()"></label>
+                    <textarea id="input-msg" rows="1" class="flex-1 bg-slate-100 dark:bg-slate-700 rounded-2xl py-3 px-4 outline-none text-sm resize-none dark:text-white max-h-32 focus:ring-2 focus:ring-indigo-500 transition" placeholder="Digite sua mensagem..."></textarea>
+                    <button id="btn-mic" onclick="iniciarGravacao()" class="bg-indigo-600 text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition hover:scale-105 hover:bg-indigo-700" title="Gravar Áudio"><i class="fas fa-microphone"></i></button>
+                    <button id="btn-send" onclick="enviarMsg()" class="bg-indigo-600 text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center hidden transition hover:scale-105 hover:bg-indigo-700" title="Enviar"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAIS (Transferir, Agenda, Novo Chat) -->
+    <div id="modal-transfer" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-96 dark:bg-slate-800 animate-fade-in">
+            <div class="flex justify-between items-center mb-4"><h3 class="font-bold text-lg dark:text-white">Transferir Atendimento</h3><button onclick="document.getElementById('modal-transfer').classList.add('hidden')" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button></div>
+            <div class="flex border-b mb-4 dark:border-slate-700"><button onclick="mudarAbaTransfer('setor')" id="tab-transf-setor" class="flex-1 py-2 text-sm font-bold modal-tab-active transition">Para Setor</button><button onclick="mudarAbaTransfer('usuario')" id="tab-transf-usuario" class="flex-1 py-2 text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition">Para Usuário</button></div>
+            <div id="view-transf-setor" class="max-h-60 overflow-y-auto space-y-1 scroll-smooth"><div id="lista-setores-transf"></div></div>
+            <div id="view-transf-usuario" class="hidden max-h-60 overflow-y-auto space-y-1 scroll-smooth"><div id="lista-usuarios-transf" class="text-center text-slate-400 text-sm py-4">Carregando...</div></div>
+        </div>
+    </div>
+    <div id="modal-agenda" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-[500px] max-h-[80vh] flex flex-col dark:bg-slate-800 animate-fade-in">
+            <div class="flex justify-between items-center mb-4"><h3 class="font-bold text-lg dark:text-white flex items-center gap-2"><i class="fas fa-address-book text-indigo-500"></i> Agenda Global</h3><button onclick="document.getElementById('modal-agenda').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition"><i class="fas fa-times"></i></button></div>
+            <input type="text" id="agenda-search" onkeyup="filtrarAgenda()" placeholder="Buscar nome ou telefone..." class="w-full border p-3 rounded-lg text-sm mb-4 dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+            <div id="lista-agenda" class="flex-1 overflow-y-auto space-y-2 pr-1"><div class="text-center text-slate-400 py-10">Carregando...</div></div>
+        </div>
+    </div>
+    <div id="modal-novo-chat" class="fixed inset-0 z-50 bg-black/50 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-xl shadow-lg w-96 dark:bg-slate-800 animate-fade-in border dark:border-slate-700">
+            <h2 class="text-xl mb-4 font-bold dark:text-white flex items-center gap-2"><i class="fas fa-comment-medical text-indigo-500"></i> Nova Conversa</h2>
+            <div class="space-y-3"><input id="new-chat-tel" placeholder="Telefone (55...)" class="w-full border p-3 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white"><input id="new-chat-name" placeholder="Nome do Cliente" class="w-full border p-3 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white"></div>
+            <div class="flex justify-end gap-2 mt-6"><button onclick="toggleNewChatModal()" class="px-4 py-2 text-slate-500 hover:bg-slate-100 rounded-lg text-sm transition">CANCELAR</button><button onclick="iniciarNovaConversa()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-indigo-700 transition shadow">INICIAR</button></div>
+        </div>
+    </div>
+    
+    <!-- TELA DE LOGIN CORRIGIDA -->
+    <div id="login-screen" class="fixed inset-0 bg-gray-900/90 z-[100] flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-96 text-center theme-card">
+            <h1 class="text-2xl font-bold mb-6 text-indigo-600">Login CRM</h1>
+            <input type="text" id="login-empresa" placeholder="Nome da Empresa" class="w-full p-3 rounded-lg mb-4 border">
+            <input type="email" id="login-email" placeholder="Email" class="w-full p-3 rounded-lg mb-4 border">
+            <input type="password" id="login-pass" placeholder="Senha" class="w-full p-3 rounded-lg mb-6 border">
+            <button onclick="fazerLogin()" class="w-full bg-indigo-600 text-white p-3 rounded-lg font-bold shadow-lg hover:bg-indigo-700 transition">ENTRAR</button>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        let session; try { session = JSON.parse(localStorage.getItem('saas_user')); } catch(e) { session = null; }
+        if (!session || session.role !== 'cliente') { document.getElementById('login-screen').classList.remove('hidden'); } 
+        else { document.getElementById('login-screen').classList.add('hidden'); if (document.readyState === 'complete' || document.readyState === 'interactive') init(); else document.addEventListener('DOMContentLoaded', init); }
+
+        let currentChat = null, listaContatosCache = [], abaAtual = 'meus', quickMsgsCache = [], agendaCache = [];
+        let mediaRecorder, audioChunks = [], recordingTimer, recordingTime = 0;
+        const headers = () => ({ 'Content-Type': 'application/json', 'x-empresa-id': session ? session.empresaId : '', 'x-user-id': session ? session.usuario.id : '' });
+
+        function init() {
+            if(!session) return;
+            document.getElementById('crm-empresa-nome').innerText = session.empresaNome;
+            if(session.config.logo) { document.getElementById('crm-logo').src = session.config.logo; document.getElementById('crm-logo').classList.remove('hidden'); }
+            if(localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+            
+            // CORREÇÃO ADMIN: Garante verificação robusta
+            const isAdmin = session.usuario.is_admin == 1 || session.usuario.is_admin === true || session.usuario.is_admin === 'true' || session.usuario.is_admin === '1';
+            if (isAdmin) { const btn = document.getElementById('btn-admin-panel'); if(btn) btn.classList.remove('hidden'); }
+
+            // Configuração do Socket para evitar duplicação de eventos
+            socket.removeAllListeners();
+            socket.emit('join_empresa', session.empresaId);
+            
+            socket.on('nova_mensagem', d => { 
+                if(currentChat && d.remoteJid.includes(currentChat.telefone.replace(/\D/g,''))) {
+                    addMsg(d.urlMidia||d.conteudo, d.fromMe, d.tipo); 
+                }
+                carregarContatos(); 
+            });
+            
+            socket.on('atualizar_lista', () => carregarContatos());
+
+            carregarSetores(); carregarContatos(); carregarQuickMsgs();
+
+            const input = document.getElementById('input-msg');
+            if(input) {
+                input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) { e.preventDefault(); enviarMsg(); } });
+                input.addEventListener('input', () => {
+                    if(input.value.trim()) { document.getElementById('btn-mic').classList.add('hidden'); document.getElementById('btn-send').classList.remove('hidden'); } 
+                    else { document.getElementById('btn-mic').classList.remove('hidden'); document.getElementById('btn-send').classList.add('hidden'); }
+                    input.style.height = 'auto'; input.style.height = (input.scrollHeight) + 'px';
+                });
+            }
+        }
+
+        // --- LÓGICA DE BOTÕES (CRÍTICO) ---
+        function selecionarChat(c) {
+            currentChat = c;
+            document.getElementById('chat-title').innerText = c.nome || c.telefone;
+            const statusLabel = c.status_atendimento === 'FILA' ? 'Aguardando na Fila' : (c.status_atendimento === 'ATENDENDO' ? `Em atendimento por ${c.nome_atendente || 'você'}` : 'Aberto');
+            document.getElementById('chat-status').innerText = statusLabel;
+            
+            if(window.innerWidth < 768) { document.getElementById('sidebar').classList.add('hidden'); document.getElementById('chat-wrapper').classList.remove('translate-x-full'); }
+            
+            const btnAssumir = document.getElementById('btn-assumir'); 
+            const actions = document.getElementById('actions-atendendo'); 
+            const inputArea = document.getElementById('input-area');
+            const isAdmin = session.usuario.is_admin == 1 || session.usuario.is_admin === true || session.usuario.is_admin === 'true';
+
+            // Reseta visual
+            btnAssumir.classList.add('hidden');
+            actions.classList.add('hidden');
+            inputArea.classList.add('hidden');
+
+            // 1. É MEU (Atendendo)
+            if (c.status_atendimento === 'ATENDENDO' && c.atendente_id == session.usuario.id) {
+                actions.classList.remove('hidden');
+                inputArea.classList.remove('hidden');
+            }
+            // 2. É DE OUTRO (Sou Admin)
+            else if (c.status_atendimento === 'ATENDENDO' && isAdmin && c.atendente_id != session.usuario.id) {
+                btnAssumir.classList.remove('hidden');
+                btnAssumir.innerText = "ASSUMIR (ADMIN)";
+                inputArea.classList.add('hidden'); // Admin só observa até assumir
+            }
+            // 3. ESTÁ NA FILA
+            else if (c.status_atendimento === 'FILA') {
+                btnAssumir.classList.remove('hidden');
+                btnAssumir.innerText = "ASSUMIR";
+            }
+            // 4. ESTÁ ABERTO (Robô)
+            else if (c.status_atendimento === 'ABERTO') {
+                btnAssumir.classList.remove('hidden');
+                btnAssumir.innerText = "INICIAR ATENDIMENTO";
+            }
+            
+            carregarHistorico(c.telefone);
+            renderContatos(listaContatosCache);
+        }
+
+        // --- RESTANTE DAS FUNÇÕES (Mantidas e Otimizadas) ---
+        function mudarAbaFila(aba) { abaAtual = aba; document.querySelectorAll('[id^="tab-"]').forEach(t => t.className = 'tab-inactive py-3 flex-1 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition'); document.getElementById(`tab-${aba}`).className = 'tab-active py-3 flex-1 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer border-b-2 border-indigo-600 text-indigo-600 transition'; carregarContatos(); }
+        async function carregarContatos() { try { const res = await fetch(`/api/crm/contatos?status=${abaAtual}`, {headers: headers()}); if(!res.ok) throw new Error(); listaContatosCache = await res.json(); filtrarContatos(); } catch(e) { console.error(e); } }
+        function filtrarContatos() { const termo = document.getElementById('input-busca').value.toLowerCase(); const filtrados = listaContatosCache.filter(c => (c.nome && c.nome.toLowerCase().includes(termo)) || (c.telefone && c.telefone.includes(termo))); renderContatos(filtrados); }
+        function renderContatos(lista) {
+            const el = document.getElementById('lista-contatos'); if(lista.length === 0) return el.innerHTML = '<div class="text-center p-10 text-slate-400 text-sm">Nenhuma conversa encontrada.</div>';
+            el.innerHTML = lista.map(c => {
+                const active = (currentChat && currentChat.telefone === c.telefone) ? 'bg-indigo-50 dark:bg-slate-800 border-l-4 border-indigo-600' : 'hover:bg-slate-50 dark:hover:bg-slate-800';
+                const avatar = c.foto_perfil ? `<img src="${c.foto_perfil}" class="w-10 h-10 rounded-full object-cover">` : `<div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">${c.nome?c.nome[0]:'U'}</div>`;
+                const setorBadge = c.nome_setor ? `<span class="text-[10px] px-1.5 py-0.5 rounded text-white font-bold ml-1" style="background-color: ${c.cor_setor || '#94a3b8'}">${c.nome_setor}</span>` : '';
+                const hora = c.ordenacao ? new Date(c.ordenacao).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : '';
+                return `<div onclick='selecionarChat(${JSON.stringify(c)})' class="p-4 border-b dark:border-slate-700 cursor-pointer flex items-center gap-3 transition ${active}">${avatar}<div class="flex-1 min-w-0"><div class="flex justify-between mb-1"><h4 class="font-bold text-sm truncate dark:text-white flex items-center">${c.nome || c.telefone} ${setorBadge}</h4><span class="text-[10px] text-slate-400">${hora}</span></div><p class="text-xs text-slate-500 truncate">${c.ultima_msg || 'Nova conversa'}</p></div></div>`;
+            }).join('');
+        }
+        
+        function toggleNewChatModal() { document.getElementById('modal-novo-chat').classList.toggle('hidden'); }
+        async function iniciarNovaConversa() { const nome = document.getElementById('new-chat-name').value; const telefone = document.getElementById('new-chat-tel').value; if(!telefone) return alert("Digite o telefone."); try { const res = await fetch('/api/crm/contatos', { method: 'POST', headers: headers(), body: JSON.stringify({ nome, telefone }) }); const data = await res.json(); if(data.success) { toggleNewChatModal(); mudarAbaFila('meus'); setTimeout(() => { carregarContatos().then(() => { const contato = listaContatosCache.find(c => c.telefone.includes(telefone.replace(/\D/g,''))); if(contato) selecionarChat(contato); }); }, 1000); } else alert(data.error); } catch(e) { alert('Erro.'); } }
+        
+        async function enviarArquivo() { const f = document.getElementById('file-upload').files[0]; if (!f || !currentChat) return; const fd = new FormData(); fd.append('file', f); fd.append('telefone', currentChat.telefone); fd.append('caption', f.name); const h = { 'x-empresa-id': session.empresaId, 'x-user-id': session.usuario.id }; try { addMsg('⏳ Enviando...', true, 'texto'); await fetch('/api/crm/enviar-midia', { method: 'POST', headers: h, body: fd }); document.getElementById('file-upload').value = ''; } catch(e) { alert('Erro.'); } }
+        
+        async function iniciarGravacao() { try { const s = await navigator.mediaDevices.getUserMedia({ audio: true }); mediaRecorder = new MediaRecorder(s); audioChunks = []; mediaRecorder.ondataavailable = e => audioChunks.push(e.data); mediaRecorder.start(); document.getElementById('text-input-ui').classList.add('hidden'); document.getElementById('audio-recorder-ui').classList.remove('hidden'); recordingTime = 0; recordingTimer = setInterval(() => { recordingTime++; document.getElementById('recording-time').innerText = `${Math.floor(recordingTime/60).toString().padStart(2,'0')}:${(recordingTime%60).toString().padStart(2,'0')}`; }, 1000); } catch (e) { alert("Erro microfone."); } }
+        function cancelarAudio() { if(mediaRecorder) mediaRecorder.stop(); clearInterval(recordingTimer); document.getElementById('audio-recorder-ui').classList.add('hidden'); document.getElementById('text-input-ui').classList.remove('hidden'); }
+        function enviarAudioGravado() { if(!mediaRecorder) return; mediaRecorder.stop(); clearInterval(recordingTimer); mediaRecorder.onstop = async () => { const b = new Blob(audioChunks, { type: 'audio/mp3' }); const fd = new FormData(); fd.append('file', b, 'audio.mp3'); fd.append('telefone', currentChat.telefone); const h = { 'x-empresa-id': session.empresaId, 'x-user-id': session.usuario.id }; addMsg('🎤 Enviando...', true, 'texto'); await fetch('/api/crm/enviar-midia', { method: 'POST', headers: h, body: fd }); document.getElementById('audio-recorder-ui').classList.add('hidden'); document.getElementById('text-input-ui').classList.remove('hidden'); }; }
+
+        function abrirAgenda() { document.getElementById('modal-agenda').classList.remove('hidden'); filtrarAgenda(); fetch('/api/crm/agenda', {headers: headers()}).then(r=>r.json()).then(d => { agendaCache = d; filtrarAgenda(); }); }
+        function filtrarAgenda() { const t = document.getElementById('agenda-search').value.toLowerCase(); const f = agendaCache.filter(c => (c.nome && c.nome.toLowerCase().includes(t)) || c.telefone.includes(t)); document.getElementById('lista-agenda').innerHTML = f.map(c => `<div onclick="iniciarConversaAgenda('${c.telefone}', '${c.nome}')" class="p-3 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer border-b dark:border-slate-700 flex items-center gap-3 rounded"><div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">${c.nome?c.nome[0]:'#'}</div><div><div class="font-bold text-sm dark:text-white">${c.nome||'Sem Nome'}</div><div class="text-xs text-slate-500">${c.telefone}</div></div></div>`).join(''); }
+        function iniciarConversaAgenda(t, n) { document.getElementById('modal-agenda').classList.add('hidden'); document.getElementById('new-chat-tel').value = t; document.getElementById('new-chat-name').value = n; iniciarNovaConversa(); }
+
+        function abrirModalTransfer() { document.getElementById('modal-transfer').classList.remove('hidden'); mudarAbaTransfer('setor'); }
+        function mudarAbaTransfer(aba) { const bs = document.getElementById('tab-transf-setor'); const bu = document.getElementById('tab-transf-usuario'); const vs = document.getElementById('view-transf-setor'); const vu = document.getElementById('view-transf-usuario'); if(aba==='setor'){ bs.className="flex-1 py-2 text-sm font-bold modal-tab-active transition"; bu.className="flex-1 py-2 text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition"; vs.classList.remove('hidden'); vu.classList.add('hidden'); } else { bu.className="flex-1 py-2 text-sm font-bold modal-tab-active transition"; bs.className="flex-1 py-2 text-sm text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition"; vu.classList.remove('hidden'); vs.classList.add('hidden'); carregarUsuariosParaTransferencia(); } }
+        async function carregarUsuariosParaTransferencia() { try { const res = await fetch('/api/crm/atendentes', {headers: headers()}); const users = await res.json(); document.getElementById('lista-usuarios-transf').innerHTML = users.filter(u => u.id != session.usuario.id && u.ativo).map(u => `<button onclick="transferirParaUsuario(${u.id})" class="w-full text-left p-3 hover:bg-slate-100 dark:hover:bg-slate-700 rounded border dark:border-slate-600 mb-1 flex items-center justify-between transition"><span class="text-sm font-medium dark:text-white">${u.nome}</span><i class="fas fa-chevron-right text-xs text-slate-400"></i></button>`).join(''); } catch(e){} }
+        async function transferirParaUsuario(uid) { if(!confirm('Transferir?')) return; await fetch('/api/crm/atendimento/transferir-usuario', { method: 'POST', headers: headers(), body: JSON.stringify({ telefone: currentChat.telefone, usuarioId: uid }) }); document.getElementById('modal-transfer').classList.add('hidden'); mudarAbaFila('meus'); }
+        async function transferir(idSetor) { await fetch('/api/crm/atendimento/transferir', { method: 'POST', headers: headers(), body: JSON.stringify({ telefone: currentChat.telefone, setorId: idSetor }) }); document.getElementById('modal-transfer').classList.add('hidden'); carregarContatos(); }
+
+        function voltarLista() { document.getElementById('sidebar').classList.remove('hidden'); document.getElementById('chat-wrapper').classList.add('translate-x-full'); currentChat = null; }
+        async function carregarHistorico(tel) { const box = document.getElementById('chat-box'); box.innerHTML = '<div class="text-center p-5 text-slate-400 text-xs"><i class="fas fa-circle-notch fa-spin"></i></div>'; try { const res = await fetch(`/api/crm/mensagens/${tel}`, {headers: headers()}); const msgs = await res.json(); box.innerHTML = ''; msgs.forEach(m => addMsg(m.url_midia||m.conteudo, m.from_me, m.tipo)); } catch(e){ box.innerHTML='Erro.'; } }
+        function addMsg(c, me, tipo) { const box = document.getElementById('chat-box'); const div = document.createElement('div'); div.className = `flex ${me?'justify-end':'justify-start'} mb-2 fade-enter`; let html = c; if(tipo==='imagem') html=`<img src="${c}" class="rounded-lg max-w-[200px]" onclick="window.open('${c}')">`; else if(tipo==='audio') html=`<audio controls src="${c}"></audio>`; else if(tipo==='texto') html = html.replace(/\n/g, '<br>'); div.innerHTML = `<div class="msg-bubble ${me?'msg-out':'msg-in'} shadow-sm">${html}</div>`; box.appendChild(div); box.scrollTop = box.scrollHeight; }
+        async function enviarMsg() { const txt = document.getElementById('input-msg').value; if(!txt) return; await fetch('/api/crm/enviar', { method: 'POST', headers: headers(), body: JSON.stringify({ telefone: currentChat.telefone, texto: txt }) }); document.getElementById('input-msg').value = ''; addMsg(txt, true, 'texto'); }
+        
+        async function fazerLogin() { 
+            const empresa = document.getElementById('login-empresa').value;
+            const email = document.getElementById('login-email').value; 
+            const senha = document.getElementById('login-pass').value; 
+            
+            if(!empresa || !email || !senha) return alert('Preencha todos os campos!');
+
+            try { 
+                const res = await fetch('/api/auth/login', { 
+                    method: 'POST', 
+                    headers: {'Content-Type':'application/json'}, 
+                    body: JSON.stringify({ nomeEmpresa: empresa, email, senha }) 
+                }); 
+                const data = await res.json(); 
+                if(data.success) { 
+                    localStorage.setItem('saas_user', JSON.stringify(data)); 
+                    session = data; 
+                    document.getElementById('login-screen').classList.add('hidden'); 
+                    window.location.reload(); 
+                } else {
+                    alert(data.message || data.error || 'Erro no login');
+                }
+            } catch(e) { 
+                console.error(e);
+                alert('Erro de conexão ou servidor.'); 
+            } 
+        }
+
+        function logout() { localStorage.removeItem('saas_user'); window.location.href = '/login'; }
+        function toggleDarkMode() { document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        async function carregarSetores() { const res = await fetch('/api/crm/setores', {headers: headers()}); const s = await res.json(); document.getElementById('lista-setores-transf').innerHTML = s.map(Setor => `<button onclick="transferir(${Setor.id})" class="w-full text-left p-3 hover:bg-slate-100 dark:hover:bg-slate-700 rounded border dark:border-slate-600 mb-1"><span class="dark:text-white">${Setor.nome}</span></button>`).join(''); }
+        async function assumirTicket() { await fetch('/api/crm/atendimento/assumir', { method: 'POST', headers: headers(), body: JSON.stringify({ telefone: currentChat.telefone }) }); mudarAbaFila('meus'); }
+        async function encerrarTicket() { if(!confirm('Encerrar?')) return; await fetch('/api/crm/atendimento/encerrar', { method: 'POST', headers: headers(), body: JSON.stringify({ telefone: currentChat.telefone }) }); mudarAbaFila('meus'); if(window.innerWidth<768) voltarLista(); }
+        async function carregarQuickMsgs() { const res = await fetch('/api/crm/mensagens-rapidas', {headers: headers()}); quickMsgsCache = await res.json(); }
+        function toggleQuickMsgs() { const el = document.getElementById('quick-msgs-popup'); const list = document.getElementById('quick-msgs-list'); if(el.classList.contains('hidden')) { list.innerHTML = quickMsgsCache.map(m => `<div onclick="usarQuickMsg('${m.conteudo.replace(/'/g, "\\'")}')" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer border-b dark:border-slate-700 transition"><div class="font-bold text-xs dark:text-white">${m.titulo}</div><div class="text-[10px] text-slate-500 truncate">${m.conteudo}</div></div>`).join(''); el.classList.remove('hidden'); } else el.classList.add('hidden'); }
+        function usarQuickMsg(t) { const i = document.getElementById('input-msg'); i.value = t; i.focus(); document.getElementById('quick-msgs-popup').classList.add('hidden'); i.dispatchEvent(new Event('input')); }
+    </script>
+</body>
+</html>

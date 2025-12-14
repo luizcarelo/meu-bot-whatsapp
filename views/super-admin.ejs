@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Master SaaS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Scrollbar fina */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-100 h-screen flex flex-col text-slate-800 overflow-hidden">
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed top-5 right-5 z-[60] bg-slate-800 text-white px-4 py-3 rounded shadow-lg transform translate-x-full transition-transform duration-300 border-l-4 border-yellow-400 flex items-center gap-3">
+        <i class="fas fa-info-circle"></i> <span id="toast-msg">Notificação</span>
+    </div>
+
+    <!-- HEADER -->
+    <header class="bg-slate-900 text-white h-16 flex justify-between items-center px-6 shadow-md z-20">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-yellow-400 shadow-inner">
+                <i class="fas fa-crown text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight">Painel Master</h1>
+                <p class="text-[10px] text-slate-400">Administração Geral</p>
+            </div>
+        </div>
+        <button onclick="logout()" class="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold transition flex items-center gap-2 shadow-lg">
+            <i class="fas fa-sign-out-alt"></i> SAIR
+        </button>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <div class="flex-1 p-6 overflow-auto bg-slate-100">
+        <div class="max-w-7xl mx-auto space-y-6">
+            
+            <!-- KPIs -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div><span class="text-xs text-slate-400 uppercase font-bold">Total Clientes</span><div class="text-3xl font-bold text-slate-800" id="kpi-total">0</div></div>
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-users"></i></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div><span class="text-xs text-slate-400 uppercase font-bold">Ativos</span><div class="text-3xl font-bold text-green-600" id="kpi-ativos">0</div></div>
+                    <div class="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xl"><i class="fas fa-check-circle"></i></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div><span class="text-xs text-slate-400 uppercase font-bold">Bloqueados</span><div class="text-3xl font-bold text-red-600" id="kpi-bloqueados">0</div></div>
+                    <div class="w-10 h-10 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-xl"><i class="fas fa-ban"></i></div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                    <div><span class="text-xs text-slate-400 uppercase font-bold">Total Mensagens</span><div class="text-3xl font-bold text-indigo-600" id="kpi-msgs">0</div></div>
+                    <div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl"><i class="fas fa-comment-alt"></i></div>
+                </div>
+            </div>
+
+            <!-- Gestão de Clientes -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <!-- Toolbar -->
+                <div class="p-5 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50">
+                    <h2 class="font-bold text-lg text-slate-700 flex items-center gap-2"><i class="fas fa-building text-slate-400"></i> Carteira de Clientes</h2>
+                    
+                    <div class="flex gap-3 w-full md:w-auto">
+                        <div class="relative flex-1 md:w-64">
+                            <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-sm"></i>
+                            <input type="text" id="search-input" onkeyup="filtrarTabela()" placeholder="Buscar empresa, email..." class="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition">
+                        </div>
+                        <button onclick="toggleFormNovo()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-indigo-700 transition shadow flex items-center gap-2 whitespace-nowrap">
+                            <i class="fas fa-plus"></i> NOVO CLIENTE
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Novo Cliente (Expandable) -->
+                <div id="form-novo-cliente" class="hidden bg-indigo-50 border-b border-indigo-100 p-6 animate-fade-in">
+                    <h3 class="text-sm font-bold text-indigo-800 mb-4 border-b border-indigo-200 pb-2">Cadastro de Nova Empresa</h3>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Nome Empresa</label><input id="sa-nome" class="w-full border p-2 rounded text-sm bg-white"></div>
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Email Admin</label><input id="sa-admin-email" class="w-full border p-2 rounded text-sm bg-white"></div>
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Senha Admin</label><input id="sa-admin-senha" class="w-full border p-2 rounded text-sm bg-white"></div>
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Plano</label>
+                            <select id="sa-plano" class="w-full border p-2 rounded text-sm bg-white">
+                                <option value="gratis">Grátis</option>
+                                <option value="pro" selected>Profissional</option>
+                                <option value="enterprise">Enterprise</option>
+                            </select>
+                        </div>
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Limite Usuários</label><input id="sa-limite" type="number" value="5" class="w-full border p-2 rounded text-sm bg-white"></div>
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Sua Senha Mestra</label><input id="sa-senha-mestra" type="password" class="w-full border p-2 rounded text-sm bg-white"></div>
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <button onclick="toggleFormNovo()" class="px-4 py-2 text-slate-500 hover:bg-indigo-100 rounded text-sm transition">Cancelar</button>
+                        <button onclick="criarEmpresa()" class="px-6 py-2 bg-green-600 text-white rounded text-sm font-bold hover:bg-green-700 shadow transition">CONFIRMAR CADASTRO</button>
+                    </div>
+                </div>
+                
+                <!-- Tabela -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-100 text-slate-500 font-bold uppercase text-xs tracking-wider">
+                            <tr>
+                                <th class="p-4 border-b border-slate-200">ID</th>
+                                <th class="p-4 border-b border-slate-200">Empresa / Admin</th>
+                                <th class="p-4 border-b border-slate-200">Plano</th>
+                                <th class="p-4 border-b border-slate-200">Uso</th>
+                                <th class="p-4 border-b border-slate-200">Status</th>
+                                <th class="p-4 border-b border-slate-200 text-right">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-empresas" class="divide-y divide-slate-100 bg-white">
+                            <!-- Preenchido via JS -->
+                            <tr><td colspan="6" class="p-8 text-center text-slate-400">Carregando dados...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edição -->
+    <div id="modal-edit" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center backdrop-blur-sm fade-in">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-[500px]">
+            <h3 class="text-lg font-bold mb-4 text-slate-800 flex items-center gap-2"><i class="fas fa-edit text-blue-500"></i> Editar Cliente</h3>
+            <input type="hidden" id="edit-id">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div><label class="text-xs font-bold text-slate-500">Empresa</label><input id="edit-nome" class="w-full border p-2 rounded text-sm mt-1"></div>
+                <div><label class="text-xs font-bold text-slate-500">Plano</label><select id="edit-plano" class="w-full border p-2 rounded text-sm mt-1"><option value="gratis">Grátis</option><option value="pro">Pro</option><option value="enterprise">Enterprise</option></select></div>
+                <div class="col-span-2"><label class="text-xs font-bold text-slate-500">Email Admin</label><input id="edit-email" class="w-full border p-2 rounded text-sm mt-1"></div>
+                <div><label class="text-xs font-bold text-slate-500">Limite Users</label><input id="edit-limite" type="number" class="w-full border p-2 rounded text-sm mt-1"></div>
+                <div><label class="text-xs font-bold text-red-500">Nova Senha (Opcional)</label><input id="edit-senha" type="password" class="w-full border p-2 rounded text-sm mt-1 border-red-100 focus:border-red-300"></div>
+            </div>
+            <div class="flex justify-end gap-2 border-t pt-4">
+                <button onclick="document.getElementById('modal-edit').classList.add('hidden')" class="px-4 py-2 text-slate-500 rounded hover:bg-slate-100 transition text-sm">Cancelar</button>
+                <button onclick="salvarEdicao()" class="px-4 py-2 bg-blue-600 text-white rounded font-bold hover:bg-blue-700 transition text-sm shadow">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auth Check Simples
+        const session = JSON.parse(localStorage.getItem('saas_user'));
+        if (!session || session.role !== 'super_admin') window.location.href = '/login';
+        const headers = { 'Content-Type': 'application/json', 'x-empresa-id': session.empresaId };
+
+        function logout() { localStorage.removeItem('saas_user'); window.location.href = '/login'; }
+        function toggleFormNovo() { document.getElementById('form-novo-cliente').classList.toggle('hidden'); }
+        function showToast(msg, type='info') { 
+            const t = document.getElementById('toast'); 
+            document.getElementById('toast-msg').innerText = msg; 
+            t.classList.remove('translate-x-full', 'border-yellow-400', 'border-red-500', 'border-green-500');
+            t.classList.add(type==='error' ? 'border-red-500' : (type==='success' ? 'border-green-500' : 'border-yellow-400'));
+            setTimeout(() => t.classList.add('translate-x-full'), 3000);
+        }
+
+        // CORE
+        async function carregarDados() {
+            try {
+                const res = await fetch('/api/super-admin/analytics', { headers });
+                const data = await res.json();
+
+                // KPIs
+                document.getElementById('kpi-total').innerText = data.kpis.total_empresas;
+                document.getElementById('kpi-ativos').innerText = data.kpis.ativas;
+                document.getElementById('kpi-bloqueados').innerText = data.kpis.bloqueadas;
+                document.getElementById('kpi-msgs').innerText = data.kpis.total_msgs_sistema;
+
+                // Tabela
+                const tbody = document.getElementById('lista-empresas');
+                if(data.clientes.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-400">Nenhum cliente cadastrado.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = data.clientes.map(e => {
+                    const planoColors = { 'gratis': 'bg-slate-100 text-slate-600', 'pro': 'bg-indigo-50 text-indigo-600', 'enterprise': 'bg-purple-50 text-purple-600' };
+                    const statusHtml = e.ativo 
+                        ? '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span> Ativo</span>' 
+                        : '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"><span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> Bloqueado</span>';
+                    
+                    return `
+                    <tr class="hover:bg-slate-50 transition group border-b border-slate-50 last:border-0">
+                        <td class="p-4 font-mono text-xs text-slate-500">#${e.id}</td>
+                        <td class="p-4">
+                            <div class="font-bold text-slate-800 text-sm">${e.nome}</div>
+                            <div class="text-xs text-slate-400 flex items-center gap-1"><i class="far fa-envelope"></i> ${e.admin_email}</div>
+                        </td>
+                        <td class="p-4"><span class="${planoColors[e.plano]} px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wide border border-opacity-10 border-black">${e.plano}</span></td>
+                        <td class="p-4 text-xs text-slate-500">
+                            <div class="flex items-center gap-2 mb-1"><i class="fas fa-users text-slate-300"></i> ${e.total_users} / ${e.limite_usuarios}</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-comment text-slate-300"></i> ${e.total_msgs}</div>
+                        </td>
+                        <td class="p-4">${statusHtml}</td>
+                        <td class="p-4 text-right">
+                            <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition">
+                                <button onclick="abrirEdicao(${e.id}, '${e.nome}', '${e.plano}', ${e.limite_usuarios}, '${e.admin_email}')" class="w-8 h-8 rounded bg-white border border-slate-200 text-blue-500 hover:bg-blue-50 transition shadow-sm" title="Editar"><i class="fas fa-pen"></i></button>
+                                <button onclick="toggleStatus(${e.id})" class="w-8 h-8 rounded bg-white border border-slate-200 ${e.ativo?'text-orange-500 hover:bg-orange-50':'text-green-500 hover:bg-green-50'} transition shadow-sm" title="${e.ativo?'Bloquear':'Ativar'}"><i class="fas ${e.ativo?'fa-ban':'fa-check'}"></i></button>
+                                <button onclick="resetar(${e.id})" class="w-8 h-8 rounded bg-white border border-slate-200 text-slate-500 hover:bg-slate-100 transition shadow-sm" title="Resetar WhatsApp"><i class="fas fa-sync"></i></button>
+                                <button onclick="excluir(${e.id})" class="w-8 h-8 rounded bg-white border border-slate-200 text-red-500 hover:bg-red-50 transition shadow-sm" title="Excluir"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) { console.error(e); showToast('Erro ao carregar dados', 'error'); }
+        }
+
+        // FILTRO
+        function filtrarTabela() {
+            const termo = document.getElementById('search-input').value.toLowerCase();
+            const linhas = document.querySelectorAll('#lista-empresas tr');
+            linhas.forEach(linha => {
+                const texto = linha.innerText.toLowerCase();
+                linha.style.display = texto.includes(termo) ? '' : 'none';
+            });
+        }
+
+        // AÇÕES
+        async function criarEmpresa() {
+            const body = {
+                nome: document.getElementById('sa-nome').value,
+                admin_email: document.getElementById('sa-admin-email').value,
+                admin_senha: document.getElementById('sa-admin-senha').value,
+                limite_usuarios: document.getElementById('sa-limite').value,
+                senha_mestra: document.getElementById('sa-senha-mestra').value,
+                plano: document.getElementById('sa-plano').value
+            };
+            if(!body.nome || !body.admin_email || !body.senha_mestra) return showToast('Preencha os campos obrigatórios', 'error');
+
+            const res = await fetch('/api/super-admin/empresas', { method: 'POST', headers, body: JSON.stringify(body) });
+            const d = await res.json();
+            if(d.success) { 
+                showToast('Empresa criada com sucesso!', 'success'); 
+                toggleFormNovo();
+                carregarDados();
+                // Limpar campos
+                document.getElementById('sa-nome').value = '';
+                document.getElementById('sa-admin-email').value = '';
+            } else showToast(d.error, 'error');
+        }
+
+        function abrirEdicao(id, nome, plano, limite, email) {
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-nome').value = nome;
+            document.getElementById('edit-plano').value = plano;
+            document.getElementById('edit-limite').value = limite;
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-senha').value = '';
+            document.getElementById('modal-edit').classList.remove('hidden');
+        }
+
+        async function salvarEdicao() {
+            const body = {
+                id: document.getElementById('edit-id').value,
+                nome: document.getElementById('edit-nome').value,
+                plano: document.getElementById('edit-plano').value,
+                limite: document.getElementById('edit-limite').value,
+                admin_email: document.getElementById('edit-email').value,
+                admin_senha_nova: document.getElementById('edit-senha').value
+            };
+            const res = await fetch('/api/super-admin/empresas/update', {method:'PUT', headers, body:JSON.stringify(body)});
+            if(res.ok) { 
+                showToast('Cliente atualizado!', 'success'); 
+                document.getElementById('modal-edit').classList.add('hidden'); 
+                carregarDados(); 
+            } else showToast('Erro ao salvar', 'error');
+        }
+
+        async function toggleStatus(id) {
+            if(!confirm('Tem certeza que deseja alterar o status de acesso desta empresa?')) return;
+            await fetch(`/api/super-admin/empresas/${id}/status`, { method: 'POST', headers });
+            carregarDados();
+            showToast('Status alterado!');
+        }
+
+        async function resetar(id) {
+            const p = prompt('Para resetar a conexão do WhatsApp deste cliente, digite a SENHA MESTRA:');
+            if(!p) return;
+            const res = await fetch(`/api/super-admin/empresas/${id}/reset`, { method: 'POST', headers, body: JSON.stringify({senha_mestra:p}) });
+            const d = await res.json();
+            if(d.success) showToast('Sessão resetada com sucesso!', 'success'); else showToast(d.error, 'error');
+        }
+
+        async function excluir(id) {
+            const p = prompt('ATENÇÃO: Esta ação é irreversível e apagará TODOS os dados da empresa.\n\nDigite a SENHA MESTRA para confirmar:');
+            if(!p) return;
+            const res = await fetch(`/api/super-admin/empresas/${id}/delete`, { method: 'POST', headers, body: JSON.stringify({senha_mestra:p}) });
+            const d = await res.json();
+            if(d.success) { showToast('Empresa excluída permanentemente.', 'success'); carregarDados(); } else showToast(d.error, 'error');
+        }
+
+        // Start
+        carregarDados();
+    </script>
+</body>
+</html>

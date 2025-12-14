@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações da Empresa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' } } } }</script>
+    <style>
+        :root { --color-primary: #4f46e5; }
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-active { border-bottom: 2px solid var(--color-primary); color: var(--color-primary); font-weight: 600; }
+        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
+        .tab-inactive:hover { color: #334155; border-bottom: 2px solid #cbd5e1; }
+        .dark .tab-inactive { color: #94a3b8; }
+        .dark .tab-inactive:hover { color: #e2e8f0; border-bottom: 2px solid #475569; }
+        .flow-node { position: relative; }
+        .flow-line-vertical { width: 2px; height: 30px; background-color: #cbd5e1; margin: 0 auto; }
+        .dark .flow-line-vertical { background-color: #475569; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col dark:bg-slate-900 dark:text-white">
+
+    <div id="toast" class="fixed top-5 right-5 z-50 bg-slate-800 text-white px-4 py-3 rounded shadow-lg transform translate-x-full transition duration-300 border-l-4 border-indigo-500 flex items-center gap-3">
+        <i class="fas fa-info-circle"></i> <span id="toast-msg">...</span>
+    </div>
+
+    <nav class="bg-white border-b border-slate-200 px-6 h-16 flex items-center justify-between sticky top-0 z-40 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+        <div class="flex items-center gap-4">
+            <button onclick="window.location.href='/crm'" class="text-slate-500 hover:text-indigo-600 transition flex items-center gap-2 text-sm font-medium dark:text-slate-400 dark:hover:text-white">
+                <i class="fas fa-arrow-left"></i> Voltar ao Chat
+            </button>
+            <div class="h-6 w-px bg-slate-200 dark:bg-slate-600"></div>
+            <h1 class="font-bold text-lg tracking-tight">Painel Administrativo</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="toggleDarkMode()" class="text-slate-500 hover:text-indigo-600 transition mr-2 dark:text-slate-400 dark:hover:text-white"><i class="fas fa-moon"></i></button>
+            <span class="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-2 py-1 rounded uppercase tracking-wide">Admin</span>
+            <span id="header-empresa" class="text-sm font-bold text-slate-600 dark:text-slate-200">Carregando...</span>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto w-full p-6 flex-1 flex flex-col">
+
+        <div class="mb-6 border-b border-slate-200 dark:border-slate-700">
+            <div class="flex gap-6 overflow-x-auto">
+                <button onclick="mudarAba('conexao')" id="btn-conexao" class="tab-active pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Conexão</button>
+                <button onclick="mudarAba('relatorios')" id="btn-relatorios" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-chart-bar"></i> Relatórios</button>
+                <button onclick="mudarAba('setores')" id="btn-setores" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-project-diagram"></i> Fluxo</button>
+                <button onclick="mudarAba('empresa')" id="btn-empresa" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-building"></i> Empresa</button>
+                <button onclick="mudarAba('automacao')" id="btn-automacao" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-robot"></i> Automação & IA</button>
+                <button onclick="mudarAba('mensagens-rapidas')" id="btn-mensagens-rapidas" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-bolt"></i> Msgs Rápidas</button>
+                <button onclick="mudarAba('marketing')" id="btn-marketing" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-bullhorn"></i> Marketing</button>
+                <button onclick="mudarAba('equipe')" id="btn-equipe" class="tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2"><i class="fas fa-users"></i> Equipe</button>
+            </div>
+        </div>
+
+        <div class="flex-1 relative">
+            <!-- ABA CONEXÃO -->
+            <div id="tab-conexao" class="tab-content fade-in space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="md:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-slate-200 text-center dark:bg-slate-800 dark:border-slate-700">
+                        <div class="mb-6"><div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fab fa-whatsapp"></i></div><h2 class="text-2xl font-bold">Conexão WhatsApp</h2></div>
+                        <div class="flex justify-center mb-8"><div id="status-badge" class="px-4 py-2 rounded-full text-sm font-bold bg-slate-100 text-slate-500 flex items-center gap-2 border dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600"><div class="w-2.5 h-2.5 rounded-full bg-slate-400"></div> Verificando...</div></div>
+                        <div id="qr-wrapper" class="hidden bg-slate-50 p-6 rounded-xl border border-dashed border-slate-300 inline-block mb-6 dark:bg-slate-900 dark:border-slate-600"><p class="text-xs font-bold text-slate-500 mb-4 uppercase tracking-wide animate-pulse">Escaneie o QR Code</p><img id="qr-code" class="w-64 h-64 object-contain bg-white p-2 rounded shadow-sm mx-auto"></div>
+                        <div class="flex justify-center gap-4"><button onclick="iniciarConexao()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition shadow-lg flex items-center gap-2"><i class="fas fa-plug"></i> CONECTAR</button><button onclick="resetarConexao()" class="bg-white border border-red-200 text-red-500 hover:bg-red-50 px-6 py-2.5 rounded-lg font-bold text-sm transition flex items-center gap-2 dark:bg-slate-700 dark:border-slate-600"><i class="fas fa-power-off"></i> DESCONECTAR</button></div>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 h-fit dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-slate-700 mb-4 flex items-center gap-2 dark:text-slate-200"><i class="fas fa-file-alt text-blue-500"></i> Relatório de Sessão</h3>
+                        <div class="space-y-4 text-sm"><div><p class="text-xs text-slate-400 uppercase font-bold mb-1">Número Conectado</p><p class="font-mono font-bold break-all dark:text-white" id="rel-numero">--</p></div><div><p class="text-xs text-slate-400 uppercase font-bold mb-1">Status Atual</p><span class="inline-block px-2 py-1 rounded text-xs font-bold bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300" id="rel-status">--</span></div><div><p class="text-xs text-slate-400 uppercase font-bold mb-1">Última Atualização</p><p class="text-slate-600 dark:text-slate-300" id="rel-data">--</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA RELATÓRIOS -->
+            <div id="tab-relatorios" class="tab-content hidden fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between dark:bg-slate-800 dark:border-slate-700"><div><p class="text-xs text-slate-400 uppercase font-bold">Nota Média</p><h2 class="text-3xl font-bold text-indigo-600" id="rpt-media">--</h2></div><div class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl"><i class="fas fa-star"></i></div></div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between dark:bg-slate-800 dark:border-slate-700"><div><p class="text-xs text-slate-400 uppercase font-bold">Total Avaliações</p><h2 class="text-3xl font-bold text-green-600" id="rpt-total">--</h2></div><div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xl"><i class="fas fa-poll"></i></div></div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden dark:bg-slate-800 dark:border-slate-700">
+                    <div class="p-4 border-b dark:border-slate-700"><h3 class="font-bold text-lg">Últimas Avaliações</h3></div>
+                    <table class="w-full text-left text-sm"><thead class="bg-slate-100 text-slate-500 font-bold uppercase text-xs dark:bg-slate-900 dark:text-slate-400"><tr><th class="p-4">Data</th><th class="p-4">Cliente</th><th class="p-4">Atendente</th><th class="p-4 text-right">Nota</th></tr></thead><tbody id="lista-avaliacoes" class="divide-y divide-slate-100 dark:divide-slate-700"></tbody></table>
+                </div>
+            </div>
+
+            <!-- ABA FLUXO (SETORES VISUAL) -->
+            <div id="tab-setores" class="tab-content hidden fade-in">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flow-node bg-white border border-indigo-200 rounded-xl p-5 shadow-sm relative z-10 dark:bg-slate-800 dark:border-indigo-900">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-lg"><i class="fas fa-home"></i></div><div><h3 class="font-bold">Boas Vindas</h3><p class="text-xs text-slate-500">Primeira mensagem.</p></div></div>
+                            <button onclick="document.getElementById('details-welcome').classList.toggle('hidden')" class="text-indigo-600 text-xs font-bold hover:bg-indigo-50 px-2 py-1 rounded transition dark:hover:bg-slate-700">EDITAR</button>
+                        </div>
+                        <div id="details-welcome" class="hidden mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
+                            <label class="text-xs font-bold text-slate-500 block mb-1">Texto</label><textarea id="welcome-text" class="w-full border p-2 rounded text-sm mb-3 h-20 resize-none dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="Olá!"></textarea>
+                            <label class="text-xs font-bold text-slate-500 block mb-1">Mídia</label><div class="flex gap-2 items-center"><input type="file" id="welcome-file" class="text-xs w-full border rounded p-1 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-300"><span id="welcome-media-preview" class="text-[10px] text-green-600 font-bold hidden">Anexado</span></div>
+                            <button onclick="salvarBoasVindas()" class="mt-3 w-full bg-indigo-600 text-white py-2 rounded text-xs font-bold hover:bg-indigo-700">SALVAR</button>
+                        </div>
+                    </div>
+                    <div class="flow-line-vertical h-8"></div>
+                    <div class="flow-node bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm relative z-10 dark:bg-slate-900 dark:border-slate-700">
+                        <div class="flex justify-between items-center mb-4">
+                            <div><h3 class="font-bold flex items-center gap-2"><i class="fas fa-list-ol text-slate-400"></i> Menu</h3><p class="text-xs text-slate-500">Arraste para reordenar.</p></div>
+                            <button onclick="abrirModalSetor()" class="bg-green-600 text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-green-700 flex items-center gap-1"><i class="fas fa-plus"></i> Adicionar</button>
+                        </div>
+                        <div id="lista-setores-sortable" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA EMPRESA -->
+            <div id="tab-empresa" class="tab-content hidden fade-in">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-2xl mx-auto dark:bg-slate-800 dark:border-slate-700">
+                    <h3 class="font-bold text-lg mb-6 pb-2 border-b flex items-center gap-2 dark:border-slate-700"><i class="fas fa-palette text-indigo-500"></i> Personalização</h3>
+                    <div class="space-y-5">
+                        <div><label class="text-xs font-bold text-slate-500 block mb-1">Nome no Sistema</label><input id="conf-nome" class="w-full border p-2.5 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white"></div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div><label class="text-xs font-bold text-slate-500 block mb-1">Cor</label><div class="flex items-center gap-3 border p-2 rounded-lg bg-slate-50 dark:bg-slate-700 dark:border-slate-600"><input type="color" id="conf-cor" class="h-8 w-10 p-0 border-0 rounded cursor-pointer bg-transparent"><span class="text-sm font-mono text-slate-600 dark:text-slate-300" id="cor-hex">#000000</span></div></div>
+                            <div><label class="text-xs font-bold text-slate-500 block mb-1">Logo</label><input type="file" id="conf-logo" class="text-xs w-full text-slate-500 border rounded p-1 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-300"></div>
+                        </div>
+                        <button onclick="salvarIdentidade()" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold text-sm hover:bg-indigo-700 transition shadow-md mt-4">SALVAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA AUTOMAÇÃO & IA -->
+            <div id="tab-automacao" class="tab-content hidden fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <!-- Coluna Esquerda: Horários e Mensagens Básicas -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-lg mb-6 pb-2 border-b flex items-center gap-2 dark:border-slate-700"><i class="fas fa-clock text-orange-500"></i> Horários</h3>
+                        <div class="space-y-5">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="text-xs font-bold text-slate-500 block mb-1">Abertura</label><input type="time" id="conf-inicio" class="w-full border p-2.5 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white"></div>
+                                <div><label class="text-xs font-bold text-slate-500 block mb-1">Fechamento</label><input type="time" id="conf-fim" class="w-full border p-2.5 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white"></div>
+                            </div>
+                            <div><label class="text-xs font-bold text-slate-500 block mb-2">Dias de Funcionamento</label><div class="flex flex-wrap gap-2" id="conf-dias"></div></div>
+                            <div><label class="text-xs font-bold text-slate-500 block mb-1">Mensagem de Ausência (Fora do Horário)</label><textarea id="conf-msg-ausencia" class="w-full border p-3 rounded-lg text-sm h-20 resize-none bg-slate-50 dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="Ex: Estamos fechados..."></textarea></div>
+                            <div><label class="text-xs font-bold text-slate-500 block mb-1">Mensagem de Avaliação (Ao Encerrar)</label><textarea id="conf-msg-avaliacao" class="w-full border p-3 rounded-lg text-sm h-20 resize-none bg-slate-50 dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="Ex: Avalie nosso atendimento de 1 a 5..."></textarea></div>
+                            <button onclick="salvarAutomacao()" class="w-full bg-orange-500 text-white py-3 rounded-lg font-bold text-sm hover:bg-orange-600 transition shadow-md">SALVAR HORÁRIOS</button>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: Inteligência Artificial -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 dark:bg-slate-800 dark:border-slate-700 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl text-indigo-500 -mt-10 -mr-10"><i class="fas fa-brain"></i></div>
+                        <h3 class="font-bold text-lg mb-6 pb-2 border-b flex items-center gap-2 dark:border-slate-700 relative z-10"><i class="fas fa-robot text-indigo-500"></i> Inteligência Artificial (OpenAI)</h3>
+                        
+                        <div class="space-y-5 relative z-10">
+                            <div class="flex items-center justify-between bg-indigo-50 p-4 rounded-lg border border-indigo-100 dark:bg-slate-700 dark:border-slate-600">
+                                <div>
+                                    <h4 class="font-bold text-sm text-indigo-900 dark:text-white">Ativar Chatbot Inteligente</h4>
+                                    <p class="text-[10px] text-indigo-600 dark:text-slate-300">Responde automaticamente quando o cliente não escolhe uma opção do menu.</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="conf-openai-ativo" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600"></div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="text-xs font-bold text-slate-500 block mb-1">OpenAI API Key <a href="https://platform.openai.com/api-keys" target="_blank" class="text-blue-500 hover:underline">(Obter Chave)</a></label>
+                                <div class="relative">
+                                    <input type="password" id="conf-openai-key" class="w-full border p-2.5 pl-10 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="sk-...">
+                                    <i class="fas fa-key absolute left-3 top-3 text-slate-400"></i>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-xs font-bold text-slate-500 block mb-1">Prompt do Sistema (Personalidade)</label>
+                                <textarea id="conf-openai-prompt" class="w-full border p-3 rounded-lg text-sm h-40 resize-none bg-slate-50 dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="Ex: Você é um assistente virtual da Empresa X. Seja educado, use emojis e ajude a agendar consultas..."></textarea>
+                                <p class="text-[10px] text-slate-400 mt-1">Defina como o bot deve se comportar e o que ele pode responder.</p>
+                            </div>
+
+                            <button onclick="salvarConfigIA()" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold text-sm hover:bg-indigo-700 transition shadow-md">SALVAR CONFIGURAÇÃO IA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA MENSAGENS RÁPIDAS (NOVA) -->
+            <div id="tab-mensagens-rapidas" class="tab-content hidden fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Form -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-lg mb-4 dark:text-white">Nova Mensagem</h3>
+                        <div class="space-y-4">
+                            <input id="quick-title" placeholder="Título (Ex: Pix)" class="w-full border p-3 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                            <input id="quick-shortcut" placeholder="Atalho (Ex: /pix) - Opcional" class="w-full border p-3 rounded-lg text-sm dark:bg-slate-700 dark:border-slate-600 dark:text-white">
+                            <textarea id="quick-content" placeholder="Conteúdo da mensagem..." class="w-full border p-3 rounded-lg text-sm h-32 resize-none dark:bg-slate-700 dark:border-slate-600 dark:text-white"></textarea>
+                            <button onclick="salvarQuickMsg()" class="w-full bg-indigo-600 text-white py-2 rounded-lg font-bold text-sm hover:bg-indigo-700">CRIAR</button>
+                        </div>
+                    </div>
+                    <!-- Lista -->
+                    <div class="md:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-lg mb-4 dark:text-white">Mensagens Cadastradas</h3>
+                        <div id="lista-quick-msgs" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA MARKETING (BROADCAST) -->
+            <div id="tab-marketing" class="tab-content hidden fade-in">
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 max-w-3xl mx-auto dark:bg-slate-800 dark:border-slate-700">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-bullhorn"></i></div>
+                        <h2 class="text-2xl font-bold dark:text-white">Disparo em Massa (Broadcast)</h2>
+                        <p class="text-sm text-slate-500 mt-2 dark:text-slate-400">Envie uma mensagem para <b>todos</b> os contatos salvos no seu CRM.</p>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r">
+                        <div class="flex">
+                            <div class="flex-shrink-0"><i class="fas fa-exclamation-triangle text-yellow-600"></i></div>
+                            <div class="ml-3">
+                                <p class="text-sm text-yellow-700 font-bold">Atenção ao Spam!</p>
+                                <p class="text-xs text-yellow-600 mt-1">O envio excessivo de mensagens pode levar ao banimento do seu número pelo WhatsApp. Use com moderação. O sistema adiciona um atraso aleatório (1-3s) entre cada envio para segurança.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold text-slate-500 block mb-1">Mensagem da Campanha</label>
+                            <textarea id="broadcast-msg" class="w-full border p-4 rounded-xl text-sm h-40 resize-none bg-slate-50 focus:ring-2 focus:ring-purple-500 outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="Olá! Temos uma oferta especial para você hoje..."></textarea>
+                        </div>
+
+                        <div id="broadcast-status" class="hidden bg-slate-100 p-4 rounded-lg text-center dark:bg-slate-700">
+                            <p class="text-sm font-bold text-slate-700 dark:text-white">Enviando mensagens...</p>
+                            <div class="w-full bg-slate-300 rounded-full h-2.5 mt-2 dark:bg-slate-600">
+                                <div class="bg-purple-600 h-2.5 rounded-full w-full animate-pulse"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="enviarBroadcast()" id="btn-broadcast" class="w-full bg-purple-600 text-white py-4 rounded-xl font-bold text-sm hover:bg-purple-700 transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> ENVIAR PARA TODOS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA EQUIPE (ATUALIZADA) -->
+            <div id="tab-equipe" class="tab-content hidden fade-in">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                    <div class="flex justify-between items-center mb-6 pb-2 border-b dark:border-slate-700">
+                        <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-users text-blue-500"></i> Equipe</h3>
+                        <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded font-bold" id="contador-equipe">0</span>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-lg border border-slate-200 mb-6 dark:bg-slate-900 dark:border-slate-700">
+                        <h4 class="text-sm font-bold text-slate-600 mb-4 flex items-center gap-2 dark:text-slate-300"><i class="fas fa-user-plus"></i> Adicionar Membro</h4>
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div><label class="text-xs font-bold text-slate-400 block mb-1">Nome</label><input id="at-nome" class="w-full border p-2 rounded text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white"></div>
+                            <div><label class="text-xs font-bold text-slate-400 block mb-1">Email</label><input id="at-email" class="w-full border p-2 rounded text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white"></div>
+                            <div><label class="text-xs font-bold text-slate-400 block mb-1">Senha</label><input id="at-senha" type="password" class="w-full border p-2 rounded text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white"></div>
+                            
+                            <!-- NOVOS CAMPOS -->
+                            <div><label class="text-xs font-bold text-slate-400 block mb-1">Telefone/WhatsApp</label><input id="at-telefone" class="w-full border p-2 rounded text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white"></div>
+                            <div><label class="text-xs font-bold text-slate-400 block mb-1">Cargo</label><input id="at-cargo" class="w-full border p-2 rounded text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white"></div>
+                            
+                            <div><label class="text-xs font-bold text-slate-400 block mb-1">Setores (Múltiplos)</label><div id="select-setores" class="flex flex-wrap gap-2 bg-white border p-2 rounded max-h-24 overflow-y-auto dark:bg-slate-800 dark:border-slate-600"></div></div>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <label class="flex items-center gap-2 text-xs cursor-pointer bg-white border p-2 rounded h-[38px] dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300"><input type="checkbox" id="at-admin" class="rounded text-indigo-600 focus:ring-0"> Admin</label>
+                            <label class="flex items-center gap-2 text-xs cursor-pointer bg-white border p-2 rounded h-[38px] dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300"><input type="checkbox" id="at-ativo" checked class="rounded text-green-600 focus:ring-0"> Ativo</label>
+                            <button onclick="addAtendente()" class="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition shadow-sm ml-auto">CADASTRAR</button>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-100 text-slate-500 font-bold uppercase text-xs dark:bg-slate-900 dark:text-slate-400"><tr><th class="p-3">Nome</th><th class="p-3">Cargo/Tel</th><th class="p-3">Setores</th><th class="p-3">Status</th><th class="p-3 text-right">Ações</th></tr></thead>
+                            <tbody id="lista-atendentes" class="divide-y divide-slate-100 bg-white dark:bg-slate-800 dark:divide-slate-700"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SETOR (ATUALIZADO COM COR) -->
+    <div id="modal-setor" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-xl shadow-2xl w-96 animate-fade-in dark:bg-slate-800">
+            <h3 class="text-lg font-bold mb-4 dark:text-white">Configurar Setor</h3>
+            <input type="hidden" id="setor-id">
+            <div class="space-y-3">
+                <div><label class="text-xs font-bold text-slate-500">Nome</label><input id="setor-nome" class="w-full border p-2 rounded text-sm mt-1 dark:bg-slate-700 dark:border-slate-600 dark:text-white"></div>
+                <div><label class="text-xs font-bold text-slate-500">Cor do Setor</label><input type="color" id="setor-cor" class="w-full h-10 cursor-pointer rounded border mt-1 p-0"></div>
+                <div><label class="text-xs font-bold text-slate-500">Mensagem</label><textarea id="setor-msg" rows="3" class="w-full border p-2 rounded text-sm mt-1 resize-none dark:bg-slate-700 dark:border-slate-600 dark:text-white"></textarea></div>
+                <div><label class="text-xs font-bold text-slate-500">Mídia (Opcional)</label><input type="file" id="setor-file" class="text-xs w-full mt-1 text-slate-500 border rounded p-1 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-300"></div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="document.getElementById('modal-setor').classList.add('hidden')" class="px-4 py-2 text-slate-500 hover:bg-slate-100 rounded text-sm transition dark:text-slate-400 dark:hover:bg-slate-700">Cancelar</button>
+                <button onclick="salvarSetor()" class="px-4 py-2 bg-green-600 text-white rounded font-bold hover:bg-green-700 transition text-sm shadow">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        const session = JSON.parse(localStorage.getItem('saas_user'));
+        const headers = { 'Content-Type': 'application/json', 'x-empresa-id': session.empresaId };
+        const currentEmpresaId = session.empresaId;
+
+        if(!session || session.role !== 'cliente') window.location.href = '/crm';
+        document.getElementById('header-empresa').innerText = session.empresaNome;
+        if(localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        
+        socket.emit('join_empresa', currentEmpresaId);
+        carregarDados();
+
+        // TABS
+        function mudarAba(abaId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${abaId}`).classList.remove('hidden');
+            ['conexao', 'empresa', 'automacao', 'setores', 'equipe', 'relatorios', 'mensagens-rapidas', 'marketing'].forEach(b => {
+                const btn = document.getElementById(`btn-${b}`);
+                if (btn) {
+                    btn.className = (b === abaId) 
+                        ? "tab-active pb-3 text-sm transition px-1 flex items-center gap-2"
+                        : "tab-inactive pb-3 text-sm transition px-1 flex items-center gap-2 cursor-pointer";
+                }
+            });
+            if(abaId === 'relatorios') carregarRelatorios();
+            if(abaId === 'mensagens-rapidas') carregarQuickMsgs();
+        }
+
+        async function carregarDados() {
+            try {
+                const res = await fetch('/api/crm/config', {headers: {'Content-Type': 'application/json', ...headers}});
+                const conf = await res.json();
+                
+                document.getElementById('conf-nome').value = conf.nome_exibicao || conf.nome;
+                document.getElementById('header-empresa').innerText = conf.nome_exibicao || conf.nome;
+                document.getElementById('conf-cor').value = conf.cor_primaria || '#4f46e5';
+                document.getElementById('cor-hex').innerText = conf.cor_primaria || '#4f46e5';
+                document.getElementById('conf-inicio').value = conf.horario_inicio || '08:00';
+                document.getElementById('conf-fim').value = conf.horario_fim || '18:00';
+                document.getElementById('conf-msg-ausencia').value = conf.msg_ausencia || '';
+                document.getElementById('conf-msg-avaliacao').value = conf.msg_avaliacao || '';
+
+                // --- PREENCHE DADOS DE IA ---
+                document.getElementById('conf-openai-key').value = conf.openai_key || '';
+                document.getElementById('conf-openai-prompt').value = conf.openai_prompt || '';
+                document.getElementById('conf-openai-ativo').checked = !!conf.openai_ativo;
+
+                document.getElementById('rel-numero').innerText = conf.whatsapp_numero ? formatPhone(conf.whatsapp_numero) : 'Não conectado';
+                
+                // Status do WhatsApp
+                const badge = document.getElementById('status-badge');
+                const qrWrapper = document.getElementById('qr-wrapper');
+                
+                if (conf.whatsapp_status === 'CONECTADO') {
+                    document.getElementById('rel-status').innerText = 'CONECTADO';
+                    document.getElementById('rel-status').className = 'inline-block px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300';
+                    badge.className = "px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700 flex items-center gap-2 border border-green-200 shadow-sm dark:bg-green-900 dark:text-green-300 dark:border-green-700";
+                    badge.innerHTML = '<div class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div> Conectado';
+                    qrWrapper.classList.add('hidden');
+                    fetch('/api/whatsapp/start', {method:'POST', headers: {'Content-Type': 'application/json', ...headers}});
+                } else if (conf.whatsapp_status === 'AGUARDANDO_QR') {
+                    document.getElementById('rel-status').innerText = 'AGUARDANDO QR';
+                    document.getElementById('rel-status').className = 'inline-block px-2 py-1 rounded text-xs font-bold bg-yellow-100 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-300';
+                    badge.className = "px-4 py-2 rounded-full text-sm font-bold bg-yellow-100 text-yellow-700 flex items-center gap-2 border border-yellow-200 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-700";
+                    badge.innerHTML = '<div class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></div> Aguardando Leitura';
+                    fetch('/api/whatsapp/start', {method:'POST', headers: {'Content-Type': 'application/json', ...headers}});
+                } else {
+                    document.getElementById('rel-status').innerText = 'DESCONECTADO';
+                    document.getElementById('rel-status').className = 'inline-block px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-300';
+                    badge.className = "px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700 flex items-center gap-2 border border-red-200 dark:bg-red-900 dark:text-red-300 dark:border-red-700";
+                    badge.innerHTML = '<div class="w-2.5 h-2.5 rounded-full bg-red-500"></div> Desconectado';
+                }
+
+                document.getElementById('rel-data').innerText = conf.whatsapp_updated_at ? new Date(conf.whatsapp_updated_at).toLocaleString() : '--';
+
+                globalMensagensPadrao = typeof conf.mensagens_padrao === 'string' ? JSON.parse(conf.mensagens_padrao) : (conf.mensagens_padrao || []);
+                const msgBoasVindas = globalMensagensPadrao.find(m => m.titulo === 'boasvindas');
+                if(msgBoasVindas) document.getElementById('welcome-text').value = msgBoasVindas.texto;
+                if(conf.welcome_media_url) document.getElementById('welcome-media-preview').classList.remove('hidden');
+
+                const dias = conf.dias_funcionamento ? (typeof conf.dias_funcionamento === 'string' ? JSON.parse(conf.dias_funcionamento) : conf.dias_funcionamento) : ["seg","ter","qua","qui","sex"];
+                document.getElementById('conf-dias').innerHTML = ["dom","seg","ter","qua","qui","sex","sab"].map(d => `<label class="flex items-center gap-2 text-xs cursor-pointer bg-slate-50 border border-slate-200 px-3 py-2 rounded hover:border-indigo-500 transition select-none dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300"><input type="checkbox" value="${d}" ${dias.includes(d)?'checked':''} class="text-indigo-600 rounded focus:ring-0"> ${d.toUpperCase()}</label>`).join('');
+
+                await carregarSetores();
+                carregarEquipe();
+            } catch(e) { console.error(e); }
+        }
+
+        async function salvarAutomacao() { 
+            const msg_ausencia = document.getElementById('conf-msg-ausencia').value; 
+            const msg_avaliacao = document.getElementById('conf-msg-avaliacao').value;
+            const horario_inicio = document.getElementById('conf-inicio').value; 
+            const horario_fim = document.getElementById('conf-fim').value;
+            const dias = []; 
+            document.querySelectorAll('#conf-dias input:checked').forEach(c => dias.push(c.value));
+            
+            const fd = new FormData();
+            fd.append('msg_ausencia', msg_ausencia);
+            fd.append('msg_avaliacao', msg_avaliacao);
+            fd.append('horario_inicio', horario_inicio);
+            fd.append('horario_fim', horario_fim);
+            fd.append('dias', JSON.stringify(dias));
+            
+            const res = await fetch('/api/crm/config/geral', { method: 'POST', headers: {'x-empresa-id': currentEmpresaId}, body: fd });
+            if(res.ok) showToast('Horários salvos!', 'success'); else showToast('Erro.', 'error');
+        }
+
+        // --- FUNÇÃO SALVAR IA ---
+        async function salvarConfigIA() {
+            const body = {
+                openai_key: document.getElementById('conf-openai-key').value,
+                openai_prompt: document.getElementById('conf-openai-prompt').value,
+                openai_ativo: document.getElementById('conf-openai-ativo').checked
+            };
+
+            const res = await fetch('/api/crm/config/ia', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', ...headers},
+                body: JSON.stringify(body)
+            });
+
+            if(res.ok) showToast('IA Configurada!', 'success');
+            else showToast('Erro ao salvar IA.', 'error');
+        }
+
+        // --- FUNÇÃO ENVIAR BROADCAST ---
+        async function enviarBroadcast() {
+            const msg = document.getElementById('broadcast-msg').value;
+            if (!msg) return showToast('Digite uma mensagem!', 'error');
+            if (!confirm('Tem certeza que deseja enviar esta mensagem para TODOS os contatos?')) return;
+
+            const btn = document.getElementById('btn-broadcast');
+            const status = document.getElementById('broadcast-status');
+            
+            btn.classList.add('hidden');
+            status.classList.remove('hidden');
+
+            try {
+                const res = await fetch('/api/crm/broadcast', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', ...headers},
+                    body: JSON.stringify({ mensagem: msg })
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    showToast(`Enviado para ${data.enviados} contatos!`, 'success');
+                    document.getElementById('broadcast-msg').value = '';
+                } else {
+                    showToast(data.error || 'Erro no envio.', 'error');
+                }
+            } catch (e) {
+                showToast('Erro de conexão.', 'error');
+            } finally {
+                btn.classList.remove('hidden');
+                status.classList.add('hidden');
+            }
+        }
+
+        async function carregarRelatorios() {
+            try {
+                const res = await fetch('/api/crm/avaliacoes', {headers: {'Content-Type': 'application/json', ...headers}});
+                const data = await res.json();
+                document.getElementById('rpt-media').innerText = data.media;
+                document.getElementById('rpt-total').innerText = data.total;
+                document.getElementById('lista-avaliacoes').innerHTML = data.lista.map(a => `
+                    <tr class="border-b border-slate-50 hover:bg-slate-50 transition dark:border-slate-700 dark:hover:bg-slate-700">
+                        <td class="p-4 text-slate-500 dark:text-slate-400">${new Date(a.data_avaliacao).toLocaleDateString()}</td>
+                        <td class="p-4 font-bold text-slate-700 dark:text-slate-200">${a.nome_cliente || a.contato_telefone}</td>
+                        <td class="p-4 text-slate-600 dark:text-slate-400">${a.nome_atendente || 'Sistema'}</td>
+                        <td class="p-4 text-right text-yellow-500 font-bold">${'★'.repeat(a.nota)} <span class="text-slate-400 font-normal text-xs">(${a.nota})</span></td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error(e); }
+        }
+
+        // --- QUICK MESSAGES ---
+        async function carregarQuickMsgs() {
+            const res = await fetch('/api/crm/mensagens-rapidas', {headers});
+            const msgs = await res.json();
+            document.getElementById('lista-quick-msgs').innerHTML = msgs.map(m => `
+                <div class="bg-slate-50 p-3 rounded flex justify-between items-center border dark:bg-slate-700 dark:border-slate-600">
+                    <div>
+                        <div class="font-bold text-sm dark:text-white">${m.titulo} <span class="text-xs text-slate-400 font-normal">${m.atalho || ''}</span></div>
+                        <div class="text-xs text-slate-500 truncate max-w-xs dark:text-slate-400">${m.conteudo}</div>
+                    </div>
+                    <button onclick="delQuickMsg(${m.id})" class="text-red-500 hover:bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        async function salvarQuickMsg() {
+            const titulo = document.getElementById('quick-title').value;
+            const atalho = document.getElementById('quick-shortcut').value;
+            const conteudo = document.getElementById('quick-content').value;
+            await fetch('/api/crm/mensagens-rapidas', { method:'POST', headers, body: JSON.stringify({titulo, atalho, conteudo}) });
+            carregarQuickMsgs();
+            // Limpar inputs
+            document.getElementById('quick-title').value = '';
+            document.getElementById('quick-content').value = '';
+        }
+
+        async function delQuickMsg(id) {
+            if(confirm('Excluir?')) { await fetch(`/api/crm/mensagens-rapidas/${id}`, {method:'DELETE', headers}); carregarQuickMsgs(); }
+        }
+
+        async function carregarSetores() {
+            const res = await fetch('/api/crm/setores', {headers: {'Content-Type': 'application/json', ...headers}});
+            const setores = await res.json();
+            const lista = document.getElementById('lista-setores-sortable');
+            
+            // Popula a lista de setores na aba Fluxo (visualização/edição/exclusão)
+            lista.innerHTML = setores.map((s, index) => `<div class="bg-white border border-slate-200 rounded-lg p-3 flex justify-between items-center shadow-sm group hover:border-indigo-300 transition dark:bg-slate-800 dark:border-slate-700" data-id="${s.id}"><div class="flex items-center gap-3"><div class="handle text-slate-400 cursor-move px-2"><i class="fas fa-grip-vertical"></i></div><div class="w-4 h-4 rounded-full border border-slate-300" style="background-color: ${s.cor || '#cbd5e1'}"></div><div><div class="font-bold text-sm text-slate-700 dark:text-white">${index + 1}. ${s.nome}</div><div class="text-[10px] text-slate-400 truncate max-w-[200px]">${s.mensagem_saudacao}</div></div></div><div class="flex gap-1"><button onclick="editarSetor(${s.id}, '${s.nome}', '${s.mensagem_saudacao.replace(/\n/g, '\\n').replace(/'/g, "\\'")}', '${s.cor}')" class="text-blue-500 hover:bg-blue-50 p-2 rounded transition dark:hover:bg-slate-700"><i class="fas fa-pen"></i></button><button onclick="deletarSetor(${s.id})" class="text-red-500 hover:bg-red-50 p-2 rounded transition dark:hover:bg-slate-700"><i class="fas fa-trash"></i></button></div></div>`).join('');
+            
+            // Popula a lista de setores na aba Equipe (seleção múltipla)
+            document.getElementById('select-setores').innerHTML = setores.map(s => `
+                <label class="flex items-center gap-1 bg-slate-100 px-2 py-1 rounded cursor-pointer hover:bg-indigo-50 transition border border-transparent hover:border-indigo-200 w-full dark:bg-slate-800 dark:border-slate-600">
+                    <input type="checkbox" value="${s.id}" class="chk-setor rounded text-indigo-600 focus:ring-0">
+                    <div class="w-3 h-3 rounded-full" style="background-color: ${s.cor || '#cbd5e1'}"></div>
+                    <span class="text-xs font-medium dark:text-slate-300">${s.nome}</span>
+                </label>`).join('');
+                
+            new Sortable(lista, { handle: '.handle', animation: 150, onEnd: async function (evt) { const order = []; lista.querySelectorAll('[data-id]').forEach(el => order.push(el.getAttribute('data-id'))); await fetch('/api/crm/setores/reordenar', { method: 'POST', headers: {'Content-Type': 'application/json', ...headers}, body: JSON.stringify({ordem: order}) }); carregarSetores(); } });
+        }
+
+        async function salvarBoasVindas() {
+            const texto = document.getElementById('welcome-text').value;
+            const file = document.getElementById('welcome-file').files[0];
+            const idx = globalMensagensPadrao.findIndex(m => m.titulo === 'boasvindas');
+            if(idx >= 0) globalMensagensPadrao[idx].texto = texto; else globalMensagensPadrao.push({titulo: 'boasvindas', texto});
+            const fd = new FormData(); fd.append('mensagens', JSON.stringify(globalMensagensPadrao));
+            if(file) fd.append('welcome_media', file);
+            const res = await fetch('/api/crm/config/geral', { method: 'POST', headers: {'x-empresa-id': currentEmpresaId}, body: fd });
+            if(res.ok) showToast('Boas-vindas atualizada!', 'success'); else showToast('Erro.', 'error');
+        }
+
+        async function salvarSetor() {
+            const id = document.getElementById('setor-id').value;
+            const nome = document.getElementById('setor-nome').value;
+            const msg = document.getElementById('setor-msg').value;
+            const cor = document.getElementById('setor-cor').value;
+            const file = document.getElementById('setor-file').files[0];
+            if(!nome || !msg) return showToast('Preencha tudo', 'error');
+            
+            const fd = new FormData(); 
+            fd.append('nome', nome); 
+            fd.append('mensagem', msg); 
+            fd.append('cor', cor);
+            if(file) fd.append('media', file);
+            
+            const url = id ? `/api/crm/setores/${id}` : '/api/crm/setores'; const method = id ? 'PUT' : 'POST';
+            const res = await fetch(url, {method, headers: {'x-empresa-id': currentEmpresaId}, body: fd});
+            if(res.ok) { showToast('Setor salvo!', 'success'); document.getElementById('modal-setor').classList.add('hidden'); carregarSetores(); } else showToast('Erro.', 'error');
+        }
+
+        function abrirModalSetor() { document.getElementById('setor-id').value = ''; document.getElementById('setor-nome').value = ''; document.getElementById('setor-msg').value = ''; document.getElementById('setor-file').value = ''; document.getElementById('setor-cor').value = '#cbd5e1'; document.getElementById('modal-setor').classList.remove('hidden'); }
+        function editarSetor(id, nome, msg, cor) { document.getElementById('setor-id').value = id; document.getElementById('setor-nome').value = nome; document.getElementById('setor-msg').value = msg; document.getElementById('setor-file').value = ''; document.getElementById('setor-cor').value = cor || '#cbd5e1'; document.getElementById('modal-setor').classList.remove('hidden'); }
+        async function deletarSetor(id) { if(confirm('Excluir?')) { await fetch(`/api/crm/setores/${id}`, {method:'DELETE', headers: {'Content-Type': 'application/json', ...headers}}); carregarSetores(); } }
+
+        async function carregarEquipe() {
+            const res = await fetch('/api/crm/atendentes', {headers: {'Content-Type': 'application/json', ...headers}});
+            const data = await res.json();
+            document.getElementById('contador-equipe').innerText = data.length;
+            document.getElementById('lista-atendentes').innerHTML = data.map(u => `
+                <tr class="hover:bg-slate-50 transition dark:hover:bg-slate-700">
+                    <td class="p-3 font-bold text-slate-700 flex items-center gap-2 dark:text-slate-200">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 text-xs font-bold">${u.nome.charAt(0)}</div>
+                        <div>${u.nome}<div class="text-[10px] text-slate-400 font-normal">${u.email}</div></div>
+                    </td>
+                    <td class="p-3 text-xs text-slate-600 dark:text-slate-400">
+                        <div>${u.cargo || '-'}</div>
+                        <div class="text-[10px] text-slate-400">${u.telefone || ''}</div>
+                    </td>
+                    <td class="p-3 text-xs text-slate-500 max-w-[150px] dark:text-slate-400">${u.setores || 'Todos'}</td>
+                    <td class="p-3"><span class="px-2 py-1 rounded text-[10px] font-bold uppercase ${u.ativo ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${u.ativo ? 'Ativo' : 'Inativo'}</span></td>
+                    <td class="p-3 text-right"><button onclick="delUser(${u.id})" class="text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded"><i class="fas fa-trash"></i></button></td>
+                </tr>`).join('');
+        }
+
+        async function addAtendente() {
+            const setores = []; document.querySelectorAll('.chk-setor:checked').forEach(c => setores.push(c.value));
+            const body = { 
+                nome: document.getElementById('at-nome').value, 
+                email: document.getElementById('at-email').value, 
+                senha: document.getElementById('at-senha').value, 
+                telefone: document.getElementById('at-telefone').value, 
+                cargo: document.getElementById('at-cargo').value, 
+                is_admin: document.getElementById('at-admin').checked,
+                ativo: document.getElementById('at-ativo').checked,
+                setores: setores 
+            };
+            const res = await fetch('/api/crm/atendentes', {method:'POST', headers: {'Content-Type': 'application/json', ...headers}, body:JSON.stringify(body)});
+            if(res.ok) { showToast('Criado!', 'success'); carregarEquipe(); document.getElementById('at-nome').value = ''; } else alert('Erro.');
+        }
+        async function delUser(id) { if(confirm('Remover?')) { await fetch(`/api/crm/atendentes/${id}`, {method:'DELETE', headers: {'Content-Type': 'application/json', ...headers}}); carregarEquipe(); } }
+
+        async function salvarIdentidade() { 
+            const nome = document.getElementById('conf-nome').value; const cor = document.getElementById('conf-cor').value;
+            const logoFile = document.getElementById('conf-logo').files[0];
+            const fd = new FormData();
+            fd.append('nome', nome);
+            fd.append('cor', cor);
+            if(logoFile) fd.append('logo', logoFile);
+
+            const res = await fetch('/api/crm/config/geral', { method:'POST', headers: {'x-empresa-id': currentEmpresaId}, body: fd });
+            if(res.ok) { showToast('Salvo!', 'success'); document.getElementById('header-empresa').innerText = nome; } else showToast('Erro.', 'error');
+        }
+
+        function iniciarConexao() { fetch('/api/whatsapp/start', {method:'POST', headers: {'Content-Type': 'application/json', ...headers}}); showToast('Iniciando...', 'info'); mudarAba('conexao'); }
+        async function resetarConexao() { if(!confirm('Desconectar?')) return; await fetch('/api/whatsapp/reset-me', {method:'POST', headers: {'Content-Type': 'application/json', ...headers}}); showToast('Resetado.', 'info'); document.getElementById('qr-wrapper').classList.add('hidden'); }
+
+        socket.on('qrcode', d => { document.getElementById('qr-wrapper').classList.remove('hidden'); document.getElementById('qr-code').src = d.qrBase64; document.getElementById('status-badge').innerHTML = 'Leia o QR Code'; document.getElementById('rel-status').innerText = 'AGUARDANDO_QR'; });
+        socket.on('status_conn', d => { 
+            const badge = document.getElementById('status-badge'); 
+            if(d.status === 'online') { 
+                badge.className = "px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700 flex items-center gap-2 border border-green-200"; 
+                badge.innerHTML = 'Conectado'; 
+                document.getElementById('qr-wrapper').classList.add('hidden');
+                carregarDados(); // Recarrega para atualizar o número conectado
+            } else { 
+                badge.className = "px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700 flex items-center gap-2 border border-red-200"; 
+                badge.innerHTML = 'Desconectado'; 
+            } 
+        });
+
+        function showToast(msg, type='info') { const t = document.getElementById('toast'); document.getElementById('toast-msg').innerText = msg; t.classList.remove('translate-x-full', 'bg-green-800', 'bg-red-800', 'bg-slate-800'); t.classList.add(type==='success'?'bg-green-800':(type==='error'?'bg-red-800':'bg-slate-800')); t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
+        function formatPhone(phone) { return phone.split(':')[0].split('@')[0]; }
+        document.getElementById('conf-cor').addEventListener('input', (e) => { document.getElementById('cor-hex').innerText = e.target.value; });
+    </script>
+</body>
+</html>

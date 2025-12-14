@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 h-screen flex items-center justify-center p-4">
+
+    <div class="glass-effect p-8 md:p-10 rounded-2xl w-full max-w-md shadow-2xl relative overflow-hidden border border-white/20">
+        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+        
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-50 rounded-2xl mb-4 text-indigo-600 text-3xl shadow-sm transform transition hover:scale-105 duration-300">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-slate-800 tracking-tight">Connect SaaS</h1>
+            <p class="text-sm text-slate-500 mt-2 font-medium">Gestão Inteligente de Atendimento</p>
+        </div>
+
+        <div class="space-y-5">
+            <!-- Campo Empresa -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">Empresa</label>
+                <div class="relative group">
+                    <i class="fas fa-building absolute left-3.5 top-3.5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                    <input id="login-empresa" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition text-slate-700 font-medium placeholder:text-slate-400" placeholder="Nome da sua empresa">
+                </div>
+            </div>
+
+            <!-- Campo Email -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">E-mail</label>
+                <div class="relative group">
+                    <i class="fas fa-envelope absolute left-3.5 top-3.5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                    <input id="login-email" type="email" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition text-slate-700 font-medium placeholder:text-slate-400" placeholder="seu@email.com">
+                </div>
+            </div>
+
+            <!-- Campo Senha -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">Senha</label>
+                <div class="relative group">
+                    <i class="fas fa-lock absolute left-3.5 top-3.5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                    <input type="password" id="login-senha" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition text-slate-700 font-medium placeholder:text-slate-400" placeholder="Sua senha">
+                </div>
+            </div>
+            
+            <!-- Link Esqueci Senha -->
+            <div class="flex justify-end">
+                <button onclick="abrirModalRecuperacao()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline transition">
+                    Esqueceu a senha?
+                </button>
+            </div>
+            
+            <button onclick="fazerLogin()" id="btn-login" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-indigo-500/30 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
+                <span>ENTRAR</span>
+                <i class="fas fa-arrow-right text-sm opacity-70"></i>
+            </button>
+            
+            <div class="text-center mt-8 pt-6 border-t border-slate-100">
+                <button onclick="preencherSuperAdmin()" class="text-xs text-slate-400 hover:text-indigo-600 font-medium transition flex items-center justify-center gap-1 mx-auto">
+                    <i class="fas fa-shield-alt"></i> Acesso Administrativo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RECUPERAÇÃO DE SENHA -->
+    <div id="modal-recuperar" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm relative transform scale-95 transition-transform duration-300">
+            <button onclick="fecharModalRecuperacao()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full w-8 h-8 flex items-center justify-center transition">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800">Recuperar Acesso</h2>
+                <p class="text-sm text-slate-500 mt-2">Digite seu e-mail para receber as instruções de redefinição.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">E-mail cadastrado</label>
+                    <input id="recuperar-email" type="email" placeholder="exemplo@empresa.com" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition text-slate-700">
+                </div>
+                <button onclick="enviarRecuperacao()" id="btn-recuperar" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition transform active:scale-[0.98]">
+                    ENVIAR LINK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animação de entrada do modal
+        const modal = document.getElementById('modal-recuperar');
+        const modalContent = modal.querySelector('div');
+
+        function preencherSuperAdmin() {
+            document.getElementById('login-empresa').value = '';
+            document.getElementById('login-email').value = 'admin@saas.com';
+            document.getElementById('login-senha').value = '123456';
+            // Animação sutil nos campos
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.classList.add('bg-yellow-50');
+                setTimeout(() => input.classList.remove('bg-yellow-50'), 500);
+            });
+        }
+
+        function abrirModalRecuperacao() {
+            modal.classList.remove('hidden');
+            // Pequeno delay para permitir a transição CSS
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            document.getElementById('recuperar-email').focus();
+        }
+
+        function fecharModalRecuperacao() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Fechar modal ao clicar fora
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) fecharModalRecuperacao();
+        });
+
+        async function enviarRecuperacao() {
+            const email = document.getElementById('recuperar-email').value;
+            const btn = document.getElementById('btn-recuperar');
+
+            if(!email) {
+                alert('Por favor, digite seu e-mail.');
+                return;
+            }
+            
+            const originalText = btn.innerText;
+            btn.innerText = 'ENVIANDO...'; 
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            try {
+                const res = await fetch('/api/auth/esqueci-senha', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    alert(data.message);
+                    fecharModalRecuperacao();
+                    document.getElementById('recuperar-email').value = '';
+                } else {
+                    alert(data.error || 'Erro ao recuperar senha.');
+                }
+            } catch (e) {
+                alert('Erro de conexão com o servidor.');
+            }
+
+            btn.innerText = originalText; 
+            btn.disabled = false;
+            btn.classList.remove('opacity-75', 'cursor-not-allowed');
+        }
+
+        async function fazerLogin() {
+            const btn = document.getElementById('btn-login');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> ACESSANDO...';
+            btn.disabled = true;
+            btn.classList.add('opacity-90', 'cursor-wait');
+            
+            const body = {
+                nomeEmpresa: document.getElementById('login-empresa').value,
+                email: document.getElementById('login-email').value,
+                senha: document.getElementById('login-senha').value
+            };
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem('saas_user', JSON.stringify(data));
+                    window.location.href = data.redirectUrl;
+                } else {
+                    alert(data.error || 'Erro no login');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-90', 'cursor-wait');
+                }
+            } catch (e) {
+                alert('Erro de conexão');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-90', 'cursor-wait');
+            }
+        }
+
+        // Login com Enter
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const modalOpen = !document.getElementById('modal-recuperar').classList.contains('hidden');
+                if (modalOpen) {
+                    enviarRecuperacao();
+                } else {
+                    fazerLogin();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
