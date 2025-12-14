@@ -1,27 +1,33 @@
 // ============================================
 // Arquivo: controllers/AdminController.js
-// Descrição: Controller do Super Admin - Gestão de empresas
+// Descrição: Controller do Super Admin
+// Versão: 5.0 - Revisado e Corrigido
 // ============================================
 
+const bcrypt = require('bcryptjs');
+
 class AdminController {
+    /**
+     * Construtor do AdminController
+     * @param {Object} db - Pool de conexão MySQL
+     * @param {Object} sessionManager - Instância do SessionManager
+     */
     constructor(db, sessionManager) {
         this.db = db;
         this.sm = sessionManager;
     }
 
     // ============================================
-    // ANALYTICS E DASHBOARD
+    // ANALYTICS
     // ============================================
+
     /**
-     * Retorna estatísticas gerais do sistema
-     * @param {Object} req - Request
-     * @param {Object} res - Response
+     * Obtém estatísticas gerais do sistema
+     * GET /api/super-admin/analytics
      */
     async getAnalytics(req, res) {
         try {
-            // ============================================
-            // 1. KPIs PRINCIPAIS
-            // ============================================
+            // KPIs
             const [kpis] = await this.db.execute(`
                 SELECT
                     (SELECT COUNT(*) FROM empresas WHERE id != 1) as total_empresas,
@@ -32,9 +38,7 @@ class AdminController {
                     (SELECT COUNT(*) FROM contatos) as total_contatos
             `);
 
-            // ============================================
-            // 2. LISTA DE CLIENTES COM MÉTRICAS
-            // ============================================
+            // Lista de clientes
             const [clientes] = await this.db.execute(`
                 SELECT
                     e.id,
@@ -57,13 +61,12 @@ class AdminController {
                 ORDER BY e.id DESC
             `);
 
-            // ============================================
-            // 3. FORMATAR DADOS
-            // ============================================
+            // Formatar dados
             const clientesFormatados = clientes.map(cliente => ({
                 ...cliente,
                 created_at: new Date(cliente.created_at).toLocaleDateString('pt-BR'),
-                uso_percentual: Math.round(((cliente.total_users || 0) / (cliente.limite_usuarios || 1)) * 100),                status_whatsapp: cliente.whatsapp_status || 'DESCONECTADO'
+                uso_percentual: Math.round(((cliente.total_users || 0) / (cliente.limite_usuarios || 1)) * 100),
+                status_whatsapp: cliente.whatsapp_status || 'DESCONECTADO'
             }));
 
             res.json({
@@ -83,12 +86,12 @@ class AdminController {
     }
 
     // ============================================
-    // CRIAR NOVA EMPRESA
+    // CRIAR EMPRESA
     // ============================================
+
     /**
-     * Cria uma nova empresa com dados padrão
-     * @param {Object} req - Request
-     * @param {Object} res - Response
+     * Cria uma nova empresa
+     * POST /api/super-admin/empresas
      */
     async createEmpresa(req, res) {
         const {
@@ -101,38 +104,29 @@ class AdminController {
         } = req.body;
 
         try {
-            // ============================================
-            // 1. VALIDAÇÃO DA SENHA MESTRA
-            // ============================================
+            // Validar senha mestra
             if (senha_mestra !== process.env.SUPER_ADMIN_PASS) {
                 return res.status(403).json({
-                    error: 'Senha Mestra inválida',
-                    message: 'A senha mestra fornecida está incorreta'
+                    error: 'Senha Mestra inválida'
                 });
             }
 
-            // ============================================
-            // 2. VALIDAÇÃO DOS CAMPOS
-            // ============================================
+            // Validar campos
             if (!nome || !admin_email || !admin_senha) {
                 return res.status(400).json({
-                    error: 'Campos obrigatórios não preenchidos',
-                    message: 'Nome, email do admin e senha são obrigatórios'
+                    error: 'Nome, email e senha são obrigatórios'
                 });
             }
 
-            // Validação de email
+            // Validar email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(admin_email)) {
                 return res.status(400).json({
-                    error: 'Email inválido',
-                    message: 'Forneça um email válido'
+                    error: 'Email inválido'
                 });
             }
 
-            // ============================================
-            // 3. VERIFICAR SE EMPRESA JÁ EXISTE
-            // ============================================
+            // Verificar se empresa existe
             const [empresaExiste] = await this.db.execute(
                 'SELECT id FROM empresas WHERE nome = ?',
                 [nome]
@@ -140,14 +134,11 @@ class AdminController {
 
             if (empresaExiste.length > 0) {
                 return res.status(409).json({
-                    error: 'Empresa já existe',
-                    message: 'Já existe uma empresa cadastrada com este nome'
+                    error: 'Empresa já existe'
                 });
             }
 
-            // ============================================
-            // 4. VERIFICAR SE EMAIL JÁ ESTÁ EM USO
-            // ============================================
+            // Verificar se email está em uso
             const [emailExiste] = await this.db.execute(
                 'SELECT id FROM usuarios_painel WHERE email = ?',
                 [admin_email]
@@ -155,49 +146,32 @@ class AdminController {
 
             if (emailExiste.length > 0) {
                 return res.status(409).json({
-                    error: 'Email já cadastrado',
-                    message: 'Este email já está em uso'
+                    error: 'Email já está em uso'
                 });
             }
 
-            // ============================================
-            // 5. TRANSAÇÃO PARA CRIAR EMPRESA COMPLETA
-            // ============================================
+            // Transação
             const conn = await this.db.getConnection();
 
             try {
                 await conn.beginTransaction();
 
-                // ============================================
-                // 5.1 MENSAGENS PADRÃO
-                // ============================================
+                // Mensagens padrão
                 const msgsPadrao = [
                     {
                         titulo: "boasvindas",
-                        texto: `Olá {{nome}}! Tudo bem? 👋\nSeja muito bem-vindo(a) à *${nome}*!\n\nEstamos prontos para te atender com a melhor qualidade.`
+                        texto: `Olá {{nome}}! 👋\nSeja bem-vindo(a) à *${nome}*!\n\nComo podemos ajudar?`
                     }
                 ];
 
-                // ============================================
-                // 5.2 CRIAR EMPRESA
-                // ============================================
+                // Criar empresa
                 const [resEmp] = await conn.execute(
                     `INSERT INTO empresas (
-                        nome,
-                        plano,
-                        limite_usuarios,
-                        ativo,
-                        mensagens_padrao,
-                        welcome_media_type,
-                        cor_primaria,
-                        msg_ausencia,
-                        msg_avaliacao,
-                        horario_inicio,
-                        horario_fim,
-                        dias_funcionamento,
-                        created_at
+                        nome, plano, limite_usuarios, ativo, mensagens_padrao,
+                        welcome_media_type, cor_primaria, msg_ausencia, msg_avaliacao,
+                        horario_inicio, horario_fim, dias_funcionamento, created_at
                     ) VALUES (?, ?, ?, 1, ?, 'texto', '#4f46e5',
-                        'Olá! Nosso horário de atendimento é de segunda a sexta, das 8h às 18h. Retornaremos assim que possível.',
+                        'Olá! Nosso horário de atendimento é de segunda a sexta, das 8h às 18h.',
                         'Obrigado pelo contato! Por favor, avalie nosso atendimento de 1 a 5.',
                         '08:00', '18:00', ?, NOW())`,
                     [
@@ -211,108 +185,46 @@ class AdminController {
 
                 const empId = resEmp.insertId;
 
-                // ============================================
-                // 5.3 CRIAR SETORES PADRÃO
-                // ============================================
+                // Criar setores padrão
                 const setores = [
-                    {
-                        nome: "Comercial 💰",
-                        msg: "Ótimo {{nome}}, vou te conectar com nosso time de Vendas para impulsionar seus resultados!",
-                        cor: "#10b981"
-                    },
-                    {
-                        nome: "Suporte Técnico 🛠️",
-                        msg: "Entendido {{nome}}. Um técnico especializado já vai analisar seu caso.",
-                        cor: "#3b82f6"
-                    },
-                    {
-                        nome: "Financeiro 📄",
-                        msg: "Olá {{nome}}. Assuntos financeiros serão tratados agora.",
-                        cor: "#f59e0b"
-                    }
+                    { nome: "Comercial 💰", msg: "Olá {{nome}}, vou te conectar com nosso time de Vendas!", cor: "#10b981" },
+                    { nome: "Suporte 🛠️", msg: "Entendido {{nome}}. Um técnico já vai te ajudar.", cor: "#3b82f6" },
+                    { nome: "Financeiro 📄", msg: "Olá {{nome}}. Assuntos financeiros serão tratados agora.", cor: "#f59e0b" }
                 ];
 
                 for (let i = 0; i < setores.length; i++) {
                     const s = setores[i];
                     await conn.execute(
-                        `INSERT INTO setores (
-                            empresa_id,
-                            nome,
-                            mensagem_saudacao,
-                            padrao,
-                            cor,
-                            ordem
-                        ) VALUES (?, ?, ?, 0, ?, ?)`,
+                        `INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, cor, ordem)
+                         VALUES (?, ?, ?, 0, ?, ?)`,
                         [empId, s.nome, s.msg, s.cor, i]
                     );
                 }
 
-                // ============================================
-                // 5.4 CRIAR MENSAGENS RÁPIDAS PADRÃO
-                // ============================================
+                // Criar mensagens rápidas padrão
                 const rapidas = [
-                    {
-                        titulo: "Pix",
-                        conteudo: "Nossa chave Pix é: 00.000.000/0001-00 (CNPJ)",
-                        atalho: "/pix"
-                    },
-                    {
-                        titulo: "Endereço",
-                        conteudo: "Estamos localizados na Rua Exemplo, 123, Centro.",
-                        atalho: "/end"
-                    },
-                    {
-                        titulo: "Agradecimento",
-                        conteudo: "Muito obrigado pela preferência, {{nome}}! Volte sempre. 🚀",
-                        atalho: "/obg"
-                    },
-                    {
-                        titulo: "Aguarde",
-                        conteudo: "Só um momento, estou verificando essa informação para você...",
-                        atalho: "/momento"
-                    },
-                    {
-                        titulo: "Horário",
-                        conteudo: "Nosso horário de atendimento é de segunda a sexta, das 8h às 18h.",
-                        atalho: "/horario"
-                    }
+                    { titulo: "Pix", conteudo: "Nossa chave Pix é: 00.000.000/0001-00 (CNPJ)", atalho: "/pix" },
+                    { titulo: "Endereço", conteudo: "Estamos localizados na Rua Exemplo, 123.", atalho: "/end" },
+                    { titulo: "Agradecimento", conteudo: "Muito obrigado, {{nome}}! Volte sempre. 🚀", atalho: "/obg" },
+                    { titulo: "Aguarde", conteudo: "Só um momento, estou verificando...", atalho: "/momento" }
                 ];
 
                 for (const r of rapidas) {
                     await conn.execute(
-                        `INSERT INTO mensagens_rapidas (
-                            empresa_id,
-                            titulo,
-                            conteudo,
-                            atalho
-                        ) VALUES (?, ?, ?, ?)`,
+                        `INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho)
+                         VALUES (?, ?, ?, ?)`,
                         [empId, r.titulo, r.conteudo, r.atalho]
                     );
                 }
 
-                // ============================================
-                // 5.5 CRIAR USUÁRIO ADMIN
-                // ============================================
-                const bcrypt = require('bcryptjs');
+                // Criar usuário admin
                 const senhaHash = await bcrypt.hash(admin_senha, 10);
-
                 await conn.execute(
-                    `INSERT INTO usuarios_painel (
-                        empresa_id,
-                        nome,
-                        email,
-                        senha,
-                        is_admin,
-                        cargo,
-                        ativo,
-                        created_at
-                    ) VALUES (?, ?, ?, ?, 1, 'Gerente', 1, NOW())`,
-                    [empId, 'Administrador', admin_email, senhaHash]
+                    `INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, cargo, ativo, created_at)
+                     VALUES (?, 'Administrador', ?, ?, 1, 'Gerente', 1, NOW())`,
+                    [empId, admin_email, senhaHash]
                 );
 
-                // ============================================
-                // 5.6 COMMIT DA TRANSAÇÃO
-                // ============================================
                 await conn.commit();
 
                 console.log(`✅ [ADMIN] Nova empresa criada: ${nome} (ID: ${empId})`);
@@ -320,13 +232,7 @@ class AdminController {
                 res.json({
                     success: true,
                     message: 'Empresa criada com sucesso',
-                    empresaId: empId,
-                    dados: {
-                        nome,
-                        admin_email,
-                        plano: plano || 'pro',
-                        limite_usuarios: limite_usuarios || 5
-                    }
+                    empresaId: empId
                 });
 
             } catch (error) {
@@ -348,34 +254,22 @@ class AdminController {
     // ============================================
     // ATUALIZAR EMPRESA
     // ============================================
+
     /**
      * Atualiza dados de uma empresa
-     * @param {Object} req - Request
-     * @param {Object} res - Response
+     * PUT /api/super-admin/empresas/update
      */
     async updateEmpresa(req, res) {
-        const {
-            id,
-            nome,
-            plano,
-            limite,
-            admin_email,
-            admin_senha_nova
-        } = req.body;
+        const { id, nome, plano, limite, admin_email, admin_senha_nova } = req.body;
 
         try {
-            // ============================================
-            // 1. VALIDAÇÃO
-            // ============================================
             if (!id || !nome || !plano || !limite) {
                 return res.status(400).json({
                     error: 'Campos obrigatórios não preenchidos'
                 });
             }
 
-            // ============================================
-            // 2. VERIFICAR SE EMPRESA EXISTE
-            // ============================================
+            // Verificar se empresa existe
             const [empresa] = await this.db.execute(
                 'SELECT id FROM empresas WHERE id = ?',
                 [id]
@@ -387,39 +281,25 @@ class AdminController {
                 });
             }
 
-            // ============================================
-            // 3. ATUALIZAR EMPRESA
-            // ============================================
+            // Atualizar empresa
             await this.db.execute(
-                `UPDATE empresas
-                SET nome = ?, plano = ?, limite_usuarios = ?, updated_at = NOW()
-                WHERE id = ?`,
+                `UPDATE empresas SET nome = ?, plano = ?, limite_usuarios = ?, updated_at = NOW() WHERE id = ?`,
                 [nome, plano, limite, id]
             );
 
-            // ============================================
-            // 4. ATUALIZAR EMAIL DO ADMIN (SE FORNECIDO)
-            // ============================================
+            // Atualizar email do admin
             if (admin_email) {
                 await this.db.execute(
-                    `UPDATE usuarios_painel
-                    SET email = ?
-                    WHERE empresa_id = ? AND is_admin = 1`,
+                    `UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1`,
                     [admin_email, id]
                 );
             }
 
-            // ============================================
-            // 5. ATUALIZAR SENHA DO ADMIN (SE FORNECIDA)
-            // ============================================
+            // Atualizar senha do admin
             if (admin_senha_nova) {
-                const bcrypt = require('bcryptjs');
                 const senhaHash = await bcrypt.hash(admin_senha_nova, 10);
-
                 await this.db.execute(
-                    `UPDATE usuarios_painel
-                    SET senha = ?
-                    WHERE empresa_id = ? AND is_admin = 1`,
+                    `UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1`,
                     [senhaHash, id]
                 );
             }
@@ -441,28 +321,22 @@ class AdminController {
     }
 
     // ============================================
-    // BLOQUEAR / DESBLOQUEAR EMPRESA
+    // ALTERNAR STATUS
     // ============================================
+
     /**
-     * Alterna status ativo/inativo da empresa
-     * @param {Object} req - Request
-     * @param {Object} res - Response
+     * Ativa/desativa empresa
+     * POST /api/super-admin/empresas/:id/status
      */
     async toggleStatus(req, res) {
         const { id } = req.params;
 
         try {
-            // ============================================
-            // 1. ALTERNAR STATUS
-            // ============================================
             await this.db.execute(
                 'UPDATE empresas SET ativo = NOT ativo, updated_at = NOW() WHERE id = ?',
                 [id]
             );
 
-            // ============================================
-            // 2. BUSCAR NOVO STATUS
-            // ============================================
             const [emp] = await this.db.execute(
                 'SELECT ativo, nome FROM empresas WHERE id = ?',
                 [id]
@@ -476,12 +350,10 @@ class AdminController {
 
             const novoStatus = emp[0].ativo;
 
-            // ============================================
-            // 3. DESCONECTAR WHATSAPP SE BLOQUEADO
-            // ============================================
+            // Desconectar WhatsApp se bloqueado
             if (!novoStatus) {
                 await this.sm.deleteSession(parseInt(id));
-                console.log(`⚠️ [ADMIN] Empresa bloqueada e desconectada: ${emp[0].nome}`);
+                console.log(`⚠️ [ADMIN] Empresa bloqueada: ${emp[0].nome}`);
             } else {
                 console.log(`✅ [ADMIN] Empresa desbloqueada: ${emp[0].nome}`);
             }
@@ -504,37 +376,31 @@ class AdminController {
     // ============================================
     // EXCLUIR EMPRESA
     // ============================================
+
     /**
-     * Remove empresa e todos os dados relacionados
-     * @param {Object} req - Request
-     * @param {Object} res - Response
+     * Remove empresa permanentemente
+     * POST /api/super-admin/empresas/:id/delete
      */
     async deleteEmpresa(req, res) {
         const { senha_mestra } = req.body;
         const id = parseInt(req.params.id);
 
         try {
-            // ============================================
-            // 1. VALIDAÇÃO DA SENHA MESTRA
-            // ============================================
+            // Validar senha mestra
             if (senha_mestra !== process.env.SUPER_ADMIN_PASS) {
                 return res.status(403).json({
-                    error: 'Senha Mestra inválida',
-                    message: 'A senha mestra fornecida está incorreta'
+                    error: 'Senha Mestra inválida'
                 });
             }
 
-            // Proteção: não pode excluir empresa ID 1 (sistema)
+            // Proteção: não pode excluir empresa ID 1
             if (id === 1) {
                 return res.status(403).json({
-                    error: 'Operação não permitida',
-                    message: 'Não é possível excluir a empresa do sistema'
+                    error: 'Não é possível excluir a empresa do sistema'
                 });
             }
 
-            // ============================================
-            // 2. BUSCAR NOME DA EMPRESA
-            // ============================================
+            // Buscar nome
             const [empresa] = await this.db.execute(
                 'SELECT nome FROM empresas WHERE id = ?',
                 [id]
@@ -548,23 +414,20 @@ class AdminController {
 
             const nomeEmpresa = empresa[0].nome;
 
-            // ============================================
-            // 3. DESCONECTAR SESSÃO WHATSAPP
-            // ============================================
+            // Desconectar WhatsApp
             await this.sm.deleteSession(id);
 
-            // ============================================
-            // 4. EXCLUIR DADOS (CASCADE VIA FK OU MANUAL)
-            // ============================================
+            // Excluir dados
             const conn = await this.db.getConnection();
 
             try {
                 await conn.beginTransaction();
 
-                // Ordem de exclusão respeitando foreign keys
                 await conn.execute('DELETE FROM avaliacoes WHERE empresa_id = ?', [id]);
                 await conn.execute('DELETE FROM mensagens WHERE empresa_id = ?', [id]);
                 await conn.execute('DELETE FROM mensagens_rapidas WHERE empresa_id = ?', [id]);
+                await conn.execute('DELETE FROM contatos_etiquetas WHERE empresa_id = ?', [id]);
+                await conn.execute('DELETE FROM etiquetas WHERE empresa_id = ?', [id]);
                 await conn.execute('DELETE FROM usuarios_setores WHERE usuario_id IN (SELECT id FROM usuarios_painel WHERE empresa_id = ?)', [id]);
                 await conn.execute('DELETE FROM contatos WHERE empresa_id = ?', [id]);
                 await conn.execute('DELETE FROM setores WHERE empresa_id = ?', [id]);
@@ -573,7 +436,7 @@ class AdminController {
 
                 await conn.commit();
 
-                console.log(`🗑️ [ADMIN] Empresa excluída permanentemente: ${nomeEmpresa} (ID: ${id})`);
+                console.log(`🗑️ [ADMIN] Empresa excluída: ${nomeEmpresa} (ID: ${id})`);
 
                 res.json({
                     success: true,
@@ -599,29 +462,24 @@ class AdminController {
     // ============================================
     // RESETAR SESSÃO WHATSAPP
     // ============================================
+
     /**
      * Desconecta sessão WhatsApp da empresa
-     * @param {Object} req - Request
-     * @param {Object} res - Response
+     * POST /api/super-admin/empresas/:id/reset
      */
     async resetSession(req, res) {
         const { senha_mestra } = req.body;
         const id = parseInt(req.params.id);
 
         try {
-            // ============================================
-            // 1. VALIDAÇÃO DA SENHA MESTRA
-            // ============================================
+            // Validar senha mestra
             if (senha_mestra !== process.env.SUPER_ADMIN_PASS) {
                 return res.status(403).json({
-                    error: 'Senha Mestra inválida',
-                    message: 'A senha mestra fornecida está incorreta'
+                    error: 'Senha Mestra inválida'
                 });
             }
 
-            // ============================================
-            // 2. BUSCAR EMPRESA
-            // ============================================
+            // Buscar empresa
             const [empresa] = await this.db.execute(
                 'SELECT nome FROM empresas WHERE id = ?',
                 [id]
@@ -633,9 +491,7 @@ class AdminController {
                 });
             }
 
-            // ============================================
-            // 3. RESETAR SESSÃO
-            // ============================================
+            // Resetar sessão
             await this.sm.deleteSession(id);
 
             console.log(`🔄 [ADMIN] Sessão resetada: ${empresa[0].nome} (ID: ${id})`);

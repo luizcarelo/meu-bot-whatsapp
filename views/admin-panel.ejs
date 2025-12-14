@@ -266,6 +266,45 @@
                 </div>
             </div>
 
+            <!-- 
+  ========================================
+  ABA: CONFIGURAÇÃO DE HORÁRIOS (Enterprise)
+  Inserir este bloco HTML onde você deseja que a tabela apareça
+  ========================================
+-->
+<div id="tab-horarios" class="bg-white p-6 rounded-lg shadow-md mb-6 hidden">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Configuração de Horário de Atendimento</h2>
+    
+    <div class="overflow-x-auto">
+        <form id="form-horarios">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Dia da Semana</th>
+                        <th class="py-2 px-4 border-b text-center">Aberto?</th>
+                        <th class="py-2 px-4 border-b text-center">Abertura</th>
+                        <th class="py-2 px-4 border-b text-center">Fechamento</th>
+                        <th class="py-2 px-4 border-b text-center">Início Almoço</th>
+                        <th class="py-2 px-4 border-b text-center">Fim Almoço</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-horarios-body">
+                    <!-- Linhas serão preenchidas via JS -->
+                    <tr><td colspan="6" class="text-center py-4">Carregando horários...</td></tr>
+                </tbody>
+            </table>
+
+            <div class="mt-4 flex justify-end">
+                <button type="button" onclick="salvarHorarios()" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow transition duration-200">
+                    Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
             <!-- 8. ABA EQUIPE -->
             <div id="tab-equipe" class="tab-content hidden fade-in">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

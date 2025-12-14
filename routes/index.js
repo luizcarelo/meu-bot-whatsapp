@@ -1,85 +1,125 @@
 // ============================================
 // Arquivo: routes/index.js
-// Descrição: Rotas principais da aplicação
+// Descrição: Rotas Principais da Aplicação
+// Versão: 5.0 - Revisado e Corrigido
 // ============================================
 
 const express = require('express');
 const router = express.Router();
 
-// Importação de Middlewares e Controllers
-// Certifique-se de que estes arquivos existem na pasta controllers
-const WhatsAppController = require('../controllers/WhatsAppController'); 
-const AuthMiddleware = require('../src/middleware/auth'); // Ajuste o caminho conforme sua estrutura
+// ============================================
+// FUNÇÃO AUXILIAR - DETECTAR MOBILE
+// ============================================
+
+function isMobileDevice(req) {
+    const userAgent = req.headers['user-agent'] || '';
+    const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return mobileRegex.test(userAgent);
+}
 
 // ============================================
-// ROTAS PÚBLICAS
+// ROTAS PÚBLICAS (SEM AUTENTICAÇÃO)
 // ============================================
-router.get('/', (req, res) => res.redirect('/login'));
 
+/**
+ * Rota raiz - Redireciona para login
+ */
+router.get('/', (req, res) => {
+    res.redirect('/login');
+});
+
+/**
+ * Página de Login
+ */
 router.get('/login', (req, res) => {
     res.render('login', {
-        titulo: 'Acesso SaaS',
+        titulo: 'Acesso ao Sistema',
         erro: null
     });
 });
 
-// ============================================
-// ROTAS DA API WHATSAPP (CORREÇÃO DO ERRO 404)
-// ============================================
-// Estas rotas estavam faltando no seu arquivo anterior, causando falha no painel
-
-// Iniciar Sessão
-router.get('/whatsapp/start/:companyId', AuthMiddleware, WhatsAppController.startSession);
-
-// Verificar Status
-router.get('/whatsapp/status/:companyId', AuthMiddleware, WhatsAppController.getStatus);
-
-// Obter QR Code
-router.get('/whatsapp/qrcode/:companyId', AuthMiddleware, WhatsAppController.getQrCode);
-
-// Logout
-router.post('/whatsapp/logout/:companyId', AuthMiddleware, WhatsAppController.logoutSession);
-
-// Rota de fallback para erros de chamada sem ID
-router.get('/whatsapp/start', (req, res) => {
-    res.status(400).json({ error: 'ID da empresa obrigatório na URL' });
+/**
+ * Health Check - Verifica se o servidor está rodando
+ */
+router.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
+    });
 });
 
+/**
+ * Status do Sistema
+ */
+router.get('/status', (req, res) => {
+    res.json({
+        status: 'running',
+        version: '5.0.0',
+        node: process.version,
+        memory: process.memoryUsage()
+    });
+});
 
 // ============================================
-// ROTAS DO CRM E PAINEL
+// ROTAS DO CRM (REQUEREM AUTENTICAÇÃO)
 // ============================================
-router.get('/crm', AuthMiddleware, (req, res) => {
+
+/**
+ * CRM Desktop/Mobile - Detecta automaticamente
+ */
+router.get('/crm', (req, res) => {
+    const isMobile = isMobileDevice(req);
+    res.render('crm', {
+        titulo: isMobile ? 'CRM Mobile' : 'CRM Desktop',
+        isMobile: isMobile
+    });
+});
+
+/**
+ * CRM Forçado para Mobile
+ */
+router.get('/app', (req, res) => {
+    res.render('crm', {
+        titulo: 'CRM Mobile',
+        isMobile: true
+    });
+});
+
+/**
+ * CRM Forçado para Desktop
+ */
+router.get('/desktop', (req, res) => {
     res.render('crm', {
         titulo: 'CRM Desktop',
         isMobile: false
     });
 });
 
-router.get('/app', AuthMiddleware, (req, res) => {
-    res.render('crm', {
-        titulo: 'CRM App Mobile',
-        isMobile: true
-    });
-});
+// ============================================
+// ROTAS DE ADMINISTRAÇÃO
+// ============================================
 
-router.get('/admin/painel', AuthMiddleware, (req, res) => {
+/**
+ * Painel Administrativo da Empresa
+ */
+router.get('/admin/painel', (req, res) => {
     res.render('admin-panel', {
         titulo: 'Configurações da Empresa'
     });
 });
 
-router.get('/super-admin', AuthMiddleware, (req, res) => {
+/**
+ * Painel do Super Admin (Gestão de Clientes)
+ */
+router.get('/super-admin', (req, res) => {
     res.render('super-admin', {
-        titulo: 'Gestão Master'
+        titulo: 'Gestão Master SaaS'
     });
 });
 
 // ============================================
-// ROTAS DE API GERAIS
+// EXPORTAR ROUTER
 // ============================================
-// Se você tiver um arquivo api.js, importe aqui:
-const apiRoutes = require('./api'); 
-router.use('/api', apiRoutes);
 
 module.exports = router;

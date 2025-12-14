@@ -1,73 +1,85 @@
 // ============================================
 // Arquivo: config/db.js
-// Descrição: Configuração da conexão com MySQL
+// Descrição: Configuração do Pool MySQL
+// Versão: 5.0 - Revisado e Corrigido
 // ============================================
 
-require('dotenv').config();
 const mysql = require('mysql2/promise');
 
 // ============================================
-// CONFIGURAÇÃO DO POOL DE CONEXÕES
+// CONFIGURAÇÃO DO POOL
 // ============================================
+
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASS || '',
+    database: process.env.DB_NAME || 'saas_whatsapp',
+    port: parseInt(process.env.DB_PORT) || 3306,
+    
+    // Configurações de pool
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 20,
     queueLimit: 0,
+    
+    // Configurações de conexão
+    connectTimeout: 30000,
+    acquireTimeout: 30000,
+    
+    // Charset para emojis e caracteres especiais
+    charset: 'utf8mb4',
+    
+    // Timezone
+    timezone: 'local',
+    
+    // Suporte a múltiplas queries
+    multipleStatements: false,
+    
+    // Manter conexão viva
     enableKeepAlive: true,
-    keepAliveInitialDelay: 0,
-    // Configurações adicionais de segurança e performance
-    connectTimeout: 10000,
-    // Configurações de timezone
-    timezone: '+00:00',
-    // Charset
-    charset: 'utf8mb4'
+    keepAliveInitialDelay: 30000
 });
 
 // ============================================
-// HEALTH CHECK DO BANCO DE DADOS
+// TESTE DE CONEXÃO INICIAL
 // ============================================
-pool.getConnection()
-    .then(conn => {
-        console.log(`\n${'='.repeat(50)}`);
-        console.log(`✅ MySQL Conectado com Sucesso`);
-        console.log(`📍 Host: ${process.env.DB_HOST}`);
-        console.log(`🗄️  Database: ${process.env.DB_NAME}`);
-        console.log(`${'='.repeat(50)}\n`);
-        conn.release();
-    })
-    .catch(err => {
-        console.error('\n❌ ERRO FATAL: Falha na conexão com MySQL');
-        console.error('Detalhes:', err.message);
-        console.error('\nVerifique:');
-        console.error('  1. Se o MySQL está rodando');
-        console.error('  2. Se as credenciais no .env estão corretas');
-        console.error('  3. Se o banco de dados existe');
-        console.error('  4. Se há permissões adequadas\n');
 
-        // Em produção, você pode querer encerrar o processo
-        if (process.env.NODE_ENV === 'production') {
-            process.exit(1);
-        }
-    });
+(async () => {
+    try {
+        const connection = await pool.getConnection();
+        console.log('✅ [MySQL] Conexão estabelecida com sucesso');
+        console.log(`📊 [MySQL] Database: ${process.env.DB_NAME || 'saas_whatsapp'}`);
+        console.log(`🖥️  [MySQL] Host: ${process.env.DB_HOST || 'localhost'}`);
+        connection.release();
+    } catch (error) {
+        console.error('❌ [MySQL] Erro ao conectar:', error.message);
+        console.error('⚠️  [MySQL] Verifique as configurações do banco de dados no arquivo .env');
+    }
+})();
 
 // ============================================
-// TRATAMENTO DE ERROS DO POOL
+// EVENTOS DO POOL
 // ============================================
-pool.on('error', (err) => {
-    console.error('❌ Erro no pool de conexões MySQL:', err);
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-        console.error('Conexão com o banco de dados foi perdida.');
-    }
-    if (err.code === 'ER_CON_COUNT_ERROR') {
-        console.error('O banco de dados tem muitas conexões.');
-    }
-    if (err.code === 'ECONNREFUSED') {
-        console.error('Conexão com o banco de dados foi recusada.');
-    }
+
+pool.on('connection', (connection) => {
+    console.log(`🔗 [MySQL] Nova conexão criada (ID: ${connection.threadId})`);
+    
+    // Configurar charset
+    connection.query("SET NAMES utf8mb4");
+});
+
+pool.on('acquire', (connection) => {
+    // Log de debug (descomente se precisar)
+    // console.log(`📥 [MySQL] Conexão adquirida (ID: ${connection.threadId})`);
+});
+
+pool.on('release', (connection) => {
+    // Log de debug (descomente se precisar)
+    // console.log(`📤 [MySQL] Conexão liberada (ID: ${connection.threadId})`);
+});
+
+pool.on('enqueue', () => {
+    console.log('⏳ [MySQL] Aguardando conexão disponível...');
 });
 
 // ============================================
@@ -75,65 +87,55 @@ pool.on('error', (err) => {
 // ============================================
 
 /**
- * Testa a conexão com o banco de dados
+ * Testa a conexão com o banco
  * @returns {Promise<boolean>}
  */
 async function testConnection() {
     try {
-        const conn = await pool.getConnection();
-        await conn.ping();
-        conn.release();
+        const connection = await pool.getConnection();
+        await connection.ping();
+        connection.release();
         return true;
-    } catch (err) {
-        console.error('Erro ao testar conexão:', err.message);
+    } catch (error) {
+        console.error('[MySQL] Teste de conexão falhou:', error.message);
         return false;
     }
 }
 
 /**
- * Executa uma query com retry em caso de falha
+ * Executa query com retry automático
  * @param {string} sql - Query SQL
- * @param {Array} params - Parâmetros da query
+ * @param {Array} params - Parâmetros
  * @param {number} retries - Número de tentativas
- * @returns {Promise}
+ * @returns {Promise<Array>}
  */
 async function executeWithRetry(sql, params = [], retries = 3) {
     for (let i = 0; i < retries; i++) {
         try {
             return await pool.execute(sql, params);
-        } catch (err) {
-            if (i === retries - 1) throw err;
-            console.warn(`Tentativa ${i + 1} falhou, tentando novamente...`);
-            await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+        } catch (error) {
+            if (i === retries - 1) throw error;
+            
+            console.warn(`[MySQL] Retry ${i + 1}/${retries} para query...`);
+            await new Promise(r => setTimeout(r, 1000 * (i + 1)));
         }
     }
 }
 
 /**
- * Fecha o pool de conexões gracefully
- * @returns {Promise<void>}
+ * Obtém estatísticas do pool
+ * @returns {Object}
  */
-async function closePool() {
-    try {
-        // Verifica se o pool já está fechado antes de tentar fechar
-        // (Pools do mysql2 não expõem propriedade 'closed' pública facilmente, 
-        // mas o try/catch captura a tentativa em estado inválido)
-        await pool.end();
-        console.log('✅ Pool de conexões fechado com sucesso');
-    } catch (err) {
-        // Ignora erro se já estiver fechado
-        if (err.message && err.message.includes('Pool is closed')) return;
-        console.error('❌ Erro ao fechar pool de conexões:', err);
-    }
+function getPoolStats() {
+    return {
+        totalConnections: pool.pool._allConnections?.length || 0,
+        freeConnections: pool.pool._freeConnections?.length || 0,
+        connectionQueue: pool.pool._connectionQueue?.length || 0
+    };
 }
 
-// REMOVIDOS OS LISTENERS DE PROCESSO AQUI
-// O controle de shutdown agora é exclusivo do server.js para evitar conflitos.
-
-// ============================================
-// EXPORTAÇÕES
-// ============================================
+// Exportar pool e funções auxiliares
 module.exports = pool;
 module.exports.testConnection = testConnection;
 module.exports.executeWithRetry = executeWithRetry;
-module.exports.closePool = closePool;
+module.exports.getPoolStats = getPoolStats;
