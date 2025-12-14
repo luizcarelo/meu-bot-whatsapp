@@ -17,9 +17,9 @@ router.get('/', (req, res) => {
 // ROTA DE LOGIN
 // ============================================
 router.get('/login', (req, res) => {
-    res.render('login', { 
+    res.render('login', {
         titulo: 'Acesso SaaS',
-        erro: null 
+        erro: null
     });
 });
 
@@ -27,8 +27,8 @@ router.get('/login', (req, res) => {
 // PAINEL SUPER ADMIN
 // ============================================
 router.get('/super-admin', (req, res) => {
-    res.render('super-admin', { 
-        titulo: 'Gestão Master' 
+    res.render('super-admin', {
+        titulo: 'Gestão Master'
     });
 });
 
@@ -55,17 +55,17 @@ router.get('/crm', (req, res) => {
         return res.redirect('/app');
     }
 
-    res.render('crm', { 
-        titulo: 'CRM Desktop', 
-        isMobile: false 
+    res.render('crm', {
+        titulo: 'CRM Desktop',
+        isMobile: false
     });
 });
 
 // Rota Mobile (Específica para dispositivos móveis)
 router.get('/app', (req, res) => {
-    res.render('crm', { 
-        titulo: 'CRM App Mobile', 
-        isMobile: true 
+    res.render('crm', {
+        titulo: 'CRM App Mobile',
+        isMobile: true
     });
 });
 
@@ -73,17 +73,17 @@ router.get('/app', (req, res) => {
 // PAINEL DE ADMINISTRAÇÃO (CONFIGURAÇÕES)
 // ============================================
 router.get('/admin/painel', (req, res) => {
-    res.render('admin-panel', { 
-        titulo: 'Configurações da Empresa' 
-    }); 
+    res.render('admin-panel', {
+        titulo: 'Configurações da Empresa'
+    });
 });
 
 // ============================================
 // ROTA DE HEALTH CHECK
 // ============================================
 router.get('/health', (req, res) => {
-    res.json({ 
-        status: 'OK', 
+    res.json({
+        status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime()
     });

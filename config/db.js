@@ -47,7 +47,7 @@ pool.getConnection()
         console.error('  2. Se as credenciais no .env estão corretas');
         console.error('  3. Se o banco de dados existe');
         console.error('  4. Se há permissões adequadas\n');
-        
+
         // Em produção, você pode querer encerrar o processo
         if (process.env.NODE_ENV === 'production') {
             process.exit(1);
