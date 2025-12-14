@@ -115,16 +115,16 @@ async function resetBanco() {
 
         // 4. INSERIR DADOS PADRÃO (Super Admin)
         console.log("👤 Criando Super Admin...");
-        
+
         // Cria a "Empresa" do Super Admin
         await connection.query(`
-            INSERT INTO empresas (id, nome, plano, limite_usuarios) 
+            INSERT INTO empresas (id, nome, plano, limite_usuarios)
             VALUES (1, 'Super Admin', 'enterprise', 999)
         `);
-        
+
         // Cria o Usuário Super Admin
         await connection.query(`
-            INSERT INTO usuarios_painel (id, empresa_id, nome, email, senha, is_super_admin, is_admin) 
+            INSERT INTO usuarios_painel (id, empresa_id, nome, email, senha, is_super_admin, is_admin)
             VALUES (1, 1, 'Administrador', 'admin@saas.com', '123456', 1, 1)
         `);
 

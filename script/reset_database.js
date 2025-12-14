@@ -54,7 +54,7 @@ async function resetDatabase() {
 
         const dropTables = `
             SET FOREIGN_KEY_CHECKS = 0;
-            
+
             DROP TABLE IF EXISTS avaliacoes;
             DROP TABLE IF EXISTS mensagens;
             DROP TABLE IF EXISTS mensagens_rapidas;
@@ -63,7 +63,7 @@ async function resetDatabase() {
             DROP TABLE IF EXISTS contatos;
             DROP TABLE IF EXISTS usuarios_painel;
             DROP TABLE IF EXISTS empresas;
-            
+
             SET FOREIGN_KEY_CHECKS = 1;
         `;
 

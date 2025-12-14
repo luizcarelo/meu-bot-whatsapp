@@ -35,7 +35,7 @@ async function backupDatabase() {
         }
 
         // Nome do arquivo com timestamp
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0] + '_' + 
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0] + '_' +
                          new Date().toTimeString().split(' ')[0].replace(/:/g, '-');
         const fileName = `backup_${process.env.DB_NAME}_${timestamp}.sql`;
         const filePath = path.join(backupDir, fileName);
@@ -49,7 +49,7 @@ async function backupDatabase() {
         // Lista de tabelas na ordem correta (respeita foreign keys)
         const tables = [
             'empresas',
-            'usuarios_painel', 
+            'usuarios_painel',
             'setores',
             'contatos',
             'mensagens',
@@ -68,7 +68,7 @@ async function backupDatabase() {
 
                 // Dados da tabela
                 const [rows] = await connection.query(`SELECT * FROM ${table}`);
-                
+
                 if (rows.length > 0) {
                     sqlDump += `-- Dados da tabela ${table}\n`;
                     sqlDump += `INSERT INTO \`${table}\` VALUES\n`;

@@ -217,7 +217,7 @@ async function setupDatabase() {
         console.log('\n📦 Verificando dados iniciais...');
 
         const [empresas] = await connection.query('SELECT COUNT(*) as total FROM empresas WHERE id = 1');
-        
+
         if (empresas[0].total === 0) {
             await connection.query(`
                 INSERT INTO empresas (id, nome, nome_sistema, ativo, plano, limite_usuarios)
@@ -238,7 +238,7 @@ async function setupDatabase() {
 
     } catch (error) {
         console.error('\n❌ ERRO:', error.message);
-        
+
         if (error.code === 'ER_BAD_DB_ERROR') {
             console.error('\n⚠️  O banco de dados não existe!');
             console.error('   Execute no MySQL:');

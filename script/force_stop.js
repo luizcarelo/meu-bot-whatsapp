@@ -7,7 +7,7 @@ console.log('🧹 A verificar portas presas...');
 ports.forEach(port => {
     // Comando para Linux/Mac
     const cmd = `lsof -i :${port} -t | xargs kill -9`;
-    
+
     exec(cmd, (error, stdout, stderr) => {
         if (error) {
             // Ignora erro se não houver processo (exit code 1)

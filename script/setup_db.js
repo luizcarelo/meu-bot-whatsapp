@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 
 async function instalarBanco() {
     console.log("🔄 A verificar banco de dados...");
-    
+
     const connection = await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -14,7 +14,7 @@ async function instalarBanco() {
     try {
         await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
         await connection.query(`USE ${process.env.DB_NAME}`);
-        
+
         const sql = `
             CREATE TABLE IF NOT EXISTS empresas (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -150,7 +150,7 @@ async function instalarBanco() {
         ];
 
         for (const query of migrations) {
-            try { await connection.query(query); console.log(`✅ Correção aplicada: ${query}`); } 
+            try { await connection.query(query); console.log(`✅ Correção aplicada: ${query}`); }
             catch (e) { if (!e.message.includes('Duplicate')) console.log(`ℹ️ Info: ${e.message}`); }
         }
 
