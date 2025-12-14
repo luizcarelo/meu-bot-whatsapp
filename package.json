@@ -1,12 +1,14 @@
 {
   "name": "saas-whatsapp-crm",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "restart": "pkill -9 -f 'node.*server.js' || true && node server.js",
     "kill": "pkill -9 -f 'node.*server.js' || true",
-    "setup": "node setup_db.js"
+    "setup": "node setup_db.js",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./public/css/style.css --watch",
+    "build:css:prod": "tailwindcss -i ./src/styles.css -o ./public/css/style.css --minify"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "latest",
@@ -15,6 +17,7 @@
     "dotenv": "^16.6.1",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "express-session": "^1.18.2",
     "helmet": "^8.1.0",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.15.3",
@@ -25,6 +28,26 @@
     "socket.io": "^4.7.5"
   },
   "engines": {
-    "node": ">=20.0.0"
-  }
+    "node": ">=24.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.3"
+  },
+  "description": "Sistema de **CRM multi-empresa** com integração ao **WhatsApp Web via Baileys**, atendimento em tempo real (Socket.IO), painel administrativo, avaliações, mensagens rápidas, broadcast e integração opcional com **IA (OpenAI)**.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizcarelo/meu-bot-whatsapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/luizcarelo/meu-bot-whatsapp/issues"
+  },
+  "homepage": "https://github.com/luizcarelo/meu-bot-whatsapp#readme"
 }

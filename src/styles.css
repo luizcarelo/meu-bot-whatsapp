@@ -1,0 +1,14 @@
+/* Arquivo de Entrada do Tailwind CSS 
+  Este arquivo será compilado para /public/css/style.css
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos Customizados do Sistema (se necessário sobrescrever algo globalmente) */
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-200;
+  }
+}

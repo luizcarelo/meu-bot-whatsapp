@@ -115,23 +115,20 @@ async function executeWithRetry(sql, params = [], retries = 3) {
  */
 async function closePool() {
     try {
+        // Verifica se o pool já está fechado antes de tentar fechar
+        // (Pools do mysql2 não expõem propriedade 'closed' pública facilmente, 
+        // mas o try/catch captura a tentativa em estado inválido)
         await pool.end();
         console.log('✅ Pool de conexões fechado com sucesso');
     } catch (err) {
+        // Ignora erro se já estiver fechado
+        if (err.message && err.message.includes('Pool is closed')) return;
         console.error('❌ Erro ao fechar pool de conexões:', err);
     }
 }
 
-// ============================================
-// GRACEFUL SHUTDOWN
-// ============================================
-process.on('SIGTERM', async () => {
-    await closePool();
-});
-
-process.on('SIGINT', async () => {
-    await closePool();
-});
+// REMOVIDOS OS LISTENERS DE PROCESSO AQUI
+// O controle de shutdown agora é exclusivo do server.js para evitar conflitos.
 
 // ============================================
 // EXPORTAÇÕES

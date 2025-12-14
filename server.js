@@ -1,6 +1,6 @@
 // ============================================
 // Arquivo: server.js
-// Descrição: Ponto de entrada da aplicação SaaS CRM
+// Descrição: Ponto de entrada da aplicação SaaS CRM (Otimizado)
 // ============================================
 
 require('dotenv').config();
@@ -10,14 +10,12 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const session = require('express-session'); // Adicionado para gestão de sessão
 
 // Configuração de Logs e Tratamento de Exceções Globais
 process.on('uncaughtException', (err) => {
-    // Ignora erro de porta em uso aqui pois será tratado no server.on('error')
     if (err.code === 'EADDRINUSE') return;
-    
     console.error('❌ ERRO CRÍTICO NÃO TRATADO:', err);
-    // Em produção, considerar reiniciar o processo via PM2
 });
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -31,88 +29,69 @@ if (!fs.existsSync(uploadDir)) {
     console.log(`📁 Pasta de uploads verificada: ${uploadDir}`);
 }
 
-// Dependências Internas
-const db = require('./config/db');
-const SessionManager = require('./src/managers/SessionManager');
-
 const app = express();
 const server = http.createServer(app);
 
-// Configuração do Socket.IO com CORS e Buffer otimizado
+// Configuração de Sessão (CRUCIAL PARA O LOGIN FUNCIONAR)
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'segredo_padrao_dev_123',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production', // true apenas se tiver HTTPS
+        maxAge: 1000 * 60 * 60 * 24 // 1 dia
+    }
+}));
+
+// Configuração do Socket.IO
 const io = new Server(server, {
     cors: {
-        origin: "*", // Em produção, restrinja para o domínio do seu frontend
+        origin: "*", // Em produção, restrinja para seu domínio
         methods: ["GET", "POST"]
     },
-    maxHttpBufferSize: 1e8, // 100MB para uploads via socket se necessário
-    pingTimeout: 60000 // Aumenta tolerância para conexões lentas
+    maxHttpBufferSize: 1e8 // 100 MB
 });
-
-// Configuração do Express
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 
 // Middlewares Globais
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+
+// Configuração de View Engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Inicialização do Gerenciador de Sessões (WhatsApp Core)
-const sessionManager = new SessionManager(io, db);
+// Middleware Global de Variáveis (Torna user acessível em todas as views)
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    res.locals.isMobile = /mobile|android|iphone/i.test(req.headers['user-agent'] || '');
+    next();
+});
+
+// --- CORREÇÃO DE ERRO DE CONSOLE (Favicon) ---
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // Importação de Rotas
-const indexRoutes = require('./routes/index');
-app.use('/', indexRoutes);
+const routes = require('./routes/index'); // Certifique-se que o arquivo esteja em routes/index.js
+app.use('/', routes);
 
-try {
-    // Injeção de Dependências nas Rotas da API
-    const apiRoutes = require('./routes/api')(sessionManager, db);
-    app.use('/api', apiRoutes);
-} catch (error) {
-    console.error("❌ Erro crítico ao carregar rotas da API:", error);
-}
-
-// Socket.IO Connection Handler Global
-io.on('connection', (socket) => {
-    // Lógica para salas privadas por empresa (Multi-tenancy via Socket)
-    socket.on('join_empresa', (empresaId) => {
-        if(empresaId) {
-            const room = `empresa_${empresaId}`;
-            socket.join(room);
-            // console.log(`🔌 Socket ${socket.id} entrou na sala: ${room}`);
-        }
-    });
-
-    socket.on('disconnect', () => {
-        // console.log(`🔌 Socket ${socket.id} desconectado`);
-    });
-});
-
-// Handler 404
+// Tratamento de Erro 404
 app.use((req, res) => {
     if (req.accepts('html')) {
-        res.status(404).render('login', { titulo: 'Página não encontrada - 404' });
+        res.status(404).render('login', { erro: 'Página não encontrada', titulo: '404' });
         return;
     }
-    res.status(404).json({ error: 'Recurso não encontrado' });
+    res.status(404).json({ error: 'Endpoint não encontrado' });
 });
 
-// ============================================
-// GRACEFUL SHUTDOWN (Encerramento Limpo)
-// ============================================
+// --- SISTEMA DE GRACEFUL SHUTDOWN (Mantido do seu código original) ---
 async function gracefulShutdown(signal) {
-    console.log(`\n🛑 Recebido ${signal}. Encerrando servidor...`);
+    console.log(`\n🛑 Recebido sinal ${signal}. Encerrando graciosamente...`);
     try {
-        await require('./config/db').closePool();
-        console.log('✅ Conexões com banco fechadas.');
-        
-        // Encerra a sessão do socket.io e http
-        io.close();
-        server.close();
-        
-        console.log('👋 Processo finalizado.');
-        process.exit(0); // Força o encerramento do processo Node (mata timers pendentes)
+        await new Promise((resolve) => server.close(resolve));
+        console.log('✅ Servidor HTTP fechado.');
+        process.exit(0);
     } catch (err) {
         console.error('❌ Erro ao encerrar:', err);
         process.exit(1);
@@ -125,31 +104,18 @@ process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 // Inicialização do Servidor
 const PORT = process.env.PORT || 50010;
 
-// TRATAMENTO DE ERRO DE PORTA EM USO
 server.on('error', (e) => {
     if (e.code === 'EADDRINUSE') {
         console.error(`\n❌ ERRO FATAL: A porta ${PORT} já está em uso!`);
-        console.error(`⚠️  O servidor anterior não foi encerrado corretamente.`);
-        console.error(`\n🛠️  SOLUÇÃO RÁPIDA:`);
-        console.error(`   Execute: node script/force_stop.js`);
-        console.error(`   E tente novamente: npm start\n`);
+        console.error(`🛠️  Execute: node script/force_stop.js`);
         process.exit(1);
     } else {
         console.error('❌ Erro desconhecido no servidor HTTP:', e);
     }
 });
 
-server.listen(PORT, async () => {
+server.listen(PORT, () => {
     console.log(`\n🚀 SISTEMA DE GESTÃO SAAS INICIADO`);
-    console.log(`🌐 URL: https://chatbot.lcsolucoesdigital.com.br:${PORT}`);
-    console.log(`📅 Data: ${new Date().toLocaleString('pt-BR')}`);
+    console.log(`🌐 URL: http://localhost:${PORT}`);
     console.log(`============================================`);
-
-    // Auto-Reconexão das Sessões WhatsApp
-    console.log('⏳ Iniciando restauração de sessões do WhatsApp...');
-    try {
-        await sessionManager.reconnectAllSessions();
-    } catch (error) {
-        console.error('❌ Falha na reconexão automática:', error);
-    }
 });

@@ -6,16 +6,16 @@
 const express = require('express');
 const router = express.Router();
 
-// ============================================
-// REDIRECIONAMENTO INICIAL
-// ============================================
-router.get('/', (req, res) => {
-    res.redirect('/login');
-});
+// Importação de Middlewares e Controllers
+// Certifique-se de que estes arquivos existem na pasta controllers
+const WhatsAppController = require('../controllers/WhatsAppController'); 
+const AuthMiddleware = require('../src/middleware/auth'); // Ajuste o caminho conforme sua estrutura
 
 // ============================================
-// ROTA DE LOGIN
+// ROTAS PÚBLICAS
 // ============================================
+router.get('/', (req, res) => res.redirect('/login'));
+
 router.get('/login', (req, res) => {
     res.render('login', {
         titulo: 'Acesso SaaS',
@@ -24,85 +24,62 @@ router.get('/login', (req, res) => {
 });
 
 // ============================================
-// PAINEL SUPER ADMIN
+// ROTAS DA API WHATSAPP (CORREÇÃO DO ERRO 404)
 // ============================================
-router.get('/super-admin', (req, res) => {
-    res.render('super-admin', {
-        titulo: 'Gestão Master'
-    });
+// Estas rotas estavam faltando no seu arquivo anterior, causando falha no painel
+
+// Iniciar Sessão
+router.get('/whatsapp/start/:companyId', AuthMiddleware, WhatsAppController.startSession);
+
+// Verificar Status
+router.get('/whatsapp/status/:companyId', AuthMiddleware, WhatsAppController.getStatus);
+
+// Obter QR Code
+router.get('/whatsapp/qrcode/:companyId', AuthMiddleware, WhatsAppController.getQrCode);
+
+// Logout
+router.post('/whatsapp/logout/:companyId', AuthMiddleware, WhatsAppController.logoutSession);
+
+// Rota de fallback para erros de chamada sem ID
+router.get('/whatsapp/start', (req, res) => {
+    res.status(400).json({ error: 'ID da empresa obrigatório na URL' });
 });
 
+
 // ============================================
-// ROTAS DO CRM (COM DETECÇÃO MOBILE)
+// ROTAS DO CRM E PAINEL
 // ============================================
-
-/**
- * Detecta se o dispositivo é mobile através do User-Agent
- * @param {string} userAgent - String do User-Agent
- * @returns {boolean} - True se for dispositivo mobile
- */
-function isMobileDevice(userAgent) {
-    return /mobile|android|iphone|ipad|phone|tablet/i.test(userAgent || '');
-}
-
-// Rota Desktop (Padrão)
-router.get('/crm', (req, res) => {
-    const ua = req.headers['user-agent'] || '';
-    const isMobile = isMobileDevice(ua);
-
-    // Se for mobile, redireciona para a rota específica
-    if (isMobile) {
-        return res.redirect('/app');
-    }
-
+router.get('/crm', AuthMiddleware, (req, res) => {
     res.render('crm', {
         titulo: 'CRM Desktop',
         isMobile: false
     });
 });
 
-// Rota Mobile (Específica para dispositivos móveis)
-router.get('/app', (req, res) => {
+router.get('/app', AuthMiddleware, (req, res) => {
     res.render('crm', {
         titulo: 'CRM App Mobile',
         isMobile: true
     });
 });
 
-// ============================================
-// PAINEL DE ADMINISTRAÇÃO (CONFIGURAÇÕES)
-// ============================================
-router.get('/admin/painel', (req, res) => {
+router.get('/admin/painel', AuthMiddleware, (req, res) => {
     res.render('admin-panel', {
         titulo: 'Configurações da Empresa'
     });
 });
 
-// ============================================
-// ROTA DE HEALTH CHECK
-// ============================================
-router.get('/health', (req, res) => {
-    res.json({
-        status: 'OK',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime()
+router.get('/super-admin', AuthMiddleware, (req, res) => {
+    res.render('super-admin', {
+        titulo: 'Gestão Master'
     });
 });
 
 // ============================================
-// ROTA DE STATUS DO SISTEMA
+// ROTAS DE API GERAIS
 // ============================================
-router.get('/status', (req, res) => {
-    res.json({
-        status: 'online',
-        version: require('../package.json').version,
-        node: process.version,
-        platform: process.platform,
-        memory: {
-            used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + ' MB',
-            total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + ' MB'
-        }
-    });
-});
+// Se você tiver um arquivo api.js, importe aqui:
+const apiRoutes = require('./api'); 
+router.use('/api', apiRoutes);
 
 module.exports = router;

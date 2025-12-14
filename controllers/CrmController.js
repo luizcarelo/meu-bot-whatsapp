@@ -65,68 +65,74 @@ class CrmController {
     }
 
 
-async getContatos(req, res) {
-  const userId = req.headers['x-user-id'];
-  const statusFiltro = req.query.status;
+    async getContatos(req, res) {
+        const userId = req.headers['x-user-id'];
+        const statusFiltro = req.query.status;
 
-  try {
-    const [users] = await this.db.execute(
-      'SELECT is_admin FROM usuarios_painel WHERE id = ?',
-      [userId]
-    );
-    const isAdmin = users[0] && (users[0].is_admin == 1 || users[0].is_admin === true);
+        try {
+            const [users] = await this.db.execute(
+                'SELECT is_admin FROM usuarios_painel WHERE id = ?',
+                [userId]
+            );
+            const isAdmin = users[0] && (users[0].is_admin == 1 || users[0].is_admin === true);
 
-let sql = `
-  SELECT c.*,
-    (SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,
-    (SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
-    s.nome as nome_setor,
-    s.cor as cor_setor,
-    u.nome as nome_atendente,
-    (
-        SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))
-        FROM contatos_etiquetas ce
-        JOIN etiquetas e ON ce.etiqueta_id = e.id
-        WHERE ce.contato_id = c.id
-    ) as tags
-  FROM contatos c
-  LEFT JOIN setores s ON c.setor_id = s.id
-  LEFT JOIN usuarios_painel u ON c.atendente_id = u.id
-  WHERE c.empresa_id = ?
-`;
-    const params = [req.empresaId];
+            // Query otimizada para buscar contatos e suas tags agregadas
+            // O uso de COALESCE garante que retorne '[]' em vez de null se não houver tags
+            let sql = `
+                SELECT c.*,
+                    (SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,
+                    (SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
+                    s.nome as nome_setor,
+                    s.cor as cor_setor,
+                    u.nome as nome_atendente,
+                    COALESCE(
+                        (
+                            SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))
+                            FROM contatos_etiquetas ce
+                            JOIN etiquetas e ON ce.etiqueta_id = e.id
+                            WHERE ce.contato_id = c.id
+                        ), 
+                    '[]') as tags
+                FROM contatos c
+                LEFT JOIN setores s ON c.setor_id = s.id
+                LEFT JOIN usuarios_painel u ON c.atendente_id = u.id
+                WHERE c.empresa_id = ?
+            `;
+            
+            const params = [req.empresaId];
 
-    if (statusFiltro === 'meus') {
-      sql += ` AND c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?`;
-      params.push(userId);
-    } else if (statusFiltro === 'fila') {
-      sql += ` AND c.status_atendimento = 'FILA'`;
-      if (!isAdmin) {
-        sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;
-        params.push(userId);
-      }
-    } else if (statusFiltro === 'todos') {
-      if (isAdmin) {
-        sql += ` AND c.status_atendimento IN ('ATENDENDO','FILA','ABERTO')`;
-      } else {
-        sql += ` AND (
-          (c.status_atendimento = 'FILA' AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?))
-          OR
-          (c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?)
-        )`;
-        params.push(userId, userId);
-      }
+            if (statusFiltro === 'meus') {
+                sql += ` AND c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?`;
+                params.push(userId);
+            } else if (statusFiltro === 'fila') {
+                sql += ` AND c.status_atendimento = 'FILA'`;
+                if (!isAdmin) {
+                    sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;
+                    params.push(userId);
+                }
+            } else if (statusFiltro === 'todos') {
+                if (isAdmin) {
+                    sql += ` AND c.status_atendimento IN ('ATENDENDO','FILA','ABERTO')`;
+                } else {
+                    sql += ` AND (
+                        (c.status_atendimento = 'FILA' AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?))
+                        OR
+                        (c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?)
+                    )`;
+                    params.push(userId, userId);
+                }
+            }
+
+            // Ordenação: Conversas com mensagens primeiro, depois pela data da última mensagem
+            sql += ` ORDER BY CASE WHEN ordenacao IS NULL THEN 0 ELSE 1 END, ordenacao DESC`;
+
+            const [rows] = await this.db.execute(sql, params);
+            res.json(rows);
+        } catch (e) {
+            console.error('Erro ao buscar contatos:', e);
+            res.status(500).json({ error: 'Erro ao buscar contatos' });
+        }
     }
-
-       sql += ` ORDER BY CASE WHEN ordenacao IS NULL THEN 0 ELSE 1 END, ordenacao DESC`;
-
-    const [rows] = await this.db.execute(sql, params);
-    res.json(rows);
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'Erro ao buscar contatos' });
-  }
-}
 
     // --- FLUXO DE ATENDIMENTO ---
 
@@ -134,9 +140,6 @@ let sql = `
         const { telefone } = req.body;
         const atendenteId = req.headers['x-user-id'];
         try {
-            // Admin pode roubar (force take over)
-            // Usuário só assume se estiver na fila ou se não tiver dono
-
             await this.db.execute(
                 `UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
                 [atendenteId, req.empresaId, telefone]
@@ -178,7 +181,6 @@ let sql = `
         } catch(e) { res.status(500).json({error: e.message}); }
     }
 
-    // NOVA FUNÇÃO: Transferir diretamente para usuário
     async transferirParaUsuario(req, res) {
         const { telefone, usuarioId } = req.body;
         try {
@@ -190,7 +192,6 @@ let sql = `
                 await sock.sendMessage(telefone, { text: `🔄 Seu atendimento foi transferido para *${nomeUser}*.` });
             }
 
-            // Atualiza direto para ATENDENDO com o novo ID, sem passar pela fila
             await this.db.execute(
                 `UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
                 [usuarioId, req.empresaId, telefone]
@@ -429,8 +430,9 @@ let sql = `
 
     async createAtendente(req, res) {
         const bcrypt = require('bcryptjs');
-        const senhaHash = await bcrypt.hash(senha, 10);
         const { nome, email, senha, is_admin, setores, telefone, cargo, ativo } = req.body;
+        const senhaHash = await bcrypt.hash(senha, 10);
+        
         const [emp] = await this.db.execute('SELECT limite_usuarios FROM empresas WHERE id = ?', [req.empresaId]);
         const [qtd] = await this.db.execute('SELECT COUNT(*) as total FROM usuarios_painel WHERE empresa_id = ?', [req.empresaId]);
         if (qtd[0].total >= emp[0].limite_usuarios) return res.status(400).json({ error: 'Limite atingido.' });
@@ -520,8 +522,10 @@ let sql = `
             res.status(500).json({ error: 'Erro ao carregar agenda' });
         }
     }
-        // Listar etiquetas da empresa
-        async getEtiquetas(req, res) {
+
+    // --- ETIQUETAS (TAGS) ---
+
+    async getEtiquetas(req, res) {
         try {
             const [rows] = await this.db.execute(
                 'SELECT * FROM etiquetas WHERE empresa_id = ? ORDER BY nome ASC',
@@ -531,7 +535,6 @@ let sql = `
         } catch (e) { res.status(500).json({ error: e.message }); }
     }
 
-    // Criar nova etiqueta
     async createEtiqueta(req, res) {
         const { nome, cor } = req.body;
         if (!nome) return res.status(400).json({ error: 'Nome obrigatório' });
@@ -544,7 +547,6 @@ let sql = `
         } catch (e) { res.status(500).json({ error: e.message }); }
     }
 
-    // Excluir etiqueta
     async deleteEtiqueta(req, res) {
         const { id } = req.params;
         try {
@@ -553,37 +555,29 @@ let sql = `
         } catch (e) { res.status(500).json({ error: e.message }); }
     }
 
-    // Associar/Desassociar etiqueta a um contato
     async toggleEtiquetaContato(req, res) {
         const { contatoId, etiquetaId } = req.body;
         try {
-            // Verifica se já existe
             const [exists] = await this.db.execute(
                 'SELECT * FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',
                 [contatoId, etiquetaId]
             );
 
             if (exists.length > 0) {
-                // Remove
                 await this.db.execute(
                     'DELETE FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',
                     [contatoId, etiquetaId]
                 );
                 res.json({ success: true, action: 'removed' });
             } else {
-                // Adiciona
                 await this.db.execute(
                     'INSERT INTO contatos_etiquetas (contato_id, etiqueta_id, empresa_id) VALUES (?, ?, ?)',
                     [contatoId, etiquetaId, req.empresaId]
                 );
                 res.json({ success: true, action: 'added' });
             }
-            
-            // Atualiza lista para todos
-            // (Opcional: enviar evento socket específico para atualizar só aquele contato)
-            
         } catch (e) { res.status(500).json({ error: e.message }); }
     }
-    }
+}
 
 module.exports = CrmController;
