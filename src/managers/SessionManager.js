@@ -315,6 +315,120 @@ class SessionManager {
                     'SELECT id, setor_id, status_atendimento, foto_perfil, atendente_id FROM contatos WHERE empresa_id = ? AND telefone = ?',
                     [empresaId, remoteJid]
                 );
+                
+try {
+  // 1) Config da empresa
+  const [empRows] = await this.db.execute(
+    "SELECT nome, mensagens_padrao, msg_ausencia, welcome_media_url, welcome_media_type, horario_inicio, horario_fim, dias_funcionamento FROM empresas WHERE id = ?",
+    [empresaId]
+  );
+  const emp = empRows[0];
+  if (!emp) { /* sem empresa -> nada a fazer */ }
+
+  // 2) Contato + last_welcome_at
+  const [contRows] = await this.db.execute(
+    "SELECT id, last_welcome_at FROM contatos WHERE empresa_id = ? AND telefone = ?",
+    [empresaId, remoteJid]
+  );
+  let contatoId = contRows[0]?.id;
+  let lastWelcomeAt = contRows[0]?.last_welcome_at;
+
+  if (!contatoId) {
+    const [ins] = await this.db.execute(
+      "INSERT INTO contatos (empresa_id, telefone, status_atendimento, created_at) VALUES (?, ?, 'ABERTO', NOW())",
+      [empresaId, remoteJid]
+    );
+    contatoId = ins.insertId;
+    lastWelcomeAt = null;
+  }
+
+  // 3) Decide se precisa enviar boas-vindas (24h)
+  const precisaWelcome = (() => {
+    if (!lastWelcomeAt) return true;
+    const horas = (Date.now() - new Date(lastWelcomeAt).getTime()) / 3600000;
+    return horas >= 24;
+  })();
+
+  // 4) Lista de setores (para mensagem e interpretação)
+  const [setores] = await this.db.execute(
+    "SELECT id, nome, mensagem_saudacao, cor FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC",
+    [empresaId]
+  );
+
+  // 5) Se o cliente respondeu com número (ex.: "1"), transfere direto
+  const numSel = parseInt((conteudo || "").trim(), 10);
+  if (!isNaN(numSel) && numSel >= 1 && numSel <= setores.length) {
+    const setorEscolhido = setores[numSel - 1];
+    await this.db.execute(
+      "UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?",
+      [setorEscolhido.id, empresaId, remoteJid]
+    );
+
+    const aviso = `🔄 Transferido para setor: *${setorEscolhido.nome}*`;
+    await sock.sendMessage(remoteJid, { text: aviso });
+    await this.db.execute(
+      "INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)",
+      [empresaId, remoteJid, aviso]
+    );
+    this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
+      remoteJid: remoteJid, fromMe: true, tipo: 'sistema',
+      conteudo: aviso, timestamp: Math.floor(Date.now() / 1000)
+    });
+    // Não segue com boas-vindas se já houve seleção
+  } else if (precisaWelcome) {
+    const inHorario = estaNoHorario(emp);
+    let boasVindasText = "Olá! Seja bem-vindo(a).";
+    try {
+      const padrao = JSON.parse(emp.mensagens_padrao || "[]");
+      const msgBV = padrao.find(p => String(p.titulo || "").toLowerCase() === "boasvindas");
+      if (msgBV?.texto) boasVindasText = msgBV.texto;
+    } catch {}
+    const ausenciaText = emp.msg_ausencia || "Estamos fora do horário. Retornaremos assim que possível.";
+
+    const listaSetoresTexto = setores.length
+      ? "Setores disponíveis:\n" + setores.map((s, i) => `${i + 1}) ${s.nome}`).join("\n")
+      : "No momento, não há setores cadastrados.";
+
+    const textoFinal = inHorario
+      ? `${boasVindasText}\n\n${listaSetoresTexto}\n\n*Responda com o número do setor para continuar.*`
+      : `${ausenciaText}\n\n${listaSetoresTexto}`;
+
+    // envia texto
+    await sock.sendMessage(remoteJid, { text: textoFinal });
+    await this.db.execute(
+      "INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', ?)",
+      [empresaId, remoteJid, textoFinal]
+    );
+    this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
+      remoteJid: remoteJid, fromMe: true, tipo: 'sistema',
+      conteudo: textoFinal, timestamp: Math.floor(Date.now() / 1000)
+    });
+
+    // mídia opcional
+    if (emp.welcome_media_url && emp.welcome_media_type) {
+      const safePath = path.join(this.rootDir, "public", emp.welcome_media_url.replace(/^\/+/, ""));
+      const type = String(emp.welcome_media_type).toLowerCase();
+      const msgSend =
+        (type === "imagem") ? { image: { url: safePath }, caption: boasVindasText } :
+        (type === "video")  ? { video: { url: safePath }, caption: boasVindasText } :
+        (type === "audio")  ? { audio: { url: safePath } } :
+                              { document: { url: safePath }, caption: boasVindasText };
+      await sock.sendMessage(remoteJid, msgSend);
+      // emitir registro sintético (se quiser)
+      this.io.to(`empresa_${empresaId}`).emit('nova_mensagem', {
+        remoteJid: remoteJid, fromMe: true, tipo: type,
+        conteudo: "[Mídia Boas-Vindas]", urlMidia: emp.welcome_media_url,
+        timestamp: Math.floor(Date.now() / 1000)
+      });
+    }
+
+    // marca última boas-vindas
+    await this.db.execute("UPDATE contatos SET last_welcome_at = NOW() WHERE id = ?", [contatoId]);
+  }
+} catch (e) {
+  console.error("[WelcomeFlow] Erro:", e.message);
+}
+
 
                 // Atualiza Foto de Perfil (Opcional, pode ser pesado)
                 let fotoPerfil = contatoExistente[0]?.foto_perfil;
