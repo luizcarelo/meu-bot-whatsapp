@@ -1,236 +1,257 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= titulo %></title>
-    <link href="/css/style.css" rel="stylesheet">
+    <title>Login - Acesso Seguro</title>
+    
+    <!-- TailwindCSS (Via CDN para desenvolvimento) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* Fix: Compatibilidade de ajuste de texto (Audit) */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
         body { font-family: 'Inter', sans-serif; }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        [x-cloak] { display: none !important; }
+        .animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
         }
     </style>
+    
+    <!-- Alpine.js (CORREÇÃO: atributo 'defer' adicionado para corrigir o erro de inicialização) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-900 to-slate-800 h-screen flex items-center justify-center p-4">
-
-    <div class="glass-effect p-8 md:p-10 rounded-2xl w-full max-w-md shadow-2xl relative overflow-hidden border border-white/20">
-        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
-        
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-50 rounded-2xl mb-4 text-indigo-600 text-3xl shadow-sm transform transition hover:scale-105 duration-300">
-                <i class="fab fa-whatsapp"></i>
-            </div>
-            <h1 class="text-3xl font-bold text-slate-800 tracking-tight">Connect SaaS</h1>
-            <p class="text-sm text-slate-500 mt-2 font-medium">Gestão Inteligente de Atendimento</p>
+<body class="h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8" x-data="{ showRecovery: false }">
+    
+    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+        <div class="mx-auto h-12 w-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xl font-bold shadow-lg">
+            <i class="fas fa-layer-group"></i>
         </div>
-
-        <div class="space-y-5">
-            <!-- Campo Empresa -->
-            <div>
-                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">Empresa</label>
-                <div class="relative group">
-                    <i class="fas fa-building absolute left-3.5 top-3.5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
-                    <input id="login-empresa" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition text-slate-700 font-medium placeholder:text-slate-400" placeholder="Nome da sua empresa">
-                </div>
-            </div>
-
-            <!-- Campo Email -->
-            <div>
-                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">E-mail</label>
-                <div class="relative group">
-                    <i class="fas fa-envelope absolute left-3.5 top-3.5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
-                    <input id="login-email" type="email" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition text-slate-700 font-medium placeholder:text-slate-400" placeholder="seu@email.com">
-                </div>
-            </div>
-
-            <!-- Campo Senha -->
-            <div>
-                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">Senha</label>
-                <div class="relative group">
-                    <i class="fas fa-lock absolute left-3.5 top-3.5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
-                    <input type="password" id="login-senha" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition text-slate-700 font-medium placeholder:text-slate-400" placeholder="Sua senha">
-                </div>
-            </div>
-            
-            <!-- Link Esqueci Senha -->
-            <div class="flex justify-end">
-                <button onclick="abrirModalRecuperacao()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline transition">
-                    Esqueceu a senha?
-                </button>
-            </div>
-            
-            <button onclick="fazerLogin()" id="btn-login" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-indigo-500/30 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
-                <span>ENTRAR</span>
-                <i class="fas fa-arrow-right text-sm opacity-70"></i>
-            </button>
-            
-            <div class="text-center mt-8 pt-6 border-t border-slate-100">
-                <button onclick="preencherSuperAdmin()" class="text-xs text-slate-400 hover:text-indigo-600 font-medium transition flex items-center justify-center gap-1 mx-auto">
-                    <i class="fas fa-shield-alt"></i> Acesso Administrativo
-                </button>
-            </div>
-        </div>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 tracking-tight">Sistemas de Gestão</h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            Acesso administrativo ao CRM & WhatsApp
+        </p>
     </div>
 
-    <!-- MODAL RECUPERAÇÃO DE SENHA -->
-    <div id="modal-recuperar" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm relative transform scale-95 transition-transform duration-300">
-            <button onclick="fecharModalRecuperacao()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full w-8 h-8 flex items-center justify-center transition">
-                <i class="fas fa-times"></i>
-            </button>
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 border border-gray-100 relative overflow-hidden">
             
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl">
-                    <i class="fas fa-key"></i>
+            <!-- Barra de Status Superior (Decorativa) -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+
+            <!-- ALERTA DE ERRO -->
+            <div id="errorDiv" class="hidden mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-circle text-red-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">Falha no acesso</h3>
+                        <div class="mt-1 text-sm text-red-700" id="errorText">Erro desconhecido</div>
+                    </div>
                 </div>
-                <h2 class="text-xl font-bold text-slate-800">Recuperar Acesso</h2>
-                <p class="text-sm text-slate-500 mt-2">Digite seu e-mail para receber as instruções de redefinição.</p>
             </div>
 
-            <div class="space-y-4">
+            <!-- FORMULÁRIO DE LOGIN -->
+            <form id="loginForm" class="space-y-6" x-show="!showRecovery" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1.5 ml-1">E-mail cadastrado</label>
-                    <input id="recuperar-email" type="email" placeholder="exemplo@empresa.com" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition text-slate-700">
+                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail Corporativo</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input id="email" name="email" type="email" autocomplete="email" required 
+                            class="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
+                            placeholder="seu@email.com">
+                    </div>
                 </div>
-                <button onclick="enviarRecuperacao()" id="btn-recuperar" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition transform active:scale-[0.98]">
-                    ENVIAR LINK
-                </button>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <!-- CORREÇÃO: name="password" alterado para name="senha" para compatibilidade com AuthController -->
+                        <input id="password" name="senha" type="password" autocomplete="current-password" required 
+                            class="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
+                            placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer">
+                        <label for="remember_me" class="ml-2 block text-sm text-gray-900 cursor-pointer">Lembrar dispositivo</label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" @click.prevent="showRecovery = true" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                            Esqueceu a senha?
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="btnLogin"
+                        class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 transform hover:scale-[1.02]">
+                        <span id="btnText">Acessar Painel</span>
+                        <i id="btnIcon" class="fas fa-arrow-right ml-2 pt-1"></i>
+                        <i id="btnLoading" class="fas fa-circle-notch fa-spin hidden"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- FORMULÁRIO DE RECUPERAÇÃO -->
+            <div x-show="showRecovery" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="space-y-6">
+                <div class="text-center">
+                    <div class="mx-auto h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center mb-3">
+                        <i class="fas fa-key text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Recuperação de Acesso</h3>
+                    <p class="text-sm text-gray-500 px-4">Digite seu e-mail cadastrado. Enviaremos um link temporário.</p>
+                </div>
+                
+                <form id="recoveryForm">
+                    <div>
+                        <label for="rec_email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                        <input id="rec_email" name="email" type="email" required autocomplete="email"
+                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div class="mt-5 flex space-x-3">
+                        <button type="button" @click="showRecovery = false" class="w-1/2 flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Voltar
+                        </button>
+                        <button type="submit" class="w-1/2 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
             </div>
+
         </div>
+        
+        <p class="mt-6 text-center text-xs text-gray-400">
+            &copy; 2025 Sistemas de Gestão. Ambiente Seguro (SSL).
+        </p>
     </div>
 
     <script>
-        // Animação de entrada do modal
-        const modal = document.getElementById('modal-recuperar');
-        const modalContent = modal.querySelector('div');
-
-        function preencherSuperAdmin() {
-            document.getElementById('login-empresa').value = '';
-            document.getElementById('login-email').value = 'admin@saas.com';
-            document.getElementById('login-senha').value = '123456';
-            // Animação sutil nos campos
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.classList.add('bg-yellow-50');
-                setTimeout(() => input.classList.remove('bg-yellow-50'), 500);
-            });
-        }
-
-        function abrirModalRecuperacao() {
-            modal.classList.remove('hidden');
-            // Pequeno delay para permitir a transição CSS
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalContent.classList.remove('scale-95');
-                modalContent.classList.add('scale-100');
-            }, 10);
-            document.getElementById('recuperar-email').focus();
-        }
-
-        function fecharModalRecuperacao() {
-            modal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // Fechar modal ao clicar fora
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) fecharModalRecuperacao();
-        });
-
-        async function enviarRecuperacao() {
-            const email = document.getElementById('recuperar-email').value;
-            const btn = document.getElementById('btn-recuperar');
-
-            if(!email) {
-                alert('Por favor, digite seu e-mail.');
-                return;
-            }
+        // Lógica de Login (COM DEBUG DETALHADO)
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            const originalText = btn.innerText;
-            btn.innerText = 'ENVIANDO...'; 
+            const btn = document.getElementById('btnLogin');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+            const btnLoading = document.getElementById('btnLoading');
+            const errorDiv = document.getElementById('errorDiv');
+            const errorText = document.getElementById('errorText');
+            const container = document.querySelector('.bg-white');
+
+            // UI: Carregando
             btn.disabled = true;
             btn.classList.add('opacity-75', 'cursor-not-allowed');
+            btnText.innerText = 'Autenticando...';
+            btnIcon.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // 1. Log do Envio
+            console.log('📡 [DEBUG] Tentando Logar:', { email: data.email });
 
             try {
-                const res = await fetch('/api/auth/esqueci-senha', {
+                // Requisição para API de Login
+                const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
+                    body: JSON.stringify(data)
                 });
-                const data = await res.json();
 
-                if (data.success) {
-                    alert(data.message);
-                    fecharModalRecuperacao();
-                    document.getElementById('recuperar-email').value = '';
+                // 2. Log do Status
+                console.log('📡 [DEBUG] Status HTTP:', response.status);
+
+                const result = await response.json();
+                
+                // 3. Log da Resposta Completa
+                console.log('📡 [DEBUG] Payload do Servidor:', result);
+
+                if (response.ok && result.success) {
+                    btnText.innerText = 'Redirecionando...';
+                    btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    
+                    const destino = result.redirectUrl || '/dashboard';
+                    console.log('🚀 [DEBUG] Iniciando navegação para:', destino);
+                    
+                    // Sucesso: Redireciona com pequeno delay para debug visual
+                    setTimeout(() => {
+                        window.location.replace(destino);
+                    }, 500);
+
                 } else {
-                    alert(data.error || 'Erro ao recuperar senha.');
+                    throw new Error(result.message || 'Credenciais inválidas');
                 }
-            } catch (e) {
-                alert('Erro de conexão com o servidor.');
-            }
 
-            btn.innerText = originalText; 
-            btn.disabled = false;
-            btn.classList.remove('opacity-75', 'cursor-not-allowed');
-        }
+            } catch (error) {
+                console.error('❌ [DEBUG ERROR] Falha no Login:', error);
+                
+                // Exibe erro
+                errorText.innerText = error.message;
+                errorDiv.classList.remove('hidden');
+                
+                // Efeito visual de erro (Shake)
+                container.classList.add('animate-shake');
+                setTimeout(() => container.classList.remove('animate-shake'), 500);
 
-        async function fazerLogin() {
-            const btn = document.getElementById('btn-login');
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> ACESSANDO...';
-            btn.disabled = true;
-            btn.classList.add('opacity-90', 'cursor-wait');
-            
-            const body = {
-                nomeEmpresa: document.getElementById('login-empresa').value,
-                email: document.getElementById('login-email').value,
-                senha: document.getElementById('login-senha').value
-            };
-
-            try {
-                const res = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                });
-                const data = await res.json();
-
-                if (data.success) {
-                    localStorage.setItem('saas_user', JSON.stringify(data));
-                    window.location.href = data.redirectUrl;
-                } else {
-                    alert(data.error || 'Erro no login');
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                    btn.classList.remove('opacity-90', 'cursor-wait');
-                }
-            } catch (e) {
-                alert('Erro de conexão');
-                btn.innerHTML = originalText;
+                // Reset UI
                 btn.disabled = false;
-                btn.classList.remove('opacity-90', 'cursor-wait');
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                btnText.innerText = 'Acessar Painel';
+                btnIcon.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
             }
-        }
+        });
 
-        // Login com Enter
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                const modalOpen = !document.getElementById('modal-recuperar').classList.contains('hidden');
-                if (modalOpen) {
-                    enviarRecuperacao();
-                } else {
-                    fazerLogin();
-                }
+        // Lógica de Recuperação
+        document.getElementById('recoveryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            btn.disabled = true;
+            btn.innerText = 'Enviando...';
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                const response = await fetch('/api/auth/recuperar-senha', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                
+                alert(result.message || 'Verifique sua caixa de entrada.');
+                window.location.reload();
+            } catch (err) {
+                alert('Erro ao conectar com o servidor.');
+                btn.disabled = false;
+                btn.innerText = originalText;
             }
         });
     </script>

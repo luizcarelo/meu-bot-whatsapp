@@ -1,17 +1,19 @@
-// ============================================
-// Arquivo: controllers/WhatsAppController.js
-// Descrição: Controlador Central de WhatsApp & Regras de Negócio
-// Versão: 5.1 - Integração Enterprise Horários
-// ============================================
+/**
+ * controllers/WhatsAppController.js
+ * Descrição: Controlador Central de WhatsApp & Regras de Negócio
+ * Versão: 5.2 - Refatorado para Arquitetura Singleton DB
+ * Adaptação: Compatibilidade com novo db.js (query/run) e SessionManager
+ */
 
 const fs = require('fs');
 const path = require('path');
+// Importação da lógica de horários (Deve ser compatível com o novo objeto db)
 const { verificarHorarioAtendimento } = require('../src/utils/atendimento');
 
 class WhatsAppController {
     /**
      * Construtor do WhatsAppController
-     * @param {Object} db - Pool de conexão MySQL
+     * @param {Object} db - Instância Singleton do Banco de Dados (wrapper)
      * @param {Object} sessionManager - Instância do SessionManager
      */
     constructor(db, sessionManager) {
@@ -20,7 +22,7 @@ class WhatsAppController {
     }
 
     // ============================================
-    // CONEXÃO WHATSAPP
+    // 1. GESTÃO DE SESSÃO (CONEXÃO)
     // ============================================
 
     /**
@@ -29,58 +31,63 @@ class WhatsAppController {
      */
     async startSession(req, res) {
         try {
-            const empresaId = req.empresaId || req.body.empresaId || req.params.companyId;
+            // Prioridade: Sessão Backend > Header > Body > Params
+            const empresaId = req.session?.empresaId || req.headers['x-empresa-id'] || req.body.empresaId || req.params.companyId;
             
             if (!empresaId) {
                 return res.status(400).json({ 
-                    error: 'ID da empresa não fornecido',
-                    success: false 
+                    success: false, 
+                    error: 'ID da empresa não identificado. Faça login novamente.' 
                 });
             }
 
-            console.log(`[WhatsAppController] Iniciando sessão para empresa ${empresaId}`);
+            console.log(`[WhatsAppController] 🚀 Iniciando sessão para empresa ID: ${empresaId}`);
             
-            // Inicia a sessão no Gerenciador
+            // Inicia a sessão no SessionManager (Baileys/WPPConnect)
             await this.sm.startSession(parseInt(empresaId));
 
-            // Configura os ouvintes de eventos (incluindo Horário de Atendimento)
-            // Pequeno delay para garantir que o objeto client foi instanciado
+            // Configura os ouvintes de eventos (incluindo Horário de Atendimento e IA)
+            // Pequeno delay para garantir que a promessa de conexão foi resolvida internamente
             setTimeout(() => {
                 this.monitorarAtendimento(parseInt(empresaId));
-            }, 2000);
+            }, 3000);
             
             res.json({ 
                 success: true,
-                message: 'Sessão iniciada. Monitoramento de horários ativo.'
+                message: 'Processo de conexão iniciado. Aguarde o QR Code ou a conexão automática.'
             });
+
         } catch (e) {
-            console.error('[WhatsAppController] Erro ao iniciar sessão:', e.message);
+            console.error(`[WhatsAppController] ❌ Erro crítico ao iniciar sessão (Empresa ${req.body.empresaId}):`, e.message);
             res.status(500).json({ 
-                error: e.message,
-                success: false 
+                success: false, 
+                error: 'Falha interna ao iniciar serviço de WhatsApp.',
+                details: e.message
             });
         }
     }
 
     /**
-     * Configura o monitoramento de mensagens recebidas para aplicar regras de negócio
-     * (Horário de Atendimento, Anti-Spam, etc)
+     * Configura o monitoramento de mensagens recebidas
+     * Aplica regras de negócio: Horário, Anti-Spam e Gatilhos de IA
      */
     async monitorarAtendimento(empresaId) {
         const sock = this.sm.getSession(empresaId);
         
         if (!sock) {
-            console.warn(`[WhatsAppController] Sessão não encontrada para empresa ${empresaId} ao configurar monitoramento.`);
+            console.warn(`[WhatsAppController] ⚠️ Sessão não encontrada para empresa ${empresaId} ao tentar monitorar.`);
             return;
         }
 
-        // Evita duplicar listeners se a função for chamada múltiplas vezes
-        if (sock.listenerCount('message') > 5) { // Limite de segurança
+        // Prevenção de múltiplos listeners (Memory Leak)
+        // Se já houver muitos ouvintes, removemos os anteriores para renovar
+        if (sock.listenerCount && sock.listenerCount('message') > 5) {
              sock.removeAllListeners('message');
         }
 
-        console.log(`[WhatsAppController] Monitoramento de Atendimento ATIVO para Empresa ${empresaId}`);
+        console.log(`[WhatsAppController] 👂 Monitoramento de Atendimento ATIVO para Empresa ${empresaId}`);
 
+        // Ouve eventos de mensagem (padrão do SessionManager deve emitir 'message')
         sock.on('message', async (msg) => {
             await this.processarMensagemRecebida(sock, msg, empresaId);
         });
@@ -92,34 +99,40 @@ class WhatsAppController {
      */
     async processarMensagemRecebida(sock, msg, empresaId) {
         try {
-            // 1. Ignorar mensagens próprias, de status ou grupos
+            // 1. Filtros de Ignorância:
+            // - Mensagens enviadas por mim (fromMe)
+            // - Status (Stories)
+            // - Grupos (Se o foco for atendimento individual)
             if (msg.fromMe || msg.from === 'status@broadcast' || msg.from.includes('@g.us')) return;
 
             const contato = msg.from;
 
-            // 2. Verificar Horário de Atendimento (NOVO MÓDULO)
+            // 2. Verificar Horário de Atendimento (Módulo Externo)
+            // Passamos 'this.db' que agora é o Singleton Wrapper
             const statusAtendimento = await verificarHorarioAtendimento(this.db, empresaId);
 
             if (!statusAtendimento.dentroDoHorario) {
-                console.log(`[Atendimento] Empresa ${empresaId} FECHADA. Bloqueando interação com ${contato}`);
+                console.log(`[Atendimento] 🌙 Empresa ${empresaId} FECHADA. Contato: ${contato}`);
                 
-                // Enviar mensagem de ausência
+                // Enviar mensagem de ausência se configurada
                 if (statusAtendimento.mensagem) {
                     await sock.sendMessage(contato, { text: statusAtendimento.mensagem });
                 }
                 
-                // Retorna para NÃO processar IA nem salvar como interação ativa
+                // Interrompe o fluxo: Não processa IA, nem notifica atendentes
                 return;
             }
 
-            // 3. Se estiver aberto, continua o fluxo (Salvar DB, Acionar OpenAI, etc)
-            // Nota: Se você tiver lógica de salvar mensagem recebida, ela deve vir AQUI.
+            // 3. Fluxo de Atendimento Aberto (Horário Comercial)
+            // AQUI entraria a lógica de:
+            // - Salvar mensagem no banco (Tabela mensagens)
+            // - Verificar se é cliente novo (Upsert tabela contatos)
+            // - Acionar OpenAI (se habilitado para a empresa)
             
-            // Exemplo de log de passagem
-            // console.log(`[Atendimento] Mensagem de ${contato} autorizada (Horário Comercial).`);
+            // console.log(`[Atendimento] ✅ Mensagem de ${contato} processada.`);
 
         } catch (error) {
-            console.error(`[WhatsAppController] Erro no processamento de mensagem: ${error.message}`);
+            console.error(`[WhatsAppController] ❌ Erro no processamento de mensagem: ${error.message}`);
         }
     }
 
@@ -129,60 +142,61 @@ class WhatsAppController {
      */
     async logoutSession(req, res) {
         try {
-            const empresaId = req.empresaId || req.body.empresaId || req.params.companyId;
+            const empresaId = req.session?.empresaId || req.body.empresaId || req.params.companyId;
             
             if (!empresaId) {
-                return res.status(400).json({ error: 'ID da empresa não fornecido', success: false });
+                return res.status(400).json({ success: false, error: 'ID da empresa não fornecido.' });
             }
 
-            console.log(`[WhatsAppController] Encerrando sessão para empresa ${empresaId}`);
+            console.log(`[WhatsAppController] 🛑 Encerrando sessão para empresa ${empresaId}`);
             
             await this.sm.deleteSession(parseInt(empresaId));
             
             res.json({ 
                 success: true,
-                message: 'Sessão encerrada com sucesso.'
+                message: 'Sessão do WhatsApp desconectada e dados locais limpos.'
             });
         } catch (e) {
             console.error('[WhatsAppController] Erro ao encerrar sessão:', e.message);
-            res.status(500).json({ error: e.message, success: false });
+            res.status(500).json({ success: false, error: e.message });
         }
     }
 
     /**
      * Obtém status da conexão WhatsApp
-     * GET /whatsapp/status
+     * GET /whatsapp/status/:companyId
      */
     async getStatus(req, res) {
         try {
-            const empresaId = req.empresaId || req.params.companyId;
+            const empresaId = req.session?.empresaId || req.params.companyId;
             
             if (!empresaId) {
-                return res.status(400).json({ error: 'ID da empresa não fornecido' });
+                return res.status(400).json({ success: false, error: 'ID da empresa obrigatório.' });
             }
 
+            // Consulta o SessionManager
             const status = this.sm.getStatus(parseInt(empresaId));
             
             res.json({
                 success: true,
-                ...status
+                ...status // Retorna { status: 'CONNECTED', qr: null, ... }
             });
         } catch (e) {
             console.error('[WhatsAppController] Erro ao obter status:', e.message);
-            res.status(500).json({ error: e.message });
+            res.status(500).json({ success: false, error: e.message });
         }
     }
 
     /**
      * Obtém QR Code atual
-     * GET /whatsapp/qrcode
+     * GET /whatsapp/qrcode/:companyId
      */
     async getQrCode(req, res) {
         try {
-            const empresaId = req.empresaId || req.params.companyId;
+            const empresaId = req.session?.empresaId || req.params.companyId;
             
             if (!empresaId) {
-                return res.status(400).json({ error: 'ID da empresa não fornecido' });
+                return res.status(400).json({ success: false, error: 'ID da empresa obrigatório.' });
             }
 
             const qr = this.sm.getQRCode(parseInt(empresaId));
@@ -190,22 +204,27 @@ class WhatsAppController {
             if (qr) {
                 res.json({ success: true, qr: qr, qrBase64: qr });
             } else {
-                res.json({ success: false, message: 'QR Code não disponível. Inicie a conexão primeiro.' });
+                res.json({ 
+                    success: false, 
+                    message: 'QR Code indisponível. Verifique se a sessão foi iniciada ou se já está conectada.' 
+                });
             }
         } catch (e) {
             console.error('[WhatsAppController] Erro ao obter QR Code:', e.message);
-            res.status(500).json({ error: e.message });
+            res.status(500).json({ success: false, error: e.message });
         }
     }
 
     // ============================================
-    // UTILITÁRIOS
+    // 2. MÉTODOS AUXILIARES
     // ============================================
 
     async getNomeAtendente(userId) {
         if (!userId) return null;
         try {
-            const [rows] = await this.db.execute(
+            // ATUALIZAÇÃO: Uso de this.db.query (Novo DB Wrapper)
+            // query retorna as linhas diretamente, não um array [rows, fields]
+            const rows = await this.db.query(
                 'SELECT nome FROM usuarios_painel WHERE id = ?',
                 [userId]
             );
@@ -217,79 +236,94 @@ class WhatsAppController {
     }
 
     // ============================================
-    // ENVIO DE MENSAGENS (Saída)
+    // 3. ENVIO DE MENSAGENS (Saída CRM)
     // ============================================
 
     /**
-     * Envia mensagem de texto
+     * Envia mensagem de texto via CRM
      * POST /api/crm/enviar
      */
     async sendText(req, res) {
+        // Recupera dados do corpo e sessão
         const { telefone, texto } = req.body;
-        const userId = req.headers['x-user-id'];
-        const empresaId = req.empresaId;
+        const empresaId = req.session?.empresaId || req.empresaId || req.body.empresaId;
+        const userId = req.session?.user?.id || req.headers['x-user-id'];
 
+        // Validação de Sessão WA
         const sock = this.sm.getSession(empresaId);
         if (!sock) {
-            return res.status(400).json({ error: 'WhatsApp não está conectado', success: false });
+            return res.status(400).json({ success: false, error: 'WhatsApp Desconectado. Reconecte no painel.' });
+        }
+
+        if (!telefone || !texto) {
+            return res.status(400).json({ success: false, error: 'Telefone e texto são obrigatórios.' });
         }
 
         try {
+            // Formata JID (ex: 552199999999 -> 552199999999@s.whatsapp.net)
             const jid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;
             
-            // Nota: Mensagens enviadas pelo painel (Atendentes) NÃO passam pela validação de horário
-            // pois assume-se que o humano tem autonomia para responder fora de hora se desejar.
-
+            // Envia via Socket (Baileys)
             await sock.sendMessage(jid, { text: texto });
 
-            await this.db.execute(
+            // ATUALIZAÇÃO: Uso de this.db.run para INSERT (Novo DB Wrapper)
+            // 1. Registra no Histórico de Mensagens
+            await this.db.run(
                 `INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
                 [empresaId, jid, texto]
             );
 
-            await this.db.execute(
+            // 2. Garante que o contato existe (Upsert simplificado via INSERT IGNORE)
+            await this.db.run(
                 `INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,
                 [empresaId, jid, jid.split('@')[0]]
             );
 
-            this.sm.emitirMensagemEnviada(empresaId, jid, texto, 'texto', null, true);
+            // Emite evento para atualizar o Front-end em tempo real (Socket.io se existir)
+            if (this.sm.emitirMensagemEnviada) {
+                this.sm.emitirMensagemEnviada(empresaId, jid, texto, 'texto', null, true);
+            }
 
-            res.json({ success: true });
+            res.json({ success: true, message: 'Mensagem enviada.' });
+
         } catch (e) {
-            console.error('[WhatsAppController] Erro ao enviar texto:', e.message);
-            res.status(500).json({ error: 'Falha ao enviar mensagem', success: false });
+            console.error('[WhatsAppController] ❌ Erro ao enviar texto:', e.message);
+            res.status(500).json({ success: false, error: 'Falha técnica ao enviar mensagem.' });
         }
     }
 
     /**
-     * Envia mídia
+     * Envia mídia (Imagem, Vídeo, Áudio, Doc) via CRM
      * POST /api/crm/enviar-midia
      */
     async sendMedia(req, res) {
         const { telefone, caption } = req.body;
-        const userId = req.headers['x-user-id'];
-        const empresaId = req.empresaId;
+        const empresaId = req.session?.empresaId || req.empresaId || req.body.empresaId;
 
         const sock = this.sm.getSession(empresaId);
         if (!sock) {
-            return res.status(400).json({ error: 'WhatsApp não está conectado', success: false });
+            return res.status(400).json({ success: false, error: 'WhatsApp Desconectado.' });
         }
 
         if (!req.file) {
-            return res.status(400).json({ error: 'Nenhum arquivo enviado', success: false });
+            return res.status(400).json({ success: false, error: 'Arquivo de mídia não recebido.' });
         }
 
         try {
             const jid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;
+            // Caminho relativo para salvar no banco (acessível via public)
             const urlRelativa = `/uploads/empresa_${empresaId}/${req.file.filename}`;
             const filePath = req.file.path;
             const mime = req.file.mimetype;
-            let captionFinal = caption || '';
+            const captionFinal = caption || '';
 
             let msgSend = {};
             let tipo = 'documento';
+            
+            // Leitura do arquivo para Buffer (Baileys exige Buffer ou URL)
             const fileBuffer = fs.readFileSync(filePath);
 
+            // Definição do Tipo de Mensagem para o Baileys
             if (mime.startsWith('image')) {
                 msgSend = { image: fileBuffer, caption: captionFinal };
                 tipo = 'imagem';
@@ -297,28 +331,40 @@ class WhatsAppController {
                 msgSend = { video: fileBuffer, caption: captionFinal };
                 tipo = 'video';
             } else if (mime.startsWith('audio')) {
+                // ptt: true envia como "Nota de Voz" (waveform)
                 msgSend = { audio: fileBuffer, mimetype: 'audio/mp4', ptt: true };
                 tipo = 'audio';
             } else {
-                msgSend = { document: fileBuffer, mimetype: mime, fileName: req.file.originalname, caption: captionFinal };
+                msgSend = { 
+                    document: fileBuffer, 
+                    mimetype: mime, 
+                    fileName: req.file.originalname, 
+                    caption: captionFinal 
+                };
                 tipo = 'documento';
             }
 
+            // Envia
             await sock.sendMessage(jid, msgSend);
 
-            const conteudoSalvo = tipo === 'audio' ? (caption || 'Áudio enviado') : captionFinal || req.file.originalname;
+            // Define conteúdo textual para o banco (para pesquisa)
+            const conteudoSalvo = tipo === 'audio' ? (caption || 'Áudio enviado') : (captionFinal || req.file.originalname);
 
-            await this.db.execute(
+            // ATUALIZAÇÃO: Uso de this.db.run (Novo DB Wrapper)
+            await this.db.run(
                 `INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, 1, ?, ?, ?)`,
                 [empresaId, jid, tipo, conteudoSalvo, urlRelativa]
             );
 
-            this.sm.emitirMensagemEnviada(empresaId, jid, conteudoSalvo, tipo, urlRelativa, true);
+            if (this.sm.emitirMensagemEnviada) {
+                this.sm.emitirMensagemEnviada(empresaId, jid, conteudoSalvo, tipo, urlRelativa, true);
+            }
 
             res.json({ success: true, url: urlRelativa });
+
         } catch (e) {
-            console.error('[WhatsAppController] Erro ao enviar mídia:', e.message);
-            res.status(500).json({ error: e.message, success: false });
+            console.error('[WhatsAppController] ❌ Erro ao enviar mídia:', e.message);
+            res.status(500).json({ success: false, error: e.message });
         }
     }
 }

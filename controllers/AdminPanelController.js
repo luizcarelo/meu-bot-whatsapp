@@ -1,60 +1,146 @@
-// ============================================
-// Arquivo: controllers/AdminPanelController.js
-// Descrição: Controller do Painel Admin da Empresa
-// Versão: 5.0 - Revisado e Corrigido
-// ============================================
+/**
+ * controllers/AdminPanelController.js
+ * Descrição: Controller do Painel Admin (Renderização EJS + APIs do Dashboard)
+ * Versão: 5.2 - Refatorado para Singleton DB & Sessão
+ */
+
+const db = require('../src/config/db');  // Novo Singleton
 
 class AdminPanelController {
     /**
-     * Construtor do AdminPanelController
-     * @param {Object} db - Pool de conexão MySQL
+     * Construtor
+     * @param {Object} injectedDb - Opcional para manter compatibilidade com injeção manual
      */
-    constructor(db) {
-        this.db = db;
+    constructor(injectedDb) {
+        this.db = injectedDb || db;
     }
 
+    // ============================================
+    // 1. RENDERIZAÇÃO DE VIEWS (SSR - EJS)
+    // ============================================
+
     /**
-     * Renderiza o painel administrativo da empresa
+     * Renderiza o painel administrativo da empresa (HTML)
      * GET /admin/painel
      */
     async renderPanel(req, res) {
         try {
-            // Buscar dados do usuário
-            const [user] = await this.db.execute(
-                'SELECT is_admin, nome FROM usuarios_painel WHERE id = ?',
-                [req.userId]
+            // Recupera IDs da sessão (prioridade) ou da requisição
+            const userId = req.session?.user?.id || req.userId;
+            const empresaId = req.session?.empresaId || req.empresaId;
+
+            if (!userId || !empresaId) {
+                // Se a sessão caiu, redireciona para login em vez de crashar
+                return res.redirect('/');
+            }
+
+            // 1. Buscar dados do usuário logado
+            // Nota: db.query retorna as linhas diretamente (sem destructuring [rows])
+            const users = await this.db.query(
+                'SELECT id, is_admin, nome, email, cargo, ativo FROM usuarios_painel WHERE id = ?',
+                [userId]
             );
 
-            // Verificar se é admin (comentado para permitir acesso)
-            // if (!user[0] || !user[0].is_admin) {
-            //     return res.redirect('/crm');
-            // }
+            if (users.length === 0) {
+                return res.redirect('/auth/logout');
+            }
+            const user = users[0];
 
-            // Buscar dados da empresa
-            const [empresa] = await this.db.execute(
-                `SELECT nome, logo_url, cor_primaria, msg_ausencia, 
+            // 2. Buscar dados da empresa
+            const empresas = await this.db.query(
+                `SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia, 
                         horario_inicio, horario_fim, dias_funcionamento,
-                        whatsapp_status, whatsapp_numero
+                        whatsapp_status, whatsapp_numero, plano, limite_usuarios
                  FROM empresas WHERE id = ?`,
-                [req.empresaId]
+                [empresaId]
+            );
+            const empresa = empresas[0] || {};
+            
+            // Fallback visual para nome do sistema (UX)
+            empresa.nome_exibicao = empresa.nome_sistema || empresa.nome;
+
+            // 3. Buscar equipe completa (para listagem na view inicial)
+            const equipe = await this.db.query(
+                'SELECT id, nome, email, is_admin, cargo, ativo, telefone FROM usuarios_painel WHERE empresa_id = ? ORDER BY nome ASC',
+                [empresaId]
             );
 
-            // Buscar equipe
-            const [equipe] = await this.db.execute(
-                'SELECT id, nome, email, is_admin, ativo FROM usuarios_painel WHERE empresa_id = ?',
-                [req.empresaId]
-            );
-
+            // 4. Renderizar a View (EJS)
             res.render('admin-panel', {
                 titulo: 'Painel Administrativo',
-                empresa: empresa[0] || {},
+                empresa: empresa,
                 equipe: equipe,
-                user: user[0] || {}
+                user: user,
+                // Passa o caminho para destacar o menu lateral
+                path: req.path 
             });
 
         } catch (e) {
             console.error('[AdminPanelController] Erro ao carregar painel:', e);
-            res.status(500).send('Erro ao carregar painel administrativo');
+            // Renderiza uma página de erro amigável se possível, ou texto
+            res.status(500).send(`
+                <h1>Erro 500</h1>
+                <p>Ocorreu um erro ao carregar o painel administrativo.</p>
+                <p><a href="/">Voltar para Login</a></p>
+            `);
+        }
+    }
+
+    // ============================================
+    // 2. API ENDPOINTS (JSON para AJAX/Dashboard)
+    // ============================================
+
+    /**
+     * API: Estatísticas rápidas para o Dashboard (Cards de topo)
+     * GET /admin/dashboard-stats
+     */
+    async getStats(req, res) {
+        const empresaId = req.session?.empresaId || req.empresaId;
+        
+        if (!empresaId) {
+            return res.status(401).json({ success: false, error: 'Sessão inválida' });
+        }
+
+        try {
+            // Executa queries em paralelo para máxima performance
+            const [msgs, contatos, equipe] = await Promise.all([
+                this.db.query("SELECT COUNT(*) as t FROM mensagens WHERE empresa_id = ?", [empresaId]),
+                this.db.query("SELECT COUNT(*) as t FROM contatos WHERE empresa_id = ?", [empresaId]),
+                this.db.query("SELECT COUNT(*) as t FROM usuarios_painel WHERE empresa_id = ?", [empresaId])
+            ]);
+            
+            res.json({
+                success: true,
+                mensagens: msgs[0].t,
+                contatos: contatos[0].t,
+                equipe: equipe[0].t
+            });
+        } catch (e) {
+            console.error('[AdminPanel] Erro Stats:', e);
+            res.status(500).json({ success: false, error: e.message });
+        }
+    }
+
+    /**
+     * API: Lista de Usuários (JSON)
+     * GET /admin/users
+     */
+    async getUsers(req, res) {
+        const empresaId = req.session?.empresaId || req.empresaId;
+        
+        try {
+            const users = await this.db.query(
+                `SELECT id, nome, email, is_admin, cargo, ativo, telefone, created_at 
+                 FROM usuarios_painel 
+                 WHERE empresa_id = ? 
+                 ORDER BY nome ASC`,
+                [empresaId]
+            );
+            
+            res.json({ success: true, data: users });
+        } catch (e) {
+            console.error('[AdminPanel] Erro Users:', e);
+            res.status(500).json({ success: false, error: e.message });
         }
     }
 }

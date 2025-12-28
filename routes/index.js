@@ -1,125 +1,78 @@
-// ============================================
-// Arquivo: routes/index.js
-// Descrição: Rotas Principais da Aplicação
-// Versão: 5.0 - Revisado e Corrigido
-// ============================================
+/**
+ * routes/index.js
+ * Descrição: Rotas de Navegação (Frontend) com Debug
+ * Autor: Sistemas de Gestão
+ */
 
 const express = require('express');
 const router = express.Router();
+const { isAuthenticated } = require('../src/middleware/auth');
+const db = require('../src/config/db');
 
-// ============================================
-// FUNÇÃO AUXILIAR - DETECTAR MOBILE
-// ============================================
-
-function isMobileDevice(req) {
-    const userAgent = req.headers['user-agent'] || '';
-    const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    return mobileRegex.test(userAgent);
-}
-
-// ============================================
-// ROTAS PÚBLICAS (SEM AUTENTICAÇÃO)
-// ============================================
-
-/**
- * Rota raiz - Redireciona para login
- */
+// Rota Raiz
 router.get('/', (req, res) => {
+    if (req.session && req.session.user) return res.redirect('/dashboard');
     res.redirect('/login');
 });
 
-/**
- * Página de Login
- */
+// Login Page
 router.get('/login', (req, res) => {
-    res.render('login', {
-        titulo: 'Acesso ao Sistema',
-        erro: null
-    });
-});
-
-/**
- * Health Check - Verifica se o servidor está rodando
- */
-router.get('/health', (req, res) => {
-    res.json({
-        status: 'ok',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime()
-    });
-});
-
-/**
- * Status do Sistema
- */
-router.get('/status', (req, res) => {
-    res.json({
-        status: 'running',
-        version: '5.0.0',
-        node: process.version,
-        memory: process.memoryUsage()
-    });
+    if (req.session && req.session.user) return res.redirect('/dashboard');
+    res.render('login', { error: null });
 });
 
 // ============================================
-// ROTAS DO CRM (REQUEREM AUTENTICAÇÃO)
+// DASHBOARD (Com Diagnóstico de Erro)
 // ============================================
+router.get('/dashboard', isAuthenticated, async (req, res) => {
+    try {
+        // [DEBUG] Diagnóstico
+        console.log(`🖥️ [DASHBOARD] Acesso permitido para: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);
 
-/**
- * CRM Desktop/Mobile - Detecta automaticamente
- */
-router.get('/crm', (req, res) => {
-    const isMobile = isMobileDevice(req);
-    res.render('crm', {
-        titulo: isMobile ? 'CRM Mobile' : 'CRM Desktop',
-        isMobile: isMobile
-    });
+        const empresaId = req.session.empresaId;
+
+        if (!empresaId) {
+            console.error('❌ [DASHBOARD] Sessão corrompida: User existe mas empresaId é nulo.');
+            req.session.destroy();
+            return res.redirect('/login?error=sessao_invalida');
+        }
+
+        // 1. Busca Dados da Empresa
+        const [empresas] = await db.query('SELECT * FROM empresas WHERE id = ? LIMIT 1', [empresaId]);
+        const empresa = empresas ? empresas[0] : null;
+
+        if (!empresa) {
+            console.error(`❌ [DASHBOARD] Empresa ID ${empresaId} não encontrada no DB.`);
+            return res.status(404).send('Empresa não encontrada.');
+        }
+
+        // 2. Busca Dados Auxiliares (Tolerante a falhas)
+        let setores = [], contatos = [];
+        try {
+            [setores] = await db.query('SELECT * FROM setores WHERE empresa_id = ? ORDER BY ordem ASC', [empresaId]);
+            [contatos] = await db.query('SELECT * FROM contatos WHERE empresa_id = ? ORDER BY ultima_msg DESC LIMIT 50', [empresaId]);
+        } catch (dbErr) {
+            console.warn('⚠️ [DASHBOARD] Aviso: Erro ao buscar setores/contatos (tabelas existem?).', dbErr.message);
+        }
+
+        // 3. Renderiza
+        res.render('dashboard', {
+            user: req.session.user,
+            empresa: empresa,
+            setores: setores || [],
+            contatos: contatos || [],
+            socketUrl: process.env.SOCKET_URL || ''
+        });
+
+    } catch (error) {
+        console.error('🔥 [DASHBOARD FATAL ERROR]', error);
+        res.status(500).render('login', { error: 'Erro crítico no sistema: ' + error.message });
+    }
 });
 
-/**
- * CRM Forçado para Mobile
- */
-router.get('/app', (req, res) => {
-    res.render('crm', {
-        titulo: 'CRM Mobile',
-        isMobile: true
-    });
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/login');
 });
-
-/**
- * CRM Forçado para Desktop
- */
-router.get('/desktop', (req, res) => {
-    res.render('crm', {
-        titulo: 'CRM Desktop',
-        isMobile: false
-    });
-});
-
-// ============================================
-// ROTAS DE ADMINISTRAÇÃO
-// ============================================
-
-/**
- * Painel Administrativo da Empresa
- */
-router.get('/admin/painel', (req, res) => {
-    res.render('admin-panel', {
-        titulo: 'Configurações da Empresa'
-    });
-});
-
-/**
- * Painel do Super Admin (Gestão de Clientes)
- */
-router.get('/super-admin', (req, res) => {
-    res.render('super-admin', {
-        titulo: 'Gestão Master SaaS'
-    });
-});
-
-// ============================================
-// EXPORTAR ROUTER
-// ============================================
 
 module.exports = router;

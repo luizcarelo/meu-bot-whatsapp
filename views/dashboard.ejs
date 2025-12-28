@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Enterprise | <%= (typeof empresa !== 'undefined' && empresa && empresa.nome) ? empresa.nome : 'Painel' %></title>
+    
+    <!-- TailwindCSS (Design) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981', // Emerald 500
+                        secondary: '#3b82f6', // Blue 500
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js (Interatividade) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- FontAwesome & Socket.IO -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Estilos Embutidos (Garante carregamento) -->
+    <style>
+        /* Fundo Padrão WhatsApp */
+        .bg-chat-pattern {
+            background-color: #e5ddd5;
+            background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+            background-repeat: repeat;
+            background-attachment: fixed;
+        }
+
+        .dark .bg-chat-pattern {
+            background-color: #0f172a;
+            background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+            opacity: 0.9;
+            background-blend-mode: overlay;
+        }
+
+        /* Scrollbar Fina e Elegante */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.95); /* Aumentei opacidade para leitura */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Animações Alpine.js */
+        [x-cloak] { display: none !important; }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.3s;
+        }
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<!-- Alpine Store: Gerencia estado global da aplicação -->
+<body class="h-full overflow-hidden bg-gray-100 text-slate-800 font-sans"
+      x-data="appData()"
+      x-init="initApp()">
+
+    <div class="flex h-full">
+
+        <!-- 1. SIDEBAR DE NAVEGAÇÃO (Esquerda Extrema) -->
+        <div class="w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4 z-20 shadow-sm">
+            <!-- Logo -->
+            <div class="mb-6">
+                <div class="h-10 w-10 bg-gradient-to-br from-primary to-emerald-700 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-emerald-200">
+                    <%= (typeof empresa !== 'undefined' && empresa && empresa.nome) ? empresa.nome.charAt(0) : 'S' %>
+                </div>
+            </div>
+
+            <!-- Menu Icons -->
+            <nav class="flex-1 space-y-4 w-full px-2">
+                <template x-for="item in menuItems">
+                    <button @click="activeTab = item.id"
+                            :class="activeTab === item.id ? 'bg-emerald-50 text-primary' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'"
+                            class="w-full h-10 rounded-lg flex items-center justify-center transition-all duration-200 relative group">
+                        <i :class="item.icon" class="text-lg"></i>
+                        <!-- Tooltip -->
+                        <span class="absolute left-14 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50"
+                              x-text="item.label"></span>
+                    </button>
+                </template>
+            </nav>
+
+            <!-- User/Config Bottom -->
+            <div class="mt-auto space-y-4 flex flex-col items-center">
+                <button @click="logout()" class="text-gray-400 hover:text-red-500 transition-colors" title="Sair">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <img src="https://ui-avatars.com/api/?name=<%= user.nome %>&background=random" class="h-8 w-8 rounded-full ring-2 ring-offset-2 ring-gray-100 cursor-pointer">
+                <% } %>
+            </div>
+        </div>
+
+        <!-- 2. SUB-SIDEBAR (Lista de Conversas ou Kanban) -->
+        <div class="w-80 bg-white border-r border-gray-200 flex flex-col z-10 transition-all duration-300"
+             x-show="activeTab === 'chats' || activeTab === 'crm'">
+            
+            <!-- Header da Lista -->
+            <div class="p-4 border-b border-gray-100 bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-slate-800" x-text="activeTab === 'chats' ? 'Conversas' : 'CRM Kanban'"></h2>
+                    
+                    <!-- Status Connection Badge -->
+                    <div class="flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-medium border"
+                         :class="statusClass">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="statusPingClass"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2" :class="statusBgClass"></span>
+                        </span>
+                        <span x-text="connectionStatus"></span>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input type="text" x-model="searchQuery" placeholder="Buscar conversa..." 
+                           class="w-full pl-10 pr-4 py-2 bg-gray-50 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Lista de Contatos (Modo Chat) -->
+            <div class="flex-1 overflow-y-auto" x-show="activeTab === 'chats'">
+                <template x-for="chat in filteredChats" :key="chat.telefone">
+                    <div @click="selectChat(chat)"
+                         :class="currentChat?.telefone === chat.telefone ? 'bg-emerald-50 border-l-4 border-primary' : 'hover:bg-gray-50 border-l-4 border-transparent'"
+                         class="p-3 cursor-pointer transition-all duration-150 flex items-center space-x-3 group border-b border-gray-50">
+                        
+                        <div class="relative">
+                            <img :src="chat.foto_perfil || `https://ui-avatars.com/api/?name=${chat.nome}`" 
+                                 class="h-12 w-12 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform">
+                            <!-- Icone de Status do Atendimento -->
+                            <div class="absolute -bottom-1 -right-1 h-5 w-5 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                <i class="text-[10px]" :class="getStatusIcon(chat.status_atendimento)"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-baseline mb-0.5">
+                                <h3 class="text-sm font-semibold text-slate-800 truncate" x-text="chat.nome || chat.telefone"></h3>
+                                <span class="text-[10px] text-gray-400" x-text="formatTime(chat.ultima_msg)"></span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate group-hover:text-gray-700" x-text="chat.lastMessage || 'Iniciar conversa...'"></p>
+                        </div>
+                    </div>
+                </template>
+                
+                <!-- Estado Vazio -->
+                <div x-show="filteredChats.length === 0" class="p-8 text-center text-gray-400 text-sm">
+                    Nenhuma conversa encontrada.
+                </div>
+            </div>
+            
+            <!-- Modo Kanban (Visual Mockup) -->
+            <div class="flex-1 p-4 space-y-4 overflow-y-auto" x-show="activeTab === 'crm'">
+                <div class="bg-gray-50 p-3 rounded-lg border border-dashed border-gray-300 text-center">
+                    <p class="text-sm text-gray-500 mb-2">Funil de Vendas</p>
+                    <button class="text-xs bg-primary text-white px-3 py-1 rounded">Novo Card</button>
+                </div>
+                <!-- Exemplo de Card -->
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-200 cursor-move hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded-full font-bold">Negociação</span>
+                    </div>
+                    <p class="font-medium text-sm text-gray-800">Cliente Exemplo Ltda</p>
+                    <p class="text-xs text-gray-500 mt-1">R$ 5.000,00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ÁREA PRINCIPAL (Chat) -->
+        <div class="flex-1 flex flex-col bg-chat-pattern relative" x-show="activeTab === 'chats'">
+            
+            <!-- Empty State -->
+            <div x-show="!currentChat" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-50/90 z-0">
+                <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-md animate-fade-in-up">
+                    <div class="h-20 w-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 text-primary text-3xl">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">CRM WhatsApp Enterprise</h1>
+                    <p class="text-gray-500 mb-6">Selecione uma conversa para iniciar o atendimento ou escaneie o QR Code.</p>
+                    <button @click="checkConnection()" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-emerald-600 transition shadow-lg shadow-emerald-200">
+                        Verificar Conexão
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Area (Ativa quando tem chat selecionado) -->
+            <div x-show="currentChat" class="flex flex-col h-full z-10 glass" x-transition>
+                
+                <!-- Chat Header -->
+                <div class="h-16 px-4 flex items-center justify-between glass shadow-sm z-20">
+                    <div class="flex items-center space-x-3">
+                        <img :src="currentChat?.foto_perfil" class="h-10 w-10 rounded-full object-cover ring-2 ring-white">
+                        <div>
+                            <h2 class="font-bold text-gray-800 text-sm" x-text="currentChat?.nome"></h2>
+                            <p class="text-xs text-primary font-medium flex items-center">
+                                <span class="h-1.5 w-1.5 bg-primary rounded-full mr-1.5"></span>
+                                Atendimento Online
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 text-gray-500">
+                        <button class="hover:text-primary transition"><i class="fa-solid fa-phone"></i></button>
+                        <button class="hover:text-primary transition"><i class="fa-solid fa-search"></i></button>
+                        <button class="hover:text-primary transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                </div>
+
+                <!-- Messages Stream -->
+                <div id="messagesContainer" class="flex-1 overflow-y-auto p-4 space-y-3 bg-chat-pattern">
+                    <template x-for="msg in messages" :key="msg.id">
+                        <div class="flex w-full" :class="msg.fromMe ? 'justify-end' : 'justify-start'">
+                            <div class="max-w-[70%] relative group">
+                                <div class="p-2.5 rounded-lg shadow-sm text-sm leading-relaxed relative"
+                                     :class="msg.fromMe ? 'bg-emerald-100 text-gray-800 rounded-tr-none' : 'bg-white text-gray-800 rounded-tl-none'">
+                                    
+                                    <!-- Conteúdo da Msg -->
+                                    <div x-html="formatMessage(msg)"></div>
+
+                                    <!-- Metadata -->
+                                    <div class="flex items-center justify-end space-x-1 mt-1 opacity-60 select-none">
+                                        <span class="text-[10px]" x-text="formatTime(msg.timestamp)"></span>
+                                        <template x-if="msg.fromMe">
+                                            <i class="fa-solid fa-check-double text-[10px] text-blue-500"></i>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Input Area -->
+                <div class="p-3 bg-gray-50 border-t border-gray-200">
+                    <form @submit.prevent="sendMessage()" class="flex items-end space-x-2 bg-white p-1.5 rounded-xl border border-gray-300 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all shadow-sm">
+                        <button type="button" class="p-3 text-gray-400 hover:text-gray-600 transition rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button type="button" class="p-3 text-gray-400 hover:text-gray-600 transition rounded-lg hover:bg-gray-100">
+                            <i class="fa-regular fa-face-smile"></i>
+                        </button>
+                        
+                        <div class="flex-1 py-2">
+                            <input type="text" x-model="newMessage" 
+                                   class="w-full bg-transparent border-none focus:ring-0 text-sm max-h-32 overflow-y-auto p-0 text-gray-700 placeholder-gray-400"
+                                   placeholder="Digite uma mensagem..." autocomplete="off">
+                        </div>
+
+                        <button type="submit" 
+                                class="p-3 rounded-lg transition-all duration-200 shadow-md"
+                                :class="newMessage.trim() ? 'bg-primary text-white hover:bg-emerald-600 scale-100' : 'bg-gray-200 text-gray-400 scale-95 pointer-events-none'">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal de QR Code (Alpine x-show) -->
+        <div x-show="showQrModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" x-cloak x-transition>
+            <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center relative">
+                <button @click="showQrModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Conectar WhatsApp</h3>
+                <div class="bg-gray-100 p-4 rounded-xl mb-4 min-h-[250px] flex items-center justify-center">
+                    <img :src="qrCodeBase64" x-show="qrCodeBase64" class="w-full h-auto rounded-lg">
+                    <div x-show="!qrCodeBase64" class="text-gray-400 flex flex-col items-center">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl mb-2"></i>
+                        <span>Gerando QR Code...</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500">Abra o WhatsApp > Configurações > Aparelhos conectados > Conectar aparelho</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Lógica da Aplicação (Alpine + Socket) -->
+    <script>
+        const socket = io();
+        // Safety Check: Garante que variáveis EJS existam antes de usar
+        const empresaId = <%= (typeof empresa !== 'undefined' && empresa && empresa.id) ? empresa.id : 'null' %>;
+
+        function appData() {
+            return {
+                activeTab: 'chats',
+                currentChat: null,
+                newMessage: '',
+                searchQuery: '',
+                connectionStatus: 'Verificando...',
+                showQrModal: false,
+                qrCodeBase64: null,
+                
+                // Dados Iniciais (Safe JSON Parse)
+                chats: <%- (typeof contatos !== 'undefined' && contatos) ? JSON.stringify(contatos) : '[]' %>,
+                messages: [], 
+
+                // Menu Lateral
+                menuItems: [
+                    { id: 'dashboard', icon: 'fa-solid fa-chart-pie', label: 'Dashboard' },
+                    { id: 'chats', icon: 'fa-solid fa-comments', label: 'Conversas' },
+                    { id: 'crm', icon: 'fa-solid fa-kanban', label: 'Kanban CRM' },
+                    { id: 'settings', icon: 'fa-solid fa-cog', label: 'Configurações' }
+                ],
+
+                initApp() {
+                    if (!empresaId) {
+                        console.error('Erro critico: ID da Empresa nao carregado.');
+                        return;
+                    }
+                    this.setupSocket();
+                    this.checkConnection();
+                },
+
+                // Propriedade Computada para Filtro
+                get filteredChats() {
+                    return this.chats.filter(c => 
+                        (c.nome && c.nome.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+                        (c.telefone.includes(this.searchQuery))
+                    );
+                },
+
+                // Lógica de Classes de Status
+                get statusClass() {
+                    if (this.connectionStatus === 'Conectado') return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    if (this.connectionStatus === 'Desconectado') return 'bg-red-50 text-red-700 border-red-200';
+                    return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+                },
+                get statusBgClass() {
+                    if (this.connectionStatus === 'Conectado') return 'bg-emerald-500';
+                    if (this.connectionStatus === 'Desconectado') return 'bg-red-500';
+                    return 'bg-yellow-500';
+                },
+                get statusPingClass() {
+                    if (this.connectionStatus === 'Conectado') return 'bg-emerald-400';
+                    return 'hidden';
+                },
+
+                // Funções Lógicas
+                selectChat(chat) {
+                    this.currentChat = chat;
+                    this.messages = []; // Limpa mensagens anteriores
+                    this.scrollToBottom();
+                    
+                    // Simulação de Histórico (Deve ser substituído por fetch API)
+                    this.messages.push({
+                        id: 1,
+                        fromMe: false,
+                        conteudo: 'Histórico carregado.',
+                        timestamp: Date.now() / 1000 - 60
+                    });
+                },
+
+                async sendMessage() {
+                    if (!this.newMessage.trim() || !this.currentChat) return;
+                    
+                    const text = this.newMessage;
+                    const tempMsg = {
+                        id: Date.now(),
+                        fromMe: true,
+                        conteudo: text,
+                        timestamp: Date.now() / 1000
+                    };
+                    
+                    this.messages.push(tempMsg);
+                    this.newMessage = '';
+                    this.scrollToBottom();
+
+                    // Envio API
+                    try {
+                        await fetch('/api/crm/enviar', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                empresaId,
+                                number: this.currentChat.telefone,
+                                message: text
+                            })
+                        });
+                    } catch (e) {
+                        alert('Erro ao enviar');
+                    }
+                },
+
+                setupSocket() {
+                    socket.on('connect', () => socket.emit('join', `empresa_${empresaId}`));
+                    
+                    socket.on('nova_mensagem', (msg) => {
+                        // Se for para o chat aberto
+                        if (this.currentChat && msg.remoteJid === this.currentChat.telefone) {
+                            this.messages.push({
+                                id: Date.now(),
+                                fromMe: msg.fromMe,
+                                conteudo: msg.conteudo,
+                                timestamp: msg.timestamp
+                            });
+                            this.scrollToBottom();
+                        }
+                        
+                        // Atualiza lista lateral
+                        const chatIndex = this.chats.findIndex(c => c.telefone === msg.remoteJid);
+                        if (chatIndex > -1) {
+                            this.chats[chatIndex].lastMessage = msg.conteudo;
+                            this.chats[chatIndex].ultima_msg = new Date();
+                            // Move para o topo
+                            const chat = this.chats.splice(chatIndex, 1)[0];
+                            this.chats.unshift(chat);
+                        }
+                    });
+
+                    socket.on('status_conn', (data) => this.handleStatus(data.status));
+                    socket.on('qr_code', (data) => {
+                        this.qrCodeBase64 = data.qr;
+                        this.connectionStatus = 'Aguardando Leitura';
+                        this.showQrModal = true;
+                    });
+                    socket.on('whatsapp_ready', () => {
+                        this.showQrModal = false;
+                        this.connectionStatus = 'Conectado';
+                    });
+                },
+
+                async checkConnection() {
+                    const res = await fetch(`/api/whatsapp/status/${empresaId}`);
+                    const data = await res.json();
+                    
+                    if (data.connected) {
+                        this.connectionStatus = 'Conectado';
+                    } else if (data.qrcode) {
+                        this.qrCodeBase64 = data.qrcode;
+                        this.connectionStatus = 'Aguardando Leitura';
+                        this.showQrModal = true;
+                    } else {
+                        this.connectionStatus = 'Desconectado';
+                        if (data.status === 'DESCONECTADO') {
+                            fetch('/api/whatsapp/start', {
+                                method: 'POST',
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({ empresaId })
+                            });
+                        }
+                    }
+                },
+
+                handleStatus(status) {
+                    const map = {
+                        'online': 'Conectado',
+                        'offline': 'Desconectado',
+                        'connecting': 'Conectando...'
+                    };
+                    this.connectionStatus = map[status] || status;
+                },
+
+                // Helpers
+                formatTime(isoString) {
+                    if (!isoString) return '';
+                    const date = typeof isoString === 'number' ? new Date(isoString * 1000) : new Date(isoString);
+                    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                },
+
+                formatMessage(msg) {
+                    return msg.conteudo.replace(/\n/g, '<br>');
+                },
+                
+                getStatusIcon(status) {
+                    const icons = {
+                        'ABERTO': 'fa-solid fa-inbox text-gray-500',
+                        'FILA': 'fa-solid fa-clock text-yellow-500',
+                        'ATENDENDO': 'fa-solid fa-headset text-primary'
+                    };
+                    return icons[status] || 'fa-solid fa-question';
+                },
+
+                scrollToBottom() {
+                    this.$nextTick(() => {
+                        const container = document.getElementById('messagesContainer');
+                        if (container) container.scrollTop = container.scrollHeight;
+                    });
+                },
+
+                async logout() {
+                    await fetch('/api/auth/logout', { method: 'POST' });
+                    window.location.reload();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,117 +1,87 @@
-// ============================================
-// Arquivo: src/middleware/auth.js
-// Descrição: Middleware de autenticação
-// ============================================
+/**
+ * src/middleware/auth.js
+ * Descrição: Middleware de Segurança e Controle de Acesso (RBAC)
+ * Versão: 7.0 - Hybrid (UX + Security)
+ */
 
 /**
- * Middleware de autenticação para proteger rotas
- * Verifica se a empresa está identificada no header
- *
- * @param {Object} req - Request object
- * @param {Object} res - Response object
- * @param {Function} next - Next middleware
+ * Verifica se o usuário está logado (Autenticação)
  */
-module.exports = (req, res, next) => {
-
-    // ============================================
-    // ROTAS PÚBLICAS (SEM AUTENTICAÇÃO)
-    // ============================================
-    const publicRoutes = [
-        '/auth/login',
-        '/auth/esqueci-senha',
-        '/auth/trocar-senha'
-    ];
-
-    // Verifica se é rota pública
-    if (publicRoutes.some(route => req.path.startsWith(route))) {
+const isAuthenticated = (req, res, next) => {
+    // 1. Verifica se a sessão existe e tem usuário
+    if (req.session && req.session.user) {
         return next();
     }
 
-    // Rotas do super admin também passam
-    if (req.path.startsWith('/super-admin')) {
-        return next();
-    }
+    // 2. Se não estiver logado:
+    
+    // Detecção robusta de API: XHR, rota /api/ ou cabeçalho JSON
+    const isApiCall = req.xhr || req.path.startsWith('/api/') || (req.headers.accept && req.headers.accept.indexOf('json') > -1);
 
-    // ============================================
-    // VALIDAÇÃO DA EMPRESA
-    // ============================================
-    const empresaId = req.headers['x-empresa-id'];
-    const userId = req.headers['x-user-id'];
-
-    // Valida se o ID da empresa foi fornecido
-    if (!empresaId || isNaN(empresaId)) {
+    if (isApiCall) {
         return res.status(401).json({
-            error: 'Acesso não autorizado',
-            message: 'ID da empresa não fornecido ou inválido',
-            code: 'EMPRESA_ID_MISSING'
+            success: false,
+            message: 'Sessão expirada ou inválida. Faça login novamente.',
+            code: 'SESSION_EXPIRED'
         });
     }
 
-    // Adiciona IDs ao request para uso nos controllers
-    req.empresaId = parseInt(empresaId);
-    req.userId = userId ? parseInt(userId) : null;
-
-    // ============================================
-    // LOG DE ACESSO (OPCIONAL - APENAS EM DEV)
-    // ============================================
-    if (process.env.NODE_ENV === 'development') {
-        console.log(`[AUTH] Empresa: ${req.empresaId} | User: ${req.userId || 'N/A'} | ${req.method} ${req.path}`);
-    }
-
-    next();
+    // Acesso via Navegador: Redireciona para login
+    return res.redirect('/');
 };
 
 /**
- * Middleware adicional para verificar se é administrador
- * Use depois do middleware auth principal
+ * Verifica privilégios administrativos (Autorização)
+ * Permite: Admins (is_admin=1) OU Gerentes
  */
-module.exports.isAdmin = async (req, res, next) => {
-    if (!req.userId) {
-        return res.status(403).json({
-            error: 'Acesso negado',
-            message: 'Esta ação requer autenticação de usuário'
-        });
-    }
+const isAdmin = (req, res, next) => {
+    const user = req.session?.user;
+    
+    // Lógica RBAC v7: Admin ou Gerente
+    const hasPermission = user && (user.is_admin === 1 || user.cargo === 'Gerente');
 
-    try {
-        // Aqui você pode fazer uma query para verificar se é admin
-        // Por enquanto, apenas passa adiante
-        // TODO: Implementar verificação de admin no banco
-        next();
-    } catch (err) {
-        return res.status(500).json({
-            error: 'Erro ao verificar permissões',
-            message: err.message
-        });
+    if (hasPermission) {
+        return next();
     }
+    
+    // Tratamento de Erro
+    const isApiCall = req.xhr || req.path.startsWith('/api/');
+    
+    if (isApiCall) {
+        return res.status(403).json({ success: false, message: 'Acesso negado. Requer privilégios administrativos.' });
+    }
+    
+    return res.redirect('/dashboard?error=access_denied');
 };
 
 /**
- * Middleware para validar empresa ativa
- * Use depois do middleware auth principal
+ * Verifica privilégios de Super Admin (Multi-tenant)
+ * Permite: Apenas usuários da Empresa 1 com flag admin ou cargo Super Admin
  */
-module.exports.empresaAtiva = (db) => {
-    return async (req, res, next) => {
-        try {
-            const [empresa] = await db.execute(
-                'SELECT ativo FROM empresas WHERE id = ?',
-                [req.empresaId]
-            );
+const isSuperAdmin = (req, res, next) => {
+    const user = req.session?.user;
+    const empresaId = req.session?.empresaId;
 
-            if (!empresa.length || !empresa[0].ativo) {
-                return res.status(403).json({
-                    error: 'Empresa inativa',
-                    message: 'Esta empresa está bloqueada. Entre em contato com o suporte.',
-                    code: 'EMPRESA_INATIVA'
-                });
-            }
+    // Regra Estrita: Deve pertencer à Empresa 1 (Master) E ter permissão elevada
+    const isMasterCompany = empresaId === 1;
+    const hasSuperPrivilege = user && (user.is_admin === 1 || user.cargo === 'Super Admin');
 
-            next();
-        } catch (err) {
-            return res.status(500).json({
-                error: 'Erro ao verificar status da empresa',
-                message: err.message
-            });
-        }
-    };
+    if (isMasterCompany && hasSuperPrivilege) {
+        return next();
+    }
+
+    // Tratamento de Erro
+    const isApiCall = req.xhr || req.path.startsWith('/api/');
+
+    if (isApiCall) {
+        return res.status(403).json({ success: false, message: 'Acesso restrito a Super Administradores.' });
+    }
+
+    return res.redirect('/dashboard');
+};
+
+module.exports = {
+    isAuthenticated,
+    isAdmin,
+    isSuperAdmin
 };

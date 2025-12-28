@@ -1,8 +1,9 @@
-// ============================================
-// Arquivo: routes/api.js
-// Descrição: Rotas da API REST
-// Versão: 5.0 - Revisado e Corrigido
-// ============================================
+/**
+ * routes/api.js
+ * Descrição: Rotas da API REST (Backend Central)
+ * Versão: 7.0 - Enterprise (Redis Queues + Singleton Injection)
+ * Autor: Sistemas de Gestão
+ */
 
 const express = require('express');
 const router = express.Router();
@@ -10,16 +11,38 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// --- 1. Importações de Infraestrutura ---
+const db = require('../src/config/db'); // Singleton DB
+// Removido: const sessionManager... (Já vem injetado em req.whatsapp)
+const { isAuthenticated, isAdmin, isSuperAdmin } = require('../src/middleware/auth');
+
+// --- 2. Importação dos Controladores Legados (DB CRUD) ---
+// Mantemos estes controllers pois lidam com lógica de banco de dados, não com o socket direto
+const AuthController = require('../controllers/AuthController');
+const AdminController = require('../controllers/AdminController');
+const AdminPanelController = require('../controllers/AdminPanelController');
+// const WhatsAppController = require('../controllers/WhatsAppController'); // SUBSTITUÍDO pela lógica v7 direta
+const CrmController = require('../controllers/CrmController');
+const ScheduleController = require('../controllers/ScheduleController');
+
+// --- 3. Instanciação dos Controladores ---
+const adminCtrl = new AdminController(db);
+const adminPanelCtrl = new AdminPanelController(db);
+const crmCtrl = new CrmController(db);
+const scheduleController = new ScheduleController(db);
+
 // ============================================
-// CONFIGURAÇÃO DO MULTER (UPLOAD DE ARQUIVOS)
+// CONFIGURAÇÃO DO MULTER (OTIMIZADA v7)
 // ============================================
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const empresaId = req.headers['x-empresa-id'] || req.empresaId || 'temp';
-        const uploadPath = path.join(process.cwd(), 'public', 'uploads', `empresa_${empresaId}`);
+        // Organização por Data (YYYY-MM-DD) para evitar diretórios gigantes
+        const empresaId = req.session?.empresaId || req.headers['x-empresa-id'] || req.body.empresaId || 'temp';
+        const dateDir = new Date().toISOString().split('T')[0];
         
-        // Criar diretório se não existir
+        const uploadPath = path.join(process.cwd(), 'public', 'uploads', `empresa_${empresaId}`, dateDir);
+        
         if (!fs.existsSync(uploadPath)) {
             fs.mkdirSync(uploadPath, { recursive: true });
         }
@@ -27,256 +50,193 @@ const storage = multer.diskStorage({
         cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-        // Sanitizar nome do arquivo
-        const sanitized = file.originalname
-            .replace(/[^a-zA-Z0-9.-]/g, '_')
-            .substring(0, 100);
+        // Sanitização e Unique ID
+        const sanitized = file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_').substring(0, 50);
         const uniqueName = `${Date.now()}_${sanitized}`;
         cb(null, uniqueName);
     }
 });
 
-// Filtro de tipos de arquivo permitidos
-const fileFilter = (req, file, cb) => {
-    const allowedMimes = [
-        'image/jpeg', 'image/png', 'image/gif', 'image/webp',
-        'video/mp4', 'video/webm', 'video/quicktime',
-        'audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mp4', 'audio/webm',
-        'application/pdf',
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'application/vnd.ms-excel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/zip',
-        'text/plain'
-    ];
-
-    if (allowedMimes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(new Error(`Tipo de arquivo não permitido: ${file.mimetype}`), false);
-    }
-};
-
-const upload = multer({
-    storage,
-    fileFilter,
-    limits: {
-        fileSize: 50 * 1024 * 1024 // 50MB
+const upload = multer({ 
+    storage: storage,
+    limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
+    fileFilter: (req, file, cb) => {
+        const allowedMimes = [
+            'image/jpeg', 'image/png', 'image/webp',
+            'application/pdf',
+            'video/mp4',
+            'audio/mpeg', 'audio/mp4', 'audio/ogg', 'audio/wav', 'audio/x-wav'
+        ];
+        if (allowedMimes.includes(file.mimetype)) cb(null, true);
+        else cb(new Error('Tipo de arquivo não suportado'), false);
     }
 });
 
-// Upload com múltiplos campos
-const uploadFields = upload.fields([
-    { name: 'file', maxCount: 1 },
-    { name: 'logo', maxCount: 1 },
-    { name: 'welcome_media', maxCount: 1 },
-    { name: 'media', maxCount: 1 }
-]);
+// ============================================
+// ROTAS DE WHATSAPP (CORE v7)
+// ============================================
+// Estas rotas substituem o antigo WhatsAppController para garantir uso do SessionManager v7
+
+// Iniciar Sessão
+router.post('/whatsapp/start', isAuthenticated, isAdmin, async (req, res) => {
+    const empresaId = req.body.empresaId || req.user.empresaId;
+    try {
+        // Usa o Singleton injetado no server.js
+        await req.whatsapp.startSession(empresaId);
+        res.json({ success: true, message: 'Sessão inicializada. Escaneie o QR Code.' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Logout
+router.post('/whatsapp/logout', isAuthenticated, isAdmin, async (req, res) => {
+    const empresaId = req.body.empresaId || req.user.empresaId;
+    try {
+        await req.whatsapp.deleteSession(empresaId);
+        res.json({ success: true, message: 'Sessão desconectada.' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Status e QR Code
+router.get('/whatsapp/status/:companyId', isAuthenticated, (req, res) => {
+    const empresaId = parseInt(req.params.companyId);
+    
+    const session = req.whatsapp.sessions.get(empresaId);
+    const qr = req.whatsapp.qrCodes.get(empresaId);
+    const isConnected = session?.user ? true : false;
+    
+    // Formatação segura do usuário
+    const userJid = session?.user?.id ? session.user.id.split(':')[0] : null;
+
+    res.json({
+        connected: isConnected,
+        status: isConnected ? 'CONECTADO' : (qr ? 'AGUARDANDO_QR' : 'DESCONECTADO'),
+        qrcode: (!isConnected && qr) ? qr : null,
+        number: userJid
+    });
+});
 
 // ============================================
-// MIDDLEWARE DE AUTENTICAÇÃO
+// ROTAS DE CRM / MENSAGEM (VIA FILA)
 // ============================================
 
-function authMiddleware(req, res, next) {
-    const empresaId = req.headers['x-empresa-id'];
-    const userId = req.headers['x-user-id'];
-
-    if (!empresaId) {
-        return res.status(401).json({ 
-            error: 'Empresa não identificada',
-            message: 'Header x-empresa-id é obrigatório'
-        });
+// Enviar Texto Simples
+router.post('/crm/enviar', isAuthenticated, async (req, res) => {
+    const { empresaId, number, message } = req.body;
+    
+    if (!empresaId || !number || !message) {
+        return res.status(400).json({ error: 'Dados inválidos' });
     }
 
-    req.empresaId = parseInt(empresaId);
-    req.userId = userId ? parseInt(userId) : null;
+    try {
+        const sock = req.whatsapp.sessions.get(parseInt(empresaId));
+        if (!sock) throw new Error('WhatsApp desconectado');
+
+        const jid = number.includes('@') ? number : `${number.replace(/\D/g, '')}@s.whatsapp.net`;
+        
+        // Envia diretamente (para mensagens de saída, não usamos fila para garantir feedback imediato ao atendente)
+        // O SessionManager v7 captura o evento 'messages.upsert' e salva no banco via Worker
+        const sent = await sock.sendMessage(jid, { text: message });
+        
+        res.json({ success: true, messageId: sent.key.id });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, error: 'Erro ao enviar mensagem' });
+    }
+});
+
+// Enviar Mídia (Upload + Envio)
+router.post('/crm/enviar-midia', isAuthenticated, upload.single('file'), async (req, res) => {
+    const { empresaId, number, caption, type } = req.body; // type: image, video, document, audio
+    const file = req.file;
+
+    if (!file || !empresaId || !number) {
+        return res.status(400).json({ error: 'Arquivo ou dados obrigatórios faltando' });
+    }
+
+    try {
+        const sock = req.whatsapp.sessions.get(parseInt(empresaId));
+        if (!sock) throw new Error('WhatsApp desconectado');
+
+        const jid = number.includes('@') ? number : `${number.replace(/\D/g, '')}@s.whatsapp.net`;
+        const filePath = file.path;
+        
+        // Mapeamento de tipos Baileys
+        let msgContent = {};
+        const mimetype = file.mimetype;
+
+        if (mimetype.startsWith('image/')) {
+            msgContent = { image: { url: filePath }, caption: caption };
+        } else if (mimetype.startsWith('video/')) {
+            msgContent = { video: { url: filePath }, caption: caption };
+        } else if (mimetype.startsWith('audio/')) {
+            msgContent = { audio: { url: filePath }, mimetype: 'audio/mp4', ptt: type === 'audio_ptt' }; // ptt: true envia como gravação
+        } else {
+            msgContent = { document: { url: filePath }, mimetype: mimetype, fileName: file.originalname, caption: caption };
+        }
+
+        const sent = await sock.sendMessage(jid, msgContent);
+        
+        // Opcional: Remover arquivo local após envio (se estiver usando S3 ou quiser economizar espaço)
+        // fs.unlinkSync(filePath); 
+
+        res.json({ success: true, messageId: sent.key.id });
+
+    } catch (error) {
+        console.error('[Upload/Send Error]', error);
+        res.status(500).json({ success: false, error: 'Falha ao enviar mídia' });
+    }
+});
+
+
+// ============================================
+// OUTRAS ROTAS (LEGADO MANTIDO)
+// ============================================
+
+// Autenticação
+router.post('/auth/login', AuthController.login);
+router.post('/auth/recover-password', AuthController.recuperarSenha);
+router.get('/auth/check', AuthController.checkSession);
+router.post('/auth/logout', isAuthenticated, AuthController.logout);
+router.post('/auth/change-password', isAuthenticated, AuthController.trocarSenha);
+
+// Admin / Painel
+router.get('/admin/dashboard-stats', isAuthenticated, (req, res) => adminPanelCtrl.getStats(req, res));
+router.get('/admin/users', isAuthenticated, (req, res) => adminPanelCtrl.getUsers(req, res));
+
+// Super Admin (Empresas)
+router.get('/super-admin/empresas', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.getEmpresas(req, res));
+router.post('/super-admin/empresas', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.createEmpresa(req, res));
+router.post('/super-admin/empresas/update', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.updateEmpresa(req, res));
+router.post('/super-admin/empresas/:id/status', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.toggleStatus(req, res));
+router.post('/super-admin/empresas/:id/delete', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.deleteEmpresa(req, res));
+router.post('/super-admin/empresas/:id/reset', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.resetSession(req, res));
+
+// Configurações
+router.get('/settings/schedules/:empresaId', isAuthenticated, isAdmin, (req, res) => scheduleController.getSchedules(req, res));
+router.post('/settings/schedules/:empresaId', isAuthenticated, isAdmin, (req, res) => scheduleController.updateSchedules(req, res));
+
+// ============================================
+// TRATAMENTO DE ERROS
+// ============================================
+router.use((err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+        return res.status(400).json({ error: 'Erro de Upload', message: err.message });
+    }
+    if (err) {
+        console.error('[API Router Error]', err);
+        return res.status(500).json({ error: 'Erro interno', message: err.message });
+    }
     next();
-}
+});
 
-// ============================================
-// EXPORTAR FUNÇÃO DE CONFIGURAÇÃO
-// ============================================
+router.get('/ping', (req, res) => res.json({ 
+    status: 'online', 
+    version: '7.0', 
+    workers: !!req.whatsapp.messageWorker 
+}));
 
-/**
- * Configura as rotas da API com as dependências necessárias
- * @param {Object} db - Pool de conexão MySQL
- * @param {Object} sessionManager - Instância do SessionManager
- * @returns {Router}
- */
-module.exports = function(db, sessionManager) {
-    
-    // Importar controllers
-    const AuthController = require('../controllers/AuthController');
-    const CrmController = require('../controllers/CrmController');
-    const WhatsAppController = require('../controllers/WhatsAppController');
-    const AdminController = require('../controllers/AdminController');
-
-    // Instanciar controllers
-    const authCtrl = new AuthController(db);
-    const crmCtrl = new CrmController(db, sessionManager);
-    const waCtrl = new WhatsAppController(db, sessionManager);
-    const adminCtrl = new AdminController(db, sessionManager);
-    const whatsappController = new WhatsAppController(db, sessionManager);
-    const crmController = new CrmController(db);
-    const scheduleController = new ScheduleController(db);
-
-
-
-    // ============================================
-    // ROTAS DE AUTENTICAÇÃO (PÚBLICAS)
-    // ============================================
-
-    router.post('/auth/login', (req, res) => authCtrl.login(req, res));
-    router.post('/auth/esqueci-senha', (req, res) => authCtrl.esqueciSenha(req, res));
-    router.post('/auth/trocar-senha', authMiddleware, (req, res) => authCtrl.trocarSenha(req, res));
-
-    // ============================================
-    // ROTAS WHATSAPP (CONEXÃO)
-    // ============================================
-
-    router.post('/whatsapp/start', authMiddleware, (req, res) => waCtrl.startSession(req, res));
-    router.post('/whatsapp/logout', authMiddleware, (req, res) => waCtrl.logoutSession(req, res));
-    router.get('/whatsapp/status', authMiddleware, (req, res) => waCtrl.getStatus(req, res));
-    router.get('/whatsapp/qrcode', authMiddleware, (req, res) => waCtrl.getQrCode(req, res));
-
-    // Rotas alternativas (compatibilidade)
-    router.get('/whatsapp/start/:companyId', (req, res) => {
-        req.empresaId = parseInt(req.params.companyId);
-        waCtrl.startSession(req, res);
-    });
-    router.get('/whatsapp/status/:companyId', (req, res) => {
-        req.empresaId = parseInt(req.params.companyId);
-        waCtrl.getStatus(req, res);
-    });
-    router.get('/whatsapp/qrcode/:companyId', (req, res) => {
-        req.empresaId = parseInt(req.params.companyId);
-        waCtrl.getQrCode(req, res);
-    });
-    router.post('/whatsapp/logout/:companyId', (req, res) => {
-        req.empresaId = parseInt(req.params.companyId);
-        waCtrl.logoutSession(req, res);
-    });
-
-    // ============================================
-    // ROTAS CRM - MENSAGENS
-    // ============================================
-
-    router.get('/crm/mensagens/:telefone', authMiddleware, (req, res) => crmCtrl.getMensagens(req, res));
-    router.post('/crm/enviar', authMiddleware, (req, res) => waCtrl.sendText(req, res));
-    router.post('/crm/enviar-midia', authMiddleware, upload.single('file'), (req, res) => waCtrl.sendMedia(req, res));
-
-    // ============================================
-    // ROTAS CRM - CONTATOS
-    // ============================================
-
-    router.get('/crm/contatos', authMiddleware, (req, res) => crmCtrl.getContatos(req, res));
-    router.post('/crm/contatos', authMiddleware, (req, res) => crmCtrl.createContato(req, res));
-    router.put('/crm/contatos', authMiddleware, (req, res) => crmCtrl.updateContato(req, res));
-    router.get('/crm/agenda', authMiddleware, (req, res) => crmCtrl.getAgenda(req, res));
-
-    // ============================================
-    // ROTAS CRM - ATENDIMENTO
-    // ============================================
-
-    router.post('/crm/atendimento/assumir', authMiddleware, (req, res) => crmCtrl.assumirAtendimento(req, res));
-    router.post('/crm/atendimento/encerrar', authMiddleware, (req, res) => crmCtrl.encerrarAtendimento(req, res));
-    router.post('/crm/atendimento/transferir', authMiddleware, (req, res) => crmCtrl.transferirAtendimento(req, res));
-    router.post('/crm/atendimento/transferir-usuario', authMiddleware, (req, res) => crmCtrl.transferirParaUsuario(req, res));
-
-    // ============================================
-    // ROTAS CRM - CONFIGURAÇÕES
-    // ============================================
-
-    router.get('/crm/config', authMiddleware, (req, res) => crmCtrl.getConfig(req, res));
-    router.put('/crm/config', authMiddleware, uploadFields, (req, res) => crmCtrl.updateConfig(req, res));
-    router.put('/crm/config/ia', authMiddleware, (req, res) => crmCtrl.updateConfigIA(req, res));
-    router.get('/crm/dashboard', authMiddleware, (req, res) => crmCtrl.getClientDashboard(req, res));
-    router.get('/crm/avaliacoes', authMiddleware, (req, res) => crmCtrl.getAvaliacoes(req, res));
-
-    // ============================================
-    // ROTAS CRM - SETORES
-    // ============================================
-
-    router.get('/crm/setores', authMiddleware, (req, res) => crmCtrl.getSetores(req, res));
-    router.post('/crm/setores', authMiddleware, upload.single('media'), (req, res) => crmCtrl.createSetor(req, res));
-    router.put('/crm/setores/:id', authMiddleware, upload.single('media'), (req, res) => crmCtrl.updateSetor(req, res));
-    router.delete('/crm/setores/:id', authMiddleware, (req, res) => crmCtrl.deleteSetor(req, res));
-    router.post('/crm/setores/reordenar', authMiddleware, (req, res) => crmCtrl.reordenarSetores(req, res));
-
-    // ============================================
-    // ROTAS CRM - MENSAGENS RÁPIDAS
-    // ============================================
-
-    router.get('/crm/mensagens-rapidas', authMiddleware, (req, res) => crmCtrl.getQuickMessages(req, res));
-    router.post('/crm/mensagens-rapidas', authMiddleware, (req, res) => crmCtrl.createQuickMessage(req, res));
-    router.delete('/crm/mensagens-rapidas/:id', authMiddleware, (req, res) => crmCtrl.deleteQuickMessage(req, res));
-
-    // ============================================
-    // ROTAS CRM - EQUIPE
-    // ============================================
-
-    router.get('/crm/atendentes', authMiddleware, (req, res) => crmCtrl.getAtendentes(req, res));
-    router.post('/crm/atendentes', authMiddleware, (req, res) => crmCtrl.createAtendente(req, res));
-    router.delete('/crm/atendentes/:id', authMiddleware, (req, res) => crmCtrl.deleteAtendente(req, res));
-
-    // ============================================
-    // ROTAS CRM - ETIQUETAS
-    // ============================================
-
-    router.get('/crm/etiquetas', authMiddleware, (req, res) => crmCtrl.getEtiquetas(req, res));
-    router.post('/crm/etiquetas', authMiddleware, (req, res) => crmCtrl.createEtiqueta(req, res));
-    router.delete('/crm/etiquetas/:id', authMiddleware, (req, res) => crmCtrl.deleteEtiqueta(req, res));
-    router.post('/crm/etiquetas/toggle', authMiddleware, (req, res) => crmCtrl.toggleEtiquetaContato(req, res));
-
-    // ============================================
-    // ROTAS CRM - BROADCAST
-    // ============================================
-
-    router.post('/crm/broadcast', authMiddleware, (req, res) => crmCtrl.sendBroadcast(req, res));
-
-    // ============================================
-    // ROTAS SUPER ADMIN
-    // ============================================
-
-    router.get('/super-admin/analytics', (req, res) => adminCtrl.getAnalytics(req, res));
-    router.post('/super-admin/empresas', (req, res) => adminCtrl.createEmpresa(req, res));
-    router.put('/super-admin/empresas/update', (req, res) => adminCtrl.updateEmpresa(req, res));
-    router.post('/super-admin/empresas/:id/status', (req, res) => adminCtrl.toggleStatus(req, res));
-    router.post('/super-admin/empresas/:id/delete', (req, res) => adminCtrl.deleteEmpresa(req, res));
-    router.post('/super-admin/empresas/:id/reset', (req, res) => adminCtrl.resetSession(req, res));
-
-    // --- Rotas de Configuração de Horários (Enterprise) ---
-    router.get('/settings/schedules/:empresaId', (req, res) => scheduleController.getSchedules(req, res));
-    router.post('/settings/schedules/:empresaId', (req, res) => scheduleController.updateSchedules(req, res));
-
-    // ============================================
-    // TRATAMENTO DE ERROS DE UPLOAD
-    // ============================================
-
-    router.use((err, req, res, next) => {
-        if (err instanceof multer.MulterError) {
-            if (err.code === 'LIMIT_FILE_SIZE') {
-                return res.status(413).json({ 
-                    error: 'Arquivo muito grande',
-                    message: 'O arquivo excede o limite de 50MB'
-                });
-            }
-            return res.status(400).json({ 
-                error: 'Erro no upload',
-                message: err.message 
-            });
-        }
-        
-        if (err) {
-            return res.status(500).json({ 
-                error: 'Erro interno',
-                message: err.message 
-            });
-        }
-        
-        next();
-    });
-
-    return router;
-};
+module.exports = router;
