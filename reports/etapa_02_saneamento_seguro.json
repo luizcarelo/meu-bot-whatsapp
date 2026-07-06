@@ -1,0 +1,64 @@
+{
+  "gerado_em": "2026-07-06T11:01:56",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_02_20260706_110156",
+    "itens_copiados_raiz": 25,
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_02_manifesto_antes.json",
+  "env_example": ".env.example",
+  "docs_sanitizados": [
+    {
+      "arquivo": "README.md",
+      "existe": true,
+      "alterado": true,
+      "linhas_sanitizadas": 3
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "existe": true,
+      "alterado": true,
+      "linhas_sanitizadas": 3
+    }
+  ],
+  "alertas_pacote": [
+    {
+      "item": ".env",
+      "tipo": "arquivo",
+      "recomendacao": "Nao incluir em pacote compartilhavel ou deploy manual"
+    },
+    {
+      "item": ".git",
+      "tipo": "diretorio",
+      "recomendacao": "Nao incluir em pacote compartilhavel ou deploy manual"
+    },
+    {
+      "item": "node_modules",
+      "tipo": "diretorio",
+      "recomendacao": "Nao incluir em pacote compartilhavel ou deploy manual"
+    },
+    {
+      "item": "auth_sessions",
+      "tipo": "diretorio",
+      "recomendacao": "Nao incluir em pacote compartilhavel ou deploy manual"
+    },
+    {
+      "item": "public/uploads",
+      "tipo": "diretorio",
+      "recomendacao": "Nao incluir em pacote compartilhavel ou deploy manual"
+    },
+    {
+      "item": "backups",
+      "tipo": "diretorio",
+      "recomendacao": "Nao incluir em pacote compartilhavel ou deploy manual"
+    }
+  ],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_02_manifesto_depois.json"
+}

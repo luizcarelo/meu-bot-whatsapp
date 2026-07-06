@@ -1,7 +1,7 @@
 /**
  * server.js
  * Entry Point do SAAS WhatsApp & CRM
- * Versão: 8.1 - Fix RedisStore Constructor & Deep Debug
+ * Versão: 8.2 - Importação Moderna do Redis (v9)
  * Autor: Sistemas de Gestão
  */
 
@@ -15,24 +15,13 @@ const { Server } = require('socket.io');
 const { createClient } = require('redis');
 
 // ==============================================================================
-// BLINDAGEM DO REDIS STORE (Correção do erro "not a constructor")
+// IMPORTAÇÃO MODERNA DO REDIS STORE (Compatível com v7, v8 e v9)
 // ==============================================================================
 let RedisStore;
 try {
     const connectRedis = require('connect-redis');
-    
-    // Detecta se é versão nova (com .default) ou antiga (função factory)
-    if (connectRedis.default) {
-        RedisStore = connectRedis.default;
-    } else {
-        try {
-            // Tenta inicializar como Factory (padrão v6 ou inferior)
-            RedisStore = connectRedis(session);
-        } catch (err) {
-            // Se der erro ao chamar como função, assume que é a classe direta
-            RedisStore = connectRedis;
-        }
-    }
+    // Nas versões novas do pacote, a classe fica guardada dentro da propriedade RedisStore ou default
+    RedisStore = connectRedis.RedisStore || connectRedis.default || connectRedis;
 } catch (e) {
     console.error('❌ Erro crítico: module connect-redis não encontrado. Execute: npm install connect-redis');
     process.exit(1);
@@ -131,8 +120,12 @@ redisClient.on('connect', () => console.log('🔌 [Redis] Conectado com sucesso.
     // ==============================================================================
     // 6. Inicialização dos Gerentes (Bot WhatsApp)
     // ==============================================================================
-    const sessionManager = new SessionManager(io);
-    await sessionManager.init();
+    // Adicionamos o 'db' aqui para que o SessionManager consiga salvar no banco de dados
+    const sessionManager = new SessionManager(io, db); 
+    
+    // Trocamos o .init() pelo nome correto da função que existe no arquivo
+    sessionManager.initBackgroundJobs(); 
+    
     app.set('io', io);
     app.set('sessionManager', sessionManager);
 

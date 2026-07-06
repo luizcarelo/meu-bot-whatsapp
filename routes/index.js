@@ -38,8 +38,12 @@ router.get('/dashboard', isAuthenticated, async (req, res) => {
         }
 
         // 1. Busca Dados da Empresa
-        const [empresas] = await db.query('SELECT * FROM empresas WHERE id = ? LIMIT 1', [empresaId]);
-        const empresa = empresas ? empresas[0] : null;
+// 1. Busca Dados da Empresa
+        const result = await db.query('SELECT * FROM empresas WHERE id = ? LIMIT 1', [empresaId]);
+        
+        // No Postgres, o db.query geralmente retorna o array de linhas diretamente
+        // Verificamos se result é um array ou se tem a propriedade 'rows' (padrão do pg)
+        const empresa = Array.isArray(result) ? result[0] : (result.rows ? result.rows[0] : null);
 
         if (!empresa) {
             console.error(`❌ [DASHBOARD] Empresa ID ${empresaId} não encontrada no DB.`);

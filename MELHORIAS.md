@@ -177,11 +177,11 @@ saas-whatsapp-crm/
 ```env
 DB_HOST=mysql.lcsolucoesdigital.com.br
 DB_USER=lcsolucoes_add2
-DB_PASS=Whatsapp2025
+DB_PASS=altere_aqui
 DB_NAME=lcsolucoesdigi
 PORT=4000
 NODE_ENV=production
-SUPER_ADMIN_PASS=
+SUPER_ADMIN_PASS=altere_aqui
 ```
 
 ### Variáveis de Ambiente Opcionais:
@@ -190,7 +190,7 @@ SMTP_HOST=smtp.kinghost.net
 SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=snao-responda@lcsolucoesdigital.com.br
-SMTP_PASS=@Ch030991@
+SMTP_PASS=altere_aqui
 ```
 
 ### Comandos:

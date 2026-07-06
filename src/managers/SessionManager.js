@@ -342,6 +342,7 @@ class SessionManager {
     }
 
     async verificarInatividade() {
+        // Query adaptada para PostgreSQL usando NOW() - INTERVAL '30 minutes'
         const sql = `
             SELECT c.id, c.empresa_id, c.telefone 
             FROM contatos c
@@ -351,7 +352,7 @@ class SessionManager {
                 GROUP BY empresa_id, remote_jid
             ) m ON c.empresa_id = m.empresa_id AND c.telefone = m.remote_jid
             WHERE c.status_atendimento IN ('ATENDENDO', 'FILA')
-            AND m.last_msg_time < DATE_SUB(NOW(), INTERVAL 30 MINUTE)
+            AND m.last_msg_time < NOW() - INTERVAL '30 minutes'
         `;
 
         try {

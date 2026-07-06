@@ -1,0 +1,312 @@
+{
+  "gerado_em": "2026-07-06T11:01:56",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "total_arquivos": 61,
+  "arquivos": [
+    {
+      "arquivo": ".env",
+      "tamanho_bytes": 1704,
+      "sha256": "8152c1e92639cd8b9e44efe759095c73f77390c66209511ea9578df9ea169a7b"
+    },
+    {
+      "arquivo": ".env.example",
+      "tamanho_bytes": 675,
+      "sha256": "d2e41861328a980c1633b167f77fdd602d6cce46f7111771f361b9e59f9b1b47"
+    },
+    {
+      "arquivo": ".github/copilot-instructions.md",
+      "tamanho_bytes": 6072,
+      "sha256": "3a9bdff93eb2aabf106d5cbb6b7d84f5f97a068f657aac66351ff2b6435a145b"
+    },
+    {
+      "arquivo": ".gitignore",
+      "tamanho_bytes": 59,
+      "sha256": "acc90aa0ff081dd5d95b11ea402fc78c2c9ca81e8405054ed8eb88abe0d292c9"
+    },
+    {
+      "arquivo": ".vscode/mcp.json",
+      "tamanho_bytes": 18,
+      "sha256": "ef65639def9fe94904700c141dfaef547861d6eea44e0dabdfb60a635bf9678f"
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "tamanho_bytes": 386,
+      "sha256": "0dba288bca03770c31dd560b5550573d349ab20fa92306fae0766b093cb16ede"
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "tamanho_bytes": 449,
+      "sha256": "ee06f99a5773227e3ffb2fe985b9359bbef810ed82b88daa33c81553d8931d30"
+    },
+    {
+      "arquivo": "DECISOES_TECNICAS.md",
+      "tamanho_bytes": 445,
+      "sha256": "b243e0aa159e241d5a1e69bbd56788a3007fdd294903718c9325f27ef3adad58"
+    },
+    {
+      "arquivo": "Dockerfile",
+      "tamanho_bytes": 657,
+      "sha256": "1b62d7112061a6e130ac85dad55a77156e59d456c71d62e571152108a79856be"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "tamanho_bytes": 5879,
+      "sha256": "ff16f536df422466f1db8ab941d6321009819f7072e53741fac0f0a26784984e"
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "tamanho_bytes": 563,
+      "sha256": "e94da3cad8720a4d2dc3630eaddbf6a89a615d63bd3920ade9f2e67851dd4549"
+    },
+    {
+      "arquivo": "README.md",
+      "tamanho_bytes": 5378,
+      "sha256": "095ae9f5aa3d5f92537a84400c026d81a629433d0f064d8bb69f4b3adf17c532"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "tamanho_bytes": 13433,
+      "sha256": "54810f67a5fbefce7b14ee69c12fdbb6a6f45763e9a044fe39a9353662d1c0eb"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "tamanho_bytes": 5413,
+      "sha256": "0845c17cf60f77d793771be161842be23b9e567a9ccd0718678eed8ab8efe110"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "tamanho_bytes": 7828,
+      "sha256": "4d1e813a157049566f2fc9674c8003123c56a3be9e526d5cbcfdc7d42df7dbfa"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "tamanho_bytes": 30284,
+      "sha256": "5bd2cc300ea406c66df59a2e798d3cebefd934457676fdff9de8346e074518ad"
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "tamanho_bytes": 3672,
+      "sha256": "54218a2c08585eea911c9c7a9fe8b2799f159fea23ff296b1ed01235934d1c72"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "tamanho_bytes": 14494,
+      "sha256": "4e580bd99e918a700efc70d472b8d839a533144487608cc11466bdfc8d0243b6"
+    },
+    {
+      "arquivo": "docker-compose.yml",
+      "tamanho_bytes": 1025,
+      "sha256": "472e0a85e51adb0ac016d20c11d88c5b876330d1cfe4133a1863633c759f833f"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "tamanho_bytes": 15242,
+      "sha256": "631027e8839bfd7ef8fe547440f6322b487959170bc1aa44ee80a159bb4d2bde"
+    },
+    {
+      "arquivo": "etapa_02_saneamento_seguro.py",
+      "tamanho_bytes": 16624,
+      "sha256": "71aec6e2b0e4ded562b9f364fe3b3785e7ef149e2e920c6acfff893fee3170ca"
+    },
+    {
+      "arquivo": "favicon.ico",
+      "tamanho_bytes": 630994,
+      "sha256": "e5d92feb710ede82563c6b4000ac15659dd9de0d7412da54438c0716756b8df6"
+    },
+    {
+      "arquivo": "get-docker.sh",
+      "tamanho_bytes": 22806,
+      "sha256": "37eb71347a4353a6ff7ae9a2aa3dddc71cd142f3512cb18f90d10ae4770a7bd2"
+    },
+    {
+      "arquivo": "package-lock.json",
+      "tamanho_bytes": 272258,
+      "sha256": "b3efd5b69f5981cc92cec18ddec28f624857f0536b02f71c0f64c7d78c7935a9"
+    },
+    {
+      "arquivo": "package.json",
+      "tamanho_bytes": 2162,
+      "sha256": "da10927da77c27b52ff3b0075562d2c58fcd18e009921daf56e90ec76de77bfc"
+    },
+    {
+      "arquivo": "postcss.config.js",
+      "tamanho_bytes": 81,
+      "sha256": "6bbbfd323867a78af8d7ee348a179835202fc7a71f4c2b3e3f34de6f5f895c76"
+    },
+    {
+      "arquivo": "public/images/chatbot_logo.png",
+      "tamanho_bytes": 265659,
+      "sha256": "13a8b8b16e3b1a9fb023ff85d34e3175721681dcea290ca27923fe3518a2706e"
+    },
+    {
+      "arquivo": "public/images/lh_chatbot_favicon.png",
+      "tamanho_bytes": 158903,
+      "sha256": "81cba5c9044c73e3f577919a2bd6f55fb4a4286446011b79068cf301b0942026"
+    },
+    {
+      "arquivo": "public/images/lhsolucao_logo.png",
+      "tamanho_bytes": 204712,
+      "sha256": "f579970a9486c5695e74148826dc52e08f4e278d98e7455df72b7997a9304dc7"
+    },
+    {
+      "arquivo": "public/uploads/empresa_2/1765714023337_logo.png",
+      "tamanho_bytes": 130488,
+      "sha256": "6810ad1ff93e2e4d75a09bf2c8fdc8c1a718ff817329d9e528fa75f4c6ff9890"
+    },
+    {
+      "arquivo": "public/uploads/empresa_2/css/style.css",
+      "tamanho_bytes": 187,
+      "sha256": "c465319430765f318c1b851b3c192a6c8d69ac36c094d4184bbccbef27dc9b39"
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.json",
+      "tamanho_bytes": 7966,
+      "sha256": "cb41338ae1d410382b077e7f648940599a7afd1720a3524919744d9d3a9decc2"
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.md",
+      "tamanho_bytes": 4239,
+      "sha256": "24e18a4f04c815891140705f78fe3271da6baa9abd93d6c623b6c47fa75bb7b3"
+    },
+    {
+      "arquivo": "reports/etapa_02_manifesto_antes.json",
+      "tamanho_bytes": 9402,
+      "sha256": "a7fbc3bbcf9db611a60b82512276bc17b67ec60149f3c689310652bfcf307f46"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "tamanho_bytes": 10081,
+      "sha256": "af2b42e44ebe3c8360d83b54184ea710438a6eebb64b43529bd0c22650ac5da4"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "tamanho_bytes": 3027,
+      "sha256": "234bc38503cfbe2613670e4812a94fc05b2e0e98b7bd3011ab4587a229b50d84"
+    },
+    {
+      "arquivo": "script/apply_branding.js",
+      "tamanho_bytes": 1182,
+      "sha256": "a9e53a45b7026c309c8f1837ef3a510b07060bc05536df6bb4f869d72558a6e0"
+    },
+    {
+      "arquivo": "script/audit_sync.js",
+      "tamanho_bytes": 1745,
+      "sha256": "d636a7815117901b14913899b15f65f7ecbeb44b0290e06b48bacd570c80d41e"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "tamanho_bytes": 4545,
+      "sha256": "92c4569001e0b666a6a15e0da8ce965a72d90741dfc8662ec5be850889932893"
+    },
+    {
+      "arquivo": "script/check_auth.js",
+      "tamanho_bytes": 823,
+      "sha256": "b6484dbdd2c13330b637df46c460ef9ecb297328a35e62566c9ad6486a933c00"
+    },
+    {
+      "arquivo": "script/configurar_nginx.sh",
+      "tamanho_bytes": 3109,
+      "sha256": "0e2440e981747d0bcd6fafa5bc510d8e7a7e5cc4f8e9ff707a861135ab039d7a"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "tamanho_bytes": 6232,
+      "sha256": "da3b45fb42dae844a0e26bdd6fef8d2e76fa2ce5255dc4a368dd2aa6615b987d"
+    },
+    {
+      "arquivo": "script/fix_access.js",
+      "tamanho_bytes": 1052,
+      "sha256": "a060338e6e52e3e5064d5d4980e9b877e39bfb6d3cb66f0036e280168a44ddc1"
+    },
+    {
+      "arquivo": "script/force_activate.js",
+      "tamanho_bytes": 933,
+      "sha256": "da17fe4b45923fa0411c8e912828f702c41ff8d2ed98c196d3e71f3fa8f66838"
+    },
+    {
+      "arquivo": "script/force_stop.js",
+      "tamanho_bytes": 2572,
+      "sha256": "e53012ae4f0e182ad8a0b153ec27ee88c40833849dac4e1ad5846719528242c5"
+    },
+    {
+      "arquivo": "script/force_sync.js",
+      "tamanho_bytes": 2775,
+      "sha256": "5f33bb003efc04c1b29cf31d596a21c482474fa3e2bb9e218d31efbf3de52a49"
+    },
+    {
+      "arquivo": "script/seed_data.js",
+      "tamanho_bytes": 1491,
+      "sha256": "d2d6846b72a42e081d8c456c3a284fc369e9ca2d55cd583679cce436296927e2"
+    },
+    {
+      "arquivo": "script/setup_reset.js",
+      "tamanho_bytes": 6283,
+      "sha256": "5df121a81822864df8e6763b33f460886c0b3fb6ebccec8535e10dc606ef18fe"
+    },
+    {
+      "arquivo": "server.js",
+      "tamanho_bytes": 6374,
+      "sha256": "d928b5c7193e6b15149072b1b44d88dfdf9d77987b95c934d019a78958679a45"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "tamanho_bytes": 2932,
+      "sha256": "3d527a9e27758a79177c746e3925cdf38cc547471fb2fec58c87568e677f0358"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "tamanho_bytes": 3522,
+      "sha256": "a550e4def3f037cd4ee0e23c7e0ca049dfaf0b4850b91bf89a344b6ced4b6cc1"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "tamanho_bytes": 17052,
+      "sha256": "3602f5820136225ea7badf2b3ef2ed75ff73086e7834683f8738dd396c5ff671"
+    },
+    {
+      "arquivo": "src/middleware/auth.js",
+      "tamanho_bytes": 2522,
+      "sha256": "56c288b2a3d22e347d41b0829bf4668322757fcf4fbe92b3afe76edc4e486b66"
+    },
+    {
+      "arquivo": "src/styles.css",
+      "tamanho_bytes": 394,
+      "sha256": "4032fa8f312c286a6777ae22d0fd0faae609b25de45a19987d04649cbfe8e904"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "tamanho_bytes": 3449,
+      "sha256": "9e6dbc2dd46a4b5d4d7b241b1f4b42911db3ae8145cb77a9b4bad39d0ce84da4"
+    },
+    {
+      "arquivo": "tailwind.config.js",
+      "tamanho_bytes": 693,
+      "sha256": "64c34b37b708646daffa446c898c3824832b51ff872d8069679605948c4b6f08"
+    },
+    {
+      "arquivo": "views/admin-panel.ejs",
+      "tamanho_bytes": 53105,
+      "sha256": "a9235c4197335efd9b59446ee406098586f6bee2c2c2e9d4711429a11320295f"
+    },
+    {
+      "arquivo": "views/crm.ejs",
+      "tamanho_bytes": 49116,
+      "sha256": "3c42b6e5f800cc304bdf04d4852b2ec9917cb3d966abefb8420c197270751a46"
+    },
+    {
+      "arquivo": "views/dashboard.ejs",
+      "tamanho_bytes": 26462,
+      "sha256": "4b7d89a58b0c2eff8e59e607318a262b53806005fdbc78fab5db9509589af107"
+    },
+    {
+      "arquivo": "views/login.ejs",
+      "tamanho_bytes": 13518,
+      "sha256": "46b94c76adfdb469fc1060255559c423dbb80d51452e9cf919c493efd5053b74"
+    },
+    {
+      "arquivo": "views/super-admin.ejs",
+      "tamanho_bytes": 21218,
+      "sha256": "f3409911593558c5883e2a7d94fff0dd9ac46953f2b131b9fdc4772778c7e904"
+    }
+  ]
+}

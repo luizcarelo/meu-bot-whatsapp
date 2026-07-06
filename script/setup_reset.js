@@ -1,11 +1,27 @@
-require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
+
+// 1. FAREJADOR DE .ENV (Procura na raiz e na pasta script)
+let envPath = path.join(__dirname, '../.env'); // Tenta na raiz primeiro
+if (!fs.existsSync(envPath)) {
+    envPath = path.join(__dirname, '.env'); // Tenta na pasta script depois
+}
+require('dotenv').config({ path: envPath });
+
 const { Client } = require('pg');
 
 async function resetBanco() {
     console.log("🚨 INICIANDO RESET TOTAL DO BANCO DE DADOS (POSTGRESQL)...");
+    console.log(`🔍 [DEBUG] Lendo variáveis do arquivo: ${envPath}`);
+    console.log(`🔍 [DEBUG] Host: ${process.env.DB_HOST} | Usuário: ${process.env.DB_USER}`);
+    console.log(`🔍 [DEBUG] Senha carregada: ${process.env.DB_PASS ? "SIM (******)" : "NÃO ❌ (Vazio - Verifique o arquivo .env)"}`);
     console.log("⚠️  ATENÇÃO: TODOS OS DADOS SERÃO APAGADOS!");
 
-    // PASSO 1: Conecta no banco raiz do servidor para poder apagar/criar o nosso banco
+    if (!process.env.DB_PASS) {
+        console.error("❌ ERRO: O script não encontrou a senha no .env. Implantação abortada.");
+        return;
+    }
+
     const adminClient = new Client({
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
@@ -20,7 +36,6 @@ async function resetBanco() {
         
         console.log(`🗑️  Tentando apagar o banco ${dbName}...`);
         
-        // Desconecta possíveis usuários pendurados no banco antes de apagar
         await adminClient.query(`
             SELECT pg_terminate_backend(pg_stat_activity.pid)
             FROM pg_stat_activity
@@ -33,12 +48,12 @@ async function resetBanco() {
         await adminClient.query(`CREATE DATABASE "${dbName}"`);
         console.log("✨ Novo banco criado.");
     } catch (err) {
-        console.error("❌ Erro ao recriar banco (O banco pode ainda não existir, o que é normal na primeira vez):", err.message);
+        console.error("❌ Erro ao recriar banco:", err.message);
     } finally {
         await adminClient.end();
     }
 
-    // PASSO 2: Conecta diretamente no NOVO banco criado para estruturar as tabelas
+    // PASSO 2: Conecta diretamente no NOVO banco criado
     const dbClient = new Client({
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
@@ -51,11 +66,10 @@ async function resetBanco() {
         await dbClient.connect();
 
         const sql = `
-            -- Empresas (Tenants)
             CREATE TABLE empresas (
                 id SERIAL PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
-                plano VARCHAR(20) DEFAULT 'gratis' CHECK (plano IN ('gratis', 'pro', 'enterprise')),
+                plano VARCHAR(20) DEFAULT 'gratis',
                 limite_usuarios INT DEFAULT 3,
                 ativo BOOLEAN DEFAULT TRUE,
                 logo_url TEXT,
@@ -65,10 +79,12 @@ async function resetBanco() {
                 horario_inicio TIME DEFAULT '08:00:00',
                 horario_fim TIME DEFAULT '18:00:00',
                 dias_funcionamento JSONB,
+                whatsapp_status VARCHAR(50),
+                whatsapp_numero VARCHAR(50),
+                whatsapp_updated_at TIMESTAMP,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
-            -- Setores
             CREATE TABLE setores (
                 id SERIAL PRIMARY KEY,
                 empresa_id INT,
@@ -79,23 +95,22 @@ async function resetBanco() {
                 FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
             );
 
-            -- Usuários (Painel)
             CREATE TABLE usuarios_painel (
                 id SERIAL PRIMARY KEY,
                 empresa_id INT,
                 nome VARCHAR(100),
                 email VARCHAR(100) UNIQUE,
                 senha VARCHAR(255),
+                cargo VARCHAR(50), 
                 is_super_admin BOOLEAN DEFAULT FALSE,
                 is_admin BOOLEAN DEFAULT FALSE,
+                ativo BOOLEAN DEFAULT TRUE,
                 setor_id INT DEFAULT NULL,
                 reset_token VARCHAR(100),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE,
-                FOREIGN KEY (setor_id) REFERENCES setores(id) ON DELETE SET NULL
+                FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
             );
 
-            -- Contatos (CRM)
             CREATE TABLE contatos (
                 id SERIAL PRIMARY KEY,
                 empresa_id INT,
@@ -107,12 +122,12 @@ async function resetBanco() {
                 anotacoes TEXT,
                 foto_perfil TEXT,
                 status_atendimento VARCHAR(20) DEFAULT 'ABERTO',
+                ultima_msg TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE (empresa_id, telefone),
                 FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
             );
 
-            -- Mensagens (Histórico)
             CREATE TABLE mensagens (
                 id SERIAL PRIMARY KEY,
                 empresa_id INT,
@@ -121,19 +136,7 @@ async function resetBanco() {
                 tipo VARCHAR(20),
                 conteudo TEXT,
                 url_midia TEXT,
-                data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
-            );
-
-            -- Avaliações (NPS)
-            CREATE TABLE avaliacoes (
-                id SERIAL PRIMARY KEY,
-                empresa_id INT,
-                contato_telefone VARCHAR(100),
-                atendente_id INT,
-                nota INT,
-                comentario TEXT,
-                data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
             );
         `;
@@ -142,14 +145,11 @@ async function resetBanco() {
         console.log("🏗️  Tabelas criadas com sucesso.");
 
         console.log("👤 Criando Super Admin...");
-
-        // Insere a empresa
         await dbClient.query(`
             INSERT INTO empresas (id, nome, plano, limite_usuarios)
             VALUES (1, 'Super Admin', 'enterprise', 999)
         `);
 
-        // Insere o administrador
         await dbClient.query(`
             INSERT INTO usuarios_painel (id, empresa_id, nome, email, senha, is_super_admin, is_admin)
             VALUES (1, 1, 'Administrador', 'admin@saas.com', '123456', TRUE, TRUE)

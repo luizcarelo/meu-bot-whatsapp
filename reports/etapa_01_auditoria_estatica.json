@@ -1,0 +1,304 @@
+{
+  "gerado_em": "2026-07-06T10:58:32",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "estrutura": {
+    "total_arquivos_analisados": 49,
+    "arquivos_por_extensao": {
+      "[sem_extensao]": 3,
+      ".md": 3,
+      ".js": 27,
+      ".yml": 1,
+      ".py": 1,
+      ".ico": 1,
+      ".sh": 2,
+      ".json": 2,
+      ".png": 3,
+      ".css": 1,
+      ".ejs": 5
+    },
+    "arquivos_grandes": [],
+    "arquivos_sensiveis": [
+      {
+        "arquivo": ".env",
+        "tamanho_bytes": 1704
+      }
+    ],
+    "git_presente": true,
+    "node_modules_presente": true
+  },
+  "segredos": [
+    {
+      "arquivo": ".env",
+      "linha": 13,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "DB_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 29,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "SMTP_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 29,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "SMTP_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 35,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "SUPER_ADMIN_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 40,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "# JWT_SECRET=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 40,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "# JWT_SECRET=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 41,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "SESSION_SECRET=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 54,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "REDIS_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": ".env",
+      "linha": 54,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "REDIS_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "linha": 180,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "DB_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "linha": 193,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "SMTP_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "linha": 193,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "SMTP_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "README.md",
+      "linha": 74,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "DB_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "README.md",
+      "linha": 82,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "SUPER_ADMIN_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "README.md",
+      "linha": 89,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "SMTP_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "README.md",
+      "linha": 89,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "SMTP_PASS=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "`UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 75,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "} else if (user.senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 88,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "await db.run('UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 170,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "const novaSenha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 173,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "await db.run(\"UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 196,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "await db.run(\"UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 441,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "'UPDATE empresas SET openai_key=<REDIGIDO>"
+    },
+    {
+      "arquivo": "docker-compose.yml",
+      "linha": 25,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "- POSTGRES_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": "docker-compose.yml",
+      "linha": 40,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "- REDIS_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": "docker-compose.yml",
+      "linha": 40,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "- REDIS_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "linha": 70,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "const tableKey=<REDIGIDO>"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 44,
+      "tipo": "Possivel URI com credencial",
+      "conteudo_redigido": "<REDIGIDO>"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 1,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "const OpenAI=<REDIGIDO>"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 14,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "let openai=<REDIGIDO>"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 29,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "openai=<REDIGIDO>"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 36,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "const openai=<REDIGIDO>"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 74,
+      "tipo": "Possivel chave JWT/API",
+      "conteudo_redigido": "const openai=<REDIGIDO>"
+    },
+    {
+      "arquivo": "views/admin-panel.ejs",
+      "linha": 698,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "const senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "views/crm.ejs",
+      "linha": 249,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "input.addEventListener('keydown', (e)=<REDIGIDO>"
+    },
+    {
+      "arquivo": "views/crm.ejs",
+      "linha": 389,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "async function fazerLogin() { const empresa=<REDIGIDO>"
+    },
+    {
+      "arquivo": "views/dashboard.ejs",
+      "linha": 156,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "<template x-for=<REDIGIDO>"
+    },
+    {
+      "arquivo": "views/dashboard.ejs",
+      "linha": 244,
+      "tipo": "Possivel senha",
+      "conteudo_redigido": "<template x-for=<REDIGIDO>"
+    }
+  ],
+  "dependencias": {
+    "package_json_encontrado": true,
+    "nome": "saas-whatsapp-crm",
+    "versao": "3.7.1",
+    "engines": {
+      "node": ">=20.0.0"
+    },
+    "total_dependencias": 34,
+    "alertas": [
+      {
+        "pacote": "fluent-ffmpeg",
+        "versao_declarada": "^2.1.2",
+        "observacao": "Pacote sem suporte ativo segundo avisos comuns do npm."
+      },
+      {
+        "pacote": "multer",
+        "versao_declarada": "^1.4.5-lts.1",
+        "observacao": "Multer 1.x possui historico de vulnerabilidades corrigidas na linha 2.x."
+      }
+    ]
+  },
+  "banco_docker": {
+    "env_existe": true,
+    "docker_compose_existe": true,
+    "sinais_mysql": [
+      ".env indica configuracao compativel com MySQL"
+    ],
+    "sinais_postgres": [
+      "docker-compose.yml usa imagem ou variaveis de PostgreSQL"
+    ],
+    "inconsistencia_detectada": true
+  },
+  "controllers_suspeitos": [],
+  "js_suspeito": [
+    {
+      "arquivo": "controllers/AuthController.js",
+      "tipo": "export_singleton",
+      "detalhe": "Exporta instancia unica. Verificar consistencia com injecao de dependencias."
+    }
+  ],
+  "prioridade": {
+    "criticos": 2,
+    "altos": 2,
+    "medios": 1
+  }
+}

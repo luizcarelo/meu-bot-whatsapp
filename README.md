@@ -71,7 +71,7 @@ Crie um arquivo `.env` com as variáveis essenciais:
 # Banco
 DB_HOST=seu-host
 DB_USER=seu-usuario
-DB_PASS=sua-senha
+DB_PASS=altere_aqui
 DB_NAME=seu-banco
 
 # Servidor
@@ -79,14 +79,14 @@ PORT=4000
 NODE_ENV=production
 
 # Super Admin (senha mestra)
-SUPER_ADMIN_PASS=TroqueImediatamente
+SUPER_ADMIN_PASS=altere_aqui
 
 # SMTP (recuperação de senha)
 SMTP_HOST=smtp.seuprovedor.com
 SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=nao-responda@seu-dominio.com
-SMTP_PASS=senha-ou-senha-de-app
+SMTP_PASS=altere_aqui
 ```
 
 > **Importante:** nunca faça commit do `.env`. Utilize **variáveis de ambiente** no provedor de hospedagem.
