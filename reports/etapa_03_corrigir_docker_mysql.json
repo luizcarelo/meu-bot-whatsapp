@@ -1,0 +1,41 @@
+{
+  "gerado_em": "2026-07-06T11:10:03",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_03_20260706_111003",
+    "copiados": [
+      "docker-compose.yml",
+      ".env.example",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_03_manifesto_antes.json",
+  "docker_compose": {
+    "arquivo": "docker-compose.yml",
+    "existia_antes": true,
+    "alterado": true,
+    "sha256_depois": "7619f3c73aae27b95a63e016b76a147482913abc69b92a6c7d14e7b74f99e601"
+  },
+  "env_example": {
+    "arquivo": ".env.example",
+    "alterado": true,
+    "sha256_depois": "97246fa9d316e6a5c7dc850dd2d884d65d5c6d279aa8ee5e1ff9392eb8924420"
+  },
+  "validacao_docker": {
+    "ok": true,
+    "erros": [],
+    "avisos": []
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_03_manifesto_depois.json"
+}

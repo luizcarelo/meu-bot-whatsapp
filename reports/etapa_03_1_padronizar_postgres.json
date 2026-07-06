@@ -1,0 +1,4176 @@
+{
+  "gerado_em": "2026-07-06T20:02:04",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_03_1_20260706_200204",
+    "copiados": [
+      "docker-compose.yml",
+      ".env.example",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_03_1_manifesto_antes.json",
+  "docker_compose": {
+    "arquivo": "docker-compose.yml",
+    "existia_antes": true,
+    "alterado": false,
+    "sha256_depois": "a6519c62daba983fb0364a506a7254cf8c52101f87a6e39ac076016c28508d5b"
+  },
+  "env_example": {
+    "arquivo": ".env.example",
+    "existia_antes": true,
+    "alterado": false,
+    "sha256_depois": "fc54f96bebc626c7232dff9cee17adb1044c5837c15db0f4f32269b0ef6c1572"
+  },
+  "validacao_docker": {
+    "ok": true,
+    "erros": [],
+    "avisos": []
+  },
+  "validacao_env_example": {
+    "ok": true,
+    "erros": [],
+    "avisos": []
+  },
+  "rastros_mysql": [
+    {
+      "arquivo": "README.md",
+      "linha": 36,
+      "termos": [
+        "mysql",
+        "mariadb"
+      ],
+      "conteudo_redigido": "- **MySQL ≥ 5.7** (ou MariaDB ≥ 10.3)"
+    },
+    {
+      "arquivo": "README.md",
+      "linha": 100,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "├── config/               # Conexão MySQL"
+    },
+    {
+      "arquivo": "README.md",
+      "linha": 153,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- Rotacione senhas do **MySQL/SMTP/SUPER_ADMIN_PASS** regularmente."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 16,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "## Etapa 03 - Correcao do Docker para MySQL"
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 20,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Substituido servico db baseado em PostgreSQL por MySQL 8."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 21,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "Substituido volume pgdata por mysqldata."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 22,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "Ajustado healthcheck do banco para mysqladmin ping."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 24,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "Atualizado .env.example com MYSQL_ROOT_PASSWORD quando necessario."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 34,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Removidas configuracoes MySQL do docker-compose.yml."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 35,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "Substituido volume mysqldata por pgdata."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 38,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Gerado relatorio de rastros MySQL ainda presentes no projeto."
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 12,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "- Remover MYSQL_ROOT_PASSWORD do .env.example."
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 13,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- Gerar relatorio de rastros MySQL ainda presentes no projeto."
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 69,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "TERMOS_MYSQL = ["
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 70,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 71,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"mysql2\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 72,
+      "termos": [
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"mariadb\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 73,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 74,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 75,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 76,
+      "termos": [
+        "DB_PORT=3306",
+        "3306"
+      ],
+      "conteudo_redigido": "\"DB_PORT=3306\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 77,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 81,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql:8.0\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 82,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"mysql_native_password\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 83,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_DATABASE\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 84,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_USER\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 85,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_PASSWORD\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 86,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_ROOT_PASSWORD\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 87,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 88,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 356,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "erros.append(\"Termo MySQL ainda presente no Docker: \" + termo)"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 462,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_ROOT_PASSWORD\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 463,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_DATABASE\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 464,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_USER\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 465,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_PASSWORD\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 466,
+      "termos": [
+        "DB_PORT=3306",
+        "3306"
+      ],
+      "conteudo_redigido": "\"DB_PORT=3306\""
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 477,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "erros.append(\"Linha MySQL proibida em .env.example: \" + termo)"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 528,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "def escanear_rastros_mysql():"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 561,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "for termo in TERMOS_MYSQL:"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 617,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "total_rastros = str(len(relatorio[\"rastros_mysql\"]))"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 629,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Foram encontrados \" + total_rastros + \" rastros de MySQL para analise na proxima etapa.\""
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 640,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Removidas configuracoes MySQL do docker-compose.yml.\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 641,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"Substituido volume mysqldata por pgdata.\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 644,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Gerado relatorio de rastros MySQL ainda presentes no projeto.\""
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 668,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Revisar rastros MySQL listados no relatorio da Etapa 03.1.\","
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 734,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "linhas.append(\"## Rastros MySQL encontrados\")"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 736,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "linhas.append(\"- Total: \" + str(len(relatorio[\"rastros_mysql\"])))"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 738,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "if relatorio[\"rastros_mysql\"]:"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 740,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "for item in relatorio[\"rastros_mysql\"][:limite]:"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 751,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "if len(relatorio[\"rastros_mysql\"]) > limite:"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 754,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "linhas.append(\"- Nenhum rastro MySQL encontrado.\")"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 791,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "rastros_mysql = escanear_rastros_mysql()"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 802,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"rastros_mysql\": rastros_mysql"
+    },
+    {
+      "arquivo": "etapa_03_1_padronizar_postgres.py",
+      "linha": 828,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "print(\"Rastros MySQL encontrados: \" + str(len(rastros_mysql)))"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 48,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "(\"Possivel URI com credencial\", r\"(?i)(mysql|postgres|mongodb|redis):\\/\\/[^ \\n]+\"),"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 241,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "sinais_mysql = []"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 245,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "if \"DB_HOST\" in env_texto or \"mysql\" in env_texto.lower():"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 246,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "sinais_mysql.append(\".env indica configuracao compativel com MySQL\")"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 251,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "if \"mysql\" in compose_texto.lower():"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 252,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "sinais_mysql.append(\"docker-compose.yml menciona MySQL\")"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 254,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "inconsistente = bool(sinais_mysql and sinais_postgres)"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 259,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"sinais_mysql\": sinais_mysql,"
+    },
+    {
+      "arquivo": "etapa_01_auditoria_estatica.py",
+      "linha": 416,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "for item in bd[\"sinais_mysql\"]:"
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "linha": 9,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Corrigir inconsistencia entre MySQL no ambiente e PostgreSQL no docker-compose.yml."
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "linha": 23,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "Confirmar se a porta 3306 deve ficar exposta publicamente ou apenas internamente."
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "linha": 34,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Revisar rastros MySQL listados no relatorio da Etapa 03.1."
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "linha": 178,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "DB_HOST=mysql.lcsolucoesdigital.com.br"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "linha": 214,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- ✅ Conexão MySQL"
+    },
+    {
+      "arquivo": "DECISOES_TECNICAS.md",
+      "linha": 19,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Decidido alinhar Docker ao MySQL porque o ambiente do projeto usa variaveis DB_HOST, DB_USER, DB_PASS e DB_NAME."
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "linha": 15,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "## Etapa 03 - Docker alinhado ao MySQL"
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "linha": 19,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Foi corrigida a configuracao do docker-compose.yml para usar MySQL 8."
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "linha": 34,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Foram encontrados 133 rastros de MySQL para analise na proxima etapa."
+    },
+    {
+      "arquivo": "etapa_02_saneamento_seguro.py",
+      "linha": 463,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Corrigir inconsistencia entre MySQL no ambiente e PostgreSQL no docker-compose.yml.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 5,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Etapa 03 - Corrigir Docker para MySQL"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 10,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- Substituir docker-compose.yml com configuracao MySQL coerente com .env."
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 12,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "- Atualizar .env.example com MYSQL_ROOT_PASSWORD se necessario."
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 215,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "def conteudo_docker_compose_mysql():"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 238,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "image: mysql:8.0"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 241,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "command: --default-authentication-plugin=mysql_native_password"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 243,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "MYSQL_DATABASE: ${DB_NAME}"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 244,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "MYSQL_USER: ${DB_USER}"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 245,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "MYSQL_PASSWORD: ${DB_PASS}"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 246,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_altere_aqui}"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 249,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "- \"3306:3306\""
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 251,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "- mysqldata:/var/lib/mysql"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 253,
+      "termos": [
+        "mysql",
+        "MYSQL_",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "test: [\"CMD-SHELL\", \"mysqladmin ping -h 127.0.0.1 -u root -p$${MYSQL_ROOT_PASSWORD} || exit 1\"]"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 270,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "mysqldata:"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 280,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "novo = conteudo_docker_compose_mysql()"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 312,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql:8.0\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 313,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_DATABASE\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 314,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_USER\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 315,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_PASSWORD\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 316,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_ROOT_PASSWORD\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 317,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 318,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin ping\""
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 362,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "if \"MYSQL_ROOT_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 365,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "texto += \"\\n# MySQL Docker\\n\""
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 366,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "texto += \"MYSQL_ROOT_PASSWORD=root_altere_aqui\\n\""
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 423,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Etapa 03 - Docker alinhado ao MySQL\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 427,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Foi corrigida a configuracao do docker-compose.yml para usar MySQL 8.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 436,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Etapa 03 - Correcao do Docker para MySQL\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 440,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Substituido servico db baseado em PostgreSQL por MySQL 8.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 441,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"Substituido volume pgdata por mysqldata.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 442,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"Ajustado healthcheck do banco para mysqladmin ping.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 444,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"Atualizado .env.example com MYSQL_ROOT_PASSWORD quando necessario.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 455,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"Decidido alinhar Docker ao MySQL porque o ambiente do projeto usa variaveis DB_HOST, DB_USER, DB_PASS e DB_NAME.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 470,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"Confirmar se a porta 3306 deve ficar exposta publicamente ou apenas internamente.\","
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 483,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "linhas.append(\"# Etapa 03 - Corrigir Docker para MySQL\")"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 525,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "linhas.append(\"- reports/etapa_03_corrigir_docker_mysql.json\")"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 526,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "linhas.append(\"- reports/etapa_03_corrigir_docker_mysql.md\")"
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 574,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "json_path = REPORTS_DIR / \"etapa_03_corrigir_docker_mysql.json\""
+    },
+    {
+      "arquivo": "etapa_03_corrigir_docker_mysql.py",
+      "linha": 575,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "md_path = REPORTS_DIR / \"etapa_03_corrigir_docker_mysql.md\""
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 60,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "// PostgreSQL retorna true/false, MySQL retornava 1/0"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 10,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "* @param {Object} db - Pool de conexão MySQL"
+    },
+    {
+      "arquivo": ".github/copilot-instructions.md",
+      "linha": 22,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- Arquitetura: Express (server.js) + Socket.IO para sincronização em tempo real + Baileys (`src/managers/SessionManager.js`) para integrações WhatsApp + MySQL v"
+    },
+    {
+      "arquivo": ".github/copilot-instructions.md",
+      "linha": 66,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- [config/db.js](config/db.js) — pool MySQL e helpers"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "linha": 50,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "// Traduz consultas com \"?\" do MySQL para \"$1, $2\" do PostgreSQL"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "linha": 60,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "return [result.rows, result.fields]; // Mantém compatibilidade com o MySQL"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "linha": 11,
+      "termos": [
+        "mysql",
+        "mariadb"
+      ],
+      "conteudo_redigido": "* * @param {Object} dbConnection - Conexão Pool do MySQL/MariaDB"
+    },
+    {
+      "arquivo": "reports/etapa_03_manifesto_depois.json",
+      "linha": 112,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_depois.json",
+      "linha": 117,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_depois.json",
+      "linha": 207,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.json\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_depois.json",
+      "linha": 212,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.md\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_antes.json",
+      "linha": 122,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_antes.json",
+      "linha": 222,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.json\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_antes.json",
+      "linha": 227,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.md\","
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.json",
+      "linha": 283,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"sinais_mysql\": ["
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.json",
+      "linha": 284,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\".env indica configuracao compativel com MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_manifesto_antes.json",
+      "linha": 112,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.md",
+      "linha": 63,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- .env indica configuracao compativel com MySQL"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 40,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"rastros_mysql\": ["
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 45,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 46,
+      "termos": [
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"mariadb\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 48,
+      "termos": [
+        "mysql",
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- **MySQL ≥ 5.7** (ou MariaDB ≥ 10.3)\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 54,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 56,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"├── config/               # Conexão MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 62,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 64,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- Rotacione senhas do **MySQL/SMTP/SUPER_ADMIN_PASS** regularmente.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 70,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 72,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"## Etapa 03 - Correcao do Docker para MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 78,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 80,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Substituido servico db baseado em PostgreSQL por MySQL 8.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 86,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 87,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 89,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Substituido volume pgdata por mysqldata.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 95,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 96,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 98,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Ajustado healthcheck do banco para mysqladmin ping.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 104,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 105,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 107,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Atualizado .env.example com MYSQL_ROOT_PASSWORD quando necessario.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 113,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 114,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 116,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- Remover MYSQL_ROOT_PASSWORD do .env.example.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 122,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 124,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- Gerar relatorio de rastros MySQL ainda presentes no projeto.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 130,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 132,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"TERMOS_MYSQL = [\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 138,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 140,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysql\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 146,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 147,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"mysql2\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 149,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysql2\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 155,
+      "termos": [
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"mariadb\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 157,
+      "termos": [
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mariadb\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 163,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 164,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 166,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 172,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 173,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 175,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysqldata\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 181,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 182,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 184,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysqladmin\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 190,
+      "termos": [
+        "DB_PORT=3306",
+        "3306"
+      ],
+      "conteudo_redigido": "\"DB_PORT=3306\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 191,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 193,
+      "termos": [
+        "DB_PORT=3306",
+        "3306"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"DB_PORT=3306\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 199,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 201,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"3306\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 207,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 209,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysql:8.0\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 215,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 216,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 218,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysql_native_password\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 224,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 225,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 227,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_DATABASE\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 233,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 234,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 236,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_USER\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 242,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 243,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 245,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_PASSWORD\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 251,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 252,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 254,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_ROOT_PASSWORD\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 260,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 261,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 263,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysqldata\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 269,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 270,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 272,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysqladmin\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 278,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 280,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"erros.append(\\\"Termo MySQL ainda presente no Docker: \\\" + termo)\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 286,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 287,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 289,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_ROOT_PASSWORD\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 295,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 296,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 298,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_DATABASE\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 304,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 305,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 307,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_USER\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 313,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 314,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 316,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_PASSWORD\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 322,
+      "termos": [
+        "DB_PORT=3306",
+        "3306"
+      ],
+      "conteudo_redigido": "\"DB_PORT=3306\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 323,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 325,
+      "termos": [
+        "DB_PORT=3306",
+        "3306"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"DB_PORT=3306\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 331,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 333,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"erros.append(\\\"Linha MySQL proibida em .env.example: \\\" + termo)\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 339,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 341,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"def escanear_rastros_mysql():\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 347,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 349,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"for termo in TERMOS_MYSQL:\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 355,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 357,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"total_rastros = str(len(relatorio[\\\"rastros_mysql\\\"]))\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 363,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 365,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Foram encontrados \\\" + total_rastros + \\\" rastros de MySQL para analise na proxima etapa.\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 371,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 373,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Removidas configuracoes MySQL do docker-compose.yml.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 379,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 380,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 382,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Substituido volume mysqldata por pgdata.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 388,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 390,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Gerado relatorio de rastros MySQL ainda presentes no projeto.\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 396,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 398,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Revisar rastros MySQL listados no relatorio da Etapa 03.1.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 404,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 406,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"linhas.append(\\\"## Rastros MySQL encontrados\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 412,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 414,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"linhas.append(\\\"- Total: \\\" + str(len(relatorio[\\\"rastros_mysql\\\"])))\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 420,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 422,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"if relatorio[\\\"rastros_mysql\\\"]:\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 428,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 430,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"for item in relatorio[\\\"rastros_mysql\\\"][:limite]:\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 436,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 438,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"if len(relatorio[\\\"rastros_mysql\\\"]) > limite:\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 444,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 446,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"linhas.append(\\\"- Nenhum rastro MySQL encontrado.\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 452,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 454,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"rastros_mysql = escanear_rastros_mysql()\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 460,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 462,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"rastros_mysql\\\": rastros_mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 468,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 470,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"print(\\\"Rastros MySQL encontrados: \\\" + str(len(rastros_mysql)))\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 476,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 478,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"(\\\"Possivel URI com credencial\\\", r\\\"(?i)(mysql|postgres|mongodb|redis):\\\\/\\\\/[^ \\\\n]+\\\"),\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 484,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 486,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"sinais_mysql = []\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 492,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 494,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"if \\\"DB_HOST\\\" in env_texto or \\\"mysql\\\" in env_texto.lower():\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 500,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 502,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"sinais_mysql.append(\\\".env indica configuracao compativel com MySQL\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 508,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 510,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"if \\\"mysql\\\" in compose_texto.lower():\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 516,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 518,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"sinais_mysql.append(\\\"docker-compose.yml menciona MySQL\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 524,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 526,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"inconsistente = bool(sinais_mysql and sinais_postgres)\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 532,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 534,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"sinais_mysql\\\": sinais_mysql,\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 540,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 542,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"for item in bd[\\\"sinais_mysql\\\"]:\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 548,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 550,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Corrigir inconsistencia entre MySQL no ambiente e PostgreSQL no docker-compose.yml.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 556,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 558,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Confirmar se a porta 3306 deve ficar exposta publicamente ou apenas internamente.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 564,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 566,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"DB_HOST=mysql.lcsolucoesdigital.com.br\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 572,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 574,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- ✅ Conexão MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 580,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 582,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Decidido alinhar Docker ao MySQL porque o ambiente do projeto usa variaveis DB_HOST, DB_USER, DB_PASS e DB_NAME.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 588,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 590,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"## Etapa 03 - Docker alinhado ao MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 596,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 598,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Foi corrigida a configuracao do docker-compose.yml para usar MySQL 8.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 604,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 606,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Corrigir inconsistencia entre MySQL no ambiente e PostgreSQL no docker-compose.yml.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 609,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 612,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 614,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"Etapa 03 - Corrigir Docker para MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 617,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 620,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 622,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- Substituir docker-compose.yml com configuracao MySQL coerente com .env.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 625,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 628,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 629,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 631,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- Atualizar .env.example com MYSQL_ROOT_PASSWORD se necessario.\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 634,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 637,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 639,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"def conteudo_docker_compose_mysql():\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 642,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 645,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 647,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"image: mysql:8.0\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 650,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 653,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 654,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 656,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"command: --default-authentication-plugin=mysql_native_password\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 659,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 662,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 663,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 665,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"MYSQL_DATABASE: ${DB_NAME}\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 668,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 671,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 672,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 674,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"MYSQL_USER: ${DB_USER}\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 677,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 680,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 681,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 683,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"MYSQL_PASSWORD: ${DB_PASS}\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 686,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 689,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 690,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 692,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_altere_aqui}\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 695,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 698,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 700,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- \\\"3306:3306\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 703,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 706,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 707,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 709,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- mysqldata:/var/lib/mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 712,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 715,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 716,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 717,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 719,
+      "termos": [
+        "mysql",
+        "MYSQL_",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"test: [\\\"CMD-SHELL\\\", \\\"mysqladmin ping -h 127.0.0.1 -u root -p$${MYSQL_ROOT_PASSWORD} || exit 1\\\"]\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 722,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 725,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 726,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 728,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"mysqldata:\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 731,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 734,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 736,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"novo = conteudo_docker_compose_mysql()\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 739,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 742,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 744,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysql:8.0\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 747,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 750,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 751,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 753,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_DATABASE\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 756,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 759,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 760,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 762,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_USER\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 765,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 768,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 769,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 771,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_PASSWORD\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 774,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 777,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 778,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 780,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"MYSQL_ROOT_PASSWORD\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 783,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 786,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 787,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 789,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysqldata\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 792,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 795,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 796,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 798,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"mysqladmin ping\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 801,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 804,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 805,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 807,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"if \\\"MYSQL_ROOT_PASSWORD=<REDIGIDO>"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 810,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 813,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 815,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"texto += \\\"\\\\n# MySQL Docker\\\\n\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 818,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 821,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 822,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 824,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"texto += \\\"MYSQL_ROOT_PASSWORD=root_altere_aqui\\\\n\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 827,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 830,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 832,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Etapa 03 - Docker alinhado ao MySQL\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 835,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 838,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 840,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Foi corrigida a configuracao do docker-compose.yml para usar MySQL 8.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 843,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 846,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 848,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Etapa 03 - Correcao do Docker para MySQL\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 851,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 854,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 856,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Substituido servico db baseado em PostgreSQL por MySQL 8.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 859,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 862,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 863,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"mysqldata\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 865,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Substituido volume pgdata por mysqldata.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 868,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 871,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 872,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"mysqladmin\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 874,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Ajustado healthcheck do banco para mysqladmin ping.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 877,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 880,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 881,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"MYSQL_\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 883,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Atualizado .env.example com MYSQL_ROOT_PASSWORD quando necessario.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 886,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 889,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 891,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Decidido alinhar Docker ao MySQL porque o ambiente do projeto usa variaveis DB_HOST, DB_USER, DB_PASS e DB_NAME.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 894,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 897,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"3306\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 899,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"Confirmar se a porta 3306 deve ficar exposta publicamente ou apenas internamente.\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 902,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 905,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 907,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"linhas.append(\\\"# Etapa 03 - Corrigir Docker para MySQL\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 910,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 913,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 915,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"linhas.append(\\\"- reports/etapa_03_corrigir_docker_mysql.json\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 918,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 921,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 923,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"linhas.append(\\\"- reports/etapa_03_corrigir_docker_mysql.md\\\")\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 926,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 929,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 931,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"json_path = REPORTS_DIR / \\\"etapa_03_corrigir_docker_mysql.json\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 934,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"etapa_03_corrigir_docker_mysql.py\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 937,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 939,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"md_path = REPORTS_DIR / \\\"etapa_03_corrigir_docker_mysql.md\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 945,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 947,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"// PostgreSQL retorna true/false, MySQL retornava 1/0\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 953,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 955,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"* @param {Object} db - Pool de conexão MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 961,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 963,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- Arquitetura: Express (server.js) + Socket.IO para sincronização em tempo real + Baileys (`src/managers/SessionManager.js`) para integraç"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 969,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 971,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- [config/db.js](config/db.js) — pool MySQL e helpers\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 977,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 979,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"// Traduz consultas com \\\"?\\\" do MySQL para \\\"$1, $2\\\" do PostgreSQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 985,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 987,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"return [result.rows, result.fields]; // Mantém compatibilidade com o MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 993,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 994,
+      "termos": [
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"mariadb\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 996,
+      "termos": [
+        "mysql",
+        "mariadb"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"* * @param {Object} dbConnection - Conexão Pool do MySQL/MariaDB\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1002,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1004,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"arquivo\\\": \\\"etapa_03_corrigir_docker_mysql.py\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1010,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1012,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"arquivo\\\": \\\"etapa_03_corrigir_docker_mysql.py\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1018,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1020,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"arquivo\\\": \\\"reports/etapa_03_corrigir_docker_mysql.json\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1026,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1028,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"arquivo\\\": \\\"reports/etapa_03_corrigir_docker_mysql.md\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1034,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1036,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"sinais_mysql\\\": [\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1042,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1044,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\".env indica configuracao compativel com MySQL\\\"\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1050,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1052,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"\\\"arquivo\\\": \\\"etapa_03_corrigir_docker_mysql.py\\\",\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1058,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1060,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- .env indica configuracao compativel com MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1063,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.md\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1066,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1068,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"# Etapa 03 - Corrigir Docker para MySQL\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1071,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.md\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1074,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1076,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- reports/etapa_03_corrigir_docker_mysql.json\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1079,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"arquivo\": \"reports/etapa_03_corrigir_docker_mysql.md\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1082,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1084,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"- reports/etapa_03_corrigir_docker_mysql.md\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1090,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1092,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"// Objetivo: Exportar DADOS (DML) de todas as tabelas do banco MySQL configurado no .env\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1098,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1099,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"mysql2\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1101,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"//   - mysql2/promise instalado\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1107,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1108,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"mysql2\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1110,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"const mysql = require('mysql2/promise');\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1116,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1118,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"conn = await mysql.createConnection({\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1124,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1126,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"console.log('   mysql -u USUARIO -p BANCO < backups/' + fileName);\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1132,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\","
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1133,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"mysql2\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1135,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"const mysql = require('mysql2/promise');\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1141,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1143,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"connection = await mysql.createConnection({\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1149,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"mysql\""
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "linha": 1151,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "\"conteudo_redigido\": \"console.log(`   mysql -u ${process.env.DB_USER} -p ${process.env.DB_NAME} < ${filePath}\\\\n`);\""
+    },
+    {
+      "arquivo": "reports/etapa_03_corrigir_docker_mysql.md",
+      "linha": 1,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "# Etapa 03 - Corrigir Docker para MySQL"
+    },
+    {
+      "arquivo": "reports/etapa_03_corrigir_docker_mysql.md",
+      "linha": 30,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- reports/etapa_03_corrigir_docker_mysql.json"
+    },
+    {
+      "arquivo": "reports/etapa_03_corrigir_docker_mysql.md",
+      "linha": 31,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "- reports/etapa_03_corrigir_docker_mysql.md"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "linha": 3,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "// Objetivo: Exportar DADOS (DML) de todas as tabelas do banco MySQL configurado no .env"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "linha": 12,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "//   - mysql2/promise instalado"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "linha": 15,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "const mysql = require('mysql2/promise');"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "linha": 42,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "conn = await mysql.createConnection({"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "linha": 142,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "console.log('   mysql -u USUARIO -p BANCO < backups/' + fileName);"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "linha": 6,
+      "termos": [
+        "mysql",
+        "mysql2"
+      ],
+      "conteudo_redigido": "const mysql = require('mysql2/promise');"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "linha": 19,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "connection = await mysql.createConnection({"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "linha": 109,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "console.log(`   mysql -u ${process.env.DB_USER} -p ${process.env.DB_NAME} < ${filePath}\\n`);"
+    }
+  ],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_03_1_manifesto_depois.json"
+}
