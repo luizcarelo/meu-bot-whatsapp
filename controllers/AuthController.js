@@ -57,7 +57,7 @@ class AuthController {
             const user = users[0];
 
            // 2. Validações de Status (Adaptado para aceitar booleano ou integer)
-            // PostgreSQL retorna true/false, MySQL retornava 1/0
+            // PostgreSQL retorna valores booleanos nativos
             if (user.empresa_ativa !== true && user.empresa_ativa !== 1) {
                 return res.status(403).json({ success: false, message: 'Empresa bloqueada. Contate o suporte.' });
             }

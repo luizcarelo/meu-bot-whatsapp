@@ -273,9 +273,9 @@ class WhatsAppController {
                 [empresaId, jid, texto]
             );
 
-            // 2. Garante que o contato existe (Upsert simplificado via INSERT IGNORE)
+            // 2. Garante que o contato existe (Upsert PostgreSQL via ON CONFLICT)
             await this.db.run(
-                `INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,
+                `INSERT INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?) ON CONFLICT (empresa_id, telefone) DO NOTHING`,
                 [empresaId, jid, jid.split('@')[0]]
             );
 

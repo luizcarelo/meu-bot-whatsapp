@@ -1,0 +1,60 @@
+{
+  "gerado_em": "2026-07-06T20:26:42",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_07_1_20260706_202642",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_07_1_manifesto_antes.json",
+  "probe_runtime": {
+    "ok": false,
+    "returncode": 0,
+    "stdout": "{\"ok\":false,\"etapa\":\"runtime_constraint_check\",\"env_encontrado\":true,\"db_port_configurado\":true,\"db_name_configurado\":true,\"db_user_configurado\":true,\"hosts_tentados\":[{\"host\":\"db\",\"conectado\":false,\"codigo\":\"EAI_AGAIN\",\"erro\":\"getaddrinfo EAI_AGAIN db\"},{\"host\":\"127.0.0.1\",\"conectado\":false,\"codigo\":\"ECONNREFUSED\",\"erro\":\"connect ECONNREFUSED 127.0.0.1:5432\"},{\"host\":\"localhost\",\"conectado\":false,\"codigo\":\"ECONNREFUSED\",\"erro\":\"connect ECONNREFUSED 127.0.0.1:5432\"}],\"conectado\":false,\"host_usado\":null,\"checks\":null}",
+    "stderr": "",
+    "json": {
+      "ok": false,
+      "etapa": "runtime_constraint_check",
+      "env_encontrado": true,
+      "db_port_configurado": true,
+      "db_name_configurado": true,
+      "db_user_configurado": true,
+      "hosts_tentados": [
+        {
+          "host": "db",
+          "conectado": false,
+          "codigo": "EAI_AGAIN",
+          "erro": "getaddrinfo EAI_AGAIN db"
+        },
+        {
+          "host": "127.0.0.1",
+          "conectado": false,
+          "codigo": "ECONNREFUSED",
+          "erro": "connect ECONNREFUSED 127.0.0.1:5432"
+        },
+        {
+          "host": "localhost",
+          "conectado": false,
+          "codigo": "ECONNREFUSED",
+          "erro": "connect ECONNREFUSED 127.0.0.1:5432"
+        }
+      ],
+      "conectado": false,
+      "host_usado": null,
+      "checks": null
+    }
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_07_1_manifesto_depois.json"
+}

@@ -8,7 +8,7 @@ const moment = require('moment');
 
 /**
  * Verifica se a empresa está dentro do horário de atendimento.
- * * @param {Object} dbConnection - Conexão Pool do MySQL/MariaDB
+ * * @param {Object} dbConnection - Conexão Pool do PostgreSQL
  * @param {number} empresaId - ID da empresa no banco de dados
  * @returns {Promise<Object>} - Retorna objeto { dentroDoHorario: boolean, mensagem: string | null }
  */

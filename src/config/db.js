@@ -47,7 +47,7 @@ class Database {
         }
     }
 
-    // Traduz consultas com "?" do MySQL para "$1, $2" do PostgreSQL
+    // Normaliza parametros posicionais para PostgreSQL quando necessario
     convertQueryToPg(sql) {
         let index = 1;
         return sql.replace(/\?/g, () => `$${index++}`);
@@ -57,7 +57,7 @@ class Database {
         try {
             const pgSql = this.convertQueryToPg(sql);
             const result = await this.pool.query(pgSql, params);
-            return [result.rows, result.fields]; // Mantém compatibilidade com o MySQL
+            return [result.rows, result.fields]; // Mantem compatibilidade com chamadas legadas do projeto
         } catch (error) {
             console.error(`[DB Execute Error] ${error.message}\nSQL: ${sql}`);
             throw error;

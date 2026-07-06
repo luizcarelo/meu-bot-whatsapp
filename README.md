@@ -1,40 +1,40 @@
 # 🚀 Meu Bot WhatsApp – SaaS CRM
-Sistema de **CRM multi-empresa** com integração ao **WhatsApp Web via Baileys**, atendimento em tempo real (Socket.IO), painel administrativo, avaliações, mensagens rápidas, broadcast e integração opcional com **IA (OpenAI)**.
+Sistema de CRM multi-empresa com integração ao WhatsApp Web via Baileys, atendimento em tempo real (Socket.IO), painel administrativo, avaliações, mensagens rápidas, broadcast e integração opcional com IA (OpenAI).
 
 ![Node](https://img.shields.io/badge/node-%3E%3D20.0.0-green.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Status](https://img.shields.io/badge/status-ativo-blue.svg)
 
 > Repositório: [https://github.com/luizcarelo/meu-bot-whatsapp.git](https://github.com/luizcarelo/meu-bot-whatsapp.git)  
-> Autor: **LC Soluções Digital** · Site: [https://lcsolucoesdigital.com.br](https://lcsolucoesdigital.com.br) · Email: <comercial@lcsolucoesdigital.com.br>
+> Autor: LC Soluções Digital · Site: [https://lcsolucoesdigital.com.br](https://lcsolucoesdigital.com.br) · Email: <comercial@lcsolucoesdigital.com.br>
 
 ---
 
 ## ✨ Recursos
 
 ### Core
-- ✅ **Multi-empresa (SaaS)**
-- ✅ **WhatsApp Web (Baileys)** – sem API oficial
-- ✅ **CRM de atendimento** – filas, assumir, transferir e encerrar
-- ✅ **Mensagens Rápidas** (atalhos)
-- ✅ **Broadcast** (envio em massa)
-- ✅ **Sistema de Avaliação** (NPS simplificado)
-- ✅ **Uploads de mídia** (imagem, áudio, vídeo, docs)
+- ✅ Multi-empresa (SaaS)
+- ✅ WhatsApp Web (Baileys) – sem API oficial
+- ✅ CRM de atendimento – filas, assumir, transferir e encerrar
+- ✅ Mensagens Rápidas (atalhos)
+- ✅ Broadcast (envio em massa)
+- ✅ Sistema de Avaliação (NPS simplificado)
+- ✅ Uploads de mídia (imagem, áudio, vídeo, docs)
 
 ### Automação & IA
 - ✅ Mensagem de ausência fora do horário
-- ✅ Menu interativo (botões/lista) *(opcional)*
-- ✅ Chatbot com **OpenAI** (configurável por empresa)
+- ✅ Menu interativo (botões/lista) (opcional)
+- ✅ Chatbot com OpenAI (configurável por empresa)
 
 ### Painéis
-- ✅ **Super Admin** – gestão de clientes
-- ✅ **Admin da Empresa** – configurações, equipe e setores
-- ✅ **Dashboard do Cliente** – métricas de uso
+- ✅ Super Admin – gestão de clientes
+- ✅ Admin da Empresa – configurações, equipe e setores
+- ✅ Dashboard do Cliente – métricas de uso
 
 ---
 
 ## 🔧 Requisitos
-- **Node.js ≥ 20.0.0**
-- **MySQL ≥ 5.7** (ou MariaDB ≥ 10.3)
-- **NPM ≥ 9**
+- Node.js ≥ 20.0.0
+- PostgreSQL 15 ou superior (ou PostgreSQL 15 ou superior)
+- NPM ≥ 9
 
 > Servidor recomendado: 2 vCPU · 4GB RAM · 20GB SSD · internet estável.
 
@@ -89,7 +89,7 @@ SMTP_USER=nao-responda@seu-dominio.com
 SMTP_PASS=altere_aqui
 ```
 
-> **Importante:** nunca faça commit do `.env`. Utilize **variáveis de ambiente** no provedor de hospedagem.
+> Importante: nunca faça commit do `.env`. Utilize variáveis de ambiente no provedor de hospedagem.
 
 ---
 
@@ -97,7 +97,7 @@ SMTP_PASS=altere_aqui
 
 ```
 meu-bot-whatsapp/
-├── config/               # Conexão MySQL
+├── config/               # Conexao PostgreSQL
 ├── controllers/          # Lógica de negócio (Auth, Admin, CRM, WhatsApp)
 ├── routes/               # Rotas API e views
 ├── src/
@@ -136,12 +136,12 @@ Headers: { "x-empresa-id": 1, "x-user-id": 1 }
 Body: { "telefone": "5511999999999@s.whatsapp.net", "caption": "Veja" }
 ```
 
-> A documentação completa pode ser expandida com **Swagger** ou Postman.
+> A documentação completa pode ser expandida com Swagger ou Postman.
 
 ---
 
 ## 🛡️ Segurança (boas práticas)
-- Use **HTTPS** em produção e habilite `helmet`:
+- Use HTTPS em produção e habilite `helmet`:
 ```bash
 npm i helmet
 ```
@@ -149,41 +149,41 @@ npm i helmet
 const helmet = require('helmet');
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 ```
-- Configure **CORS** apenas para seus domínios.
-- Rotacione senhas do **MySQL/SMTP/SUPER_ADMIN_PASS** regularmente.
-- Evite picos de envio (use **rate limiting** e intervalos aleatórios).
+- Configure CORS apenas para seus domínios.
+- Rotacione senhas do PostgreSQL/SMTP/SUPER_ADMIN_PASS regularmente.
+- Evite picos de envio (use rate limiting e intervalos aleatórios).
 
 ---
 
 ## 🧪 Qualidade & Operação
-- **Logs estruturados** com Pino
-- **Jobs de manutenção**: inatividade/avaliação, lembretes (tarefas)
-- **Monitoramento**: Prometheus/Grafana *(opcional)*
-- **CI/CD**: GitHub Actions *(opcional)*
+- Logs estruturados com Pino
+- Jobs de manutenção: inatividade/avaliação, lembretes (tarefas)
+- Monitoramento: Prometheus/Grafana (opcional)
+- CI/CD: GitHub Actions (opcional)
 
 ---
 
 ## 🤝 Contribuição
 
-1. Faça um **fork** do repositório.  
+1. Faça um fork do repositório.  
 2. Crie uma branch: `git checkout -b feature/minha-feature`.  
 3. Commit: `git commit -m "feat: descrição da mudança"`.  
 4. Push: `git push origin feature/minha-feature`.  
-5. Abra um **Pull Request**.
+5. Abra um Pull Request.
 
-> Padrão de commits sugerido: **Conventional Commits**.
+> Padrão de commits sugerido: Conventional Commits.
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença **MIT**. Sinta-se livre para usar, modificar e distribuir.
+Este projeto está sob a licença MIT. Sinta-se livre para usar, modificar e distribuir.
 
 ---
 
 ## 👨‍💻 Contato
 
-- Autor: **LC Soluções Digital**
+- Autor: LC Soluções Digital
 - Site: [https://lcsolucoesdigital.com.br](https://lcsolucoesdigital.com.br)
 - Email: <comercial@lcsolucoesdigital.com.br>
 

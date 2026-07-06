@@ -1,0 +1,59 @@
+{
+  "gerado_em": "2026-07-06T20:11:45",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_04_1_20260706_201145",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_04_1_manifesto_antes.json",
+  "limpeza_docs": [
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "existe": true,
+      "alterado": true,
+      "linhas_removidas": 1,
+      "linhas_alteradas": 0,
+      "sha256_depois": "d462ff07ff12205e133c572e3f84b8ebf478b885a602cbc709721260428a3c58"
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "existe": true,
+      "alterado": true,
+      "linhas_removidas": 0,
+      "linhas_alteradas": 0,
+      "sha256_depois": "730b2a68088a9786c66ec16debdb8b246fc76c3a1756b190c3235136bffceda9"
+    },
+    {
+      "arquivo": "DECISOES_TECNICAS.md",
+      "existe": true,
+      "alterado": true,
+      "linhas_removidas": 0,
+      "linhas_alteradas": 0,
+      "sha256_depois": "702d27f7baed9f1d420d92a69d11d22ee6b7563b75d68a9ce0dbd61749fe504c"
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "existe": true,
+      "alterado": true,
+      "linhas_removidas": 1,
+      "linhas_alteradas": 0,
+      "sha256_depois": "4674d3523b1b9b3e993f6cf74a4055df52a82e6e70c8f6bae7d6e8a5a72d3db0"
+    }
+  ],
+  "rastros_restantes": [],
+  "rastros_apos_limpeza_antes_documentacao": [],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_04_1_manifesto_depois.json"
+}

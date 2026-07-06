@@ -1,0 +1,129 @@
+{
+  "gerado_em": "2026-07-06T20:21:11",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_06_2_20260706_202111",
+    "copiados": [
+      "src/managers/SessionManager.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_06_2_manifesto_antes.json",
+  "correcao": {
+    "arquivo": "src/managers/SessionManager.js",
+    "existe": true,
+    "alterado": true,
+    "ocorrencias_antes": {
+      "IFNULL": 1,
+      "VALUES(foto_perfil)": 1
+    },
+    "ocorrencias_depois": {
+      "IFNULL": 0,
+      "VALUES(foto_perfil)": 0
+    },
+    "substituicoes": [
+      {
+        "de": "foto_perfil = IFNULL(VALUES(foto_perfil), foto_perfil),",
+        "para": "foto_perfil = COALESCE(EXCLUDED.foto_perfil, contatos.foto_perfil),",
+        "quantidade": 1
+      }
+    ],
+    "contexto_antes": [
+      {
+        "linha": 389,
+        "conteudo": "INSERT INTO contatos (empresa_id, telefone, nome, foto_perfil, status_atendimento, created_at, ultima_msg)"
+      },
+      {
+        "linha": 390,
+        "conteudo": "VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())"
+      },
+      {
+        "linha": 391,
+        "conteudo": "ON CONFLICT (empresa_id, telefone) DO UPDATE SET"
+      },
+      {
+        "linha": 392,
+        "conteudo": "nome = EXCLUDED.nome,"
+      },
+      {
+        "linha": 393,
+        "conteudo": "foto_perfil = IFNULL(VALUES(foto_perfil), foto_perfil),"
+      },
+      {
+        "linha": 394,
+        "conteudo": "ultima_msg = NOW()"
+      },
+      {
+        "linha": 395,
+        "conteudo": "`;"
+      },
+      {
+        "linha": 396,
+        "conteudo": "await this.db.execute(sql, [empresaId, remoteJid, pushName, fotoPerfil]);"
+      },
+      {
+        "linha": 397,
+        "conteudo": "}"
+      }
+    ],
+    "contexto_depois": [
+      {
+        "linha": 389,
+        "conteudo": "INSERT INTO contatos (empresa_id, telefone, nome, foto_perfil, status_atendimento, created_at, ultima_msg)"
+      },
+      {
+        "linha": 390,
+        "conteudo": "VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())"
+      },
+      {
+        "linha": 391,
+        "conteudo": "ON CONFLICT (empresa_id, telefone) DO UPDATE SET"
+      },
+      {
+        "linha": 392,
+        "conteudo": "nome = EXCLUDED.nome,"
+      },
+      {
+        "linha": 393,
+        "conteudo": "foto_perfil = COALESCE(EXCLUDED.foto_perfil, contatos.foto_perfil),"
+      },
+      {
+        "linha": 394,
+        "conteudo": "ultima_msg = NOW()"
+      },
+      {
+        "linha": 395,
+        "conteudo": "`;"
+      },
+      {
+        "linha": 396,
+        "conteudo": "await this.db.execute(sql, [empresaId, remoteJid, pushName, fotoPerfil]);"
+      },
+      {
+        "linha": 397,
+        "conteudo": "}"
+      }
+    ],
+    "sha256_depois": "7b8a461533b471218630a8900075d9add1c3121686d24df157f3b0832921bcea"
+  },
+  "node_check": {
+    "arquivo": "src/managers/SessionManager.js",
+    "existe": true,
+    "ok": true,
+    "stdout": "",
+    "stderr": ""
+  },
+  "grep_proibidos": [],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_06_2_manifesto_depois.json"
+}

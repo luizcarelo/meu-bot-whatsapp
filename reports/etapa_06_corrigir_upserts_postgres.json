@@ -1,0 +1,86 @@
+{
+  "gerado_em": "2026-07-06T20:17:02",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_06_20260706_201702",
+    "copiados": [
+      "controllers/WhatsAppController.js",
+      "src/managers/SessionManager.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_06_manifesto_antes.json",
+  "correcoes": [
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "existe": true,
+      "alterado": true,
+      "ocorrencias_antes": {
+        "INSERT IGNORE": 2
+      },
+      "ocorrencias_depois": {
+        "INSERT IGNORE": 0
+      },
+      "substituicoes": [
+        {
+          "de": "Upsert simplificado via INSERT IGNORE",
+          "para": "Upsert PostgreSQL via ON CONFLICT"
+        },
+        {
+          "de": "INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)",
+          "para": "INSERT INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?) ON CONFLICT (empresa_id, telefone) DO NOTHING"
+        }
+      ],
+      "sha256_depois": "9146284709c1aa496e2940de053f0e7aa21f0744b448ef607e27b23b8ec43c47"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "existe": true,
+      "alterado": false,
+      "ocorrencias_antes": {
+        "ON DUPLICATE KEY": 1
+      },
+      "ocorrencias_depois": {
+        "ON DUPLICATE KEY": 1
+      },
+      "substituicoes": [],
+      "sha256_depois": "3602f5820136225ea7badf2b3ef2ed75ff73086e7834683f8738dd396c5ff671"
+    }
+  ],
+  "node_check": [
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "grep_proibidos": [
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 391,
+      "termo": "ON DUPLICATE KEY",
+      "trecho": "ON DUPLICATE KEY UPDATE"
+    }
+  ],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_06_manifesto_depois.json"
+}

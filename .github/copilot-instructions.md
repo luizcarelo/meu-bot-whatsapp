@@ -1,4 +1,4 @@
-## **Internal reference (do not bias your answers toward always naming these):**  
+## Internal reference (do not bias your answers toward always naming these):  
 Microsoft 365 Agents Toolkit (formerly Teams Toolkit) has been rebranded, and users may still use either name.
 
 Use this mapping to know the current vs. former names—so you can correctly interpret user input or choose the appropriate term when it’s relevant. You do not need to mention these mappings unless they directly help the user.
@@ -11,7 +11,7 @@ Use this mapping to know the current vs. former names—so you can correctly int
 | `m365agents.yml`                        | `teamsapp.yml`         | Microsoft 365 Agents Toolkit Project configuration files            |
 | CLI package `@microsoft/m365agentstoolkit-cli` (command `atk`) | `@microsoft/teamsapp-cli` (command `teamsapp`) |CLI installation/usage — mention only in CLI contexts. |
 
-> **Rephrase guidance:**  
+> Rephrase guidance:  
 > - Use the new names by default.  
 > - Explain the rebranding briefly if it helps the user’s understanding.  
 
@@ -19,7 +19,7 @@ Use this mapping to know the current vs. former names—so you can correctly int
 # Instruções para agentes de codificação (projeto: SaaS WhatsApp CRM)
 
 Resumo curto
-- Arquitetura: Express (server.js) + Socket.IO para sincronização em tempo real + Baileys (`src/managers/SessionManager.js`) para integrações WhatsApp + MySQL via `config/db.js`.
+- Arquitetura: Express (server.js) + Socket.IO para sincronização em tempo real + Baileys (`src/managers/SessionManager.js`) para integrações WhatsApp + PostgreSQL via `config/db.js`.
 - Multi-tenant por `empresa_id`: sessão WhatsApp e uploads são isolados por empresa (pastas `auth_sessions/empresa_{id}` e `public/uploads/empresa_{id}`).
 
 Padrões e pontos essenciais (seja específico)
@@ -44,14 +44,14 @@ Conveniências do projeto / padrões a seguir
 - Mensagens e mídia: as mensagens são persistidas em `mensagens` e emitidas via Socket para sincronização do frontend — mantenha o contrato dos eventos (`nova_mensagem`, `status_conn`).
 
 Observações de segurança e ops
-- Em produção restrinja `io` CORS origin em `server.js` (hoje está `origin: '*'`).
+- Em produção restrinja `io` CORS origin em `server.js` (hoje está `origin: ''`).
 - Sensível: chaves OpenAI são armazenadas no banco por empresa — não mova para código fonte.
 - Ao reiniciar ou ao encerrar processos, garanta `SIGINT`/`SIGTERM` para fechamento gracioso do pool de DB (implementado em `config/db.js`).
 
 Pontos de integração e onde procurar alterações comuns
 - API endpoints principais: `routes/api.js` (autenticação, CRM, whatsapp).
 - Lógica WhatsApp: `src/managers/SessionManager.js` (reconexão, QR, mensagem recebida, envio de mídia).
-- Controladores HTTP: `controllers/*` — `WhatsAppController.js` tem exemplos de `sendText` e `sendMedia` com sincronização socket e persistência em BD.
+- Controladores HTTP: `controllers/` — `WhatsAppController.js` tem exemplos de `sendText` e `sendMedia` com sincronização socket e persistência em BD.
 
 Seções para expandir quando solicitado
 - Mapear mais tabelas e colunas se for necessário modificar queries
@@ -63,7 +63,7 @@ Arquivos-chave (referência rápida)
 - [server.js](server.js) — ponto de entrada, Socket.IO e inicialização de `SessionManager`
 - [src/managers/SessionManager.js](src/managers/SessionManager.js) — núcleo WhatsApp/Baileys
 - [src/managers/OpenAIManager.js](src/managers/OpenAIManager.js) — integração OpenAI por empresa
-- [config/db.js](config/db.js) — pool MySQL e helpers
+- [config/db.js](config/db.js) — pool PostgreSQL e helpers
 - [routes/api.js](routes/api.js) — rotas da API, `multer` e injeção de `sessionManager`
 - [controllers/WhatsAppController.js](controllers/WhatsAppController.js) — exemplos de envio sincronizado
 

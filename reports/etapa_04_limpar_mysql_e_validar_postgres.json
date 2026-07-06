@@ -1,0 +1,350 @@
+{
+  "gerado_em": "2026-07-06T20:09:04",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_04_20260706_200904",
+    "copiados": [
+      "README.md",
+      "MELHORIAS.md",
+      ".github/copilot-instructions.md",
+      "controllers/AuthController.js",
+      "controllers/CrmController.js",
+      "src/config/db.js",
+      "src/utils/atendimento.js",
+      "script/export_full.js",
+      "script/backup_database.js",
+      "package.json",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_04_manifesto_antes.json",
+  "limpeza_documentacao": [
+    {
+      "arquivo": "README.md",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 4
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 2
+    },
+    {
+      "arquivo": ".github/copilot-instructions.md",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 2
+    }
+  ],
+  "limpeza_comentarios_js": [
+    {
+      "arquivo": "controllers/AuthController.js",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 1
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 1
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 2
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "existe": true,
+      "alterado": true,
+      "alteracoes": 1
+    }
+  ],
+  "scripts_convertidos": [
+    {
+      "arquivo": "script/export_full.js",
+      "existia_antes": true,
+      "alterado": true,
+      "sha256_depois": "e61a5fbcdd46856d63b2370e582e3aeb69856469ed6714f07959bfbc794a5ba6"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "existia_antes": true,
+      "alterado": true,
+      "sha256_depois": "8281c89659aec2675e39f05eca3977265480499f405b95c79de4afe59113781e"
+    }
+  ],
+  "validacao_package_json": {
+    "ok": true,
+    "erros": [],
+    "avisos": [],
+    "pg_version": "^8.22.0",
+    "total_dependencias": 34
+  },
+  "node_check": {
+    "node_disponivel": true,
+    "node_versao": "v24.16.0",
+    "arquivos": [
+      {
+        "arquivo": "server.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "routes/api.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "routes/index.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/AdminController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/AdminPanelController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/AuthController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/CrmController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/ScheduleController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/WhatsAppController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/config/db.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/managers/SessionManager.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/managers/OpenAIManager.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/middleware/auth.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/utils/atendimento.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "script/export_full.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "script/backup_database.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      }
+    ]
+  },
+  "resumo_node_check": {
+    "total": 16,
+    "ok": 16,
+    "falhas": 0,
+    "ausentes": 0
+  },
+  "rastros_mysql_filtrados": [
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 16,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "## Etapa 03 - Correcao do Docker para MySQL"
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 20,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Substituido servico db baseado em PostgreSQL por MySQL 8."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 21,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "Substituido volume pgdata por mysqldata."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 22,
+      "termos": [
+        "mysql",
+        "mysqladmin"
+      ],
+      "conteudo_redigido": "Ajustado healthcheck do banco para mysqladmin ping."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 24,
+      "termos": [
+        "mysql",
+        "MYSQL_"
+      ],
+      "conteudo_redigido": "Atualizado .env.example com MYSQL_ROOT_PASSWORD quando necessario."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 34,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Removidas configuracoes MySQL do docker-compose.yml."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 35,
+      "termos": [
+        "mysql",
+        "mysqldata"
+      ],
+      "conteudo_redigido": "Substituido volume mysqldata por pgdata."
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "linha": 38,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Gerado relatorio de rastros MySQL ainda presentes no projeto."
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "linha": 9,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Corrigir inconsistencia entre MySQL no ambiente e PostgreSQL no docker-compose.yml."
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "linha": 23,
+      "termos": [
+        "3306"
+      ],
+      "conteudo_redigido": "Confirmar se a porta 3306 deve ficar exposta publicamente ou apenas internamente."
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "linha": 34,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Revisar rastros MySQL listados no relatorio da Etapa 03.1."
+    },
+    {
+      "arquivo": "DECISOES_TECNICAS.md",
+      "linha": 19,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Decidido alinhar Docker ao MySQL porque o ambiente do projeto usa variaveis DB_HOST, DB_USER, DB_PASS e DB_NAME."
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "linha": 15,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "## Etapa 03 - Docker alinhado ao MySQL"
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "linha": 19,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Foi corrigida a configuracao do docker-compose.yml para usar MySQL 8."
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "linha": 34,
+      "termos": [
+        "mysql"
+      ],
+      "conteudo_redigido": "Foram encontrados 498 rastros de MySQL para analise na proxima etapa."
+    }
+  ],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_04_manifesto_depois.json"
+}

@@ -7,7 +7,7 @@
 class CrmController {
     /**
      * Construtor do CrmController
-     * @param {Object} db - Pool de conexão MySQL
+     * @param {Object} db - Pool de conexao PostgreSQL
      * @param {Object} sessionManager - Instância do SessionManager
      */
     constructor(db, sessionManager) {

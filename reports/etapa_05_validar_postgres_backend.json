@@ -1,0 +1,1871 @@
+{
+  "gerado_em": "2026-07-06T20:13:42",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_05_20260706_201342",
+    "copiados": [
+      "src/config/db.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [
+      "setup_db.js"
+    ],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_05_manifesto_antes.json",
+  "arquivos_analisados": [
+    "controllers/AdminController.js",
+    "controllers/AdminPanelController.js",
+    "controllers/AuthController.js",
+    "controllers/CrmController.js",
+    "controllers/ScheduleController.js",
+    "controllers/WhatsAppController.js",
+    "package.json",
+    "routes/api.js",
+    "routes/index.js",
+    "server.js",
+    "src/config/db.js",
+    "src/managers/OpenAIManager.js",
+    "src/managers/SessionManager.js",
+    "src/middleware/auth.js",
+    "src/utils/atendimento.js"
+  ],
+  "achados_sql": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 33,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "(SELECT COUNT(*) FROM empresas WHERE id != 1 AND ativo = 1) as ativas,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 34,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "(SELECT COUNT(*) FROM empresas WHERE id != 1 AND ativo = 0) as bloqueadas,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 57,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "LEFT JOIN usuarios_painel u ON u.empresa_id = e.id AND u.is_admin = 1"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 113,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`SELECT id FROM usuarios_painel WHERE email = ? UNION SELECT id FROM empresas WHERE nome = ?`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 128,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const msgsPadrao = [{ titulo: \"boasvindas\", texto: `Olá {{nome}}! 👋\\nBem-vindo à *${nome}*!` }];"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 138,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "'08:00', '18:00', ?, NOW(), 'DESCONECTADO')`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 157,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, cor, ordem) VALUES (?, ?, ?, 0, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 171,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho) VALUES (?, ?, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 191,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "VALUES (?, 'Administrador', ?, ?, 1, 'Gerente', 1, ?, NOW())`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 196,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`✅ [SuperAdmin] Empresa criada: ${nome} (ID: ${empId})`);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 223,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE empresas SET nome = ?, plano = ?, limite_usuarios = ? WHERE id = ?`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 230,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 230,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "`UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 265,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[SuperAdmin] Empresa ${id} bloqueada e desconectada.`);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 291,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[SuperAdmin] Empresa ${id} excluída permanentemente.`);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 312,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[SuperAdmin] Sessão da empresa ${id} resetada via painel.`);"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 89,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[AUTH] Senha migrada para Bcrypt: ${user.email}`);"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 123,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`✅ [AUTH] Sucesso: ${user.email} @ ${user.empresa_nome}`);"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 180,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "html: `<p>Sua nova senha temporária: <b>${novaSenha}</b></p>`"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 183,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[DEBUG] Senha para ${email}: ${novaSenha}`);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 27,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "this.sm.io.to(`empresa_${empresaId}`).emit('atualizar_lista', dados);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 41,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const remoteJid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 72,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const remoteJid = `${telefone}@s.whatsapp.net`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 82,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE contatos SET nome = ?, status_atendimento = 'ATENDENDO', atendente_id = ? WHERE id = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 87,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO contatos (empresa_id, telefone, nome, status_atendimento, atendente_id) VALUES (?, ?, ?, 'ATENDENDO', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 93,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', 'Iniciou uma nova conversa.')`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 148,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "sql += ` AND c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 151,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "sql += ` AND c.status_atendimento = 'FILA'`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 153,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 158,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "sql += ` AND c.status_atendimento IN ('ATENDENDO','FILA','ABERTO')`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 168,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "sql += ` ORDER BY CASE WHEN ordenacao IS NULL THEN 0 ELSE 1 END, ordenacao DESC`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 187,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE contatos SET nome=?, cnpj_cpf=?, email=?, endereco=?, anotacoes=? WHERE empresa_id=? AND telefone=?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 232,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 241,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "await sock.sendMessage(telefone, { text: `✅ *${nome}* iniciou o atendimento.` });"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 261,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const msg = setor[0]?.mensagem_saudacao || `Transferindo para ${setor[0]?.nome || 'o setor'}.`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 265,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "await sock.sendMessage(telefone, { text: `🔄 *Transferido:* ${msg}` });"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 269,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 274,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 275,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "[req.empresaId, telefone, `🔄 *Transferido para setor:* ${setor[0]?.nome}`]"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 299,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "await sock.sendMessage(telefone, { text: `🔄 Seu atendimento foi transferido para *${nomeUser}*.` });"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 303,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 308,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 309,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "[req.empresaId, telefone, `🔄 *Transferido para usuário:* ${nomeUser}`]"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 329,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const padrao = `✅ *Atendimento finalizado.*\\n\\nPor favor, avalie nosso atendimento de 1 a 5:\\n\\n1️⃣ Muito Insatisfeito\\n2️⃣ Insatisfeito\\n3️⃣ Normal\\n4️⃣ Satisfeito\\n5️⃣ Muito Satisfeito`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 333,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`UPDATE contatos SET status_atendimento = 'AGUARDANDO_AVALIACAO' WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 343,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 403,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "updateValues.push(`/uploads/empresa_${req.empresaId}/${req.files['logo'][0].filename}`);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 408,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "updateValues.push(`/uploads/empresa_${req.empresaId}/${file.filename}`);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 420,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const sql = `UPDATE empresas SET ${updateFields.join(', ')} WHERE id = ?`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 478,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacoes WHERE empresa_id = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 534,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 562,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "mediaUrl = `/uploads/empresa_${req.empresaId}/${req.file.filename}`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 589,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "params.push(`/uploads/empresa_${req.empresaId}/${req.file.filename}`, mediaType);"
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "linha": 30,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`SELECT * FROM horarios_atendimento WHERE empresa_id = ? ORDER BY dia_semana ASC`,"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 44,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[WhatsAppController] 🚀 Iniciando sessão para empresa ID: ${empresaId}`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 61,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`[WhatsAppController] ❌ Erro crítico ao iniciar sessão (Empresa ${req.body.empresaId}):`, e.message);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 78,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.warn(`[WhatsAppController] ⚠️ Sessão não encontrada para empresa ${empresaId} ao tentar monitorar.`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 88,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[WhatsAppController] 👂 Monitoramento de Atendimento ATIVO para Empresa ${empresaId}`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 115,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[Atendimento] 🌙 Empresa ${empresaId} FECHADA. Contato: ${contato}`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 132,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "// console.log(`[Atendimento] ✅ Mensagem de ${contato} processada.`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 135,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`[WhatsAppController] ❌ Erro no processamento de mensagem: ${error.message}`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 151,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[WhatsAppController] 🛑 Encerrando sessão para empresa ${empresaId}`);"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 264,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const jid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 272,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 276,
+      "padrao": "INSERT_IGNORE",
+      "severidade": "alta",
+      "recomendacao": "Usar INSERT ... ON CONFLICT DO NOTHING no PostgreSQL.",
+      "trecho": "// 2. Garante que o contato existe (Upsert simplificado via INSERT IGNORE)"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 278,
+      "padrao": "INSERT_IGNORE",
+      "severidade": "alta",
+      "recomendacao": "Usar INSERT ... ON CONFLICT DO NOTHING no PostgreSQL.",
+      "trecho": "`INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 278,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 313,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const jid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 315,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const urlRelativa = `/uploads/empresa_${empresaId}/${req.file.filename}`;"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 355,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, 1, ?, ?, ?)`,"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 44,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const uploadPath = path.join(process.cwd(), 'public', 'uploads', `empresa_${empresaId}`, dateDir);"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 55,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const uniqueName = `${Date.now()}_${sanitized}`;"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 55,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "const uniqueName = `${Date.now()}_${sanitized}`;"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 138,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const jid = number.includes('@') ? number : `${number.replace(/\\D/g, '')}@s.whatsapp.net`;"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 164,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const jid = number.includes('@') ? number : `${number.replace(/\\D/g, '')}@s.whatsapp.net`;"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "linha": 30,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`🖥️ [DASHBOARD] Acesso permitido para: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "linha": 49,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`❌ [DASHBOARD] Empresa ID ${empresaId} não encontrada no DB.`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 44,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "url: `redis://${process.env.REDIS_HOST || '127.0.0.1'}:${process.env.REDIS_PORT || 6379}`,"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 101,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`📡 URL: ${req.method} ${req.url}`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 102,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`🔑 Session ID: ${req.sessionID}`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 106,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`🍪 Header Cookie: ${cookieHeader ? 'RECEBIDO' : 'AUSENTE ❌'}`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 107,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "if (cookieHeader) console.log(`   Conteúdo: ${cookieHeader.substring(0, 50)}...`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 111,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`👤 Usuário Logado: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 113,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`👻 Sessão Vazia (Anônimo)`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 148,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`\\n🚀 [System] SAAS Server rodando na porta ${PORT}`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 149,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`📡 [Env] ${process.env.NODE_ENV}`);"
+    },
+    {
+      "arquivo": "server.js",
+      "linha": 150,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`🔒 [Security] Cookie Secure: ${isHttps ? 'ATIVADO' : 'DESATIVADO'}`);"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "linha": 38,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`📊 [PostgreSQL] Conectado: ${dbConfig.database} @ ${dbConfig.host}`);"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "linha": 53,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "return sql.replace(/\\?/g, () => `$${index++}`);"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "linha": 62,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`[DB Execute Error] ${error.message}\\nSQL: ${sql}`);"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 66,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`[OpenAI] Erro Chat Empresa ${empresaId}:`, error.message);"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 82,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`[OpenAI] Transcrevendo áudio: ${caminhoArquivo}`);"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 94,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`[OpenAI] Erro Transcrição:`, error.message);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 105,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`🚀 [Worker] Iniciando processador da fila: ${this.queueName}`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 114,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "// throw new Error(`Sessão ${empresaId} offline`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 127,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`❌ Job ${job.id} falhou: ${err.message}`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 141,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "// console.log(`Iniciando sessão ${empresaId}...`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 149,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const authPath = path.join(this.authDir, `empresa_${empresaId}`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 181,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.error(`❌ [Empresa ${empresaId}] Falha crítica:`, error.message);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 200,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "console.log(`✅ [Empresa ${empresaId}] Conectado`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 252,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "timestamp: Date.now()"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 254,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "jobId: `${empresaId}_${msg.key.id}`,"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 275,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia, created_at) VALUES (?, ?, 0, ?, ?, ?, NOW())`,"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 275,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia, created_at) VALUES (?, ?, 0, ?, ?, ?, NOW())`,"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 285,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "timestamp: Date.now() / 1000,"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 309,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "conteudo = m[Object.keys(m)[0]].caption || (tipo === 'audio' ? '[Áudio]' : `[${tipo}]`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 345,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "// Query adaptada para PostgreSQL usando NOW() - INTERVAL '30 minutes'"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 355,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "AND m.last_msg_time < NOW() - INTERVAL '30 minutes'"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 390,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 391,
+      "padrao": "ON_DUPLICATE_KEY",
+      "severidade": "alta",
+      "recomendacao": "Usar INSERT ... ON CONFLICT no PostgreSQL.",
+      "trecho": "ON DUPLICATE KEY UPDATE"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 394,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "ultima_msg = NOW()"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 409,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const empresaDir = path.join(this.uploadDir, `empresa_${empresaId}`, dateDir);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 413,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`;"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 413,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`;"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 417,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "return `/uploads/empresa_${empresaId}/${dateDir}/${fileName}`;"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 430,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "const pathAuth = path.join(this.authDir, `empresa_${empresaId}`);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 441,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "let sql = 'UPDATE empresas SET whatsapp_status = ?, whatsapp_updated_at = NOW()';"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 443,
+      "padrao": "NOW_FUNCTION_OK_REVISAR",
+      "severidade": "baixa",
+      "recomendacao": "NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.",
+      "trecho": "sql = 'UPDATE empresas SET whatsapp_status = ?, whatsapp_numero = ?, whatsapp_updated_at = NOW()';"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 451,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "if (this.io) this.io.to(`empresa_${empresaId}`).emit(event, data);"
+    },
+    {
+      "arquivo": "src/middleware/auth.js",
+      "linha": 35,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "* Permite: Admins (is_admin=1) OU Gerentes"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "linha": 25,
+      "padrao": "BOOLEAN_NUMERICO",
+      "severidade": "baixa",
+      "recomendacao": "Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.",
+      "trecho": "WHERE empresa_id = ? AND dia_semana = ? AND ativo = 1"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "linha": 50,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "mensagem: `Nosso horário de atendimento hoje é das ${regra.horario_abertura.slice(0,5)} às ${regra.horario_fechamento.slice(0,5)}.`"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "linha": 62,
+      "padrao": "BACKTICK_SQL",
+      "severidade": "media",
+      "recomendacao": "Usar aspas duplas para identificadores, ou remover quoting se nao necessario.",
+      "trecho": "mensagem: `Estamos em horário de almoço. Atendimento retorna às ${regra.fim_almoco.slice(0,5)}.`"
+    }
+  ],
+  "queries_mapeadas": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 31,
+      "trecho": "SELECT"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 32,
+      "trecho": "(SELECT COUNT(*) FROM empresas WHERE id != 1) as total_empresas,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 33,
+      "trecho": "(SELECT COUNT(*) FROM empresas WHERE id != 1 AND ativo = 1) as ativas,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 34,
+      "trecho": "(SELECT COUNT(*) FROM empresas WHERE id != 1 AND ativo = 0) as bloqueadas,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 35,
+      "trecho": "(SELECT COUNT(*) FROM mensagens) as total_msgs_sistema,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 36,
+      "trecho": "(SELECT COUNT(*) FROM usuarios_painel WHERE empresa_id != 1) as total_usuarios,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 37,
+      "trecho": "(SELECT COUNT(*) FROM contatos) as total_contatos"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 43,
+      "trecho": "SELECT"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 53,
+      "trecho": "(SELECT COUNT(*) FROM usuarios_painel WHERE empresa_id = e.id) as total_users,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 54,
+      "trecho": "(SELECT COUNT(*) FROM mensagens WHERE empresa_id = e.id) as total_msgs,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 55,
+      "trecho": "(SELECT COUNT(*) FROM contatos WHERE empresa_id = e.id) as total_contatos"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 113,
+      "trecho": "`SELECT id FROM usuarios_painel WHERE email = ? UNION SELECT id FROM empresas WHERE nome = ?`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 131,
+      "trecho": "`INSERT INTO empresas ("
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 157,
+      "trecho": "`INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, cor, ordem) VALUES (?, ?, ?, 0, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 171,
+      "trecho": "`INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho) VALUES (?, ?, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 181,
+      "trecho": "`INSERT INTO horarios_atendimento (empresa_id, dia_semana, horario_abertura, horario_fechamento, ativo)"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 190,
+      "trecho": "`INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, cargo, ativo, telefone, created_at)"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 215,
+      "trecho": "* POST /api/super-admin/empresas/update"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 223,
+      "trecho": "`UPDATE empresas SET nome = ?, plano = ?, limite_usuarios = ? WHERE id = ?`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 230,
+      "trecho": "`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "trecho": "`UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 246,
+      "trecho": "console.error('[SuperAdmin] Erro update:', e);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 260,
+      "trecho": "await this.db.run('UPDATE empresas SET ativo = ? WHERE id = ?', [ativo ? 1 : 0, id]);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 289,
+      "trecho": "await this.db.run('DELETE FROM empresas WHERE id = ?', [id]);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 295,
+      "trecho": "console.error('[SuperAdmin] Erro delete:', e);"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 310,
+      "trecho": "await this.db.run(\"UPDATE empresas SET whatsapp_status = 'DESCONECTADO' WHERE id = ?\", [id]);"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 40,
+      "trecho": "'SELECT id, is_admin, nome, email, cargo, ativo FROM usuarios_painel WHERE id = ?',"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 51,
+      "trecho": "`SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia,"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 64,
+      "trecho": "'SELECT id, nome, email, is_admin, cargo, ativo, telefone FROM usuarios_painel WHERE empresa_id = ? ORDER BY nome ASC',"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 107,
+      "trecho": "this.db.query(\"SELECT COUNT(*) as t FROM mensagens WHERE empresa_id = ?\", [empresaId]),"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 108,
+      "trecho": "this.db.query(\"SELECT COUNT(*) as t FROM contatos WHERE empresa_id = ?\", [empresaId]),"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 109,
+      "trecho": "this.db.query(\"SELECT COUNT(*) as t FROM usuarios_painel WHERE empresa_id = ?\", [empresaId])"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "linha": 133,
+      "trecho": "`SELECT id, nome, email, is_admin, cargo, ativo, telefone, created_at"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 42,
+      "trecho": "SELECT"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 88,
+      "trecho": "await db.run('UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 166,
+      "trecho": "const users = await db.query(\"SELECT id, nome FROM usuarios_painel WHERE email = ?\", [email]);"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 173,
+      "trecho": "await db.run(\"UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "linha": 196,
+      "trecho": "await db.run(\"UPDATE usuarios_painel SET senha=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 45,
+      "trecho": "'SELECT * FROM mensagens WHERE empresa_id = ? AND remote_jid = ? ORDER BY data_hora ASC',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 76,
+      "trecho": "'SELECT id FROM contatos WHERE empresa_id = ? AND telefone = ?',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 82,
+      "trecho": "`UPDATE contatos SET nome = ?, status_atendimento = 'ATENDENDO', atendente_id = ? WHERE id = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 87,
+      "trecho": "`INSERT INTO contatos (empresa_id, telefone, nome, status_atendimento, atendente_id) VALUES (?, ?, ?, 'ATENDENDO', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 93,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', 'Iniciou uma nova conversa.')`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 117,
+      "trecho": "'SELECT is_admin FROM usuarios_painel WHERE id = ?',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 124,
+      "trecho": "SELECT c.*,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 125,
+      "trecho": "(SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 126,
+      "trecho": "(SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 132,
+      "trecho": "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 153,
+      "trecho": "sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 161,
+      "trecho": "(c.status_atendimento = 'FILA' AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?))"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 187,
+      "trecho": "`UPDATE contatos SET nome=?, cnpj_cpf=?, email=?, endereco=?, anotacoes=? WHERE empresa_id=? AND telefone=?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 205,
+      "trecho": "SELECT c.*, s.nome as nome_setor"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 232,
+      "trecho": "`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 239,
+      "trecho": "const [u] = await this.db.execute('SELECT nome FROM usuarios_painel WHERE id = ?', [atendenteId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 260,
+      "trecho": "const [setor] = await this.db.execute('SELECT mensagem_saudacao, nome FROM setores WHERE id = ?', [setorId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 269,
+      "trecho": "`UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 274,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 294,
+      "trecho": "const [user] = await this.db.execute('SELECT nome FROM usuarios_painel WHERE id = ?', [usuarioId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 303,
+      "trecho": "`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 308,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 328,
+      "trecho": "const [empresa] = await this.db.execute('SELECT msg_avaliacao FROM empresas WHERE id = ?', [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 333,
+      "trecho": "`UPDATE contatos SET status_atendimento = 'AGUARDANDO_AVALIACAO' WHERE empresa_id = ? AND telefone = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 343,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 366,
+      "trecho": "`SELECT nome, nome_sistema, logo_url, cor_primaria, mensagens_padrao,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 420,
+      "trecho": "const sql = `UPDATE empresas SET ${updateFields.join(', ')} WHERE id = ?`;"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 441,
+      "trecho": "'UPDATE empresas SET openai_key=<REDIGIDO>"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 461,
+      "trecho": "const [msgs] = await this.db.execute(\"SELECT COUNT(*) as t FROM mensagens WHERE empresa_id = ?\", [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 462,
+      "trecho": "const [contatos] = await this.db.execute(\"SELECT COUNT(*) as t FROM contatos WHERE empresa_id = ?\", [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 463,
+      "trecho": "const [users] = await this.db.execute(\"SELECT COUNT(*) as t FROM usuarios_painel WHERE empresa_id = ?\", [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 478,
+      "trecho": "`SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacoes WHERE empresa_id = ?`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 482,
+      "trecho": "`SELECT a.*, u.nome as nome_atendente, c.nome as nome_cliente"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 518,
+      "trecho": "'SELECT telefone FROM contatos WHERE empresa_id = ?',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 534,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 552,
+      "trecho": "const [rows] = await this.db.execute('SELECT * FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC', [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 570,
+      "trecho": "'INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, media_url, media_type, cor) VALUES (?, ?, ?, 0, ?, ?, ?)',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 579,
+      "trecho": "let sql = 'UPDATE setores SET nome = ?, mensagem_saudacao = ?, cor = ?';"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 605,
+      "trecho": "await this.db.execute('UPDATE setores SET ordem = ? WHERE id = ? AND empresa_id = ?', [i, ordem[i], req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 612,
+      "trecho": "await this.db.execute('DELETE FROM setores WHERE id = ? AND empresa_id = ?', [id, req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 621,
+      "trecho": "const [rows] = await this.db.execute('SELECT * FROM mensagens_rapidas WHERE empresa_id = ? ORDER BY titulo ASC', [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 631,
+      "trecho": "'INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho) VALUES (?, ?, ?, ?)',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 638,
+      "trecho": "await this.db.execute('DELETE FROM mensagens_rapidas WHERE id = ? AND empresa_id = ?', [req.params.id, req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 648,
+      "trecho": "SELECT u.id, u.nome, u.email, u.is_admin, u.telefone, u.cargo, u.ativo,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 649,
+      "trecho": "(SELECT GROUP_CONCAT(s.nome SEPARATOR ', ')"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 653,
+      "trecho": "(SELECT GROUP_CONCAT(s.id SEPARATOR ',')"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 667,
+      "trecho": "const [emp] = await this.db.execute('SELECT limite_usuarios FROM empresas WHERE id = ?', [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 668,
+      "trecho": "const [qtd] = await this.db.execute('SELECT COUNT(*) as total FROM usuarios_painel WHERE empresa_id = ?', [req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 678,
+      "trecho": "'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 683,
+      "trecho": "await conn.execute('INSERT INTO usuarios_setores (usuario_id, setor_id) VALUES (?, ?)', [resUser.insertId, sId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 697,
+      "trecho": "await this.db.execute('DELETE FROM usuarios_painel WHERE id=? AND empresa_id=?', [req.params.id, req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 708,
+      "trecho": "'SELECT * FROM etiquetas WHERE empresa_id = ? ORDER BY nome ASC',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 724,
+      "trecho": "'INSERT INTO etiquetas (empresa_id, nome, cor) VALUES (?, ?, ?)',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 736,
+      "trecho": "await this.db.execute('DELETE FROM etiquetas WHERE id = ? AND empresa_id = ?', [id, req.empresaId]);"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 747,
+      "trecho": "'SELECT * FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 753,
+      "trecho": "'DELETE FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 759,
+      "trecho": "'INSERT INTO contatos_etiquetas (contato_id, etiqueta_id, empresa_id) VALUES (?, ?, ?)',"
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "linha": 30,
+      "trecho": "`SELECT * FROM horarios_atendimento WHERE empresa_id = ? ORDER BY dia_semana ASC`,"
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "linha": 64,
+      "trecho": "UPDATE horarios_atendimento"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 228,
+      "trecho": "'SELECT nome FROM usuarios_painel WHERE id = ?',"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 269,
+      "trecho": "// ATUALIZAÇÃO: Uso de this.db.run para INSERT (Novo DB Wrapper)"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 272,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 276,
+      "trecho": "// 2. Garante que o contato existe (Upsert simplificado via INSERT IGNORE)"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 278,
+      "trecho": "`INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "linha": 355,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, 1, ?, ?, ?)`,"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 213,
+      "trecho": "router.post('/super-admin/empresas/update', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.updateEmpresa(req, res));"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "linha": 215,
+      "trecho": "router.post('/super-admin/empresas/:id/delete', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.deleteEmpresa(req, res));"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "linha": 42,
+      "trecho": "const result = await db.query('SELECT * FROM empresas WHERE id = ? LIMIT 1', [empresaId]);"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "linha": 56,
+      "trecho": "[setores] = await db.query('SELECT * FROM setores WHERE empresa_id = ? ORDER BY ordem ASC', [empresaId]);"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "linha": 57,
+      "trecho": "[contatos] = await db.query('SELECT * FROM contatos WHERE empresa_id = ? ORDER BY ultima_msg DESC LIMIT 50', [empresaId]);"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 19,
+      "trecho": "\"SELECT openai_key, openai_ativo FROM empresas WHERE id=<REDIGIDO>"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 40,
+      "trecho": "const [config] = await this.db.execute(\"SELECT openai_prompt FROM empresas WHERE id = ?\", [empresaId]);"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "linha": 45,
+      "trecho": "\"SELECT from_me, conteudo FROM mensagens WHERE empresa_id = ? AND remote_jid = ? ORDER BY id DESC LIMIT 6\","
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 146,
+      "trecho": "this.sessions.delete(empresaId);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 174,
+      "trecho": "sock.ev.on('creds.update', saveCreds);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 175,
+      "trecho": "sock.ev.on('connection.update', (update) => this._handleConnectionUpdate(empresaId, update));"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 176,
+      "trecho": "sock.ev.on('messages.upsert', (update) => this._handleMessagesUpsert(empresaId, update));"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 187,
+      "trecho": "async _handleConnectionUpdate(empresaId, update) {"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 188,
+      "trecho": "const { connection, lastDisconnect, qr } = update;"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 201,
+      "trecho": "this.qrCodes.delete(empresaId);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 202,
+      "trecho": "this.reconnectAttempts.delete(empresaId);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 214,
+      "trecho": "this.sessions.delete(empresaId);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 215,
+      "trecho": "this.qrCodes.delete(empresaId);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 275,
+      "trecho": "`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia, created_at) VALUES (?, ?, 0, ?, ?, ?, NOW())`,"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 318,
+      "trecho": "'SELECT setor_id, status_atendimento, atendente_id FROM contatos WHERE empresa_id = ? AND telefone = ? LIMIT 1',"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 335,
+      "trecho": "\"SELECT mensagens_padrao, msg_ausencia FROM empresas WHERE id = ?\","
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 347,
+      "trecho": "SELECT c.id, c.empresa_id, c.telefone"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 350,
+      "trecho": "SELECT empresa_id, remote_jid, MAX(created_at) as last_msg_time"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 376,
+      "trecho": "\"UPDATE contatos SET status_atendimento = 'ABERTO', setor_id = NULL, atendente_id = NULL WHERE id = ?\","
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 389,
+      "trecho": "INSERT INTO contatos (empresa_id, telefone, nome, foto_perfil, status_atendimento, created_at, ultima_msg)"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 391,
+      "trecho": "ON DUPLICATE KEY UPDATE"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 428,
+      "trecho": "this.sessions.delete(empresaId);"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 441,
+      "trecho": "let sql = 'UPDATE empresas SET whatsapp_status = ?, whatsapp_updated_at = NOW()';"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "linha": 443,
+      "trecho": "sql = 'UPDATE empresas SET whatsapp_status = ?, whatsapp_numero = ?, whatsapp_updated_at = NOW()';"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "linha": 24,
+      "trecho": "SELECT * FROM horarios_atendimento"
+    }
+  ],
+  "analise_config_db": {
+    "arquivo": "src/config/db.js",
+    "existe": true,
+    "ok_basico": true,
+    "achados": []
+  },
+  "analise_setup_db": {
+    "arquivo": "setup_db.js",
+    "existe": false,
+    "ok_basico": false,
+    "achados": [
+      {
+        "tipo": "erro",
+        "mensagem": "Arquivo ausente ou ilegivel"
+      }
+    ]
+  },
+  "validacao_package_json": {
+    "ok": true,
+    "erros": [],
+    "avisos": [],
+    "pg_version": "^8.22.0",
+    "total_dependencias": 34
+  },
+  "node_check": {
+    "node_disponivel": true,
+    "node_versao": "v24.16.0",
+    "arquivos": [
+      {
+        "arquivo": "server.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "setup_db.js",
+        "existe": false,
+        "ok": false,
+        "erro": "Arquivo ausente"
+      },
+      {
+        "arquivo": "routes/api.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "routes/index.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/AdminController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/AdminPanelController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/AuthController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/CrmController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/ScheduleController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "controllers/WhatsAppController.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/config/db.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/managers/SessionManager.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/managers/OpenAIManager.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/middleware/auth.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "src/utils/atendimento.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "script/export_full.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "arquivo": "script/backup_database.js",
+        "existe": true,
+        "ok": true,
+        "stdout": "",
+        "stderr": ""
+      }
+    ]
+  },
+  "resumo_node_check": {
+    "total": 17,
+    "ok": 16,
+    "falhas": 0,
+    "ausentes": 1
+  },
+  "resumo_severidade": {
+    "alta": 3,
+    "media": 102,
+    "baixa": 20
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_05_manifesto_depois.json"
+}

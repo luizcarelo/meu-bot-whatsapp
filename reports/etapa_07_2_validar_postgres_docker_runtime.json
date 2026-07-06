@@ -1,0 +1,219 @@
+{
+  "gerado_em": "2026-07-06T20:29:56",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_07_2_20260706_202955",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_07_2_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       11 hours ago   Up 10 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        11 hours ago   Up 11 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     11 hours ago   Up 11 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "servico_db": {
+    "servico_db_mencionado": true,
+    "parece_rodando": true,
+    "texto_redigido": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       11 hours ago   Up 10 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        11 hours ago   Up 11 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     11 hours ago   Up 11 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp\n"
+  },
+  "runtime": {
+    "env_encontrado": true,
+    "db_user_configurado": true,
+    "db_name_configurado": true,
+    "checks": {
+      "tabela_contatos_existe": true,
+      "colunas_empresa_id_telefone_total": 2,
+      "colunas_empresa_id_telefone_existem": true,
+      "unico_empresa_telefone_existe": true,
+      "indices_unicos_saida": "contatos_empresa_id_telefone_key:empresa_id,telefone\ncontatos_pkey:id",
+      "constraints_saida": "contatos_empresa_id_telefone_key:UNIQUE (empresa_id, telefone)\ncontatos_pkey:PRIMARY KEY (id)",
+      "duplicidades_total_grupos": 0,
+      "duplicidades_existem": false,
+      "pronto_para_on_conflict": true
+    },
+    "comandos": {
+      "tabela_contatos": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.contatos') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "colunas_contatos": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'contatos' AND column_name IN ('empresa_id', 'telefone')"
+        ],
+        "returncode": 0,
+        "stdout": "2",
+        "stderr": "",
+        "ok": true
+      },
+      "unico_empresa_telefone": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM pg_class t JOIN pg_index ix ON t.oid = ix.indrelid JOIN pg_class i ON i.oid = ix.indexrelid JOIN LATERAL unnest(ix.indkey) WITH ORDINALITY AS k(attnum, ord) ON true JOIN pg_attribute a ON a.attrelid = t.oid AND a.attnum = k.attnum WHERE t.relname = 'contatos' AND t.relnamespace = 'public'::regnamespace AND ix.indisunique = true GROUP BY i.relname HAVING string_agg(a.attname, ',' ORDER BY k.ord) = 'empresa_id,telefone' LIMIT 1"
+        ],
+        "returncode": 0,
+        "stdout": "2",
+        "stderr": "",
+        "ok": true
+      },
+      "indices_unicos": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT i.relname || ':' || string_agg(a.attname, ',' ORDER BY k.ord) FROM pg_class t JOIN pg_index ix ON t.oid = ix.indrelid JOIN pg_class i ON i.oid = ix.indexrelid JOIN LATERAL unnest(ix.indkey) WITH ORDINALITY AS k(attnum, ord) ON true JOIN pg_attribute a ON a.attrelid = t.oid AND a.attnum = k.attnum WHERE t.relname = 'contatos' AND t.relnamespace = 'public'::regnamespace AND ix.indisunique = true GROUP BY i.relname ORDER BY i.relname"
+        ],
+        "returncode": 0,
+        "stdout": "contatos_empresa_id_telefone_key:empresa_id,telefone\ncontatos_pkey:id",
+        "stderr": "",
+        "ok": true
+      },
+      "constraints": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT conname || ':' || pg_get_constraintdef(oid) FROM pg_constraint WHERE conrelid = to_regclass('public.contatos') AND contype IN ('u', 'p') ORDER BY conname"
+        ],
+        "returncode": 0,
+        "stdout": "contatos_empresa_id_telefone_key:UNIQUE (empresa_id, telefone)\ncontatos_pkey:PRIMARY KEY (id)",
+        "stderr": "",
+        "ok": true
+      },
+      "duplicidades": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM (SELECT empresa_id, telefone FROM contatos GROUP BY empresa_id, telefone HAVING COUNT(1) > 1) d"
+        ],
+        "returncode": 0,
+        "stdout": "0",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "ok": true
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_07_2_manifesto_depois.json"
+}

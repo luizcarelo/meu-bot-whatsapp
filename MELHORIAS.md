@@ -175,7 +175,7 @@ saas-whatsapp-crm/
 
 ### Variáveis de Ambiente Obrigatórias:
 ```env
-DB_HOST=mysql.lcsolucoesdigital.com.br
+DB_HOST=postgres.lcsolucoesdigital.com.br
 DB_USER=lcsolucoes_add2
 DB_PASS=altere_aqui
 DB_NAME=lcsolucoesdigi
@@ -211,7 +211,7 @@ npm start
 ## 🐛 DEBUG
 
 ### Logs Importantes:
-- ✅ Conexão MySQL
+- ✅ Conexao PostgreSQL
 - ✅ Sessões WhatsApp
 - ✅ Autenticação
 - ✅ Erros de API
@@ -233,6 +233,6 @@ Para dúvidas ou problemas:
 
 ---
 
-**Última atualização:** Novembro 2024
-**Versão:** 4.0.0
-**Status:** Em desenvolvimento ativo
+Última atualização: Novembro 2024
+Versão: 4.0.0
+Status: Em desenvolvimento ativo

@@ -1,0 +1,425 @@
+# Etapa 05 - Validar backend PostgreSQL
+
+Data: 2026-07-06T20:13:42
+
+## Resumo
+
+- Backup criado em: backups/etapa_05_20260706_201342
+- Manifesto antes: reports/etapa_05_manifesto_antes.json
+- Manifesto depois: reports/etapa_05_manifesto_depois.json
+- Arquivos analisados: 15
+- Queries mapeadas: 133
+- Achados SQL suspeitos: 125
+- Validacao package.json OK: True
+
+## Severidade
+
+- alta: 3
+- media: 102
+- baixa: 20
+
+## Analise src/config/db.js
+
+- Existe: True
+- OK basico: True
+
+## Analise setup_db.js
+
+- Existe: False
+- OK basico: False
+- erro: Arquivo ausente ou ilegivel
+
+## Package JSON
+
+- OK: True
+- pg: ^8.22.0
+- Erros: nenhum
+
+## Node check
+
+- Node disponivel: True
+- Node versao: v24.16.0
+- Arquivos verificados: 17
+- OK: 16
+- Falhas: 0
+- Ausentes: 1
+
+## Achados SQL suspeitos
+
+- controllers/AdminController.js:33 severidade=baixa padrao=BOOLEAN_NUMERICO trecho=(SELECT COUNT([asterisco]) FROM empresas WHERE id != 1 AND ativo = 1) as ativas,
+  - recomendacao: Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.
+- controllers/AdminController.js:34 severidade=baixa padrao=BOOLEAN_NUMERICO trecho=(SELECT COUNT([asterisco]) FROM empresas WHERE id != 1 AND ativo = 0) as bloqueadas,
+  - recomendacao: Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.
+- controllers/AdminController.js:57 severidade=baixa padrao=BOOLEAN_NUMERICO trecho=LEFT JOIN usuarios_painel u ON u.empresa_id = e.id AND u.is_admin = 1
+  - recomendacao: Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.
+- controllers/AdminController.js:113 severidade=media padrao=BACKTICK_SQL trecho=`SELECT id FROM usuarios_painel WHERE email = ? UNION SELECT id FROM empresas WHERE nome = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:128 severidade=media padrao=BACKTICK_SQL trecho=const msgsPadrao = [{ titulo: "boasvindas", texto: `Olá {{nome}}! 👋\nBem-vindo à [asterisco]${nome}[asterisco]!` }];
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:138 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho='08:00', '18:00', ?, NOW(), 'DESCONECTADO')`,
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- controllers/AdminController.js:157 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, cor, ordem) VALUES (?, ?, ?, 0, ?, ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:171 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho) VALUES (?, ?, ?, ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:191 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=VALUES (?, 'Administrador', ?, ?, 1, 'Gerente', 1, ?, NOW())`,
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- controllers/AdminController.js:196 severidade=media padrao=BACKTICK_SQL trecho=console.log(`✅ [SuperAdmin] Empresa criada: ${nome} (ID: ${empId})`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:223 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE empresas SET nome = ?, plano = ?, limite_usuarios = ? WHERE id = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:230 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:230 severidade=baixa padrao=BOOLEAN_NUMERICO trecho=`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,
+  - recomendacao: Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.
+- controllers/AdminController.js:239 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE usuarios_painel SET senha=<REDIGIDO>
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:239 severidade=baixa padrao=BOOLEAN_NUMERICO trecho=`UPDATE usuarios_painel SET senha=<REDIGIDO>
+  - recomendacao: Validar se a coluna e BOOLEAN e se o valor numerico deve virar TRUE/FALSE.
+- controllers/AdminController.js:265 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[SuperAdmin] Empresa ${id} bloqueada e desconectada.`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:291 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[SuperAdmin] Empresa ${id} excluída permanentemente.`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AdminController.js:312 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[SuperAdmin] Sessão da empresa ${id} resetada via painel.`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AuthController.js:89 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[AUTH] Senha migrada para Bcrypt: ${user.email}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AuthController.js:123 severidade=media padrao=BACKTICK_SQL trecho=console.log(`✅ [AUTH] Sucesso: ${user.email} @ ${user.empresa_nome}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AuthController.js:180 severidade=media padrao=BACKTICK_SQL trecho=html: `<p>Sua nova senha temporária: <b>${novaSenha}</b></p>`
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/AuthController.js:183 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[DEBUG] Senha para ${email}: ${novaSenha}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:27 severidade=media padrao=BACKTICK_SQL trecho=this.sm.io.to(`empresa_${empresaId}`).emit('atualizar_lista', dados);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:41 severidade=media padrao=BACKTICK_SQL trecho=const remoteJid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:72 severidade=media padrao=BACKTICK_SQL trecho=const remoteJid = `${telefone}@s.whatsapp.net`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:82 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE contatos SET nome = ?, status_atendimento = 'ATENDENDO', atendente_id = ? WHERE id = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:87 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO contatos (empresa_id, telefone, nome, status_atendimento, atendente_id) VALUES (?, ?, ?, 'ATENDENDO', ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:93 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', 'Iniciou uma nova conversa.')`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:148 severidade=media padrao=BACKTICK_SQL trecho=sql += ` AND c.status_atendimento = 'ATENDENDO' AND c.atendente_id = ?`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:151 severidade=media padrao=BACKTICK_SQL trecho=sql += ` AND c.status_atendimento = 'FILA'`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:153 severidade=media padrao=BACKTICK_SQL trecho=sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:158 severidade=media padrao=BACKTICK_SQL trecho=sql += ` AND c.status_atendimento IN ('ATENDENDO','FILA','ABERTO')`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:168 severidade=media padrao=BACKTICK_SQL trecho=sql += ` ORDER BY CASE WHEN ordenacao IS NULL THEN 0 ELSE 1 END, ordenacao DESC`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:187 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE contatos SET nome=?, cnpj_cpf=?, email=?, endereco=?, anotacoes=? WHERE empresa_id=? AND telefone=?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:232 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:241 severidade=media padrao=BACKTICK_SQL trecho=await sock.sendMessage(telefone, { text: `✅ [asterisco]${nome}[asterisco] iniciou o atendimento.` });
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:261 severidade=media padrao=BACKTICK_SQL trecho=const msg = setor[0]?.mensagem_saudacao || `Transferindo para ${setor[0]?.nome || 'o setor'}.`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:265 severidade=media padrao=BACKTICK_SQL trecho=await sock.sendMessage(telefone, { text: `🔄 [asterisco]Transferido:[asterisco] ${msg}` });
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:269 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:274 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:275 severidade=media padrao=BACKTICK_SQL trecho=[req.empresaId, telefone, `🔄 [asterisco]Transferido para setor:[asterisco] ${setor[0]?.nome}`]
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:299 severidade=media padrao=BACKTICK_SQL trecho=await sock.sendMessage(telefone, { text: `🔄 Seu atendimento foi transferido para [asterisco]${nomeUser}[asterisco].` });
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:303 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:308 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:309 severidade=media padrao=BACKTICK_SQL trecho=[req.empresaId, telefone, `🔄 [asterisco]Transferido para usuário:[asterisco] ${nomeUser}`]
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:329 severidade=media padrao=BACKTICK_SQL trecho=const padrao = `✅ [asterisco]Atendimento finalizado.[asterisco]\n\nPor favor, avalie nosso atendimento de 1 a 5:\n\n1️⃣ Muito Insatisfeito\n2️⃣ Insatisfeito\n3️⃣ Normal\n4️⃣ Satisfeito\n5️⃣ Muito Satisfeito`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:333 severidade=media padrao=BACKTICK_SQL trecho=`UPDATE contatos SET status_atendimento = 'AGUARDANDO_AVALIACAO' WHERE empresa_id = ? AND telefone = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:343 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:403 severidade=media padrao=BACKTICK_SQL trecho=updateValues.push(`/uploads/empresa_${req.empresaId}/${req.files['logo'][0].filename}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:408 severidade=media padrao=BACKTICK_SQL trecho=updateValues.push(`/uploads/empresa_${req.empresaId}/${file.filename}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:420 severidade=media padrao=BACKTICK_SQL trecho=const sql = `UPDATE empresas SET ${updateFields.join(', ')} WHERE id = ?`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:478 severidade=media padrao=BACKTICK_SQL trecho=`SELECT AVG(nota) as media, COUNT([asterisco]) as total FROM avaliacoes WHERE empresa_id = ?`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:534 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:562 severidade=media padrao=BACKTICK_SQL trecho=mediaUrl = `/uploads/empresa_${req.empresaId}/${req.file.filename}`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/CrmController.js:589 severidade=media padrao=BACKTICK_SQL trecho=params.push(`/uploads/empresa_${req.empresaId}/${req.file.filename}`, mediaType);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/ScheduleController.js:30 severidade=media padrao=BACKTICK_SQL trecho=`SELECT [asterisco] FROM horarios_atendimento WHERE empresa_id = ? ORDER BY dia_semana ASC`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:44 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[WhatsAppController] 🚀 Iniciando sessão para empresa ID: ${empresaId}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:61 severidade=media padrao=BACKTICK_SQL trecho=console.error(`[WhatsAppController] ❌ Erro crítico ao iniciar sessão (Empresa ${req.body.empresaId}):`, e.message);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:78 severidade=media padrao=BACKTICK_SQL trecho=console.warn(`[WhatsAppController] ⚠️ Sessão não encontrada para empresa ${empresaId} ao tentar monitorar.`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:88 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[WhatsAppController] 👂 Monitoramento de Atendimento ATIVO para Empresa ${empresaId}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:115 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[Atendimento] 🌙 Empresa ${empresaId} FECHADA. Contato: ${contato}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:132 severidade=media padrao=BACKTICK_SQL trecho=// console.log(`[Atendimento] ✅ Mensagem de ${contato} processada.`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:135 severidade=media padrao=BACKTICK_SQL trecho=console.error(`[WhatsAppController] ❌ Erro no processamento de mensagem: ${error.message}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:151 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[WhatsAppController] 🛑 Encerrando sessão para empresa ${empresaId}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:264 severidade=media padrao=BACKTICK_SQL trecho=const jid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:272 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:276 severidade=alta padrao=INSERT_IGNORE trecho=// 2. Garante que o contato existe (Upsert simplificado via INSERT IGNORE)
+  - recomendacao: Usar INSERT ... ON CONFLICT DO NOTHING no PostgreSQL.
+- controllers/WhatsAppController.js:278 severidade=alta padrao=INSERT_IGNORE trecho=`INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,
+  - recomendacao: Usar INSERT ... ON CONFLICT DO NOTHING no PostgreSQL.
+- controllers/WhatsAppController.js:278 severidade=media padrao=BACKTICK_SQL trecho=`INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:313 severidade=media padrao=BACKTICK_SQL trecho=const jid = telefone.includes('@') ? telefone : `${telefone}@s.whatsapp.net`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:315 severidade=media padrao=BACKTICK_SQL trecho=const urlRelativa = `/uploads/empresa_${empresaId}/${req.file.filename}`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- controllers/WhatsAppController.js:355 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, 1, ?, ?, ?)`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- routes/api.js:44 severidade=media padrao=BACKTICK_SQL trecho=const uploadPath = path.join(process.cwd(), 'public', 'uploads', `empresa_${empresaId}`, dateDir);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- routes/api.js:55 severidade=media padrao=BACKTICK_SQL trecho=const uniqueName = `${Date.now()}_${sanitized}`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- routes/api.js:55 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=const uniqueName = `${Date.now()}_${sanitized}`;
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- routes/api.js:138 severidade=media padrao=BACKTICK_SQL trecho=const jid = number.includes('@') ? number : `${number.replace(/\D/g, '')}@s.whatsapp.net`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- routes/api.js:164 severidade=media padrao=BACKTICK_SQL trecho=const jid = number.includes('@') ? number : `${number.replace(/\D/g, '')}@s.whatsapp.net`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- routes/index.js:30 severidade=media padrao=BACKTICK_SQL trecho=console.log(`🖥️ [DASHBOARD] Acesso permitido para: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- routes/index.js:49 severidade=media padrao=BACKTICK_SQL trecho=console.error(`❌ [DASHBOARD] Empresa ID ${empresaId} não encontrada no DB.`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:44 severidade=media padrao=BACKTICK_SQL trecho=url: `redis://${process.env.REDIS_HOST || '127.0.0.1'}:${process.env.REDIS_PORT || 6379}`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:101 severidade=media padrao=BACKTICK_SQL trecho=console.log(`📡 URL: ${req.method} ${req.url}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:102 severidade=media padrao=BACKTICK_SQL trecho=console.log(`🔑 Session ID: ${req.sessionID}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:106 severidade=media padrao=BACKTICK_SQL trecho=console.log(`🍪 Header Cookie: ${cookieHeader ? 'RECEBIDO' : 'AUSENTE ❌'}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:107 severidade=media padrao=BACKTICK_SQL trecho=if (cookieHeader) console.log(`   Conteúdo: ${cookieHeader.substring(0, 50)}...`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:111 severidade=media padrao=BACKTICK_SQL trecho=console.log(`👤 Usuário Logado: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:113 severidade=media padrao=BACKTICK_SQL trecho=console.log(`👻 Sessão Vazia (Anônimo)`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:148 severidade=media padrao=BACKTICK_SQL trecho=console.log(`\n🚀 [System] SAAS Server rodando na porta ${PORT}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:149 severidade=media padrao=BACKTICK_SQL trecho=console.log(`📡 [Env] ${process.env.NODE_ENV}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- server.js:150 severidade=media padrao=BACKTICK_SQL trecho=console.log(`🔒 [Security] Cookie Secure: ${isHttps ? 'ATIVADO' : 'DESATIVADO'}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/config/db.js:38 severidade=media padrao=BACKTICK_SQL trecho=console.log(`📊 [PostgreSQL] Conectado: ${dbConfig.database} @ ${dbConfig.host}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/config/db.js:53 severidade=media padrao=BACKTICK_SQL trecho=return sql.replace(/\?/g, () => `$${index++}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/config/db.js:62 severidade=media padrao=BACKTICK_SQL trecho=console.error(`[DB Execute Error] ${error.message}\nSQL: ${sql}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/OpenAIManager.js:66 severidade=media padrao=BACKTICK_SQL trecho=console.error(`[OpenAI] Erro Chat Empresa ${empresaId}:`, error.message);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/OpenAIManager.js:82 severidade=media padrao=BACKTICK_SQL trecho=console.log(`[OpenAI] Transcrevendo áudio: ${caminhoArquivo}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/OpenAIManager.js:94 severidade=media padrao=BACKTICK_SQL trecho=console.error(`[OpenAI] Erro Transcrição:`, error.message);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:105 severidade=media padrao=BACKTICK_SQL trecho=console.log(`🚀 [Worker] Iniciando processador da fila: ${this.queueName}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:114 severidade=media padrao=BACKTICK_SQL trecho=// throw new Error(`Sessão ${empresaId} offline`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:127 severidade=media padrao=BACKTICK_SQL trecho=console.error(`❌ Job ${job.id} falhou: ${err.message}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:141 severidade=media padrao=BACKTICK_SQL trecho=// console.log(`Iniciando sessão ${empresaId}...`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:149 severidade=media padrao=BACKTICK_SQL trecho=const authPath = path.join(this.authDir, `empresa_${empresaId}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:181 severidade=media padrao=BACKTICK_SQL trecho=console.error(`❌ [Empresa ${empresaId}] Falha crítica:`, error.message);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:200 severidade=media padrao=BACKTICK_SQL trecho=console.log(`✅ [Empresa ${empresaId}] Conectado`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:252 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=timestamp: Date.now()
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:254 severidade=media padrao=BACKTICK_SQL trecho=jobId: `${empresaId}_${msg.key.id}`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:275 severidade=media padrao=BACKTICK_SQL trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia, created_at) VALUES (?, ?, 0, ?, ?, ?, NOW())`,
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:275 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia, created_at) VALUES (?, ?, 0, ?, ?, ?, NOW())`,
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:285 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=timestamp: Date.now() / 1000,
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:309 severidade=media padrao=BACKTICK_SQL trecho=conteudo = m[Object.keys(m)[0]].caption || (tipo === 'audio' ? '[Áudio]' : `[${tipo}]`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:345 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=// Query adaptada para PostgreSQL usando NOW() - INTERVAL '30 minutes'
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:355 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=AND m.last_msg_time < NOW() - INTERVAL '30 minutes'
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:390 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:391 severidade=alta padrao=ON_DUPLICATE_KEY trecho=ON DUPLICATE KEY UPDATE
+  - recomendacao: Usar INSERT ... ON CONFLICT no PostgreSQL.
+- src/managers/SessionManager.js:394 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=ultima_msg = NOW()
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:409 severidade=media padrao=BACKTICK_SQL trecho=const empresaDir = path.join(this.uploadDir, `empresa_${empresaId}`, dateDir);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:413 severidade=media padrao=BACKTICK_SQL trecho=const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:413 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`;
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:417 severidade=media padrao=BACKTICK_SQL trecho=return `/uploads/empresa_${empresaId}/${dateDir}/${fileName}`;
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:430 severidade=media padrao=BACKTICK_SQL trecho=const pathAuth = path.join(this.authDir, `empresa_${empresaId}`);
+  - recomendacao: Usar aspas duplas para identificadores, ou remover quoting se nao necessario.
+- src/managers/SessionManager.js:441 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=let sql = 'UPDATE empresas SET whatsapp_status = ?, whatsapp_updated_at = NOW()';
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- src/managers/SessionManager.js:443 severidade=baixa padrao=NOW_FUNCTION_OK_REVISAR trecho=sql = 'UPDATE empresas SET whatsapp_status = ?, whatsapp_numero = ?, whatsapp_updated_at = NOW()';
+  - recomendacao: NOW e suportado no PostgreSQL, mas validar timezone e uso de TIMESTAMPTZ.
+- Lista truncada no Markdown. Consulte o JSON completo.
+
+## Queries mapeadas
+
+- controllers/AdminController.js:31 trecho=SELECT
+- controllers/AdminController.js:32 trecho=(SELECT COUNT([asterisco]) FROM empresas WHERE id != 1) as total_empresas,
+- controllers/AdminController.js:33 trecho=(SELECT COUNT([asterisco]) FROM empresas WHERE id != 1 AND ativo = 1) as ativas,
+- controllers/AdminController.js:34 trecho=(SELECT COUNT([asterisco]) FROM empresas WHERE id != 1 AND ativo = 0) as bloqueadas,
+- controllers/AdminController.js:35 trecho=(SELECT COUNT([asterisco]) FROM mensagens) as total_msgs_sistema,
+- controllers/AdminController.js:36 trecho=(SELECT COUNT([asterisco]) FROM usuarios_painel WHERE empresa_id != 1) as total_usuarios,
+- controllers/AdminController.js:37 trecho=(SELECT COUNT([asterisco]) FROM contatos) as total_contatos
+- controllers/AdminController.js:43 trecho=SELECT
+- controllers/AdminController.js:53 trecho=(SELECT COUNT([asterisco]) FROM usuarios_painel WHERE empresa_id = e.id) as total_users,
+- controllers/AdminController.js:54 trecho=(SELECT COUNT([asterisco]) FROM mensagens WHERE empresa_id = e.id) as total_msgs,
+- controllers/AdminController.js:55 trecho=(SELECT COUNT([asterisco]) FROM contatos WHERE empresa_id = e.id) as total_contatos
+- controllers/AdminController.js:113 trecho=`SELECT id FROM usuarios_painel WHERE email = ? UNION SELECT id FROM empresas WHERE nome = ?`,
+- controllers/AdminController.js:131 trecho=`INSERT INTO empresas (
+- controllers/AdminController.js:157 trecho=`INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, cor, ordem) VALUES (?, ?, ?, 0, ?, ?)`,
+- controllers/AdminController.js:171 trecho=`INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho) VALUES (?, ?, ?, ?)`,
+- controllers/AdminController.js:181 trecho=`INSERT INTO horarios_atendimento (empresa_id, dia_semana, horario_abertura, horario_fechamento, ativo)
+- controllers/AdminController.js:190 trecho=`INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, cargo, ativo, telefone, created_at)
+- controllers/AdminController.js:215 trecho=[asterisco] POST /api/super-admin/empresas/update
+- controllers/AdminController.js:223 trecho=`UPDATE empresas SET nome = ?, plano = ?, limite_usuarios = ? WHERE id = ?`,
+- controllers/AdminController.js:230 trecho=`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,
+- controllers/AdminController.js:239 trecho=`UPDATE usuarios_painel SET senha=<REDIGIDO>
+- controllers/AdminController.js:246 trecho=console.error('[SuperAdmin] Erro update:', e);
+- controllers/AdminController.js:260 trecho=await this.db.run('UPDATE empresas SET ativo = ? WHERE id = ?', [ativo ? 1 : 0, id]);
+- controllers/AdminController.js:289 trecho=await this.db.run('DELETE FROM empresas WHERE id = ?', [id]);
+- controllers/AdminController.js:295 trecho=console.error('[SuperAdmin] Erro delete:', e);
+- controllers/AdminController.js:310 trecho=await this.db.run("UPDATE empresas SET whatsapp_status = 'DESCONECTADO' WHERE id = ?", [id]);
+- controllers/AdminPanelController.js:40 trecho='SELECT id, is_admin, nome, email, cargo, ativo FROM usuarios_painel WHERE id = ?',
+- controllers/AdminPanelController.js:51 trecho=`SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia,
+- controllers/AdminPanelController.js:64 trecho='SELECT id, nome, email, is_admin, cargo, ativo, telefone FROM usuarios_painel WHERE empresa_id = ? ORDER BY nome ASC',
+- controllers/AdminPanelController.js:107 trecho=this.db.query("SELECT COUNT([asterisco]) as t FROM mensagens WHERE empresa_id = ?", [empresaId]),
+- controllers/AdminPanelController.js:108 trecho=this.db.query("SELECT COUNT([asterisco]) as t FROM contatos WHERE empresa_id = ?", [empresaId]),
+- controllers/AdminPanelController.js:109 trecho=this.db.query("SELECT COUNT([asterisco]) as t FROM usuarios_painel WHERE empresa_id = ?", [empresaId])
+- controllers/AdminPanelController.js:133 trecho=`SELECT id, nome, email, is_admin, cargo, ativo, telefone, created_at
+- controllers/AuthController.js:42 trecho=SELECT
+- controllers/AuthController.js:88 trecho=await db.run('UPDATE usuarios_painel SET senha=<REDIGIDO>
+- controllers/AuthController.js:166 trecho=const users = await db.query("SELECT id, nome FROM usuarios_painel WHERE email = ?", [email]);
+- controllers/AuthController.js:173 trecho=await db.run("UPDATE usuarios_painel SET senha=<REDIGIDO>
+- controllers/AuthController.js:196 trecho=await db.run("UPDATE usuarios_painel SET senha=<REDIGIDO>
+- controllers/CrmController.js:45 trecho='SELECT [asterisco] FROM mensagens WHERE empresa_id = ? AND remote_jid = ? ORDER BY data_hora ASC',
+- controllers/CrmController.js:76 trecho='SELECT id FROM contatos WHERE empresa_id = ? AND telefone = ?',
+- controllers/CrmController.js:82 trecho=`UPDATE contatos SET nome = ?, status_atendimento = 'ATENDENDO', atendente_id = ? WHERE id = ?`,
+- controllers/CrmController.js:87 trecho=`INSERT INTO contatos (empresa_id, telefone, nome, status_atendimento, atendente_id) VALUES (?, ?, ?, 'ATENDENDO', ?)`,
+- controllers/CrmController.js:93 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'sistema', 'Iniciou uma nova conversa.')`,
+- controllers/CrmController.js:117 trecho='SELECT is_admin FROM usuarios_painel WHERE id = ?',
+- controllers/CrmController.js:124 trecho=SELECT c.[asterisco],
+- controllers/CrmController.js:125 trecho=(SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,
+- controllers/CrmController.js:126 trecho=(SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,
+- controllers/CrmController.js:132 trecho=SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))
+- controllers/CrmController.js:153 trecho=sql += ` AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?)`;
+- controllers/CrmController.js:161 trecho=(c.status_atendimento = 'FILA' AND c.setor_id IN (SELECT setor_id FROM usuarios_setores WHERE usuario_id = ?))
+- controllers/CrmController.js:187 trecho=`UPDATE contatos SET nome=?, cnpj_cpf=?, email=?, endereco=?, anotacoes=? WHERE empresa_id=? AND telefone=?`,
+- controllers/CrmController.js:205 trecho=SELECT c.[asterisco], s.nome as nome_setor
+- controllers/CrmController.js:232 trecho=`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
+- controllers/CrmController.js:239 trecho=const [u] = await this.db.execute('SELECT nome FROM usuarios_painel WHERE id = ?', [atendenteId]);
+- controllers/CrmController.js:260 trecho=const [setor] = await this.db.execute('SELECT mensagem_saudacao, nome FROM setores WHERE id = ?', [setorId]);
+- controllers/CrmController.js:269 trecho=`UPDATE contatos SET status_atendimento = 'FILA', setor_id = ?, atendente_id = NULL WHERE empresa_id = ? AND telefone = ?`,
+- controllers/CrmController.js:274 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+- controllers/CrmController.js:294 trecho=const [user] = await this.db.execute('SELECT nome FROM usuarios_painel WHERE id = ?', [usuarioId]);
+- controllers/CrmController.js:303 trecho=`UPDATE contatos SET status_atendimento = 'ATENDENDO', atendente_id = ? WHERE empresa_id = ? AND telefone = ?`,
+- controllers/CrmController.js:308 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+- controllers/CrmController.js:328 trecho=const [empresa] = await this.db.execute('SELECT msg_avaliacao FROM empresas WHERE id = ?', [req.empresaId]);
+- controllers/CrmController.js:333 trecho=`UPDATE contatos SET status_atendimento = 'AGUARDANDO_AVALIACAO' WHERE empresa_id = ? AND telefone = ?`,
+- controllers/CrmController.js:343 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+- controllers/CrmController.js:366 trecho=`SELECT nome, nome_sistema, logo_url, cor_primaria, mensagens_padrao,
+- controllers/CrmController.js:420 trecho=const sql = `UPDATE empresas SET ${updateFields.join(', ')} WHERE id = ?`;
+- controllers/CrmController.js:441 trecho='UPDATE empresas SET openai_key=<REDIGIDO>
+- controllers/CrmController.js:461 trecho=const [msgs] = await this.db.execute("SELECT COUNT([asterisco]) as t FROM mensagens WHERE empresa_id = ?", [req.empresaId]);
+- controllers/CrmController.js:462 trecho=const [contatos] = await this.db.execute("SELECT COUNT([asterisco]) as t FROM contatos WHERE empresa_id = ?", [req.empresaId]);
+- controllers/CrmController.js:463 trecho=const [users] = await this.db.execute("SELECT COUNT([asterisco]) as t FROM usuarios_painel WHERE empresa_id = ?", [req.empresaId]);
+- controllers/CrmController.js:478 trecho=`SELECT AVG(nota) as media, COUNT([asterisco]) as total FROM avaliacoes WHERE empresa_id = ?`,
+- controllers/CrmController.js:482 trecho=`SELECT a.[asterisco], u.nome as nome_atendente, c.nome as nome_cliente
+- controllers/CrmController.js:518 trecho='SELECT telefone FROM contatos WHERE empresa_id = ?',
+- controllers/CrmController.js:534 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+- controllers/CrmController.js:552 trecho=const [rows] = await this.db.execute('SELECT [asterisco] FROM setores WHERE empresa_id = ? ORDER BY ordem ASC, id ASC', [req.empresaId]);
+- controllers/CrmController.js:570 trecho='INSERT INTO setores (empresa_id, nome, mensagem_saudacao, padrao, media_url, media_type, cor) VALUES (?, ?, ?, 0, ?, ?, ?)',
+- controllers/CrmController.js:579 trecho=let sql = 'UPDATE setores SET nome = ?, mensagem_saudacao = ?, cor = ?';
+- controllers/CrmController.js:605 trecho=await this.db.execute('UPDATE setores SET ordem = ? WHERE id = ? AND empresa_id = ?', [i, ordem[i], req.empresaId]);
+- controllers/CrmController.js:612 trecho=await this.db.execute('DELETE FROM setores WHERE id = ? AND empresa_id = ?', [id, req.empresaId]);
+- controllers/CrmController.js:621 trecho=const [rows] = await this.db.execute('SELECT [asterisco] FROM mensagens_rapidas WHERE empresa_id = ? ORDER BY titulo ASC', [req.empresaId]);
+- controllers/CrmController.js:631 trecho='INSERT INTO mensagens_rapidas (empresa_id, titulo, conteudo, atalho) VALUES (?, ?, ?, ?)',
+- controllers/CrmController.js:638 trecho=await this.db.execute('DELETE FROM mensagens_rapidas WHERE id = ? AND empresa_id = ?', [req.params.id, req.empresaId]);
+- controllers/CrmController.js:648 trecho=SELECT u.id, u.nome, u.email, u.is_admin, u.telefone, u.cargo, u.ativo,
+- controllers/CrmController.js:649 trecho=(SELECT GROUP_CONCAT(s.nome SEPARATOR ', ')
+- controllers/CrmController.js:653 trecho=(SELECT GROUP_CONCAT(s.id SEPARATOR ',')
+- controllers/CrmController.js:667 trecho=const [emp] = await this.db.execute('SELECT limite_usuarios FROM empresas WHERE id = ?', [req.empresaId]);
+- controllers/CrmController.js:668 trecho=const [qtd] = await this.db.execute('SELECT COUNT([asterisco]) as total FROM usuarios_painel WHERE empresa_id = ?', [req.empresaId]);
+- controllers/CrmController.js:678 trecho='INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+- controllers/CrmController.js:683 trecho=await conn.execute('INSERT INTO usuarios_setores (usuario_id, setor_id) VALUES (?, ?)', [resUser.insertId, sId]);
+- controllers/CrmController.js:697 trecho=await this.db.execute('DELETE FROM usuarios_painel WHERE id=? AND empresa_id=?', [req.params.id, req.empresaId]);
+- controllers/CrmController.js:708 trecho='SELECT [asterisco] FROM etiquetas WHERE empresa_id = ? ORDER BY nome ASC',
+- controllers/CrmController.js:724 trecho='INSERT INTO etiquetas (empresa_id, nome, cor) VALUES (?, ?, ?)',
+- controllers/CrmController.js:736 trecho=await this.db.execute('DELETE FROM etiquetas WHERE id = ? AND empresa_id = ?', [id, req.empresaId]);
+- controllers/CrmController.js:747 trecho='SELECT [asterisco] FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',
+- controllers/CrmController.js:753 trecho='DELETE FROM contatos_etiquetas WHERE contato_id = ? AND etiqueta_id = ?',
+- controllers/CrmController.js:759 trecho='INSERT INTO contatos_etiquetas (contato_id, etiqueta_id, empresa_id) VALUES (?, ?, ?)',
+- controllers/ScheduleController.js:30 trecho=`SELECT [asterisco] FROM horarios_atendimento WHERE empresa_id = ? ORDER BY dia_semana ASC`,
+- controllers/ScheduleController.js:64 trecho=UPDATE horarios_atendimento
+- controllers/WhatsAppController.js:228 trecho='SELECT nome FROM usuarios_painel WHERE id = ?',
+- controllers/WhatsAppController.js:269 trecho=// ATUALIZAÇÃO: Uso de this.db.run para INSERT (Novo DB Wrapper)
+- controllers/WhatsAppController.js:272 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo) VALUES (?, ?, 1, 'texto', ?)`,
+- controllers/WhatsAppController.js:276 trecho=// 2. Garante que o contato existe (Upsert simplificado via INSERT IGNORE)
+- controllers/WhatsAppController.js:278 trecho=`INSERT IGNORE INTO contatos (empresa_id, telefone, nome) VALUES (?, ?, ?)`,
+- controllers/WhatsAppController.js:355 trecho=`INSERT INTO mensagens (empresa_id, remote_jid, from_me, tipo, conteudo, url_midia) VALUES (?, ?, 1, ?, ?, ?)`,
+- routes/api.js:213 trecho=router.post('/super-admin/empresas/update', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.updateEmpresa(req, res));
+- routes/api.js:215 trecho=router.post('/super-admin/empresas/:id/delete', isAuthenticated, isSuperAdmin, (req, res) => adminCtrl.deleteEmpresa(req, res));
+- routes/index.js:42 trecho=const result = await db.query('SELECT [asterisco] FROM empresas WHERE id = ? LIMIT 1', [empresaId]);
+- routes/index.js:56 trecho=[setores] = await db.query('SELECT [asterisco] FROM setores WHERE empresa_id = ? ORDER BY ordem ASC', [empresaId]);
+- routes/index.js:57 trecho=[contatos] = await db.query('SELECT [asterisco] FROM contatos WHERE empresa_id = ? ORDER BY ultima_msg DESC LIMIT 50', [empresaId]);
+- src/managers/OpenAIManager.js:19 trecho="SELECT openai_key, openai_ativo FROM empresas WHERE id=<REDIGIDO>
+- src/managers/OpenAIManager.js:40 trecho=const [config] = await this.db.execute("SELECT openai_prompt FROM empresas WHERE id = ?", [empresaId]);
+- src/managers/OpenAIManager.js:45 trecho="SELECT from_me, conteudo FROM mensagens WHERE empresa_id = ? AND remote_jid = ? ORDER BY id DESC LIMIT 6",
+- src/managers/SessionManager.js:146 trecho=this.sessions.delete(empresaId);
+- src/managers/SessionManager.js:174 trecho=sock.ev.on('creds.update', saveCreds);
+- src/managers/SessionManager.js:175 trecho=sock.ev.on('connection.update', (update) => this._handleConnectionUpdate(empresaId, update));
+- src/managers/SessionManager.js:176 trecho=sock.ev.on('messages.upsert', (update) => this._handleMessagesUpsert(empresaId, update));
+- src/managers/SessionManager.js:187 trecho=async _handleConnectionUpdate(empresaId, update) {
+- src/managers/SessionManager.js:188 trecho=const { connection, lastDisconnect, qr } = update;
+- src/managers/SessionManager.js:201 trecho=this.qrCodes.delete(empresaId);
+- src/managers/SessionManager.js:202 trecho=this.reconnectAttempts.delete(empresaId);
+- src/managers/SessionManager.js:214 trecho=this.sessions.delete(empresaId);
+- Lista truncada no Markdown. Consulte o JSON completo.
+
+## Documentacao atualizada
+
+- CONTEXTO_PROJETO.md
+- CHANGELOG.md
+- DECISOES_TECNICAS.md
+- PENDENCIAS.md
+
+## Proxima etapa recomendada
+
+- Etapa 06: corrigir setup_db.js e queries suspeitas priorizando severidade alta.
+

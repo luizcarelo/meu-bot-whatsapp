@@ -1,0 +1,132 @@
+{
+  "gerado_em": "2026-07-06T20:19:13",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_06_1_20260706_201913",
+    "copiados": [
+      "src/managers/SessionManager.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_06_1_manifesto_antes.json",
+  "correcao": {
+    "arquivo": "src/managers/SessionManager.js",
+    "existe": true,
+    "alterado": true,
+    "ocorrencias_antes": {
+      "ON DUPLICATE KEY": 1
+    },
+    "ocorrencias_depois": {
+      "ON DUPLICATE KEY": 0
+    },
+    "substituicoes": [
+      {
+        "de": "ON DUPLICATE KEY UPDATE",
+        "para": "ON CONFLICT (empresa_id, telefone) DO UPDATE SET",
+        "quantidade": 1
+      },
+      {
+        "de": "nome = VALUES(nome)",
+        "para": "nome = EXCLUDED.nome",
+        "quantidade": 1
+      }
+    ],
+    "contexto_antes": [
+      {
+        "linha": 387,
+        "conteudo": ""
+      },
+      {
+        "linha": 388,
+        "conteudo": "const sql = `"
+      },
+      {
+        "linha": 389,
+        "conteudo": "INSERT INTO contatos (empresa_id, telefone, nome, foto_perfil, status_atendimento, created_at, ultima_msg)"
+      },
+      {
+        "linha": 390,
+        "conteudo": "VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())"
+      },
+      {
+        "linha": 391,
+        "conteudo": "ON DUPLICATE KEY UPDATE"
+      },
+      {
+        "linha": 392,
+        "conteudo": "nome = VALUES(nome),"
+      },
+      {
+        "linha": 393,
+        "conteudo": "foto_perfil = IFNULL(VALUES(foto_perfil), foto_perfil),"
+      },
+      {
+        "linha": 394,
+        "conteudo": "ultima_msg = NOW()"
+      },
+      {
+        "linha": 395,
+        "conteudo": "`;"
+      }
+    ],
+    "contexto_depois": [
+      {
+        "linha": 387,
+        "conteudo": ""
+      },
+      {
+        "linha": 388,
+        "conteudo": "const sql = `"
+      },
+      {
+        "linha": 389,
+        "conteudo": "INSERT INTO contatos (empresa_id, telefone, nome, foto_perfil, status_atendimento, created_at, ultima_msg)"
+      },
+      {
+        "linha": 390,
+        "conteudo": "VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())"
+      },
+      {
+        "linha": 391,
+        "conteudo": "ON CONFLICT (empresa_id, telefone) DO UPDATE SET"
+      },
+      {
+        "linha": 392,
+        "conteudo": "nome = EXCLUDED.nome,"
+      },
+      {
+        "linha": 393,
+        "conteudo": "foto_perfil = IFNULL(VALUES(foto_perfil), foto_perfil),"
+      },
+      {
+        "linha": 394,
+        "conteudo": "ultima_msg = NOW()"
+      },
+      {
+        "linha": 395,
+        "conteudo": "`;"
+      }
+    ],
+    "sha256_depois": "2ac29abebceb7f41a166958b376368f0ce648643ff4e6e90db2123d5a9105dea"
+  },
+  "node_check": {
+    "arquivo": "src/managers/SessionManager.js",
+    "existe": true,
+    "ok": true,
+    "stdout": "",
+    "stderr": ""
+  },
+  "grep_proibidos": [],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_06_1_manifesto_depois.json"
+}

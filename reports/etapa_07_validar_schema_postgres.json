@@ -1,0 +1,302 @@
+{
+  "gerado_em": "2026-07-06T20:23:50",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_07_20260706_202350",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md",
+      "script/"
+    ],
+    "ausentes": [
+      "setup_db.js",
+      "schema.sql",
+      "init.sql"
+    ],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_07_manifesto_antes.json",
+  "auditoria_schema": {
+    "arquivos_schema_encontrados": [
+      "script/apply_branding.js",
+      "script/audit_sync.js",
+      "script/backup_database.js",
+      "script/check_auth.js",
+      "script/export_full.js",
+      "script/fix_access.js",
+      "script/force_activate.js",
+      "script/force_stop.js",
+      "script/force_sync.js",
+      "script/seed_data.js",
+      "script/setup_reset.js"
+    ],
+    "total_arquivos_schema": 11,
+    "encontrou_tabela_contatos": true,
+    "encontrou_unico_empresa_telefone": true,
+    "detalhes": [
+      {
+        "arquivo": "script/apply_branding.js",
+        "tamanho_bytes": 1182,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": []
+      },
+      {
+        "arquivo": "script/audit_sync.js",
+        "tamanho_bytes": 1745,
+        "tem_contatos": true,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": [
+          {
+            "linha": 33,
+            "termo": "contatos",
+            "trecho": "// Ajuste 3: Garantir que contatos tem ultima_msg"
+          },
+          {
+            "linha": 35,
+            "termo": "contatos",
+            "trecho": "ALTER TABLE contatos"
+          },
+          {
+            "linha": 38,
+            "termo": "contatos",
+            "trecho": "console.log(\"✅ [Ajuste] Tabela 'contatos' sincronizada.\");"
+          }
+        ]
+      },
+      {
+        "arquivo": "script/backup_database.js",
+        "tamanho_bytes": 3850,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": []
+      },
+      {
+        "arquivo": "script/check_auth.js",
+        "tamanho_bytes": 823,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": [
+          {
+            "linha": 14,
+            "termo": "empresa_id",
+            "trecho": "SELECT u.email, u.empresa_id, e.nome as empresa_nome, e.ativo"
+          },
+          {
+            "linha": 16,
+            "termo": "empresa_id",
+            "trecho": "JOIN empresas e ON u.empresa_id = e.id"
+          }
+        ]
+      },
+      {
+        "arquivo": "script/export_full.js",
+        "tamanho_bytes": 3821,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": []
+      },
+      {
+        "arquivo": "script/fix_access.js",
+        "tamanho_bytes": 1052,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": [
+          {
+            "linha": 19,
+            "termo": "empresa_id",
+            "trecho": "const res = await client.query(\"UPDATE usuarios_painel SET ativo = true WHERE email = $1 RETURNING empresa_id\", ['admin@saas.com']);"
+          }
+        ]
+      },
+      {
+        "arquivo": "script/force_activate.js",
+        "tamanho_bytes": 933,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": [
+          {
+            "linha": 19,
+            "termo": "empresa_id",
+            "trecho": "await client.query(\"UPDATE usuarios_painel SET empresa_id = 1 WHERE email = 'admin@saas.com'\");"
+          }
+        ]
+      },
+      {
+        "arquivo": "script/force_stop.js",
+        "tamanho_bytes": 2572,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": []
+      },
+      {
+        "arquivo": "script/force_sync.js",
+        "tamanho_bytes": 2775,
+        "tem_contatos": true,
+        "tem_unico_empresa_telefone": true,
+        "linhas_relevantes": [
+          {
+            "linha": 34,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT REFERENCES empresas(id) ON DELETE CASCADE,"
+          },
+          {
+            "linha": 36,
+            "termo": "unique",
+            "trecho": "email VARCHAR(100) UNIQUE,"
+          },
+          {
+            "linha": 45,
+            "termo": "contatos",
+            "trecho": "CREATE TABLE IF NOT EXISTS contatos ("
+          },
+          {
+            "linha": 47,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT REFERENCES empresas(id) ON DELETE CASCADE,"
+          },
+          {
+            "linha": 48,
+            "termo": "telefone",
+            "trecho": "telefone VARCHAR(100),"
+          },
+          {
+            "linha": 53,
+            "termo": "empresa_id",
+            "trecho": "UNIQUE (empresa_id, telefone)"
+          },
+          {
+            "linha": 53,
+            "termo": "telefone",
+            "trecho": "UNIQUE (empresa_id, telefone)"
+          },
+          {
+            "linha": 53,
+            "termo": "unique",
+            "trecho": "UNIQUE (empresa_id, telefone)"
+          },
+          {
+            "linha": 58,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT REFERENCES empresas(id) ON DELETE CASCADE,"
+          }
+        ]
+      },
+      {
+        "arquivo": "script/seed_data.js",
+        "tamanho_bytes": 1491,
+        "tem_contatos": false,
+        "tem_unico_empresa_telefone": false,
+        "linhas_relevantes": [
+          {
+            "linha": 28,
+            "termo": "empresa_id",
+            "trecho": "INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_super_admin, is_admin, cargo, ativo)"
+          }
+        ]
+      },
+      {
+        "arquivo": "script/setup_reset.js",
+        "tamanho_bytes": 6283,
+        "tem_contatos": true,
+        "tem_unico_empresa_telefone": true,
+        "linhas_relevantes": [
+          {
+            "linha": 90,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT,"
+          },
+          {
+            "linha": 95,
+            "termo": "empresa_id",
+            "trecho": "FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE"
+          },
+          {
+            "linha": 100,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT,"
+          },
+          {
+            "linha": 102,
+            "termo": "unique",
+            "trecho": "email VARCHAR(100) UNIQUE,"
+          },
+          {
+            "linha": 111,
+            "termo": "empresa_id",
+            "trecho": "FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE"
+          },
+          {
+            "linha": 114,
+            "termo": "contatos",
+            "trecho": "CREATE TABLE contatos ("
+          },
+          {
+            "linha": 116,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT,"
+          },
+          {
+            "linha": 117,
+            "termo": "telefone",
+            "trecho": "telefone VARCHAR(100),"
+          },
+          {
+            "linha": 127,
+            "termo": "empresa_id",
+            "trecho": "UNIQUE (empresa_id, telefone),"
+          },
+          {
+            "linha": 127,
+            "termo": "telefone",
+            "trecho": "UNIQUE (empresa_id, telefone),"
+          },
+          {
+            "linha": 127,
+            "termo": "unique",
+            "trecho": "UNIQUE (empresa_id, telefone),"
+          },
+          {
+            "linha": 128,
+            "termo": "empresa_id",
+            "trecho": "FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE"
+          },
+          {
+            "linha": 133,
+            "termo": "empresa_id",
+            "trecho": "empresa_id INT,"
+          },
+          {
+            "linha": 140,
+            "termo": "empresa_id",
+            "trecho": "FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE"
+          },
+          {
+            "linha": 154,
+            "termo": "empresa_id",
+            "trecho": "INSERT INTO usuarios_painel (id, empresa_id, nome, email, senha, is_super_admin, is_admin)"
+          }
+        ]
+      }
+    ]
+  },
+  "migration": {
+    "necessaria": false,
+    "criada": false,
+    "arquivo": null,
+    "motivo": "Indice ou constraint unica ja encontrada em arquivos locais"
+  },
+  "validacao_migration": {
+    "ok": false,
+    "motivo": "Nenhum arquivo informado"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_07_manifesto_depois.json"
+}

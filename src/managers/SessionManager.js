@@ -388,9 +388,9 @@ class SessionManager {
         const sql = `
             INSERT INTO contatos (empresa_id, telefone, nome, foto_perfil, status_atendimento, created_at, ultima_msg)
             VALUES (?, ?, ?, ?, 'ABERTO', NOW(), NOW())
-            ON DUPLICATE KEY UPDATE 
-                nome = VALUES(nome),
-                foto_perfil = IFNULL(VALUES(foto_perfil), foto_perfil),
+            ON CONFLICT (empresa_id, telefone) DO UPDATE SET 
+                nome = EXCLUDED.nome,
+                foto_perfil = COALESCE(EXCLUDED.foto_perfil, contatos.foto_perfil),
                 ultima_msg = NOW()
         `;
         await this.db.execute(sql, [empresaId, remoteJid, pushName, fotoPerfil]);
