@@ -1,11 +1,9 @@
 /**
  * src/config/db.js
- * Descrição: Singleton de Conexão MySQL (Pool de Conexões)
- * Versão: 7.1 - Enterprise Hybrid (Class-based + Retry Logic)
- * Padrão: Singleton
+ * Descrição: Singleton de Conexão PostgreSQL
  */
 
-const mysql = require('mysql2/promise');
+const { Pool } = require('pg');
 
 class Database {
     constructor() {
@@ -21,106 +19,79 @@ class Database {
     }
 
     init() {
-        // Fallback para variáveis de ambiente
         const dbConfig = {
-            host: process.env.DB_HOST || 'localhost',
-            user: process.env.DB_USER || 'root',
+            host: process.env.DB_HOST || '127.0.0.1',
+            user: process.env.DB_USER || 'postgres',
             password: process.env.DB_PASSWORD || process.env.DB_PASS || '',
-            database: process.env.DB_NAME || 'lcsolucoesdigi',
-            port: process.env.DB_PORT || 3306,
-            
-            // Configurações de Performance (Herdadas do seu código otimizado)
-            waitForConnections: true,
-            connectionLimit: 15,
-            queueLimit: 0,
-            connectTimeout: 60000,
-            
-            // Estabilidade
-            enableKeepAlive: true,
-            keepAliveInitialDelay: 10000,
-            
-            // Regional
-            charset: 'utf8mb4',
-            timezone: '-03:00'
+            database: process.env.DB_NAME || 'whatsappbot-db',
+            port: process.env.DB_PORT || 5432,
+            max: 15,
+            idleTimeoutMillis: 30000,
+            connectionTimeoutMillis: 10000,
         };
 
         try {
-            this.pool = mysql.createPool(dbConfig);
+            this.pool = new Pool(dbConfig);
             
-            // Teste inicial silencioso (logs detalhados apenas em erro)
-            this.pool.getConnection()
-                .then(conn => {
-                    console.log(`📊 [MySQL] Conectado: ${dbConfig.database} @ ${dbConfig.host}`);
-                    conn.release();
+            this.pool.connect()
+                .then(client => {
+                    console.log(`📊 [PostgreSQL] Conectado: ${dbConfig.database} @ ${dbConfig.host}`);
+                    client.release();
                     this.isConnected = true;
                 })
                 .catch(err => {
-                    console.error('❌ [MySQL] Falha na conexão inicial:', err.message);
+                    console.error('❌ [PostgreSQL] Falha na conexão inicial:', err.message);
                 });
-
         } catch (error) {
-            console.error('❌ [FATAL] Erro ao criar pool MySQL:', error.message);
+            console.error('❌ [FATAL] Erro ao criar pool PostgreSQL:', error.message);
         }
     }
 
-    /**
-     * Interface padrão compatível com mysql2/promise.
-     * Utilizada pelo SessionManager e AuthController.
-     * Retorna [rows, fields].
-     */
+    // Traduz consultas com "?" do MySQL para "$1, $2" do PostgreSQL
+    convertQueryToPg(sql) {
+        let index = 1;
+        return sql.replace(/\?/g, () => `$${index++}`);
+    }
+
     async execute(sql, params = []) {
         try {
-            return await this.pool.execute(sql, params);
+            const pgSql = this.convertQueryToPg(sql);
+            const result = await this.pool.query(pgSql, params);
+            return [result.rows, result.fields]; // Mantém compatibilidade com o MySQL
         } catch (error) {
-            // Tratamento de queda de conexão
-            if (error.code === 'PROTOCOL_CONNECTION_LOST') {
-                console.warn('⚠️ [MySQL] Conexão perdida. Tentando reconectar...');
-                // O Pool gerencia a reconexão, mas podemos logar ou tentar retentativa aqui
-            }
             console.error(`[DB Execute Error] ${error.message}\nSQL: ${sql}`);
             throw error;
         }
     }
 
-    /**
-     * Helper simplificado para SELECTs (Retorna apenas os dados).
-     * Útil para controllers de visualização.
-     */
     async query(sql, params = []) {
         const [rows] = await this.execute(sql, params);
         return rows;
     }
 
-    /**
-     * Helper para INSERT/UPDATE/DELETE.
-     * Retorna metadados (insertId, affectedRows).
-     */
     async run(sql, params = []) {
-        const [result] = await this.execute(sql, params);
+        const pgSql = this.convertQueryToPg(sql);
+        const result = await this.pool.query(pgSql, params);
         return {
-            insertId: result.insertId,
-            affectedRows: result.affectedRows,
-            changedRows: result.changedRows
+            insertId: result.rows.length > 0 ? (result.rows[0].id || null) : null,
+            affectedRows: result.rowCount,
+            changedRows: result.rowCount
         };
     }
 
-    /**
-     * Fecha o pool (Graceful Shutdown).
-     */
     async close() {
         if (this.pool) {
             await this.pool.end();
-            console.log('[MySQL] Pool encerrado.');
+            console.log('[PostgreSQL] Pool encerrado.');
         }
     }
 }
 
 const dbInstance = new Database();
 
-// Exporta a instância E o pool (para o express-mysql-session no server.js)
 module.exports = {
-    pool: dbInstance.pool,     // Necessário para Session Store
-    execute: (sql, params) => dbInstance.execute(sql, params), // Atalho direto
+    pool: dbInstance.pool,
+    execute: (sql, params) => dbInstance.execute(sql, params),
     query: (sql, params) => dbInstance.query(sql, params),
     run: (sql, params) => dbInstance.run(sql, params),
     close: () => dbInstance.close()
