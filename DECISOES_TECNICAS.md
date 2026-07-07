@@ -290,7 +290,7 @@ Decidido reiniciar app somente com ETAPA14_2_RESTART_APP=true.
 <!-- ETAPA_15_INICIO -->
 ## Etapa 15 - Decisoes tecnicas
 
-Data: 2026-07-06T22:10:01
+Data: 2026-07-06T22:11:48
 
 Decidido bloquear origem aberta em CORS quando houver sessao e cookie.
 Decidido usar CORS_ORIGINS ou APP_URL como origem permitida em ambiente configurado.

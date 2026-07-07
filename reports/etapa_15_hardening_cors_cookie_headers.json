@@ -1,8 +1,8 @@
 {
-  "gerado_em": "2026-07-06T22:10:01",
+  "gerado_em": "2026-07-06T22:11:48",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
   "backup": {
-    "destino": "backups/etapa_15_20260706_220958",
+    "destino": "backups/etapa_15_20260706_221015",
     "copiados": [
       "server.js",
       "CONTEXTO_PROJETO.md",
@@ -17,16 +17,16 @@
   "auditoria_antes": {
     "existe": true,
     "cors_require": true,
-    "cors_app_use": true,
-    "access_control_origin_star": false,
-    "access_control_credentials_true": false,
-    "etapa15_cors": false,
+    "cors_app_use": false,
+    "access_control_origin_star": true,
+    "access_control_credentials_true": true,
+    "etapa15_cors": true,
     "x_powered_disable": true,
     "headers_etapa14": true,
-    "headers_etapa15": false,
+    "headers_etapa15": true,
     "session_cookie_block": true,
     "cookie_http_only": true,
-    "cookie_same_site": false,
+    "cookie_same_site": true,
     "cookie_secure": true,
     "cookie_name_saas": false,
     "cookie_name_connect": false
@@ -36,20 +36,18 @@
     "existe": true,
     "alterado": true,
     "alteracoes": [
-      "Removido CORS permissivo: 1",
-      "Adicionado middleware CORS seguro",
-      "Adicionados headers finais de seguranca",
-      "Cookie de sessao ajustado com httpOnly, sameSite e secure condicionado"
+      "Removidos headers CORS manuais permissivos: 1",
+      "Cookie de sessao ja parecia ajustado"
     ],
-    "sha256_antes": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
-    "sha256_depois": "7bd9a569617588181cc58c1d5a6ef74451c54ee81a0c6994f2dd9a9ba4bd804b"
+    "sha256_antes": "7bd9a569617588181cc58c1d5a6ef74451c54ee81a0c6994f2dd9a9ba4bd804b",
+    "sha256_depois": "c107e62d0f7944e35b7159dc29ec9beb10e5fd437a5a4859643bc37d2e9585d4"
   },
   "auditoria_depois": {
     "existe": true,
     "cors_require": true,
     "cors_app_use": false,
     "access_control_origin_star": true,
-    "access_control_credentials_true": true,
+    "access_control_credentials_true": false,
     "etapa15_cors": true,
     "x_powered_disable": true,
     "headers_etapa14": true,
@@ -73,125 +71,250 @@
     "ok": false
   },
   "restart_app": {
-    "solicitado": false,
-    "executado": false,
-    "ok": null,
-    "resultado": null
+    "solicitado": true,
+    "executado": true,
+    "ok": true,
+    "resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "restart",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Container whatsapp_bot_app Restarting \n Container whatsapp_bot_app Started",
+      "ok": true
+    }
   },
   "aguardar_app": {
-    "ok": true,
+    "ok": false,
     "tentativas": [
       {
-        "status": 200,
-        "ok": true,
-        "erro": null
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 104] Connection reset by peer"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 104] Connection reset by peer"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 104] Connection reset by peer"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
+      },
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 111] Connection refused"
       }
     ],
-    "segundos": 0
+    "segundos": 90
   },
-  "logs_since": "2026-07-06T22:09:59",
+  "logs_since": "2026-07-06T22:11:46",
   "validacao_login_dashboard": {
     "executado": true,
     "email_configurado": true,
     "senha_configurada": true,
-    "login_ok": true,
-    "dashboard_ok": true,
-    "cookies": [
-      {
-        "name": "connect.sid",
-        "domain": "127.0.0.1",
-        "path": "/",
-        "secure": false
-      }
-    ],
+    "login_ok": false,
+    "dashboard_ok": false,
+    "cookies": [],
     "login": {
       "path": "/api/auth/login",
       "metodo": "POST",
-      "ok": true,
-      "status": 200,
-      "erro": null,
-      "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}",
-      "content_type": "application/json; charset=utf-8",
-      "redirect_url": "http://127.0.0.1:50010/api/auth/login",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "no-referrer",
-        "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
-        "Access-Control-Allow-Origin": "[asterisco]",
-        "Content-Type": "application/json; charset=utf-8",
-        "Content-Length": "258",
-        "ETag": "W/\"102-fxOttme6qligul3c6Pw7h9mpsQQ\"",
-        "Set-Cookie": "connect.sid=s%3AXu3PEF5itUwrx_NGJdwEP77k53vZPs48.TPIUaow1ibVyFxtyAWgjxfUQ8xPpTg4q61QnMRB2%2BKg; Path=/; Expires=Wed, 08 Jul 2026 01:09:59 GMT; HttpOnly",
-        "Date": "Tue, 07 Jul 2026 01:09:59 GMT",
-        "Connection": "close"
-      }
+      "ok": false,
+      "status": null,
+      "erro": "[Errno 111] Connection refused",
+      "body_preview": "",
+      "content_type": "",
+      "redirect_url": null,
+      "headers": {}
     },
     "dashboard": {
       "path": "/dashboard",
       "metodo": "GET",
-      "ok": true,
-      "status": 200,
-      "erro": null,
-      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>CRM Enterprise | Super Admin</title>\n    \n    <!-- TailwindCSS (Design) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: {\n                extend: {\n                    colors: {\n                        primary: '#10b981', // Emerald 500\n                        secondary: '#3b82f6', // Blue 500\n                        dark: '#0f172a'\n                    }\n                }\n            }\n        }\n    </script>\n\n    <!-- Alpine.js (Interatividade) -->\n    <script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n    \n    <!-- FontAwesome & Socket.IO -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    \n    <!-- Estilos Embutidos (Garante carregamento) -->\n    <style>\n        /[asterisco] Fundo Padrão WhatsApp [asterisco]/\n        .bg-chat-pattern {\n            background-color: #e5ddd5;\n        ",
-      "content_type": "text/html; charset=utf-8",
-      "redirect_url": "http://127.0.0.1:50010/dashboard",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "no-referrer",
-        "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
-        "Access-Control-Allow-Origin": "[asterisco]",
-        "Content-Type": "text/html; charset=utf-8",
-        "Content-Length": "26058",
-        "ETag": "W/\"65ca-E05Vvrn6lyw2jthAbGYNDIIEnCg\"",
-        "Set-Cookie": "connect.sid=s%3AXu3PEF5itUwrx_NGJdwEP77k53vZPs48.TPIUaow1ibVyFxtyAWgjxfUQ8xPpTg4q61QnMRB2%2BKg; Path=/; Expires=Wed, 08 Jul 2026 01:09:59 GMT; HttpOnly",
-        "Date": "Tue, 07 Jul 2026 01:09:59 GMT",
-        "Connection": "close"
-      }
+      "ok": false,
+      "status": null,
+      "erro": "[Errno 111] Connection refused",
+      "body_preview": "",
+      "content_type": "",
+      "redirect_url": null,
+      "headers": {}
     }
   },
   "validacao_headers": {
     "normal": {
-      "status": 200,
+      "status": null,
       "x_powered_by": null,
-      "x_content_type_options": "nosniff",
-      "x_frame_options": "SAMEORIGIN",
-      "referrer_policy": "no-referrer",
-      "permissions_policy": "geolocation=(), microphone=(), camera=()",
+      "x_content_type_options": null,
+      "x_frame_options": null,
+      "referrer_policy": null,
+      "permissions_policy": null,
       "cross_origin_opener_policy": null,
-      "access_control_allow_origin": "[asterisco]",
+      "access_control_allow_origin": null,
       "access_control_allow_credentials": null,
       "set_cookie": null
     },
     "origem_permitida": {
-      "status": 200,
+      "status": null,
       "x_powered_by": null,
-      "x_content_type_options": "nosniff",
-      "x_frame_options": "SAMEORIGIN",
-      "referrer_policy": "no-referrer",
-      "permissions_policy": "geolocation=(), microphone=(), camera=()",
+      "x_content_type_options": null,
+      "x_frame_options": null,
+      "referrer_policy": null,
+      "permissions_policy": null,
       "cross_origin_opener_policy": null,
-      "access_control_allow_origin": "[asterisco]",
+      "access_control_allow_origin": null,
       "access_control_allow_credentials": null,
       "set_cookie": null
     },
     "origem_nao_permitida": {
-      "status": 200,
+      "status": null,
       "x_powered_by": null,
-      "x_content_type_options": "nosniff",
-      "x_frame_options": "SAMEORIGIN",
-      "referrer_policy": "no-referrer",
-      "permissions_policy": "geolocation=(), microphone=(), camera=()",
+      "x_content_type_options": null,
+      "x_frame_options": null,
+      "referrer_policy": null,
+      "permissions_policy": null,
       "cross_origin_opener_policy": null,
-      "access_control_allow_origin": "[asterisco]",
+      "access_control_allow_origin": null,
       "access_control_allow_credentials": null,
       "set_cookie": null
     },
     "ok_sem_x_powered_by": true,
-    "ok_headers_basicos": true,
-    "ok_cors_sem_estrela": false,
-    "ok_origem_nao_permitida": false
+    "ok_headers_basicos": false,
+    "ok_cors_sem_estrela": true,
+    "ok_origem_nao_permitida": true
   },
   "logs_coleta": {
     "principal": {
@@ -200,24 +323,36 @@
         "compose",
         "logs",
         "--since",
-        "2026-07-06T22:09:59",
+        "2026-07-06T22:11:46",
         "app"
       ],
       "returncode": 0,
-      "stdout": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------",
+      "stdout": "",
       "stderr": "",
       "ok": true
     },
-    "fallback": null,
-    "texto": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\n"
+    "fallback": {
+      "cmd": [
+        "docker",
+        "logs",
+        "--since",
+        "2026-07-06T22:11:46",
+        "whatsapp_bot_app"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "ok": true
+    },
+    "texto": "\n"
   },
   "logs_novos_analise": {
-    "total_linhas": 52,
+    "total_linhas": 1,
     "linhas_session_id": 0,
     "linhas_cookie": 0,
     "linhas_email": 0,
     "achados": [],
-    "amostra": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------"
+    "amostra": ""
   },
   "documentacao_atualizada": [
     "CONTEXTO_PROJETO.md",

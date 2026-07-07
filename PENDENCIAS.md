@@ -318,7 +318,7 @@ Validar ambiente externo com HTTPS antes de producao.
 <!-- ETAPA_15_INICIO -->
 ## Pendencias apos Etapa 15
 
-Data: 2026-07-06T22:10:01
+Data: 2026-07-06T22:11:48
 
 Se o app nao foi reiniciado, reiniciar em janela controlada com ETAPA15_RESTART_APP=true.
 Definir CORS_ORIGINS no ambiente final com dominio real HTTPS.

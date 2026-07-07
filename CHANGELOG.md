@@ -316,7 +316,7 @@ Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_15_INICIO -->
 ## Etapa 15 - Hardening de CORS e cookies
 
-Data: 2026-07-06T22:10:01
+Data: 2026-07-06T22:11:48
 
 Removida configuracao CORS permissiva quando localizada.
 Adicionado middleware CORS controlado por CORS_ORIGINS ou APP_URL.

@@ -1,7 +1,7 @@
 {
-  "gerado_em": "2026-07-06T22:10:01",
+  "gerado_em": "2026-07-06T22:11:48",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
-  "total_arquivos": 197,
+  "total_arquivos": 200,
   "arquivos": [
     {
       "arquivo": ".env",
@@ -31,17 +31,17 @@
     {
       "arquivo": "CHANGELOG.md",
       "tamanho_bytes": 10504,
-      "sha256": "1241a5cca165497748dba61de185f94b4f8739d3e9ea23f3a0e3dc8738e74178"
+      "sha256": "700612f981c99e382be7ee28c4c57e6395297219598765a55b9520db74f79ab3"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 11205,
-      "sha256": "7db13b836268069740355d1d19a137070a4d137db6bd553bb57f0d83a81523b2"
+      "tamanho_bytes": 11203,
+      "sha256": "911b5280ffbe6de543b737ebcfd9607a8d000540b55c14054ac896f4127cc659"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
       "tamanho_bytes": 10103,
-      "sha256": "8396c962fe4c10709aab70a6e8ff07df648700f3422a8dc934c3430d4f771960"
+      "sha256": "fbe9f4e5c08bc10e26e27de940ad7c74367f4435bf51ea0c4b5d5ec44fad4a2b"
     },
     {
       "arquivo": "Dockerfile",
@@ -56,7 +56,7 @@
     {
       "arquivo": "PENDENCIAS.md",
       "tamanho_bytes": 11283,
-      "sha256": "07a284feb82d573932cf40535212e396adf7170e9237724434edaa40766cb4c8"
+      "sha256": "599270d39b258bec9f88e60c368aab34d55c4646046a6c4a8b41e0c0b978cc72"
     },
     {
       "arquivo": "README.md",
@@ -704,9 +704,24 @@
       "sha256": "c82f2f5bca0349883be73ced13591a8667234901e251c1b6ee708f93a9229898"
     },
     {
+      "arquivo": "reports/etapa_15_hardening_cors_cookie_headers.json",
+      "tamanho_bytes": 15283,
+      "sha256": "193f6b94b05741992c37c17df6dd4288a10a503a61e4c25980b034d3add7837c"
+    },
+    {
+      "arquivo": "reports/etapa_15_hardening_cors_cookie_headers.md",
+      "tamanho_bytes": 2964,
+      "sha256": "9c469898751448a3e4f6be400c5a965d7f614fbd57369abc29bd665015941e69"
+    },
+    {
       "arquivo": "reports/etapa_15_manifesto_antes.json",
-      "tamanho_bytes": 36502,
-      "sha256": "1d7c7edcbd60dec35dac1c4149285628d63b675b5eee589827a2add27920d733"
+      "tamanho_bytes": 37265,
+      "sha256": "f80a42f7905928f8c88b7fab4f81dcc08283334927e5f836eec52696c03ff735"
+    },
+    {
+      "arquivo": "reports/etapa_15_manifesto_depois.json",
+      "tamanho_bytes": 36687,
+      "sha256": "608fe7a22365cd74a4e694c56fd9ea20848bccc7a5a91cbfa978d0c4d7a178d7"
     },
     {
       "arquivo": "routes/api.js",
@@ -925,8 +940,8 @@
     },
     {
       "arquivo": "server.js",
-      "tamanho_bytes": 7902,
-      "sha256": "7bd9a569617588181cc58c1d5a6ef74451c54ee81a0c6994f2dd9a9ba4bd804b"
+      "tamanho_bytes": 7882,
+      "sha256": "c107e62d0f7944e35b7159dc29ec9beb10e5fd437a5a4859643bc37d2e9585d4"
     },
     {
       "arquivo": "src/config/db.js",

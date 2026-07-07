@@ -347,14 +347,14 @@ Logs novos com nome de empresa: 0.
 <!-- ETAPA_15_INICIO -->
 ## Etapa 15 - CORS, cookie e headers finais
 
-Data: 2026-07-06T22:10:01
+Data: 2026-07-06T22:11:48
 
 Foi aplicado hardening de CORS, cookie de sessao e headers HTTP finais.
-CORS seguro antes: False.
+CORS seguro antes: True.
 CORS seguro depois: True.
 SameSite depois: True.
 Node check OK: False.
-Restart executado: False.
-Headers basicos OK em runtime: True.
-CORS sem origem aberta em runtime: False.
+Restart executado: True.
+Headers basicos OK em runtime: False.
+CORS sem origem aberta em runtime: True.
 <!-- ETAPA_15_FIM -->

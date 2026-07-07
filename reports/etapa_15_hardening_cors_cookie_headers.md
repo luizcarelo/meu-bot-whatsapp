@@ -1,54 +1,52 @@
 # Etapa 15 - Hardening de CORS, cookie e headers finais
 
-Data: 2026-07-06T22:10:01
+Data: 2026-07-06T22:11:48
 
 ## Resumo
 
-- Backup criado em: backups/etapa_15_20260706_220958
+- Backup criado em: backups/etapa_15_20260706_221015
 - Manifesto antes: reports/etapa_15_manifesto_antes.json
 - Manifesto depois: reports/etapa_15_manifesto_depois.json
 - server.js alterado: True
 - Node check OK: False
-- Restart solicitado: False
-- Restart executado: False
-- Login OK: True
-- Dashboard OK: True
-- Headers basicos OK: True
+- Restart solicitado: True
+- Restart executado: True
+- Login OK: False
+- Dashboard OK: False
+- Headers basicos OK: False
 - Sem X-Powered-By: True
-- CORS sem origem aberta: False
-- Origem nao permitida bloqueada: False
+- CORS sem origem aberta: True
+- Origem nao permitida bloqueada: True
 - Logs novos Session ID: 0
 - Logs novos cookie: 0
 - Logs novos email: 0
 
 ## Auditoria antes
 
-- access_control_credentials_true: False
-- access_control_origin_star: False
+- access_control_credentials_true: True
+- access_control_origin_star: True
 - cookie_http_only: True
 - cookie_name_connect: False
 - cookie_name_saas: False
-- cookie_same_site: False
+- cookie_same_site: True
 - cookie_secure: True
-- cors_app_use: True
+- cors_app_use: False
 - cors_require: True
-- etapa15_cors: False
+- etapa15_cors: True
 - existe: True
 - headers_etapa14: True
-- headers_etapa15: False
+- headers_etapa15: True
 - session_cookie_block: True
 - x_powered_disable: True
 
 ## Alteracoes aplicadas
 
-- Removido CORS permissivo: 1
-- Adicionado middleware CORS seguro
-- Adicionados headers finais de seguranca
-- Cookie de sessao ajustado com httpOnly, sameSite e secure condicionado
+- Removidos headers CORS manuais permissivos: 1
+- Cookie de sessao ja parecia ajustado
 
 ## Auditoria depois
 
-- access_control_credentials_true: True
+- access_control_credentials_true: False
 - access_control_origin_star: True
 - cookie_http_only: True
 - cookie_name_connect: False
@@ -80,26 +78,25 @@ Node.js v24.18.0
 ## Validacao headers runtime
 
 - Sem X-Powered-By: True
-- Headers basicos OK: True
-- CORS sem origem aberta: False
-- Origem nao permitida bloqueada: False
-- ACAO origem permitida: [asterisco]
-- ACAO origem nao permitida: [asterisco]
-- X-Content-Type-Options: nosniff
-- X-Frame-Options: SAMEORIGIN
-- Referrer-Policy: no-referrer
+- Headers basicos OK: False
+- CORS sem origem aberta: True
+- Origem nao permitida bloqueada: True
+- ACAO origem permitida: None
+- ACAO origem nao permitida: None
+- X-Content-Type-Options: None
+- X-Frame-Options: None
+- Referrer-Policy: None
 
 ## Validacao login e dashboard
 
 - Executada: True
-- Login OK: True
-- Dashboard OK: True
-- Cookies recebidos: 1
-- Cookie: name=connect.sid, secure=False
+- Login OK: False
+- Dashboard OK: False
+- Cookies recebidos: 0
 
 ## Logs novos
 
-- Linhas analisadas: 52
+- Linhas analisadas: 1
 - Linhas Session ID: 0
 - Linhas cookie: 0
 - Linhas email: 0
