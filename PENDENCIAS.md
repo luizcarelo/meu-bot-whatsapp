@@ -338,3 +338,15 @@ Definir CORS_ORIGINS no ambiente final com dominio real HTTPS.
 Definir COOKIE_SECURE=true apenas com HTTPS valido.
 Planejar rate limit e politica CSP dedicada.
 <!-- ETAPA_15_1_FIM -->
+
+<!-- ETAPA_15_2_INICIO -->
+## Pendencias apos Etapa 15.2
+
+Data: 2026-07-06T22:21:48
+
+Se algum header ou CORS ainda estiver inadequado, propor correcao pequena e especifica.
+Definir CORS_ORIGINS no ambiente final com dominio real HTTPS.
+Definir COOKIE_SECURE=true apenas com HTTPS valido.
+Validar ambiente externo com HTTPS.
+Planejar rate limit e politica CSP dedicada.
+<!-- ETAPA_15_2_FIM -->

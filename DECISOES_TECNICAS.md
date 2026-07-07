@@ -309,3 +309,14 @@ Decidido nao alterar banco nem regra de autenticacao.
 Decidido reiniciar app somente apos node --check OK.
 Decidido manter a Etapa 15 para revisao posterior de CORS e headers.
 <!-- ETAPA_15_1_FIM -->
+
+<!-- ETAPA_15_2_INICIO -->
+## Etapa 15.2 - Decisoes tecnicas
+
+Data: 2026-07-06T22:21:48
+
+Decidido auditar antes de nova alteracao em CORS e headers.
+Decidido nao reiniciar app nesta etapa.
+Decidido usar teste com Origin local e Origin externo nao permitido.
+Decidido manter esta etapa como baseline de seguranca HTTP.
+<!-- ETAPA_15_2_FIM -->

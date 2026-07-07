@@ -372,3 +372,22 @@ App home OK: True.
 Login OK: True.
 Dashboard OK: True.
 <!-- ETAPA_15_1_FIM -->
+
+<!-- ETAPA_15_2_INICIO -->
+## Etapa 15.2 - Auditoria sem alteracao de CORS, cookie e headers
+
+Data: 2026-07-06T22:21:48
+
+Foi executada auditoria sem alteracao de codigo, banco ou container.
+Node check OK: True.
+Home OK: True.
+Login OK: True.
+Dashboard OK: True.
+Headers basicos OK: True.
+Sem X-Powered-By: True.
+CORS sem estrela: True.
+Origin externo bloqueado: True.
+Logs novos com Session ID: 0.
+Logs novos com cookie: 0.
+Logs novos com email: 0.
+<!-- ETAPA_15_2_FIM -->
