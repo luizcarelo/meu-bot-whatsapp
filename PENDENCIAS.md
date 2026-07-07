@@ -292,3 +292,37 @@ Revisar CORS permissivo em etapa dedicada.
 Revisar configuracao completa de cookie de sessao para HTTPS producao.
 Planejar rate limit e politica de seguranca de conteudo.
 <!-- ETAPA_14_FIM -->
+
+<!-- ETAPA_14_1_INICIO -->
+## Pendencias apos Etapa 14.1
+
+Data: 2026-07-06T21:55:04
+
+Revisar CORS permissivo em etapa dedicada.
+Revisar configuracao completa de cookie de sessao para HTTPS producao.
+Planejar rate limit e politica de seguranca de conteudo.
+Validar ambiente externo com HTTPS antes de producao.
+<!-- ETAPA_14_1_FIM -->
+
+<!-- ETAPA_14_2_INICIO -->
+## Pendencias apos Etapa 14.2
+
+Data: 2026-07-06T22:04:35
+
+Revisar CORS permissivo em etapa dedicada.
+Revisar cookie SameSite e secure para HTTPS producao.
+Planejar rate limit e politica de seguranca de conteudo.
+Validar ambiente externo com HTTPS antes de producao.
+<!-- ETAPA_14_2_FIM -->
+
+<!-- ETAPA_15_INICIO -->
+## Pendencias apos Etapa 15
+
+Data: 2026-07-06T22:10:01
+
+Se o app nao foi reiniciado, reiniciar em janela controlada com ETAPA15_RESTART_APP=true.
+Definir CORS_ORIGINS no ambiente final com dominio real HTTPS.
+Definir COOKIE_SECURE=true apenas com HTTPS valido.
+Validar ambiente externo com HTTPS.
+Planejar rate limit e politica CSP dedicada.
+<!-- ETAPA_15_FIM -->

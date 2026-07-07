@@ -287,3 +287,41 @@ Adicionados headers HTTP basicos quando possivel.
 Executado node --check em server.js.
 Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_14_FIM -->
+
+<!-- ETAPA_14_1_INICIO -->
+## Etapa 14.1 - Validacao runtime do hardening
+
+Data: 2026-07-06T21:55:04
+
+Comparado server.js local com server.js dentro do container app.
+Executado rebuild do app somente quando solicitado por variavel de ambiente.
+Validado login e dashboard apos disponibilidade do app.
+Analisados logs novos para confirmar ausencia de Session ID e cookies.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_14_1_FIM -->
+
+<!-- ETAPA_14_2_INICIO -->
+## Etapa 14.2 - Sanitizacao de logs de usuario
+
+Data: 2026-07-06T22:04:35
+
+Sanitizados logs de AuthController, rotas e servidor.
+Removida exposicao de email em logs de sucesso de login e dashboard.
+Removida exposicao de senha temporaria em log de recuperacao.
+Mantidos logs com usuario_id e empresa_id.
+Executado node --check nos arquivos relevantes.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_14_2_FIM -->
+
+<!-- ETAPA_15_INICIO -->
+## Etapa 15 - Hardening de CORS e cookies
+
+Data: 2026-07-06T22:10:01
+
+Removida configuracao CORS permissiva quando localizada.
+Adicionado middleware CORS controlado por CORS_ORIGINS ou APP_URL.
+Ajustado cookie de sessao com httpOnly, sameSite e secure condicionado.
+Validados headers HTTP basicos.
+Executado node --check em server.js.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_15_FIM -->

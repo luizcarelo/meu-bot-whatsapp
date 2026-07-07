@@ -264,3 +264,37 @@ Decidido nao reiniciar app por padrao.
 Decidido permitir restart somente com ETAPA14_RESTART_APP=true.
 Decidido adicionar headers basicos sem alterar regras de negocio.
 <!-- ETAPA_14_FIM -->
+
+<!-- ETAPA_14_1_INICIO -->
+## Etapa 14.1 - Decisoes tecnicas
+
+Data: 2026-07-06T21:55:04
+
+Decidido comparar hashes para confirmar se o container usa o codigo atualizado.
+Decidido nao fazer rebuild automaticamente sem ETAPA14_1_REBUILD_APP=true.
+Decidido analisar logs novos usando marco temporal da propria etapa.
+Decidido manter a validacao sem alterar banco.
+<!-- ETAPA_14_1_FIM -->
+
+<!-- ETAPA_14_2_INICIO -->
+## Etapa 14.2 - Decisoes tecnicas
+
+Data: 2026-07-06T22:04:35
+
+Decidido substituir logs identificaveis por logs com IDs internos.
+Decidido nao alterar regras de autenticacao.
+Decidido nao alterar banco.
+Decidido reiniciar app somente com ETAPA14_2_RESTART_APP=true.
+<!-- ETAPA_14_2_FIM -->
+
+<!-- ETAPA_15_INICIO -->
+## Etapa 15 - Decisoes tecnicas
+
+Data: 2026-07-06T22:10:01
+
+Decidido bloquear origem aberta em CORS quando houver sessao e cookie.
+Decidido usar CORS_ORIGINS ou APP_URL como origem permitida em ambiente configurado.
+Decidido usar origens locais somente como fallback de desenvolvimento.
+Decidido condicionar secure do cookie a NODE_ENV production e COOKIE_SECURE true.
+Decidido manter restart dependente de ETAPA15_RESTART_APP=true.
+<!-- ETAPA_15_FIM -->

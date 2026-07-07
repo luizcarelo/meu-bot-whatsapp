@@ -313,3 +313,48 @@ Linhas sensiveis depois cookie: 0.
 Node check OK: True.
 Restart app executado: True.
 <!-- ETAPA_14_FIM -->
+
+<!-- ETAPA_14_1_INICIO -->
+## Etapa 14.1 - Runtime do hardening validado
+
+Data: 2026-07-06T21:55:04
+
+Foi validado o runtime do hardening aplicado na Etapa 14.
+Server local e container com mesmo hash: True.
+Rebuild solicitado: False.
+Rebuild executado: False.
+Login OK: True.
+Dashboard OK: True.
+Logs novos com Session ID: 0.
+Logs novos com cookie: 0.
+<!-- ETAPA_14_1_FIM -->
+
+<!-- ETAPA_14_2_INICIO -->
+## Etapa 14.2 - Logs de usuario sanitizados
+
+Data: 2026-07-06T22:04:35
+
+Foi aplicada sanitizacao adicional dos logs de usuario e empresa.
+Console email depois: 0.
+Console empresa_nome depois: 0.
+Console senha temporaria depois: 0.
+Node check OK: True.
+Restart executado: True.
+Logs novos com email: 0.
+Logs novos com nome de empresa: 0.
+<!-- ETAPA_14_2_FIM -->
+
+<!-- ETAPA_15_INICIO -->
+## Etapa 15 - CORS, cookie e headers finais
+
+Data: 2026-07-06T22:10:01
+
+Foi aplicado hardening de CORS, cookie de sessao e headers HTTP finais.
+CORS seguro antes: False.
+CORS seguro depois: True.
+SameSite depois: True.
+Node check OK: False.
+Restart executado: False.
+Headers basicos OK em runtime: True.
+CORS sem origem aberta em runtime: False.
+<!-- ETAPA_15_FIM -->

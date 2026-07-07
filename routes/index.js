@@ -27,7 +27,7 @@ router.get('/login', (req, res) => {
 router.get('/dashboard', isAuthenticated, async (req, res) => {
     try {
         // [DEBUG] Diagnóstico
-        console.log(`🖥️ [DASHBOARD] Acesso permitido para: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);
+        console.log(`[DASHBOARD] Acesso permitido empresa_id=${req.session?.empresaId || 'N/A'}`);
 
         const empresaId = req.session.empresaId;
 

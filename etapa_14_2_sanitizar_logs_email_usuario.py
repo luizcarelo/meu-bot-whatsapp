@@ -2,26 +2,28 @@
 # -*- coding: utf-8 -*-
 
 """
-Etapa 14.1 - Validar runtime do hardening
+Etapa 14.2 - Sanitizar logs com email de usuario e nome de empresa
 
 Objetivo:
-- Criar backup documental.
+- Criar backup antes de alterar.
 - Gerar manifesto antes e depois.
-- Comparar server.js local com server.js dentro do container app.
-- Detectar se o container esta usando codigo antigo.
-- Fazer rebuild somente se ETAPA14_1_REBUILD_APP=true.
-- Aguardar app responder na porta local.
-- Validar login e dashboard.
-- Coletar logs novos apos a validacao, evitando contar historico antigo.
-- Confirmar reducao de Session ID e cookie nos logs novos.
+- Sanitizar logs em controllers/AuthController.js, routes/index.js e server.js.
+- Remover email, nome de empresa e senha temporaria dos logs.
+- Manter logs uteis com usuario_id e empresa_id.
+- Nao alterar banco.
+- Nao alterar regra de autenticacao.
+- Rodar node --check nos arquivos alterados.
+- Reiniciar app somente se ETAPA14_2_RESTART_APP=true.
+- Validar login e dashboard quando credenciais forem fornecidas.
+- Coletar logs novos e validar ausencia de Session ID, cookie e email.
 - Atualizar CONTEXTO_PROJETO.md, CHANGELOG.md, DECISOES_TECNICAS.md e PENDENCIAS.md.
 - Gerar relatorios JSON e Markdown em reports.
 
-Como executar sem rebuild:
-sudo ETAPA14_1_LOGIN_EMAIL='admin@saas.com' ETAPA14_1_LOGIN_PASSWORD='SUA_SENHA' python3 etapa_14_1_validar_runtime_hardening.py
+Como executar sem restart:
+sudo ETAPA14_2_LOGIN_EMAIL='admin@saas.com' ETAPA14_2_LOGIN_PASSWORD='123456' python3 etapa_14_2_sanitizar_logs_email_usuario.py
 
-Como executar com rebuild:
-sudo ETAPA14_1_REBUILD_APP=true ETAPA14_1_LOGIN_EMAIL='admin@saas.com' ETAPA14_1_LOGIN_PASSWORD='SUA_SENHA' python3 etapa_14_1_validar_runtime_hardening.py
+Como executar com restart:
+sudo ETAPA14_2_RESTART_APP=true ETAPA14_2_LOGIN_EMAIL='admin@saas.com' ETAPA14_2_LOGIN_PASSWORD='123456' python3 etapa_14_2_sanitizar_logs_email_usuario.py
 """
 
 import os
@@ -40,7 +42,12 @@ ROOT = Path.cwd()
 REPORTS_DIR = ROOT / "reports"
 BACKUPS_DIR = ROOT / "backups"
 
-SERVER_JS = ROOT / "server.js"
+ARQUIVOS_ALVO = [
+    "controllers/AuthController.js",
+    "routes/index.js",
+    "server.js"
+]
+
 BASE_URL = "http://127.0.0.1:50010"
 LOGIN_PATH = "/api/auth/login"
 DASHBOARD_PATH = "/dashboard"
@@ -53,6 +60,9 @@ DOCS_OBRIGATORIOS = [
 ]
 
 ARQUIVOS_BACKUP_DIRETO = [
+    "controllers/AuthController.js",
+    "routes/index.js",
+    "server.js",
     "CONTEXTO_PROJETO.md",
     "CHANGELOG.md",
     "DECISOES_TECNICAS.md",
@@ -68,6 +78,7 @@ IGNORAR_MANIFESTO_DIRS = [
 ]
 
 CHAVES_EMAIL = [
+    "ETAPA14_2_LOGIN_EMAIL",
     "ETAPA14_1_LOGIN_EMAIL",
     "ETAPA14_LOGIN_EMAIL",
     "ETAPA13_LOGIN_EMAIL",
@@ -80,6 +91,7 @@ CHAVES_EMAIL = [
 ]
 
 CHAVES_SENHA = [
+    "ETAPA14_2_LOGIN_PASSWORD",
     "ETAPA14_1_LOGIN_PASSWORD",
     "ETAPA14_LOGIN_PASSWORD",
     "ETAPA13_LOGIN_PASSWORD",
@@ -378,93 +390,195 @@ def run_cmd(cmd, timeout=60):
         }
 
 
-def verificar_docker():
-    return {
-        "docker_version": run_cmd(["docker", "--version"], 20),
-        "docker_compose_version": run_cmd(["docker", "compose", "version"], 20),
-        "docker_compose_ps": run_cmd(["docker", "compose", "ps"], 30)
+def linha_tem_log_sensivel_email(linha):
+    low = linha.lower()
+
+    if "console.log" not in low:
+        return False
+
+    termos = [
+        "user.email",
+        "req.session.user.email",
+        "empresa_nome",
+        "novaSenha",
+        "nova senha",
+        "senha para",
+        "recuperação de senha",
+        "recuperacao de senha",
+        "[auth] sucesso",
+        "[dashboard] acesso permitido",
+        "senha migrada"
+    ]
+
+    for termo in termos:
+        if termo.lower() in low:
+            return True
+
+    return False
+
+
+def sanitizar_linha_js(linha):
+    low = linha.lower()
+    indent = linha[:len(linha) - len(linha.lstrip())]
+
+    if "senha migrada" in low:
+        return indent + "console.log(`[AUTH] Senha migrada para bcrypt usuario_id=${user.id}`);"
+
+    if "debug" in low and "senha" in low:
+        return indent + "console.log(`[AUTH] Recuperacao de senha processada usuario_id=${user.id}`);"
+
+    if "recuper" in low and "senha" in low and "console.log" in low:
+        return indent + "console.log(`[AUTH] Recuperacao de senha processada usuario_id=${user.id}`);"
+
+    if "[auth]" in low and "sucesso" in low:
+        return indent + "console.log(`[AUTH] Login OK usuario_id=${user.id} empresa_id=${user.empresa_id}`);"
+
+    if "[dashboard]" in low or "dashboard" in low:
+        return indent + "console.log(`[DASHBOARD] Acesso permitido empresa_id=${req.session?.empresaId || 'N/A'}`);"
+
+    if "usuário logado" in low or "usuario logado" in low:
+        return indent + "console.log(`[REQ] Usuario autenticado empresa_id=${req.session?.empresaId || 'N/A'}`);"
+
+    return indent + "console.log('[LOG] Evento seguro registrado');"
+
+
+def sanitizar_arquivo_js(rel_path):
+    path = ROOT / rel_path
+    texto = ler_texto(path)
+
+    resultado = {
+        "arquivo": rel_path,
+        "existe": path.exists(),
+        "alterado": False,
+        "linhas_sanitizadas": 0,
+        "sha256_antes": sha256_arquivo(path) if path.exists() else None,
+        "sha256_depois": None
     }
 
+    if texto is None:
+        resultado["erro"] = "Arquivo ausente ou ilegivel"
+        return resultado
 
-def localizar_server_container():
-    script = (
-        "set -eu; "
-        "for p in /app/server.js /usr/src/app/server.js /home/node/app/server.js ./server.js; do "
-        "if [ -f \"$p\" ]; then echo \"$p\"; exit 0; fi; "
-        "done; "
-        "find /app /usr/src/app /home/node/app -maxdepth 4 -name server.js 2>/dev/null | head -n 1"
-    )
+    linhas = texto.splitlines()
+    novas = []
 
-    r = run_cmd(["docker", "compose", "exec", "-T", "app", "sh", "-lc", script], 60)
+    for linha in linhas:
+        if linha_tem_log_sensivel_email(linha):
+            novas.append(sanitizar_linha_js(linha))
+            resultado["linhas_sanitizadas"] += 1
+        else:
+            novas.append(linha)
 
-    path = ""
-    if r.get("stdout"):
-        path = r["stdout"].splitlines()[0].strip()
+    novo = "\n".join(novas)
+    if texto.endswith("\n"):
+        novo += "\n"
 
-    return {
-        "ok": bool(r.get("ok") and path),
-        "path": path,
-        "resultado": r
-    }
+    if novo != texto:
+        gravar_texto(path, novo)
+        resultado["alterado"] = True
+
+    resultado["sha256_depois"] = sha256_arquivo(path)
+    return resultado
 
 
-def hash_server_container(path):
-    if not path:
-        return {
-            "ok": False,
-            "hash": None,
-            "resultado": None
+def aplicar_sanitizacao():
+    resultados = []
+
+    for rel_path in ARQUIVOS_ALVO:
+        resultados.append(sanitizar_arquivo_js(rel_path))
+
+    return resultados
+
+
+def auditar_fontes():
+    itens = []
+
+    for rel_path in ARQUIVOS_ALVO:
+        path = ROOT / rel_path
+        texto = ler_texto(path)
+
+        item = {
+            "arquivo": rel_path,
+            "existe": path.exists(),
+            "console_email": 0,
+            "console_empresa_nome": 0,
+            "console_senha_temporaria": 0,
+            "console_cookie_sessao": 0
         }
 
-    script = (
-        "if command -v sha256sum >/dev/null 2>&1; then "
-        "sha256sum " + shell_quote(path) + " | awk '{print $1}'; "
-        "else "
-        "node -e \"const fs=require('fs');const c=require('crypto');"
-        "console.log(c.createHash('sha256').update(fs.readFileSync(process.argv[1])).digest('hex'))\" "
-        + shell_quote(path) + "; "
-        "fi"
-    )
+        if texto is None:
+            item["erro"] = "Arquivo ausente ou ilegivel"
+            itens.append(item)
+            continue
 
-    r = run_cmd(["docker", "compose", "exec", "-T", "app", "sh", "-lc", script], 60)
+        for linha in texto.splitlines():
+            low = linha.lower()
 
-    h = ""
-    if r.get("stdout"):
-        h = r["stdout"].splitlines()[0].strip()
+            if "console.log" not in low:
+                continue
+
+            if "email" in low or "user.email" in low or "req.session.user.email" in low:
+                item["console_email"] += 1
+
+            if "empresa_nome" in low or "empresa_nome" in linha:
+                item["console_empresa_nome"] += 1
+
+            if "novasenha" in low or "senha para" in low or "senha tempor" in low:
+                item["console_senha_temporaria"] += 1
+
+            if "session id" in low or "saas_crm_sid" in low or "header cookie" in low:
+                item["console_cookie_sessao"] += 1
+
+        itens.append(item)
+
+    totais = {
+        "console_email": 0,
+        "console_empresa_nome": 0,
+        "console_senha_temporaria": 0,
+        "console_cookie_sessao": 0
+    }
+
+    for item in itens:
+        for chave in totais.keys():
+            totais[chave] += int(item.get(chave) or 0)
 
     return {
-        "ok": bool(r.get("ok") and h),
-        "hash": h if h else None,
-        "resultado": r
+        "arquivos": itens,
+        "totais": totais
     }
 
 
-def shell_quote(valor):
-    return "'" + str(valor).replace("'", "'\"'\"'") + "'"
+def node_check():
+    resultados = []
 
+    for rel_path in ARQUIVOS_ALVO:
+        path = ROOT / rel_path
 
-def comparar_server_js():
-    local_hash = sha256_arquivo(SERVER_JS)
-    localizado = localizar_server_container()
-    container_hash = hash_server_container(localizado.get("path"))
+        if not path.exists():
+            resultados.append({
+                "arquivo": rel_path,
+                "ok": False,
+                "erro": "Arquivo ausente"
+            })
+            continue
 
-    iguais = bool(local_hash and container_hash.get("hash") and local_hash == container_hash.get("hash"))
+        r = run_cmd(["node", "--check", rel_path], 40)
+        r["arquivo"] = rel_path
+        resultados.append(r)
+
+    ok = True
+    for item in resultados:
+        if not item.get("ok"):
+            ok = False
 
     return {
-        "local_existe": SERVER_JS.exists(),
-        "local_hash": local_hash,
-        "container_server_path": localizado.get("path"),
-        "container_localizado_ok": localizado.get("ok"),
-        "container_hash_ok": container_hash.get("ok"),
-        "container_hash": container_hash.get("hash"),
-        "hashes_iguais": iguais,
-        "localizar_resultado": localizado.get("resultado"),
-        "hash_resultado": container_hash.get("resultado")
+        "ok": ok,
+        "resultados": resultados
     }
 
 
-def rebuild_se_solicitado():
-    valor = os.environ.get("ETAPA14_1_REBUILD_APP", "").strip().lower()
+def reiniciar_app_se_solicitado():
+    valor = os.environ.get("ETAPA14_2_RESTART_APP", "").strip().lower()
 
     if valor not in ["true", "1", "sim", "yes"]:
         return {
@@ -474,7 +588,7 @@ def rebuild_se_solicitado():
             "resultado": None
         }
 
-    r = run_cmd(["docker", "compose", "up", "-d", "--build", "app"], 600)
+    r = run_cmd(["docker", "compose", "restart", "app"], 120)
 
     return {
         "solicitado": True,
@@ -520,7 +634,7 @@ def http_request(opener, metodo, path, data_obj=None, timeout=15):
 
     body_bytes = None
     headers = {
-        "User-Agent": "etapa-14-1-runtime/1.0"
+        "User-Agent": "etapa-14-2-sanitizacao/1.0"
     }
 
     if data_obj is not None:
@@ -653,10 +767,24 @@ def coletar_logs_novos(since):
     }
 
 
+def parece_email_token(token):
+    if "@" not in token:
+        return False
+
+    if "." not in token:
+        return False
+
+    if len(token) < 5:
+        return False
+
+    return True
+
+
 def analisar_logs_texto(texto):
     session_id = 0
     cookie = 0
     email = 0
+    empresa_nome = 0
     achados = []
 
     for idx, linha in enumerate(str(texto or "").splitlines(), start=1):
@@ -668,8 +796,14 @@ def analisar_logs_texto(texto):
         if "saas_crm_sid" in low or "header cookie" in low or "conteúdo:" in low or "conteudo:" in low:
             cookie += 1
 
-        if "usuário logado:" in low or "usuario logado:" in low:
-            email += 1
+        tokens = linha.replace("(", " ").replace(")", " ").replace(",", " ").split()
+        for token in tokens:
+            if parece_email_token(token):
+                email += 1
+                break
+
+        if "super admin" in low:
+            empresa_nome += 1
 
         if "error" in low or "exception" in low or "syntaxerror" in low or "database" in low or "econnrefused" in low:
             achados.append({
@@ -681,16 +815,11 @@ def analisar_logs_texto(texto):
         "total_linhas": len(str(texto or "").splitlines()),
         "linhas_session_id": session_id,
         "linhas_cookie": cookie,
-        "linhas_usuario_email": email,
+        "linhas_email": email,
+        "linhas_empresa_nome": empresa_nome,
         "achados": achados,
         "amostra": redigir("\n".join(str(texto or "").splitlines()[-80:]))[:16000]
     }
-
-
-def headers_basicos_validar():
-    opener, jar = criar_opener()
-    r = http_request(opener, "GET", "/")
-    return r
 
 
 def acrescentar_secao_documento(nome, titulo, corpo):
@@ -700,8 +829,8 @@ def acrescentar_secao_documento(nome, titulo, corpo):
     if texto_atual is None:
         texto_atual = "# " + nome.replace(".md", "") + "\n"
 
-    marcador_inicio = "<!-- ETAPA_14_1_INICIO -->"
-    marcador_fim = "<!-- ETAPA_14_1_FIM -->"
+    marcador_inicio = "<!-- ETAPA_14_2_INICIO -->"
+    marcador_fim = "<!-- ETAPA_14_2_FIM -->"
 
     secao = []
     secao.append("")
@@ -732,78 +861,79 @@ def acrescentar_secao_documento(nome, titulo, corpo):
 
 def atualizar_documentacao(relatorio):
     data = relatorio["gerado_em"]
-    cmp = relatorio["comparacao_server"]
-    rebuild = relatorio["rebuild"]
-    validacao = relatorio["validacao_login_dashboard"]
+    audit_depois = relatorio["auditoria_depois"]["totais"]
+    node = relatorio["node_check"]
+    restart = relatorio["restart_app"]
     logs = relatorio["logs_novos_analise"]
 
     acrescentar_secao_documento(
         "CONTEXTO_PROJETO.md",
-        "Etapa 14.1 - Runtime do hardening validado",
+        "Etapa 14.2 - Logs de usuario sanitizados",
         [
             "Data: " + data,
             "",
-            "Foi validado o runtime do hardening aplicado na Etapa 14.",
-            "Server local e container com mesmo hash: " + str(cmp["hashes_iguais"]) + ".",
-            "Rebuild solicitado: " + str(rebuild["solicitado"]) + ".",
-            "Rebuild executado: " + str(rebuild["executado"]) + ".",
-            "Login OK: " + str(validacao["login_ok"]) + ".",
-            "Dashboard OK: " + str(validacao["dashboard_ok"]) + ".",
-            "Logs novos com Session ID: " + str(logs["linhas_session_id"]) + ".",
-            "Logs novos com cookie: " + str(logs["linhas_cookie"]) + "."
+            "Foi aplicada sanitizacao adicional dos logs de usuario e empresa.",
+            "Console email depois: " + str(audit_depois["console_email"]) + ".",
+            "Console empresa_nome depois: " + str(audit_depois["console_empresa_nome"]) + ".",
+            "Console senha temporaria depois: " + str(audit_depois["console_senha_temporaria"]) + ".",
+            "Node check OK: " + str(node["ok"]) + ".",
+            "Restart executado: " + str(restart["executado"]) + ".",
+            "Logs novos com email: " + str(logs["linhas_email"]) + ".",
+            "Logs novos com nome de empresa: " + str(logs["linhas_empresa_nome"]) + "."
         ]
     )
 
     acrescentar_secao_documento(
         "CHANGELOG.md",
-        "Etapa 14.1 - Validacao runtime do hardening",
+        "Etapa 14.2 - Sanitizacao de logs de usuario",
         [
             "Data: " + data,
             "",
-            "Comparado server.js local com server.js dentro do container app.",
-            "Executado rebuild do app somente quando solicitado por variavel de ambiente.",
-            "Validado login e dashboard apos disponibilidade do app.",
-            "Analisados logs novos para confirmar ausencia de Session ID e cookies.",
+            "Sanitizados logs de AuthController, rotas e servidor.",
+            "Removida exposicao de email em logs de sucesso de login e dashboard.",
+            "Removida exposicao de senha temporaria em log de recuperacao.",
+            "Mantidos logs com usuario_id e empresa_id.",
+            "Executado node --check nos arquivos relevantes.",
             "Gerados backup, manifestos e relatorios da etapa."
         ]
     )
 
     acrescentar_secao_documento(
         "DECISOES_TECNICAS.md",
-        "Etapa 14.1 - Decisoes tecnicas",
+        "Etapa 14.2 - Decisoes tecnicas",
         [
             "Data: " + data,
             "",
-            "Decidido comparar hashes para confirmar se o container usa o codigo atualizado.",
-            "Decidido nao fazer rebuild automaticamente sem ETAPA14_1_REBUILD_APP=true.",
-            "Decidido analisar logs novos usando marco temporal da propria etapa.",
-            "Decidido manter a validacao sem alterar banco."
+            "Decidido substituir logs identificaveis por logs com IDs internos.",
+            "Decidido nao alterar regras de autenticacao.",
+            "Decidido nao alterar banco.",
+            "Decidido reiniciar app somente com ETAPA14_2_RESTART_APP=true."
         ]
     )
 
     pendencias = [
         "Data: " + data,
         "",
-        "Se os hashes forem diferentes, executar rebuild controlado com ETAPA14_1_REBUILD_APP=true.",
-        "Se logs novos ainda exibirem sessao ou cookie, revisar outras fontes de log alem do server.js.",
+        "Se o app nao foi reiniciado, reiniciar em janela controlada para aplicar sanitizacao em runtime.",
+        "Reexecutar validacao de logs apos restart.",
         "Revisar CORS permissivo em etapa dedicada.",
-        "Revisar configuracao completa de cookie de sessao para HTTPS producao.",
+        "Revisar cookie SameSite e secure para HTTPS producao.",
         "Planejar rate limit e politica de seguranca de conteudo."
     ]
 
-    if cmp["hashes_iguais"] and logs["linhas_session_id"] == 0 and logs["linhas_cookie"] == 0:
+    if restart["executado"] and logs["linhas_email"] == 0 and logs["linhas_empresa_nome"] == 0:
         pendencias = [
             "Data: " + data,
             "",
             "Revisar CORS permissivo em etapa dedicada.",
-            "Revisar configuracao completa de cookie de sessao para HTTPS producao.",
+            "Revisar cookie SameSite e secure para HTTPS producao.",
             "Planejar rate limit e politica de seguranca de conteudo.",
             "Validar ambiente externo com HTTPS antes de producao."
         ]
 
     acrescentar_secao_documento(
         "PENDENCIAS.md",
-        "Pendencias apos Etapa 14.1",
+        "Pendencias apos Etapa 14.2",
         pendencias
     )
 
@@ -813,13 +943,15 @@ def atualizar_documentacao(relatorio):
 def gerar_markdown_relatorio(relatorio):
     linhas = []
 
-    cmp = relatorio["comparacao_server"]
-    rebuild = relatorio["rebuild"]
-    espera = relatorio["aguardar_app"]
+    audit_antes = relatorio["auditoria_antes"]["totais"]
+    audit_depois = relatorio["auditoria_depois"]["totais"]
+    sanitizacao = relatorio["sanitizacao"]
+    node = relatorio["node_check"]
+    restart = relatorio["restart_app"]
     validacao = relatorio["validacao_login_dashboard"]
     logs = relatorio["logs_novos_analise"]
 
-    linhas.append("# Etapa 14.1 - Validar runtime do hardening")
+    linhas.append("# Etapa 14.2 - Sanitizar logs de email e usuario")
     linhas.append("")
     linhas.append("Data: " + relatorio["gerado_em"])
     linhas.append("")
@@ -828,50 +960,73 @@ def gerar_markdown_relatorio(relatorio):
     linhas.append("- Backup criado em: " + relatorio["backup"]["destino"])
     linhas.append("- Manifesto antes: " + relatorio["manifesto_antes"])
     linhas.append("- Manifesto depois: " + relatorio["manifesto_depois"])
-    linhas.append("- Docker OK: " + str(relatorio["docker"]["docker_version"]["ok"]))
-    linhas.append("- Docker Compose OK: " + str(relatorio["docker"]["docker_compose_version"]["ok"]))
-    linhas.append("- Server local existe: " + str(cmp["local_existe"]))
-    linhas.append("- Server container localizado: " + str(cmp["container_localizado_ok"]))
-    linhas.append("- Hashes iguais: " + str(cmp["hashes_iguais"]))
-    linhas.append("- Rebuild solicitado: " + str(rebuild["solicitado"]))
-    linhas.append("- Rebuild executado: " + str(rebuild["executado"]))
-    linhas.append("- Rebuild OK: " + str(rebuild["ok"]))
-    linhas.append("- App respondeu apos espera: " + str(espera["ok"]))
+    linhas.append("- Node check OK: " + str(node["ok"]))
+    linhas.append("- Restart solicitado: " + str(restart["solicitado"]))
+    linhas.append("- Restart executado: " + str(restart["executado"]))
     linhas.append("- Login OK: " + str(validacao["login_ok"]))
     linhas.append("- Dashboard OK: " + str(validacao["dashboard_ok"]))
-    linhas.append("- Logs novos linhas Session ID: " + str(logs["linhas_session_id"]))
-    linhas.append("- Logs novos linhas cookie: " + str(logs["linhas_cookie"]))
-    linhas.append("- Logs novos linhas usuario email: " + str(logs["linhas_usuario_email"]))
-    linhas.append("- Achados criticos logs novos: " + str(len(logs["achados"])))
+    linhas.append("- Logs novos Session ID: " + str(logs["linhas_session_id"]))
+    linhas.append("- Logs novos cookie: " + str(logs["linhas_cookie"]))
+    linhas.append("- Logs novos email: " + str(logs["linhas_email"]))
+    linhas.append("- Logs novos nome empresa: " + str(logs["linhas_empresa_nome"]))
+    linhas.append("- Achados criticos: " + str(len(logs["achados"])))
     linhas.append("")
 
-    linhas.append("## Comparacao server.js")
+    linhas.append("## Auditoria antes")
     linhas.append("")
-    linhas.append("- Hash local: " + str(cmp["local_hash"]))
-    linhas.append("- Caminho no container: " + str(cmp["container_server_path"]))
-    linhas.append("- Hash container: " + str(cmp["container_hash"]))
-    linhas.append("- Hashes iguais: " + str(cmp["hashes_iguais"]))
+    linhas.append("- Console email: " + str(audit_antes["console_email"]))
+    linhas.append("- Console empresa_nome: " + str(audit_antes["console_empresa_nome"]))
+    linhas.append("- Console senha temporaria: " + str(audit_antes["console_senha_temporaria"]))
+    linhas.append("- Console cookie sessao: " + str(audit_antes["console_cookie_sessao"]))
 
     linhas.append("")
-    linhas.append("## Rebuild")
+    linhas.append("## Sanitizacao aplicada")
     linhas.append("")
-    linhas.append("- Solicitado: " + str(rebuild["solicitado"]))
-    linhas.append("- Executado: " + str(rebuild["executado"]))
-    linhas.append("- OK: " + str(rebuild["ok"]))
-    if rebuild.get("resultado"):
-        stdout = rebuild["resultado"].get("stdout") or ""
-        stderr = rebuild["resultado"].get("stderr") or ""
-        if stdout:
-            linhas.append("- stdout: " + stdout[:700])
-        if stderr:
-            linhas.append("- stderr: " + stderr[:700])
+    for item in sanitizacao:
+        linhas.append(
+            "- "
+            + item["arquivo"]
+            + ": alterado="
+            + str(item["alterado"])
+            + ", linhas_sanitizadas="
+            + str(item["linhas_sanitizadas"])
+        )
 
     linhas.append("")
-    linhas.append("## Validacao app")
+    linhas.append("## Auditoria depois")
     linhas.append("")
-    linhas.append("- App pronto: " + str(espera["ok"]))
-    linhas.append("- Segundos aguardados: " + str(espera["segundos"]))
-    linhas.append("- Login executado: " + str(validacao["executado"]))
+    linhas.append("- Console email: " + str(audit_depois["console_email"]))
+    linhas.append("- Console empresa_nome: " + str(audit_depois["console_empresa_nome"]))
+    linhas.append("- Console senha temporaria: " + str(audit_depois["console_senha_temporaria"]))
+    linhas.append("- Console cookie sessao: " + str(audit_depois["console_cookie_sessao"]))
+
+    linhas.append("")
+    linhas.append("## Node check")
+    linhas.append("")
+    linhas.append("- OK: " + str(node["ok"]))
+    for item in node["resultados"]:
+        linhas.append(
+            "- "
+            + item["arquivo"]
+            + ": ok="
+            + str(item.get("ok"))
+            + ", returncode="
+            + str(item.get("returncode"))
+        )
+        if item.get("stderr"):
+            linhas.append("  - stderr: " + item["stderr"][:400])
+
+    linhas.append("")
+    linhas.append("## Restart")
+    linhas.append("")
+    linhas.append("- Solicitado: " + str(restart["solicitado"]))
+    linhas.append("- Executado: " + str(restart["executado"]))
+    linhas.append("- OK: " + str(restart["ok"]))
+
+    linhas.append("")
+    linhas.append("## Validacao login e dashboard")
+    linhas.append("")
+    linhas.append("- Executada: " + str(validacao["executado"]))
     linhas.append("- Login OK: " + str(validacao["login_ok"]))
     linhas.append("- Dashboard OK: " + str(validacao["dashboard_ok"]))
     linhas.append("- Cookies recebidos: " + str(len(validacao["cookies"])))
@@ -882,29 +1037,27 @@ def gerar_markdown_relatorio(relatorio):
     linhas.append("- Linhas analisadas: " + str(logs["total_linhas"]))
     linhas.append("- Linhas Session ID: " + str(logs["linhas_session_id"]))
     linhas.append("- Linhas cookie: " + str(logs["linhas_cookie"]))
-    linhas.append("- Linhas usuario email: " + str(logs["linhas_usuario_email"]))
+    linhas.append("- Linhas email: " + str(logs["linhas_email"]))
+    linhas.append("- Linhas nome empresa: " + str(logs["linhas_empresa_nome"]))
     linhas.append("- Achados criticos: " + str(len(logs["achados"])))
-    if logs["achados"]:
-        for item in logs["achados"]:
-            linhas.append("- Linha " + str(item["linha"]) + ": " + item["trecho"])
 
     linhas.append("")
-    linhas.append("## Amostra dos logs novos")
+    linhas.append("## Amostra logs novos")
     linhas.append("")
     amostra = logs.get("amostra") or ""
     if amostra:
         for linha in amostra.splitlines()[-60:]:
             linhas.append("- " + linha[:240])
     else:
-        linhas.append("- Sem logs novos na janela analisada.")
+        linhas.append("- Sem logs novos.")
 
     linhas.append("")
     linhas.append("## Observacoes")
     linhas.append("")
     linhas.append("- Nenhuma senha foi impressa pelo script.")
     linhas.append("- Nenhuma alteracao foi aplicada ao banco.")
-    linhas.append("- Rebuild so foi executado se ETAPA14_1_REBUILD_APP=true.")
-    linhas.append("- Logs antigos nao sao usados na contagem principal desta etapa.")
+    linhas.append("- Regras de autenticacao nao foram alteradas.")
+    linhas.append("- Restart so foi executado se ETAPA14_2_RESTART_APP=true.")
 
     linhas.append("")
     linhas.append("## Documentacao atualizada")
@@ -915,7 +1068,7 @@ def gerar_markdown_relatorio(relatorio):
     linhas.append("")
     linhas.append("## Proxima etapa recomendada")
     linhas.append("")
-    linhas.append("- Se logs novos estiverem limpos, avancar para CORS, cookie SameSite e headers finais.")
+    linhas.append("- Se logs estiverem limpos, avancar para CORS, cookie SameSite e headers finais.")
     linhas.append("")
 
     conteudo = "\n".join(linhas) + "\n"
@@ -928,19 +1081,21 @@ def main():
     garantir_dirs()
 
     stamp = agora_stamp()
-    backup_dir = BACKUPS_DIR / ("etapa_14_1_" + stamp)
+    backup_dir = BACKUPS_DIR / ("etapa_14_2_" + stamp)
 
     manifesto_antes = gerar_manifesto()
-    manifesto_antes_path = REPORTS_DIR / "etapa_14_1_manifesto_antes.json"
+    manifesto_antes_path = REPORTS_DIR / "etapa_14_2_manifesto_antes.json"
     salvar_json(manifesto_antes_path, manifesto_antes)
 
     backup = criar_backup(backup_dir)
-    docker = verificar_docker()
 
-    comparacao_antes = comparar_server_js()
-    rebuild = rebuild_se_solicitado()
+    auditoria_antes = auditar_fontes()
+    sanitizacao = aplicar_sanitizacao()
+    auditoria_depois = auditar_fontes()
+    node = node_check()
+
+    restart = reiniciar_app_se_solicitado()
     aguardar = aguardar_app()
-    comparacao_depois = comparar_server_js()
 
     since = agora_logs_since()
     validacao = validar_login_dashboard()
@@ -954,11 +1109,12 @@ def main():
         "raiz": str(ROOT),
         "backup": backup,
         "manifesto_antes": rel(manifesto_antes_path),
-        "docker": docker,
-        "comparacao_server_antes": comparacao_antes,
-        "rebuild": rebuild,
+        "auditoria_antes": auditoria_antes,
+        "sanitizacao": sanitizacao,
+        "auditoria_depois": auditoria_depois,
+        "node_check": node,
+        "restart_app": restart,
         "aguardar_app": aguardar,
-        "comparacao_server": comparacao_depois,
         "logs_since": since,
         "validacao_login_dashboard": validacao,
         "logs_coleta": logs_coleta,
@@ -969,46 +1125,43 @@ def main():
     relatorio["documentacao_atualizada"] = documentacao
 
     manifesto_depois = gerar_manifesto()
-    manifesto_depois_path = REPORTS_DIR / "etapa_14_1_manifesto_depois.json"
+    manifesto_depois_path = REPORTS_DIR / "etapa_14_2_manifesto_depois.json"
     salvar_json(manifesto_depois_path, manifesto_depois)
 
     relatorio["manifesto_depois"] = rel(manifesto_depois_path)
 
-    json_path = REPORTS_DIR / "etapa_14_1_validar_runtime_hardening.json"
-    md_path = REPORTS_DIR / "etapa_14_1_validar_runtime_hardening.md"
+    json_path = REPORTS_DIR / "etapa_14_2_sanitizar_logs_email_usuario.json"
+    md_path = REPORTS_DIR / "etapa_14_2_sanitizar_logs_email_usuario.md"
 
     salvar_json(json_path, relatorio)
     gravar_texto(md_path, gerar_markdown_relatorio(relatorio))
 
-    print("Etapa 14.1 concluida.")
+    print("Etapa 14.2 concluida.")
     print("Backup: " + backup["destino"])
     print("Manifesto antes: " + rel(manifesto_antes_path))
     print("Manifesto depois: " + rel(manifesto_depois_path))
     print("Relatorio JSON: " + rel(json_path))
     print("Relatorio Markdown: " + rel(md_path))
-    print("Docker OK: " + str(docker["docker_version"]["ok"]))
-    print("Docker Compose OK: " + str(docker["docker_compose_version"]["ok"]))
-    print("Container server.js localizado: " + str(comparacao_depois["container_localizado_ok"]))
-    print("Hashes iguais: " + str(comparacao_depois["hashes_iguais"]))
-    print("Rebuild solicitado: " + str(rebuild["solicitado"]))
-    print("Rebuild executado: " + str(rebuild["executado"]))
-    print("Rebuild OK: " + str(rebuild["ok"]))
-    print("App pronto: " + str(aguardar["ok"]))
+    print("Node check OK: " + str(node["ok"]))
+    print("Restart solicitado: " + str(restart["solicitado"]))
+    print("Restart executado: " + str(restart["executado"]))
     print("Login OK: " + str(validacao["login_ok"]))
     print("Dashboard OK: " + str(validacao["dashboard_ok"]))
+    print("Auditoria depois console email: " + str(auditoria_depois["totais"]["console_email"]))
+    print("Auditoria depois console empresa_nome: " + str(auditoria_depois["totais"]["console_empresa_nome"]))
+    print("Auditoria depois console senha temporaria: " + str(auditoria_depois["totais"]["console_senha_temporaria"]))
     print("Logs novos Session ID: " + str(logs_analise["linhas_session_id"]))
     print("Logs novos cookie: " + str(logs_analise["linhas_cookie"]))
-    print("Logs novos usuario email: " + str(logs_analise["linhas_usuario_email"]))
-    print("Achados criticos logs novos: " + str(len(logs_analise["achados"])))
+    print("Logs novos email: " + str(logs_analise["linhas_email"]))
+    print("Logs novos nome empresa: " + str(logs_analise["linhas_empresa_nome"]))
 
-    if not comparacao_depois["hashes_iguais"]:
+    if not restart["executado"]:
         print("")
-        print("Aviso: container ainda parece usar server.js diferente do local.")
-        print("Se desejar aplicar o codigo local na imagem, rode com ETAPA14_1_REBUILD_APP=true.")
+        print("Aviso: app nao foi reiniciado. Para aplicar em runtime, execute com ETAPA14_2_RESTART_APP=true.")
 
-    if logs_analise["linhas_session_id"] > 0 or logs_analise["linhas_cookie"] > 0:
+    if logs_analise["linhas_email"] > 0 or logs_analise["linhas_empresa_nome"] > 0:
         print("")
-        print("Aviso: logs novos ainda exibem dados sensiveis. Consulte o relatorio.")
+        print("Aviso: logs novos ainda possuem identificadores. Consulte o relatorio.")
 
 
 if __name__ == "__main__":

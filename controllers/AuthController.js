@@ -86,7 +86,7 @@ class AuthController {
             if (precisaMigrar) {
                 const hash = await bcrypt.hash(senha, 10);
                 await db.run('UPDATE usuarios_painel SET senha = ? WHERE id = ?', [hash, user.id]);
-                console.log(`[AUTH] Senha migrada para Bcrypt: ${user.email}`);
+                console.log(`[AUTH] Senha migrada para bcrypt usuario_id=${user.id}`);
             }
 
             // 4. Definição de Role/Cargo
@@ -120,7 +120,7 @@ class AuthController {
                     return res.status(500).json({ success: false, message: 'Erro de sessão.' });
                 }
 
-                console.log(`✅ [AUTH] Sucesso: ${user.email} @ ${user.empresa_nome}`);
+                console.log(`[AUTH] Login OK usuario_id=${user.id} empresa_id=${user.empresa_id}`);
 
                 return res.json({
                     success: true,
@@ -180,7 +180,7 @@ class AuthController {
                     html: `<p>Sua nova senha temporária: <b>${novaSenha}</b></p>`
                 });
             } else {
-                console.log(`[DEBUG] Senha para ${email}: ${novaSenha}`);
+                console.log(`[AUTH] Recuperacao de senha processada usuario_id=${user.id}`);
             }
             res.json({ success: true, message: 'Instruções enviadas.' });
         } catch (e) {

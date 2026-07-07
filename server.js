@@ -35,6 +35,45 @@ const SessionManager = require('./src/managers/SessionManager');
 
 const app = express();
 app.disable('x-powered-by');
+// ETAPA15_CORS_SEGURO_INICIO
+const etapa15Origins = (process.env.CORS_ORIGINS || process.env.APP_URL || '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const etapa15DevOrigins = [
+    'http://127.0.0.1:50010',
+    'http://localhost:50010'
+];
+
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    const permitidas = etapa15Origins.length > 0 ? etapa15Origins : etapa15DevOrigins;
+    if (origin && permitidas.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Vary', 'Origin');
+// ETAPA15: header credentials antigo removido
+        res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    }
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204);
+    }
+    next();
+});
+// ETAPA15_CORS_SEGURO_FIM
+// ETAPA15_SECURITY_HEADERS_INICIO
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('Referrer-Policy', 'no-referrer');
+    res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    next();
+});
+// ETAPA15_SECURITY_HEADERS_FIM
+
+
 // ETAPA14_SECURITY_HEADERS_INICIO
 app.use((req, res, next) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -74,7 +113,7 @@ redisClient.on('connect', () => console.log('🔌 [Redis] Conectado com sucesso.
     // ==============================================================================
     // 3. Middlewares Globais
     // ==============================================================================
-    app.use(cors());
+    // ETAPA15: CORS permissivo removido
     app.use(express.json({ limit: '50mb' }));
     app.use(express.urlencoded({ extended: true, limit: '50mb' }));
     app.use(express.static(path.join(__dirname, 'public')));
@@ -94,10 +133,11 @@ redisClient.on('connect', () => console.log('🔌 [Redis] Conectado com sucesso.
         saveUninitialized: false,
         rolling: true,
         cookie: {
-            secure: isHttps, // Mantenha false se não tiver certeza do SSL
+            secure: process.env.NODE_ENV === 'production' && process.env.COOKIE_SECURE === 'true', // Mantenha false se não tiver certeza do SSL
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 // 1 dia
-        }
+            maxAge: 1000 * 60 * 60 * 24 // 1 dia,
+        sameSite: 'lax'
+}
     }));
 
     // ==============================================================================

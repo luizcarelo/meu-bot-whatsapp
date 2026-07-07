@@ -1,0 +1,218 @@
+{
+  "gerado_em": "2026-07-06T21:55:04",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_14_1_20260706_215501",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_14_1_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 5 minutes            0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "comparacao_server_antes": {
+    "local_existe": true,
+    "local_hash": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+    "container_server_path": "/usr/src/app/server.js",
+    "container_localizado_ok": true,
+    "container_hash_ok": true,
+    "container_hash": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+    "hashes_iguais": true,
+    "localizar_resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "sh",
+        "-lc",
+        "set -eu; for p in /app/server.js /usr/src/app/server.js /home/node/app/server.js ./server.js; do if [ -f \"$p\" ]; then echo \"$p\"; exit 0; fi; done; find /app /usr/src/app /home/node/app -maxdepth 4 -name server.js 2>/dev/null | head -n 1"
+      ],
+      "returncode": 0,
+      "stdout": "/usr/src/app/server.js",
+      "stderr": "",
+      "ok": true
+    },
+    "hash_resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "sh",
+        "-lc",
+        "if command -v sha256sum >/dev/null 2>&1; then sha256sum '/usr/src/app/server.js' | awk '{print $1}'; else node -e \"const fs=require('fs');const c=require('crypto');console.log(c.createHash('sha256').update(fs.readFileSync(process.argv[1])).digest('hex'))\" '/usr/src/app/server.js'; fi"
+      ],
+      "returncode": 0,
+      "stdout": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "rebuild": {
+    "solicitado": false,
+    "executado": false,
+    "ok": null,
+    "resultado": null
+  },
+  "aguardar_app": {
+    "ok": true,
+    "tentativas": [
+      {
+        "status": 200,
+        "ok": true,
+        "erro": null
+      }
+    ],
+    "segundos": 0
+  },
+  "comparacao_server": {
+    "local_existe": true,
+    "local_hash": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+    "container_server_path": "/usr/src/app/server.js",
+    "container_localizado_ok": true,
+    "container_hash_ok": true,
+    "container_hash": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+    "hashes_iguais": true,
+    "localizar_resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "sh",
+        "-lc",
+        "set -eu; for p in /app/server.js /usr/src/app/server.js /home/node/app/server.js ./server.js; do if [ -f \"$p\" ]; then echo \"$p\"; exit 0; fi; done; find /app /usr/src/app /home/node/app -maxdepth 4 -name server.js 2>/dev/null | head -n 1"
+      ],
+      "returncode": 0,
+      "stdout": "/usr/src/app/server.js",
+      "stderr": "",
+      "ok": true
+    },
+    "hash_resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "sh",
+        "-lc",
+        "if command -v sha256sum >/dev/null 2>&1; then sha256sum '/usr/src/app/server.js' | awk '{print $1}'; else node -e \"const fs=require('fs');const c=require('crypto');console.log(c.createHash('sha256').update(fs.readFileSync(process.argv[1])).digest('hex'))\" '/usr/src/app/server.js'; fi"
+      ],
+      "returncode": 0,
+      "stdout": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "logs_since": "2026-07-06T21:55:02",
+  "validacao_login_dashboard": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "login_ok": true,
+    "dashboard_ok": true,
+    "cookies": [
+      {
+        "name": "connect.sid",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "secure": false
+      }
+    ],
+    "login": {
+      "path": "/api/auth/login",
+      "metodo": "POST",
+      "ok": true,
+      "status": 200,
+      "erro": null,
+      "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}",
+      "content_type": "application/json; charset=utf-8",
+      "redirect_url": "http://127.0.0.1:50010/api/auth/login"
+    },
+    "dashboard": {
+      "path": "/dashboard",
+      "metodo": "GET",
+      "ok": true,
+      "status": 200,
+      "erro": null,
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>CRM Enterprise | Super Admin</title>\n    \n    <!-- TailwindCSS (Design) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: {\n                extend: {\n                    colors: {\n                        primary: '#10b981', // Emerald 500\n                        secondary: '#3b82f6', // Blue 500\n                        dark: '#0f172a'\n                    }\n                }\n            }\n        }\n    </script>\n\n    <!-- Alpine.js (Interatividade) -->\n    <script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n    \n    <!-- FontAwesome & Socket.IO -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    \n    <!-- Estilos Embutidos (Garante carregamento) -->\n    <style>\n        /[asterisco] Fundo Padrão WhatsApp [asterisco]/\n        .bg-chat-pattern {\n            background-color: #e5ddd5;\n        ",
+      "content_type": "text/html; charset=utf-8",
+      "redirect_url": "http://127.0.0.1:50010/dashboard"
+    }
+  },
+  "logs_coleta": {
+    "principal": {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--since",
+        "2026-07-06T21:55:02",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)",
+      "stderr": "",
+      "ok": true
+    },
+    "fallback": null,
+    "texto": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\n"
+  },
+  "logs_novos_analise": {
+    "total_linhas": 22,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_usuario_email": 0,
+    "achados": [],
+    "amostra": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_14_1_manifesto_depois.json"
+}
