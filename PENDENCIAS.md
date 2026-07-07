@@ -512,3 +512,14 @@ Se houver erro de permissao, revisar regra isSuperAdmin em etapa separada.
 Planejar internalizacao de dependencias externas.
 Mapear scripts inline antes de CSP forte.
 <!-- ETAPA_22_1_FIM -->
+
+<!-- ETAPA_23_INICIO -->
+## Pendencias apos Etapa 23
+
+Data: 2026-07-07T00:07:38
+
+Validar manualmente as telas no navegador.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+Avaliar padronizacao visual adicional apenas apos validacao manual.
+<!-- ETAPA_23_FIM -->

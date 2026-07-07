@@ -475,3 +475,13 @@ Decidido proteger a rota com isAuthenticated e isSuperAdmin.
 Decidido nao consultar banco nesta etapa porque a view nao usa variaveis EJS.
 Decidido nao alterar views nesta etapa.
 <!-- ETAPA_22_1_FIM -->
+
+<!-- ETAPA_23_INICIO -->
+## Etapa 23 - Decisao tecnica
+
+Data: 2026-07-07T00:07:38
+
+Decidido consolidar as validacoes das etapas 17 a 22 em uma auditoria final.
+A auditoria nao altera backend, banco, views, rotas ou controllers.
+A auditoria valida runtime com leitura ampliada para evitar falso negativo em marcadores no final das views.
+<!-- ETAPA_23_FIM -->

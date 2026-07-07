@@ -1,0 +1,274 @@
+{
+  "gerado_em": "2026-07-07T00:07:38",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_23_auditoria_final_20260707_000736",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_23_manifesto_antes.json",
+  "auditoria_arquivos": {
+    "checks": [
+      {
+        "arquivo": "views/login.ejs",
+        "existe": true,
+        "sha256": "393be0f0bafc6d8f9768c135708ac444c9dbb218c7aa4d31dd2df07ea26aaa89",
+        "tamanho": 13975,
+        "marcadores": {
+          "acesso_seguro": true,
+          "api_login": true,
+          "entrar_painel": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "views/dashboard.ejs",
+        "existe": true,
+        "sha256": "cd241a80d7684da129a5af407bb72e940e6c5cd1f3d9309fc6d65d4bb4ceafa2",
+        "tamanho": 32377,
+        "marcadores": {
+          "etapa18_css": true,
+          "etapa18_script": true,
+          "dashboard_operacional": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "public/css/style.css",
+        "existe": true,
+        "sha256": "18440595d600dc44d456ed97d79d518130f569f912e7ea67274687a7c03470d7",
+        "tamanho": 5877,
+        "marcadores": {
+          "er_card": true,
+          "er_btn": true,
+          "er_badge": true,
+          "er_red": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "views/crm.ejs",
+        "existe": true,
+        "sha256": "ad8a825eb3f75be33204f56614534d33096556b5fa48fe60feb62a938636a7c5",
+        "tamanho": 52009,
+        "marcadores": {
+          "css": true,
+          "etapa20": true,
+          "central_atendimento": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "routes/index.js",
+        "existe": true,
+        "sha256": "5df22aad6f78d0c4032a40aa7f2f14036a4858f56731f9e278f132f900b4305c",
+        "tamanho": 4646,
+        "marcadores": {
+          "rota_crm": true,
+          "rota_admin": true,
+          "rota_super_admin": true,
+          "is_super_admin": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "controllers/AdminPanelController.js",
+        "existe": true,
+        "sha256": "528c0fb263c2d3a04be3a4cb2bd2968ab5e994f72b96f25315c6faef28844653",
+        "tamanho": 5171,
+        "marcadores": {
+          "render_panel": true,
+          "empresa_segura": true,
+          "equipe_sem_telefone": true,
+          "nome_exibicao": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "views/admin-panel.ejs",
+        "existe": true,
+        "sha256": "7b77576ad10eaa1be0f8e02e3049da64abcd4f27636300750165efca53f59ec3",
+        "tamanho": 56060,
+        "marcadores": {
+          "css": true,
+          "etapa21": true,
+          "gestao_empresa": true
+        },
+        "ok": true
+      },
+      {
+        "arquivo": "views/super-admin.ejs",
+        "existe": true,
+        "sha256": "f473c362bcc6d8aebf9cba0e412214ef390bf27ce61b99b0a3ef39761dfd9f5c",
+        "tamanho": 24186,
+        "marcadores": {
+          "css": true,
+          "etapa22": true,
+          "gestao_plataforma": true
+        },
+        "ok": true
+      }
+    ],
+    "ok": true
+  },
+  "node_checks": {
+    "checks": [
+      {
+        "arquivo": "routes/index.js",
+        "resultado": {
+          "cmd": [
+            "node",
+            "--check",
+            "routes/index.js"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "ok": true
+        }
+      },
+      {
+        "arquivo": "controllers/AdminPanelController.js",
+        "resultado": {
+          "cmd": [
+            "node",
+            "--check",
+            "controllers/AdminPanelController.js"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "",
+          "ok": true
+        }
+      }
+    ],
+    "ok": true
+  },
+  "runtime": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "login_page_ok": true,
+    "css_ok": true,
+    "login_ok": true,
+    "dashboard_ok": true,
+    "crm_ok": true,
+    "admin_panel_ok": true,
+    "super_admin_ok": true,
+    "dashboard_visual_ok": true,
+    "crm_visual_ok": true,
+    "admin_visual_ok": true,
+    "super_admin_visual_ok": false,
+    "cookies": [
+      {
+        "name": "connect.sid",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "secure": false
+      }
+    ],
+    "rotas": {
+      "login_page": {
+        "path": "/login",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "text/html; charset=utf-8",
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full bg-slate-950\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Login - Acesso Seguro</title>\n\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n\n    <style>\n        html {\n            -webkit-text-size-adjust: 100%;\n            text-size-adjust: 100%;\n        }\n\n        body {\n            font-family: Inter, Arial, sans-serif;\n        }\n\n        [x-cloak] {\n            display: none !important;\n        }\n\n        .login-bg {\n            background:\n                radial-gradient(circle at top left, rgba(239, 68, 68, 0.22), transparent 32rem),\n                radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.16), transparent 30rem),\n                linear-gradient(135deg, #0f172a 0%, #111827 48%, #1f2937 100%);\n        }\n\n        .glass-card {\n            background: rgba(255, 255, 255, 0.94);\n            backdrop-filter: blur(18px);\n            border: 1px solid rgba(255, 255, 255, 0.72);\n            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.42);\n        }\n\n        .brand-mark {\n            background: linear-gradient(135deg, #b91c1c 0%, #ef4444 52%, #f97316 100%);\n            box-shadow: 0 16px 32px rgba(239, 68, 68, 0.34);\n        }\n\n   "
+      },
+      "css": {
+        "path": "/css/style.css",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "text/css; charset=UTF-8",
+        "body_preview": ":root {\n    --er-red: #b91c1c;\n    --er-red-dark: #7f1d1d;\n    --er-red-soft: #fef2f2;\n    --er-blue: #1d4ed8;\n    --er-green: #047857;\n    --er-yellow: #b45309;\n    --er-bg: #f8fafc;\n    --er-card: #ffffff;\n    --er-text: #0f172a;\n    --er-muted: #64748b;\n    --er-border: #e2e8f0;\n    --er-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);\n}\n\nhtml {\n    -webkit-text-size-adjust: 100%;\n    text-size-adjust: 100%;\n}\n\nbody {\n    background: radial-gradient(circle at top left, rgba(185, 28, 28, 0.08), transparent 26rem), radial-gradient(circle at bottom right, rgba(29, 78, 216, 0.06), transparent 30rem), var(--er-bg);\n    color: var(--er-text);\n    font-family: Inter, Arial, sans-serif;\n}\n\na {\n    color: var(--er-red);\n    text-decoration: none;\n}\n\na:hover {\n    color: var(--er-red-dark);\n}\n\n.er-page {\n    max-width: 1500px;\n    margin: 0 auto;\n    padding: 24px;\n}\n\n.er-page-header {\n    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);\n    border: 1px solid var(--er-border);\n    border-radius: 24px;\n    padding: 24px;\n    box-shadow: var(--er-shadow);\n    margin-bottom: 22px;\n}\n\n.er-page-title {\n    margin: 0;\n    color: var(--er-text);\n    font-size: 28px;\n    line-height: 1.15;\n    font-weight: 900;\n    letter-spacing: -0.03em;\n}\n\n.er-page-subtitle {\n    margin: 8px 0 0;\n    color: var(--er-muted);\n    font-size: 14px;\n}\n\n.er-card,\n.card,\n.panel,\n.box {\n    background: var(--er-card);\n    border: 1px solid var(--er-border);\n    border-radius: 20px;\n    box-shadow: var(-"
+      },
+      "login_api": {
+        "path": "/api/auth/login",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "application/json; charset=utf-8",
+        "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}"
+      },
+      "dashboard": {
+        "path": "/dashboard",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "text/html; charset=utf-8",
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>CRM Enterprise | Super Admin</title>\n    \n    <!-- TailwindCSS (Design) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: {\n                extend: {\n                    colors: {\n                        primary: '#10b981', // Emerald 500\n                        secondary: '#3b82f6', // Blue 500\n                        dark: '#0f172a'\n                    }\n                }\n            }\n        }\n    </script>\n\n    <!-- Alpine.js (Interatividade) -->\n    <script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n    \n    <!-- FontAwesome & Socket.IO -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    \n    <!-- Estilos Embutidos (Garante carregamento) -->\n    <style>\n        /* Fundo Padrão WhatsApp */\n        .bg-chat-pattern {\n            background-color: #e5ddd5;\n            background-image: url(\"https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png\");\n            background-repeat: repeat;\n            background-attachment: fixed;\n        }\n\n        .dark .bg-chat-pattern {\n            background-color: #0f172a;\n     "
+      },
+      "crm": {
+        "path": "/crm",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "text/html; charset=utf-8",
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-br\" class=\"desktop-mode\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n    <meta name=\"theme-color\" content=\"#4f46e5\">\n    <title>CRM - Atendimento</title>\n    \n    <link href=\"/css/style.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    \n    <script>\n        const IS_MOBILE_ROUTE = \"false\" === \"true\";\n        tailwind.config = { \n            darkMode: 'class', \n            theme: { \n                extend: { \n                    colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' },\n                    animation: { 'fade-in': 'fadeIn 0.2s ease-out' },\n                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } } }\n                } \n            } \n        }\n    </script>\n    <style>\n        :root { --color-primary: #4f46e5; }\n        body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; overscroll-behavior-y: none; }\n        \n        /* Scrollbar */\n        ::-webkit-scrollbar { width: 6px; } \n        ::-webkit-scrollbar-track { background: transparent; }\n        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }\n        ::-webki"
+      },
+      "admin_panel": {
+        "path": "/admin/painel",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "text/html; charset=utf-8",
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-br\" class=\"light\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Configurações da Empresa</title>\n    <link href=\"/css/style.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n    <script>\n        tailwind.config = { \n            darkMode: 'class', \n            theme: { \n                extend: { \n                    colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' } \n                } \n            } \n        }\n    </script>\n    <style>\n        :root { --color-primary: #4f46e5; }\n        body { font-family: 'Inter', sans-serif; }\n        .fade-in { animation: fadeIn 0.3s ease-in-out; }\n        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }\n        \n        /* Estilos de Abas */\n        .tab-active { border-bottom: 2px solid var(--color-primary); color: var(--color-primary); font-weight: 600; }\n        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }\n        .tab-inactive:hover { color: #334155; border-b"
+      },
+      "super_admin": {
+        "path": "/super-admin",
+        "status": 200,
+        "ok": true,
+        "erro": null,
+        "content_type": "text/html; charset=utf-8",
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>CRM Enterprise | Super Admin</title>\n    \n    <!-- TailwindCSS (Design) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: {\n                extend: {\n                    colors: {\n                        primary: '#10b981', // Emerald 500\n                        secondary: '#3b82f6', // Blue 500\n                        dark: '#0f172a'\n                    }\n                }\n            }\n        }\n    </script>\n\n    <!-- Alpine.js (Interatividade) -->\n    <script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n    \n    <!-- FontAwesome & Socket.IO -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    \n    <!-- Estilos Embutidos (Garante carregamento) -->\n    <style>\n        /* Fundo Padrão WhatsApp */\n        .bg-chat-pattern {\n            background-color: #e5ddd5;\n            background-image: url(\"https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png\");\n            background-repeat: repeat;\n            background-attachment: fixed;\n        }\n\n        .dark .bg-chat-pattern {\n            background-color: #0f172a;\n     "
+      }
+    }
+  },
+  "logs_since": "2026-07-07T00:07:36",
+  "logs_coleta": {
+    "principal": {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--since",
+        "2026-07-07T00:07:36",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /super-admin\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1",
+      "stderr": "",
+      "ok": true
+    },
+    "fallback": null,
+    "texto": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /super-admin\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\n"
+  },
+  "logs_analise": {
+    "total_linhas": 38,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_email": 0,
+    "achados": [],
+    "amostra": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /super-admin\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1"
+  },
+  "status_geral": {
+    "ok": false,
+    "total_checks": 17,
+    "checks_ok": 16
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_23_manifesto_depois.json"
+}
