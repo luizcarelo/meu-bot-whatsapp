@@ -521,3 +521,24 @@ Validadas rotas principais e marcadores visuais.
 Validados logs novos sem Session ID, cookie e email.
 Gerados relatorios finais JSON e Markdown.
 <!-- ETAPA_23_FIM -->
+
+<!-- ETAPA_23_1_INICIO -->
+## Etapa 23.1 - Super Admin sincronizado no runtime
+
+Data: 2026-07-07T00:10:18
+
+Comparado hash local e hash do container para views/super-admin.ejs.
+Copiada a view para o container quando necessario.
+Validado /super-admin com marcadores visuais da Etapa 22.
+Gerados relatorios JSON e Markdown.
+<!-- ETAPA_23_1_FIM -->
+
+<!-- ETAPA_23_2_INICIO -->
+## Etapa 23.2 - Super Admin via sendFile
+
+Data: 2026-07-07T00:14:15
+
+Alterada a rota /super-admin para usar res.type('html').sendFile.
+Mantidas as protecoes isAuthenticated e isSuperAdmin.
+Validado node --check, login, dashboard e Super Admin.
+<!-- ETAPA_23_2_FIM -->

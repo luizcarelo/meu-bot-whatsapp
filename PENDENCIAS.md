@@ -523,3 +523,25 @@ Planejar internalizacao de dependencias externas.
 Mapear scripts inline antes de CSP forte.
 Avaliar padronizacao visual adicional apenas apos validacao manual.
 <!-- ETAPA_23_FIM -->
+
+<!-- ETAPA_23_1_INICIO -->
+## Pendencias apos Etapa 23.1
+
+Data: 2026-07-07T00:10:18
+
+Executar novamente a Etapa 23 se desejar consolidar status geral final.
+Validar manualmente as telas no navegador.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_23_1_FIM -->
+
+<!-- ETAPA_23_2_INICIO -->
+## Pendencias apos Etapa 23.2
+
+Data: 2026-07-07T00:14:15
+
+Reexecutar a Etapa 23 para consolidar o status geral final.
+Validar manualmente /super-admin no navegador.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_23_2_FIM -->

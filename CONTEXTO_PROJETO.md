@@ -649,3 +649,40 @@ Logs cookie: 0.
 Logs email: 0.
 Achados criticos logs: 0.
 <!-- ETAPA_23_FIM -->
+
+<!-- ETAPA_23_1_INICIO -->
+## Etapa 23.1 - Runtime Super Admin sincronizado
+
+Data: 2026-07-07T00:10:18
+
+Foi validado e sincronizado views/super-admin.ejs no container.
+Hashes iguais antes: True.
+Copiou para container: False.
+Hashes iguais depois: True.
+CSS runtime OK: True.
+Login OK: True.
+Dashboard OK: True.
+Super Admin OK: True.
+Super Admin visual OK: False.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_23_1_FIM -->
+
+<!-- ETAPA_23_2_INICIO -->
+## Etapa 23.2 - Super Admin servido via sendFile
+
+Data: 2026-07-07T00:14:15
+
+A rota /super-admin foi alterada para servir views/super-admin.ejs diretamente via sendFile.
+Arquivo alterado: True.
+Require path adicionado: True.
+Troca de render aplicada: True.
+Login OK: True.
+Dashboard OK: True.
+Super Admin OK: True.
+Super Admin visual OK: False.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_23_2_FIM -->

@@ -485,3 +485,23 @@ Decidido consolidar as validacoes das etapas 17 a 22 em uma auditoria final.
 A auditoria nao altera backend, banco, views, rotas ou controllers.
 A auditoria valida runtime com leitura ampliada para evitar falso negativo em marcadores no final das views.
 <!-- ETAPA_23_FIM -->
+
+<!-- ETAPA_23_1_INICIO -->
+## Etapa 23.1 - Decisao tecnica
+
+Data: 2026-07-07T00:10:18
+
+Decidido sincronizar a view super-admin no container para eliminar divergencia entre arquivo local e runtime.
+Decidido nao alterar rotas, controllers, banco ou outras views nesta etapa.
+Decidido validar o HTML de /super-admin com limite ampliado de leitura.
+<!-- ETAPA_23_1_FIM -->
+
+<!-- ETAPA_23_2_INICIO -->
+## Etapa 23.2 - Decisao tecnica
+
+Data: 2026-07-07T00:14:15
+
+Decidido servir views/super-admin.ejs diretamente na rota /super-admin para eliminar divergencia de runtime.
+A decisao e segura porque views/super-admin.ejs nao usa variaveis EJS.
+Decidido nao alterar banco, controllers ou outras views nesta etapa.
+<!-- ETAPA_23_2_FIM -->

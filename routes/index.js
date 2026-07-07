@@ -5,6 +5,7 @@
  */
 
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const { isAuthenticated, isSuperAdmin } = require('../src/middleware/auth');
 const db = require('../src/config/db');
@@ -124,7 +125,7 @@ router.get('/admin/painel', isAuthenticated, async (req, res) => {
 
 // ETAPA22_1_ROTA_SUPER_ADMIN_INICIO
 router.get('/super-admin', isAuthenticated, isSuperAdmin, async (req, res) => {
-    return res.render('super-admin');
+    return res.type('html').sendFile(path.join(__dirname, '..', 'views', 'super-admin.ejs'));
 });
 // ETAPA22_1_ROTA_SUPER_ADMIN_FIM
 
