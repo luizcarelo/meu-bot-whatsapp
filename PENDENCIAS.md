@@ -577,3 +577,23 @@ Executar Etapa 26 para auditoria funcional completa.
 Planejar Etapa 27 para Baileys e camada WhatsApp.
 Planejar refinamento visual fino apos avaliacao manual.
 <!-- ETAPA_25_FIM -->
+
+<!-- ETAPA_25_1_INICIO -->
+## Pendencias apos Etapa 25.1
+
+Data: 2026-07-07T00:52:30
+
+Validar manualmente a navegacao entre dashboard, CRM, admin panel e super admin.
+Se aprovado visualmente, seguir para Etapa 26 de auditoria funcional.
+Refinar responsividade mobile se necessario.
+<!-- ETAPA_25_1_FIM -->
+
+<!-- ETAPA_25_2_INICIO -->
+## Pendencias apos Etapa 25.2
+
+Data: 2026-07-07T00:57:10
+
+Validar manualmente o dashboard no navegador e confirmar ausencia de erros appData/initApp.
+Planejar etapa futura para remover Tailwind CDN e Alpine CDN em producao.
+Seguir para Etapa 26 de auditoria funcional apos validacao manual.
+<!-- ETAPA_25_2_FIM -->

@@ -888,207 +888,190 @@
 </script>
 <!-- ETAPA21_ADMIN_PANEL_VISUAL_FIM -->
 
-
-<!-- ETAPA25_LAYOUT_PROFISSIONAL_INICIO -->
-<script id="etapa25-layout-profissional">
+<!-- ETAPA25_1_SHELL_SEGURO_INICIO -->
+<script id="etapa25-1-shell-seguro">
 (function () {
-    if (window.__ETAPA25_LAYOUT_APLICADO__) {
+    if (window.__ETAPA25_1_SHELL_SEGURO__) {
         return;
     }
-    window.__ETAPA25_LAYOUT_APLICADO__ = true;
+    window.__ETAPA25_1_SHELL_SEGURO__ = true;
 
-    function pathAtual() {
+    function pagina() {
         return window.location.pathname || '/';
     }
 
-    function labelPagina() {
-        var p = pathAtual();
-        if (p.indexOf('/crm') === 0) return ['CRM Atendimento', 'Conversas, contatos, filas e produtividade'];
-        if (p.indexOf('/admin/painel') === 0) return ['Painel Administrativo', 'Gestao da empresa, usuarios e configuracoes'];
-        if (p.indexOf('/super-admin') === 0) return ['Super Admin', 'Gestao geral da plataforma e tenants'];
-        return ['Dashboard', 'Indicadores, operacao e atalhos principais'];
+    function tituloPagina() {
+        var p = pagina();
+
+        if (p.indexOf('/crm') === 0) {
+            return ['CRM Atendimento', 'Conversas, filas e contatos'];
+        }
+
+        if (p.indexOf('/admin/painel') === 0) {
+            return ['Painel Administrativo', 'Usuarios, empresa e configuracoes'];
+        }
+
+        if (p.indexOf('/super-admin') === 0) {
+            return ['Super Admin', 'Tenants e gestao geral'];
+        }
+
+        return ['Dashboard', 'Indicadores e atalhos principais'];
     }
 
-    function temaInicial() {
-        var salvo = localStorage.getItem('er25-theme');
-        if (salvo === 'dark' || salvo === 'light') return salvo;
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    function temaAtual() {
+        var salvo = localStorage.getItem('er25safe-theme');
+        if (salvo === 'dark' || salvo === 'light') {
+            return salvo;
+        }
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        }
+
         return 'light';
     }
 
     function aplicarTema(tema) {
-        var escuro = tema === 'dark';
-        document.documentElement.classList.toggle('er-theme-dark', escuro);
-        document.body.classList.toggle('er-theme-dark', escuro);
-        document.documentElement.classList.toggle('dark', escuro);
-        document.documentElement.classList.toggle('light', !escuro);
-        localStorage.setItem('er25-theme', tema);
-        var btn = document.getElementById('er25-theme-toggle');
+        var dark = tema === 'dark';
+
+        document.documentElement.classList.toggle('er25safe-dark', dark);
+        document.body.classList.toggle('er25safe-dark', dark);
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.classList.toggle('light', !dark);
+
+        localStorage.setItem('er25safe-theme', tema);
+
+        var btn = document.getElementById('er25safe-theme');
         if (btn) {
-            btn.innerHTML = escuro ? '☀️ <span>Claro</span>' : '🌙 <span>Escuro</span>';
-            btn.setAttribute('aria-label', escuro ? 'Ativar tema claro' : 'Ativar tema escuro');
+            btn.innerHTML = dark ? '☀️ <span>Claro</span>' : '🌙 <span>Escuro</span>';
         }
     }
 
-    function criarLink(href, icon, text, section) {
-        if (section) {
-            var s = document.createElement('div');
-            s.className = 'er25-nav-section';
-            s.textContent = text;
-            return s;
-        }
-
+    function link(href, icon, text) {
         var a = document.createElement('a');
-        a.className = 'er25-nav-link';
         a.href = href;
-        a.innerHTML = '<span class="er25-nav-icon">' + icon + '</span><span>' + text + '</span>';
+        a.className = 'er25safe-link';
+        a.innerHTML = '<span>' + icon + '</span><span>' + text + '</span>';
 
-        var p = pathAtual();
-        if (href === '/dashboard' && p === '/dashboard') a.classList.add('er25-active');
-        if (href !== '/dashboard' && p.indexOf(href) === 0) a.classList.add('er25-active');
+        var p = pagina();
+
+        if (href === '/dashboard' && p === '/dashboard') {
+            a.classList.add('er25safe-active');
+        } else if (href !== '/dashboard' && p.indexOf(href) === 0) {
+            a.classList.add('er25safe-active');
+        }
 
         return a;
     }
 
-    function criarShell() {
-        if (document.getElementById('er25-shell')) {
+    function section(text) {
+        var div = document.createElement('div');
+        div.className = 'er25safe-section';
+        div.textContent = text;
+        return div;
+    }
+
+    function criar() {
+        if (document.getElementById('er25safe-sidebar')) {
             return;
         }
 
-        document.body.classList.add('er25-shell-ready');
-
-        var shell = document.createElement('div');
-        shell.id = 'er25-shell';
-        shell.className = 'er25-shell';
+        document.body.classList.add('er25safe-ready');
 
         var sidebar = document.createElement('aside');
-        sidebar.id = 'er25-sidebar';
-        sidebar.className = 'er25-sidebar';
+        sidebar.id = 'er25safe-sidebar';
+        sidebar.className = 'er25safe-sidebar';
+
         sidebar.innerHTML = ''
-            + '<div class="er25-brand">'
-            + '  <div class="er25-brand-logo">ER</div>'
+            + '<div class="er25safe-brand">'
+            + '  <div class="er25safe-brand-mark">ER</div>'
             + '  <div>'
-            + '    <p class="er25-brand-title">Engeradios CRM</p>'
-            + '    <p class="er25-brand-subtitle">Atendimento profissional</p>'
+            + '    <p class="er25safe-brand-title">Engeradios CRM</p>'
+            + '    <p class="er25safe-brand-subtitle">Atendimento profissional</p>'
             + '  </div>'
             + '</div>';
 
         var nav = document.createElement('nav');
-        nav.className = 'er25-nav';
-        nav.appendChild(criarLink('', '', 'Principal', true));
-        nav.appendChild(criarLink('/dashboard', '📊', 'Dashboard'));
-        nav.appendChild(criarLink('/crm', '💬', 'CRM Atendimento'));
-        nav.appendChild(criarLink('', '', 'Gestao', true));
-        nav.appendChild(criarLink('/admin/painel', '⚙️', 'Painel Administrativo'));
-        nav.appendChild(criarLink('/super-admin', '🛡️', 'Super Admin'));
-        nav.appendChild(criarLink('', '', 'Atalhos', true));
-        nav.appendChild(criarLink('/logout', '🚪', 'Sair'));
+        nav.className = 'er25safe-nav';
+        nav.appendChild(section('Principal'));
+        nav.appendChild(link('/dashboard', '📊', 'Dashboard'));
+        nav.appendChild(link('/crm', '💬', 'CRM Atendimento'));
+        nav.appendChild(section('Gestao'));
+        nav.appendChild(link('/admin/painel', '⚙️', 'Painel Administrativo'));
+        nav.appendChild(link('/super-admin', '🛡️', 'Super Admin'));
+        nav.appendChild(section('Sessao'));
+        nav.appendChild(link('/logout', '🚪', 'Sair'));
+
         sidebar.appendChild(nav);
 
         var footer = document.createElement('div');
-        footer.className = 'er25-sidebar-footer';
-        footer.innerHTML = ''
-            + '<div class="er25-user-card">'
-            + '  <div class="er25-avatar">U</div>'
-            + '  <div style="min-width:0">'
-            + '    <div style="font-weight:900;font-size:13px;color:var(--er25-text)">Usuario logado</div>'
-            + '    <div style="font-size:11px;color:var(--er25-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Sistema SaaS</div>'
-            + '  </div>'
-            + '</div>';
+        footer.className = 'er25safe-footer';
+        footer.innerHTML = '<div class="er25safe-user"><strong>Usuario logado</strong><br><span>Sistema SaaS</span></div>';
         sidebar.appendChild(footer);
 
-        var overlay = document.createElement('div');
-        overlay.className = 'er25-overlay';
-        overlay.id = 'er25-overlay';
-        overlay.addEventListener('click', function () {
-            document.body.classList.remove('er25-sidebar-open');
-        });
-
-        var main = document.createElement('div');
-        main.className = 'er25-main';
-
-        var nomes = labelPagina();
+        var nomes = tituloPagina();
 
         var topbar = document.createElement('header');
-        topbar.className = 'er25-topbar';
+        topbar.id = 'er25safe-topbar';
+        topbar.className = 'er25safe-topbar';
         topbar.innerHTML = ''
-            + '<div style="display:flex;align-items:center;gap:12px">'
-            + '  <button type="button" class="er25-btn er25-menu-toggle" id="er25-menu-toggle">☰</button>'
+            + '<div style="display:flex;align-items:center;gap:10px">'
+            + '  <button type="button" class="er25safe-btn" id="er25safe-mobile">☰</button>'
             + '  <div>'
-            + '    <h1 class="er25-topbar-title">' + nomes[0] + '</h1>'
-            + '    <p class="er25-topbar-subtitle">' + nomes[1] + '</p>'
+            + '    <h1 class="er25safe-title">' + nomes[0] + '</h1>'
+            + '    <p class="er25safe-subtitle">' + nomes[1] + '</p>'
             + '  </div>'
             + '</div>'
-            + '<div class="er25-actions">'
-            + '  <button type="button" class="er25-btn" id="er25-theme-toggle">🌙 <span>Escuro</span></button>'
-            + '  <button type="button" class="er25-btn" id="er25-collapse-toggle">⇤ <span>Menu</span></button>'
+            + '<div class="er25safe-actions">'
+            + '  <button type="button" class="er25safe-btn" id="er25safe-theme">🌙 <span>Escuro</span></button>'
+            + '  <button type="button" class="er25safe-btn" id="er25safe-collapse">⇤ <span>Menu</span></button>'
             + '</div>';
 
-        var content = document.createElement('main');
-        content.className = 'er25-content';
-        content.id = 'er25-content';
+        var overlay = document.createElement('div');
+        overlay.id = 'er25safe-overlay';
+        overlay.className = 'er25safe-overlay';
 
-        var nodes = [];
-        for (var i = 0; i < document.body.childNodes.length; i++) {
-            var n = document.body.childNodes[i];
-            if (n.nodeType === 1 && (
-                n.id === 'er25-shell' ||
-                n.id === 'etapa25-layout-profissional' ||
-                n.className === 'er25-overlay'
-            )) {
-                continue;
-            }
-            nodes.push(n);
-        }
+        document.body.insertBefore(overlay, document.body.firstChild);
+        document.body.insertBefore(topbar, document.body.firstChild);
+        document.body.insertBefore(sidebar, document.body.firstChild);
 
-        document.body.innerHTML = '';
-
-        for (var j = 0; j < nodes.length; j++) {
-            content.appendChild(nodes[j]);
-        }
-
-        main.appendChild(topbar);
-        main.appendChild(content);
-
-        shell.appendChild(sidebar);
-        shell.appendChild(overlay);
-        shell.appendChild(main);
-
-        document.body.appendChild(shell);
-
-        var menuBtn = document.getElementById('er25-menu-toggle');
-        if (menuBtn) {
-            menuBtn.addEventListener('click', function () {
-                document.body.classList.toggle('er25-sidebar-open');
+        var mobile = document.getElementById('er25safe-mobile');
+        if (mobile) {
+            mobile.addEventListener('click', function () {
+                document.body.classList.toggle('er25safe-open');
             });
         }
 
-        var collapseBtn = document.getElementById('er25-collapse-toggle');
-        if (collapseBtn) {
-            collapseBtn.addEventListener('click', function () {
-                document.body.classList.toggle('er25-sidebar-collapsed');
+        overlay.addEventListener('click', function () {
+            document.body.classList.remove('er25safe-open');
+        });
+
+        var collapse = document.getElementById('er25safe-collapse');
+        if (collapse) {
+            collapse.addEventListener('click', function () {
+                document.body.classList.toggle('er25safe-collapsed');
             });
         }
 
-        var themeBtn = document.getElementById('er25-theme-toggle');
-        if (themeBtn) {
-            themeBtn.addEventListener('click', function () {
-                var atual = localStorage.getItem('er25-theme') || temaInicial();
+        var theme = document.getElementById('er25safe-theme');
+        if (theme) {
+            theme.addEventListener('click', function () {
+                var atual = localStorage.getItem('er25safe-theme') || temaAtual();
                 aplicarTema(atual === 'dark' ? 'light' : 'dark');
             });
         }
 
-        aplicarTema(temaInicial());
+        aplicarTema(temaAtual());
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', criarShell);
+        document.addEventListener('DOMContentLoaded', criar);
     } else {
-        criarShell();
+        criar();
     }
 })();
 </script>
-<!-- ETAPA25_LAYOUT_PROFISSIONAL_FIM -->
+<!-- ETAPA25_1_SHELL_SEGURO_FIM -->
 
 </body>
 </html>

@@ -740,3 +740,36 @@ Logs Session ID: 0.
 Logs cookie: 0.
 Logs email: 0.
 <!-- ETAPA_25_FIM -->
+
+<!-- ETAPA_25_1_INICIO -->
+## Etapa 25.1 - Frontend corrigido com shell seguro
+
+Data: 2026-07-07T00:52:30
+
+Substituido shell invasivo por shell seguro sem reconstruir o body.
+Validacao estrutural OK: True.
+Login OK: True.
+Paginas OK: True.
+Layout OK: True.
+Runtime OK: True.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_25_1_FIM -->
+
+<!-- ETAPA_25_2_INICIO -->
+## Etapa 25.2 - Dashboard Alpine corrigido
+
+Data: 2026-07-07T00:57:10
+
+Corrigida inicializacao do Alpine no dashboard.
+Dashboard alterado: True.
+Alpine defer corrigido: True.
+window.appData garantido: True.
+Validacao estrutural OK: True.
+Dashboard Alpine runtime OK: True.
+Runtime OK: True.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_25_2_FIM -->

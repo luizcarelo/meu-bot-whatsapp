@@ -577,3 +577,25 @@ Adicionado botao de tema claro/escuro com localStorage.
 Padronizada estrutura visual via public/css/style.css.
 Preservadas as funcoes existentes das telas.
 <!-- ETAPA_25_FIM -->
+
+<!-- ETAPA_25_1_INICIO -->
+## Etapa 25.1 - Correcao do frontend
+
+Data: 2026-07-07T00:52:30
+
+Removido script antigo que reconstruia o body.
+Adicionado shell seguro com menu lateral e tema claro/escuro.
+Preservados scripts originais das paginas.
+Validadas rotas principais em runtime.
+<!-- ETAPA_25_1_FIM -->
+
+<!-- ETAPA_25_2_INICIO -->
+## Etapa 25.2 - Correcao Alpine no Dashboard
+
+Data: 2026-07-07T00:57:10
+
+Adicionado defer ao carregamento do Alpine no dashboard.
+Garantida exposicao de appData em window para inicializacao do Alpine.
+Mantido shell seguro da Etapa 25.1.
+Validadas rotas principais em runtime.
+<!-- ETAPA_25_2_FIM -->

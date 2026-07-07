@@ -538,3 +538,24 @@ Decidido manter backend, banco, rotas e controllers sem alteracao nesta etapa.
 Decidido usar localStorage para persistencia do tema claro/escuro.
 Decidido validar o menu lateral em runtime nas quatro telas principais.
 <!-- ETAPA_25_FIM -->
+
+<!-- ETAPA_25_1_INICIO -->
+## Etapa 25.1 - Decisao tecnica
+
+Data: 2026-07-07T00:52:30
+
+Decidido nao mover os nos originais do body para evitar quebra de scripts das views.
+Decidido inserir sidebar e topbar como elementos fixos independentes.
+Decidido manter a navegacao por links normais para preservar comportamento do navegador.
+Decidido corrigir o layout antes de continuar com Baileys e auditoria funcional.
+<!-- ETAPA_25_1_FIM -->
+
+<!-- ETAPA_25_2_INICIO -->
+## Etapa 25.2 - Decisao tecnica
+
+Data: 2026-07-07T00:57:10
+
+Decidido corrigir apenas views/dashboard.ejs para evitar impacto no CRM.
+Decidido manter Alpine via CDN por enquanto e deixar internalizacao para etapa futura.
+Decidido usar window.appData como compatibilidade segura com x-data=appData().
+<!-- ETAPA_25_2_FIM -->
