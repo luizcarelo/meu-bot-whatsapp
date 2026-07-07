@@ -214,3 +214,27 @@ Corrigidas sequences desalinhadas usando setval quando necessario.
 Revalidadas sequences apos correcao.
 Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_10_1_FIM -->
+
+<!-- ETAPA_11_INICIO -->
+## Etapa 11 - Validacao de endpoints e interface
+
+Data: 2026-07-06T21:27:13
+
+Verificados containers Docker Compose.
+Coletados logs recentes do servico app.
+Testados endpoints HTTP basicos em porta local.
+Detectados status HTTP e padroes de erro comuns.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_11_FIM -->
+
+<!-- ETAPA_12_INICIO -->
+## Etapa 12 - Validacao de login e autenticacao
+
+Data: 2026-07-06T21:31:11
+
+Validado login real via endpoint de autenticacao.
+Validadas paginas autenticadas com cookie mantido em memoria.
+Validados endpoints somente leitura quando existentes.
+Coletados logs recentes para detectar erros criticos.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_12_FIM -->

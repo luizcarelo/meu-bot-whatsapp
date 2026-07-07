@@ -197,3 +197,25 @@ Decidido usar setval com GREATEST entre MAX(id) e 1.
 Decidido nao inserir dados de teste nesta etapa.
 Decidido gerar backup logico antes de alterar sequences.
 <!-- ETAPA_10_1_FIM -->
+
+<!-- ETAPA_11_INICIO -->
+## Etapa 11 - Decisoes tecnicas
+
+Data: 2026-07-06T21:27:13
+
+Decidido validar disponibilidade antes de testar login real.
+Decidido nao fazer escrita nem chamadas externas nesta etapa.
+Decidido separar login e fluxos reais para etapa posterior.
+Decidido registrar achados de logs para triagem posterior.
+<!-- ETAPA_11_FIM -->
+
+<!-- ETAPA_12_INICIO -->
+## Etapa 12 - Decisoes tecnicas
+
+Data: 2026-07-06T21:31:11
+
+Decidido manter cookie apenas em memoria durante a validacao.
+Decidido nao imprimir senha nem persistir credenciais.
+Decidido nao executar criacao, edicao ou exclusao de dados nesta etapa.
+Decidido separar fluxos reais de WhatsApp para etapa posterior.
+<!-- ETAPA_12_FIM -->

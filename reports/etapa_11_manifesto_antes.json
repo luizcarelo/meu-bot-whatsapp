@@ -1,0 +1,802 @@
+{
+  "gerado_em": "2026-07-06T21:27:13",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "total_arquivos": 159,
+  "arquivos": [
+    {
+      "arquivo": ".env",
+      "tamanho_bytes": 1704,
+      "sha256": "8152c1e92639cd8b9e44efe759095c73f77390c66209511ea9578df9ea169a7b"
+    },
+    {
+      "arquivo": ".env.example",
+      "tamanho_bytes": 675,
+      "sha256": "fc54f96bebc626c7232dff9cee17adb1044c5837c15db0f4f32269b0ef6c1572"
+    },
+    {
+      "arquivo": ".github/copilot-instructions.md",
+      "tamanho_bytes": 6072,
+      "sha256": "70497762e0be03d0d60d5babdb88fdfe7c00ed6fbaf037c886449e50a942a4a5"
+    },
+    {
+      "arquivo": ".gitignore",
+      "tamanho_bytes": 59,
+      "sha256": "acc90aa0ff081dd5d95b11ea402fc78c2c9ca81e8405054ed8eb88abe0d292c9"
+    },
+    {
+      "arquivo": ".vscode/mcp.json",
+      "tamanho_bytes": 18,
+      "sha256": "ef65639def9fe94904700c141dfaef547861d6eea44e0dabdfb60a635bf9678f"
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "tamanho_bytes": 6862,
+      "sha256": "dfa28dcd80571c48b6690147db0767947e8eb60c17b711810c12f9f26316cd3e"
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "tamanho_bytes": 7562,
+      "sha256": "3ae26182fb329514e3d19bb2442550f1901469d4178b978cea40febd4d6aa740"
+    },
+    {
+      "arquivo": "DECISOES_TECNICAS.md",
+      "tamanho_bytes": 6777,
+      "sha256": "bcd92bb7e31f00dd46e3e223cbaf0179c08b4984045e9193acd96720f0448200"
+    },
+    {
+      "arquivo": "Dockerfile",
+      "tamanho_bytes": 657,
+      "sha256": "1b62d7112061a6e130ac85dad55a77156e59d456c71d62e571152108a79856be"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "tamanho_bytes": 5874,
+      "sha256": "cf55757a65a434969fe3e347c00a6a4e3bd5917aa10e1f20033969c491ec06dc"
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "tamanho_bytes": 7846,
+      "sha256": "88ba365a0cd73a0a30f75ed04a4c195bd89ed2e95a2a083076cc7602b47bab6a"
+    },
+    {
+      "arquivo": "README.md",
+      "tamanho_bytes": 5266,
+      "sha256": "4edf8e3a3387ddb67b76c2e747268ae349b27906ccd2bc8da989478f0d950cf2"
+    },
+    {
+      "arquivo": "__pycache__/etapa_10_testes_funcionais_escrita_postgres.cpython-314.pyc",
+      "tamanho_bytes": 39981,
+      "sha256": "ab4a3bda1a8342f0d3afec99efd00e32f792e7d767f081bd6524b8179ea4be44"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "tamanho_bytes": 13432,
+      "sha256": "ffc7732df804e00b9b8c3f1638c608b3eaeaa875c4e16cde77e515fe285f791f"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "tamanho_bytes": 5413,
+      "sha256": "0845c17cf60f77d793771be161842be23b9e567a9ccd0718678eed8ab8efe110"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "tamanho_bytes": 7822,
+      "sha256": "0306999cbfebc266db4db6db50c90d90c854e1aa625cdafbba4e3e9032bc6e15"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "tamanho_bytes": 30318,
+      "sha256": "6e2b09036a44f9ce3f762bff71d30abd054b1372e85c8f682a49ddd8f6dda33b"
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "tamanho_bytes": 3672,
+      "sha256": "54218a2c08585eea911c9c7a9fe8b2799f159fea23ff296b1ed01235934d1c72"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "tamanho_bytes": 14529,
+      "sha256": "9146284709c1aa496e2940de053f0e7aa21f0744b448ef607e27b23b8ec43c47"
+    },
+    {
+      "arquivo": "database/migrations/20260706_schema_funcional_setores_horarios.sql",
+      "tamanho_bytes": 777,
+      "sha256": "3f4ab9aad97307e9ec05c30c77df0ec2c5504858d24b5c1cce9e32fa5d0d8e0e"
+    },
+    {
+      "arquivo": "docker-compose.yml",
+      "tamanho_bytes": 1187,
+      "sha256": "a6519c62daba983fb0364a506a7254cf8c52101f87a6e39ac076016c28508d5b"
+    },
+    {
+      "arquivo": "etapa_10_1_corrigir_sequences_postgres.py",
+      "tamanho_bytes": 25434,
+      "sha256": "373998c28e9eb9c72098c41f3c52d2e3d88eb31b0fcf3bf8d8b70a42220a9fbd"
+    },
+    {
+      "arquivo": "etapa_10_hotfix_syntax.py",
+      "tamanho_bytes": 5358,
+      "sha256": "b4744ed68ef83080368789a93a2e5468845e0cd8f044cecc4c7757b84f48fb74"
+    },
+    {
+      "arquivo": "etapa_10_testes_funcionais_escrita_postgres.py",
+      "tamanho_bytes": 29895,
+      "sha256": "bc852279d74c76c32837b37b015fadac0c8690f6f3bfa369d2efb74fae74d5d9"
+    },
+    {
+      "arquivo": "etapa_11_validar_endpoints_interface.py",
+      "tamanho_bytes": 22793,
+      "sha256": "ca092dd03ae70a26e579a32254b65e38d5d1fb88a4fcf9a683f969f4cbbfa890"
+    },
+    {
+      "arquivo": "favicon.ico",
+      "tamanho_bytes": 630994,
+      "sha256": "e5d92feb710ede82563c6b4000ac15659dd9de0d7412da54438c0716756b8df6"
+    },
+    {
+      "arquivo": "get-docker.sh",
+      "tamanho_bytes": 22806,
+      "sha256": "37eb71347a4353a6ff7ae9a2aa3dddc71cd142f3512cb18f90d10ae4770a7bd2"
+    },
+    {
+      "arquivo": "package-lock.json",
+      "tamanho_bytes": 272258,
+      "sha256": "b3efd5b69f5981cc92cec18ddec28f624857f0536b02f71c0f64c7d78c7935a9"
+    },
+    {
+      "arquivo": "package.json",
+      "tamanho_bytes": 2162,
+      "sha256": "da10927da77c27b52ff3b0075562d2c58fcd18e009921daf56e90ec76de77bfc"
+    },
+    {
+      "arquivo": "postcss.config.js",
+      "tamanho_bytes": 81,
+      "sha256": "6bbbfd323867a78af8d7ee348a179835202fc7a71f4c2b3e3f34de6f5f895c76"
+    },
+    {
+      "arquivo": "public/images/chatbot_logo.png",
+      "tamanho_bytes": 265659,
+      "sha256": "13a8b8b16e3b1a9fb023ff85d34e3175721681dcea290ca27923fe3518a2706e"
+    },
+    {
+      "arquivo": "public/images/lh_chatbot_favicon.png",
+      "tamanho_bytes": 158903,
+      "sha256": "81cba5c9044c73e3f577919a2bd6f55fb4a4286446011b79068cf301b0942026"
+    },
+    {
+      "arquivo": "public/images/lhsolucao_logo.png",
+      "tamanho_bytes": 204712,
+      "sha256": "f579970a9486c5695e74148826dc52e08f4e278d98e7455df72b7997a9304dc7"
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.json",
+      "tamanho_bytes": 7966,
+      "sha256": "cb41338ae1d410382b077e7f648940599a7afd1720a3524919744d9d3a9decc2"
+    },
+    {
+      "arquivo": "reports/etapa_01_auditoria_estatica.md",
+      "tamanho_bytes": 4239,
+      "sha256": "24e18a4f04c815891140705f78fe3271da6baa9abd93d6c623b6c47fa75bb7b3"
+    },
+    {
+      "arquivo": "reports/etapa_02_manifesto_antes.json",
+      "tamanho_bytes": 9402,
+      "sha256": "a7fbc3bbcf9db611a60b82512276bc17b67ec60149f3c689310652bfcf307f46"
+    },
+    {
+      "arquivo": "reports/etapa_02_manifesto_depois.json",
+      "tamanho_bytes": 10386,
+      "sha256": "d8739b9b2ec7a93d1a888e6c6deb6cd20addb0423ca9123eab4bd920144be08d"
+    },
+    {
+      "arquivo": "reports/etapa_02_saneamento_seguro.json",
+      "tamanho_bytes": 1658,
+      "sha256": "7cb01cd7c4189465b88838a884198dc73151c30440b3a9b1c515ab3ddbc66ef4"
+    },
+    {
+      "arquivo": "reports/etapa_02_saneamento_seguro.md",
+      "tamanho_bytes": 1010,
+      "sha256": "1faf12aa759850b25e888bb7d9d294de2bc51fdd72ec5651d0a5f4172fe5c683"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_antes.json",
+      "tamanho_bytes": 12786,
+      "sha256": "1bc6ecb286ab754c494fb4cd975fd15e7b3a742fc9a1b05b48e1fa9e8a6a1618"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_manifesto_depois.json",
+      "tamanho_bytes": 12786,
+      "sha256": "fb213ca82f8f6dadc9eda877bb001e73395405ea1b8ae8b956f82a18d6e07247"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.json",
+      "tamanho_bytes": 107233,
+      "sha256": "fec2a3799d9a9508621c0ea7c129fa4289fc22b0b54a79aa2fac33179d244e9e"
+    },
+    {
+      "arquivo": "reports/etapa_03_1_padronizar_postgres.md",
+      "tamanho_bytes": 8917,
+      "sha256": "2e4a98a5b4cc86199478ccef372d4da8e4b0c388e073f289a4d5a73ec49f1006"
+    },
+    {
+      "arquivo": "reports/etapa_03_corrigir_docker_mysql.json",
+      "tamanho_bytes": 1074,
+      "sha256": "83f2ab94599afb7faa788c3e6195d683e2c13c21b59660c9275784ca97f0b011"
+    },
+    {
+      "arquivo": "reports/etapa_03_corrigir_docker_mysql.md",
+      "tamanho_bytes": 770,
+      "sha256": "96e92f7466d68a0bb7663861fe52f3e442fd5a001c5a3809c8ea6638db7893d0"
+    },
+    {
+      "arquivo": "reports/etapa_03_manifesto_antes.json",
+      "tamanho_bytes": 11119,
+      "sha256": "9a661b53bbb19a9e5fbd0ba2700039d0c82cb756545a369fd06f636c6814062c"
+    },
+    {
+      "arquivo": "reports/etapa_03_manifesto_depois.json",
+      "tamanho_bytes": 11304,
+      "sha256": "8428aa450507d0ea6ae042bad60f8ac99137728f887c9234f1e422b74ebe3c20"
+    },
+    {
+      "arquivo": "reports/etapa_04_1_limpar_historico_mysql_docs.json",
+      "tamanho_bytes": 1661,
+      "sha256": "169cd8e72625b4f834d6dbca7035bbffafffdfb89fd072cc6bc1ce4349dc3dea"
+    },
+    {
+      "arquivo": "reports/etapa_04_1_limpar_historico_mysql_docs.md",
+      "tamanho_bytes": 827,
+      "sha256": "af2da1a7350c08a81416e17cd983711c5dbb492091d0aeb2773c3a308bf77989"
+    },
+    {
+      "arquivo": "reports/etapa_04_1_manifesto_antes.json",
+      "tamanho_bytes": 14520,
+      "sha256": "6490198d676bbe98ead2ead2ac982c6316468b62eacae561a31d73bbba528590"
+    },
+    {
+      "arquivo": "reports/etapa_04_1_manifesto_depois.json",
+      "tamanho_bytes": 14706,
+      "sha256": "b7fb36419cac889f9437bd98998bfd4604ba4b3167e51acf83946145015f2c6d"
+    },
+    {
+      "arquivo": "reports/etapa_04_limpar_mysql_e_validar_postgres.json",
+      "tamanho_bytes": 8153,
+      "sha256": "23590cd348ff7603d4f8714ac084b61464aebc543a1fe45f631abbfeffd778a8"
+    },
+    {
+      "arquivo": "reports/etapa_04_limpar_mysql_e_validar_postgres.md",
+      "tamanho_bytes": 2906,
+      "sha256": "8b8ace90d352b3fcaed7ee6e1d096033920aca25741b1765a80224c1c64607a7"
+    },
+    {
+      "arquivo": "reports/etapa_04_manifesto_antes.json",
+      "tamanho_bytes": 13702,
+      "sha256": "e2b0e5948a20434652e74c3a0e3a446181f0ec971e4dec2ef5aa526b24d8bc5f"
+    },
+    {
+      "arquivo": "reports/etapa_04_manifesto_depois.json",
+      "tamanho_bytes": 13702,
+      "sha256": "d925a257b377ff689296451c9b39821b64499b967eaa92e601b0b35ed5dfb006"
+    },
+    {
+      "arquivo": "reports/etapa_05_manifesto_antes.json",
+      "tamanho_bytes": 15481,
+      "sha256": "125b2580bc7843881528b9e453c80a003f16cf50fa7543c8fd4101c4534b9243"
+    },
+    {
+      "arquivo": "reports/etapa_05_manifesto_depois.json",
+      "tamanho_bytes": 15665,
+      "sha256": "414f99025d99e1a8a43784bdf1d9891ecc26f3db00cf8e33105f57a1890d7c45"
+    },
+    {
+      "arquivo": "reports/etapa_05_validar_postgres_backend.json",
+      "tamanho_bytes": 71598,
+      "sha256": "ef13441a3e3f344ead8963b057443ec16f1612fcf0841a1d6b0b9a70336b6da7"
+    },
+    {
+      "arquivo": "reports/etapa_05_validar_postgres_backend.md",
+      "tamanho_bytes": 47068,
+      "sha256": "a090332e4ee0c9d44129f0e158d2ced773777d469be902f6ac45204038e9c837"
+    },
+    {
+      "arquivo": "reports/etapa_06_1_corrigir_session_upsert.json",
+      "tamanho_bytes": 3177,
+      "sha256": "405bceb4daf70254cf35e713ad3961f4e0ba45a39c34a47a7b60b283bd2e83fb"
+    },
+    {
+      "arquivo": "reports/etapa_06_1_corrigir_session_upsert.md",
+      "tamanho_bytes": 1509,
+      "sha256": "bbf0be818cda78f3168e5a9624d0f16948c76825d23d7564ef3e44f16d999e89"
+    },
+    {
+      "arquivo": "reports/etapa_06_1_manifesto_antes.json",
+      "tamanho_bytes": 17355,
+      "sha256": "2b157fec0a3b558a905d738a0e83c014e42e449df748e48be452e43a0f9daf97"
+    },
+    {
+      "arquivo": "reports/etapa_06_1_manifesto_depois.json",
+      "tamanho_bytes": 17541,
+      "sha256": "e1296852445675106d1150db5168dacd848f8e872b565b155683dc7d07656fff"
+    },
+    {
+      "arquivo": "reports/etapa_06_2_corrigir_ifnull_values_postgres.json",
+      "tamanho_bytes": 3314,
+      "sha256": "5073bdcbae1b135802f6cc7f0ae6147c3734597567b5c2300b320029509a74aa"
+    },
+    {
+      "arquivo": "reports/etapa_06_2_corrigir_ifnull_values_postgres.md",
+      "tamanho_bytes": 1612,
+      "sha256": "c436ff527ba9ec5e594dd60c03d3c06a3c0c6095974f53b00bca20d3ee81a603"
+    },
+    {
+      "arquivo": "reports/etapa_06_2_manifesto_antes.json",
+      "tamanho_bytes": 18326,
+      "sha256": "62871ebfd03da9879cb64255ecd43b7da47b74e5db375ddf397a5e9480142618"
+    },
+    {
+      "arquivo": "reports/etapa_06_2_manifesto_depois.json",
+      "tamanho_bytes": 18512,
+      "sha256": "c7657c77f325723e950b0651c0bb02873bc8b2744a8c14259c5885fb4e833f75"
+    },
+    {
+      "arquivo": "reports/etapa_06_corrigir_upserts_postgres.json",
+      "tamanho_bytes": 2292,
+      "sha256": "2e30e8b9ac62ba592f991f9a952c9403622097f80a6f0ef644ffb0c34ef031f8"
+    },
+    {
+      "arquivo": "reports/etapa_06_corrigir_upserts_postgres.md",
+      "tamanho_bytes": 1214,
+      "sha256": "cbbe58029680362c58e3228c8bca6a1a7f1624c43778c4a06896addc4108355b"
+    },
+    {
+      "arquivo": "reports/etapa_06_manifesto_antes.json",
+      "tamanho_bytes": 16418,
+      "sha256": "48b22f2be549cbc23aab8219d0772d2a2d08c1f4d5b31772c58da47a2015644a"
+    },
+    {
+      "arquivo": "reports/etapa_06_manifesto_depois.json",
+      "tamanho_bytes": 16602,
+      "sha256": "c1c212972d3261152a74e2b0c6313a84e5b3cff44721c2a033ce6d382c85f556"
+    },
+    {
+      "arquivo": "reports/etapa_07_1_manifesto_antes.json",
+      "tamanho_bytes": 19839,
+      "sha256": "7fc6796ca0a014fb1c7baea158d928f5d7398ee3e5f5d0e4480e910774447510"
+    },
+    {
+      "arquivo": "reports/etapa_07_1_manifesto_depois.json",
+      "tamanho_bytes": 20025,
+      "sha256": "73efa392ff447bd0d57402b267441f00d3c223021d216a2f6df5c187fc382ee3"
+    },
+    {
+      "arquivo": "reports/etapa_07_1_validar_constraint_runtime.json",
+      "tamanho_bytes": 2096,
+      "sha256": "b250038634f839ff265feacb67b6c8a286e74df1be1cb9fa901365dfeb2980a9"
+    },
+    {
+      "arquivo": "reports/etapa_07_1_validar_constraint_runtime.md",
+      "tamanho_bytes": 1233,
+      "sha256": "f0438cdc0038d0e7dbc6720f098f63edb246d468a4b5fa96bfbfae809402fd45"
+    },
+    {
+      "arquivo": "reports/etapa_07_2_manifesto_antes.json",
+      "tamanho_bytes": 21567,
+      "sha256": "a6ef76b7d1b3a467a4a6fccc9ae975aa8058c3a4936185817d5d2a961166fe6d"
+    },
+    {
+      "arquivo": "reports/etapa_07_2_manifesto_depois.json",
+      "tamanho_bytes": 21567,
+      "sha256": "9e93a77ef74c7705c6a3e4cf4da46236ee3635fb82fc5a140a3e7fa831f465b9"
+    },
+    {
+      "arquivo": "reports/etapa_07_2_validar_postgres_docker_runtime.json",
+      "tamanho_bytes": 7243,
+      "sha256": "9d338be24e4111621bb0a7d78e7ce9bda0c5f739cdf9cd759e45fa1e68e3acd8"
+    },
+    {
+      "arquivo": "reports/etapa_07_2_validar_postgres_docker_runtime.md",
+      "tamanho_bytes": 1477,
+      "sha256": "1cb628849026c3d685af50b9339ef2a9dd8bc89b44aaa01095e5f127a9ed628c"
+    },
+    {
+      "arquivo": "reports/etapa_07_manifesto_antes.json",
+      "tamanho_bytes": 11736,
+      "sha256": "9b44a1ab57152362fe60fc0aaa6feacc2cf06c81a95d5cf175f89fc77104dc75"
+    },
+    {
+      "arquivo": "reports/etapa_07_manifesto_depois.json",
+      "tamanho_bytes": 11736,
+      "sha256": "24f49ae33774a186b10d677166515e5a76ced7d7888c7fbc97ed2ca946204c8e"
+    },
+    {
+      "arquivo": "reports/etapa_07_validar_schema_postgres.json",
+      "tamanho_bytes": 8701,
+      "sha256": "5830c371a13422005f4a9c09907de62379cc339bc2f090582d1ead70a469d2e6"
+    },
+    {
+      "arquivo": "reports/etapa_07_validar_schema_postgres.md",
+      "tamanho_bytes": 4342,
+      "sha256": "daed66f7acb07316e6ab316ebb05c40e754e0fbabc32ab686288fe4333a4e40d"
+    },
+    {
+      "arquivo": "reports/etapa_08_1_corrigir_admin_insertid_update_limit.json",
+      "tamanho_bytes": 2268,
+      "sha256": "0814da67b6cdf12cb7c8b6f1566db7cf87838d2b6cfeec74d0d614f4bbb1df6c"
+    },
+    {
+      "arquivo": "reports/etapa_08_1_corrigir_admin_insertid_update_limit.md",
+      "tamanho_bytes": 1359,
+      "sha256": "1dd90b702f34305dba7a7f571f300a4b5359d8f1f02da51c705886411705dbb5"
+    },
+    {
+      "arquivo": "reports/etapa_08_1_manifesto_antes.json",
+      "tamanho_bytes": 22747,
+      "sha256": "008bf7b8bb069131a9ef8fb4461adf3130bab3d2610cbb7ceb0b5fdff1598389"
+    },
+    {
+      "arquivo": "reports/etapa_08_1_manifesto_depois.json",
+      "tamanho_bytes": 22933,
+      "sha256": "5f6f9637df498b243da4abed59d10ecde4bbe14f904f0221a1aba57eb84d3a72"
+    },
+    {
+      "arquivo": "reports/etapa_08_corrigir_queries_media_postgres.json",
+      "tamanho_bytes": 6495,
+      "sha256": "164228f91c8d8702977d5cdc56b4e39dc7c6f21a65568bc22d6953b8caf3d081"
+    },
+    {
+      "arquivo": "reports/etapa_08_corrigir_queries_media_postgres.md",
+      "tamanho_bytes": 2823,
+      "sha256": "d85794955c8f286c91d5127570e58d6c12e28f51377c32d605d1560f7921eca1"
+    },
+    {
+      "arquivo": "reports/etapa_08_manifesto_antes.json",
+      "tamanho_bytes": 21785,
+      "sha256": "bc268011067491d7d9e613d59443a25867ba627cbeb0f3fccfa6db6e27ccb43b"
+    },
+    {
+      "arquivo": "reports/etapa_08_manifesto_depois.json",
+      "tamanho_bytes": 21969,
+      "sha256": "56cd9f97cd1e3d6294ab811da2f9fb8d49ead7c7c707f1ce29a494513658384a"
+    },
+    {
+      "arquivo": "reports/etapa_09_1_corrigir_schema_funcional_postgres.json",
+      "tamanho_bytes": 4662,
+      "sha256": "6c2c6fb52936a531b2339b62f9e25e1aa296d6055c59e109f2af19af2f868d7a"
+    },
+    {
+      "arquivo": "reports/etapa_09_1_corrigir_schema_funcional_postgres.md",
+      "tamanho_bytes": 2104,
+      "sha256": "fa07fc5ff66fdf53b20ff5407f67b3e18cdeb0c10372a902b6dfe6063ac65a04"
+    },
+    {
+      "arquivo": "reports/etapa_09_1_manifesto_antes.json",
+      "tamanho_bytes": 24665,
+      "sha256": "2b10cc53fb28a621c6bbf45eb9ff2cc3f363fc8be46cb91e04d3bcefd7d97798"
+    },
+    {
+      "arquivo": "reports/etapa_09_1_manifesto_depois.json",
+      "tamanho_bytes": 25062,
+      "sha256": "83e6e3d1d2287699efca8a74c5e0d9c74ababb6ef29e50ae2bda5df32e01670e"
+    },
+    {
+      "arquivo": "reports/etapa_09_2_executar_migration_schema_funcional.json",
+      "tamanho_bytes": 11322,
+      "sha256": "33b1f8debff1a9db0d9365144269628ba711a6d5d167bbc72e37e0bcd3a6e513"
+    },
+    {
+      "arquivo": "reports/etapa_09_2_executar_migration_schema_funcional.md",
+      "tamanho_bytes": 1962,
+      "sha256": "3b49a5a9ce030e8796df30643be9d2d4f875be1f8fc26cde77f87a29f57fc515"
+    },
+    {
+      "arquivo": "reports/etapa_09_2_manifesto_antes.json",
+      "tamanho_bytes": 25851,
+      "sha256": "e8971984ae114c8ba390fccaf3cc5882549f1d0b2d0db6ab91edb950e2c53e8c"
+    },
+    {
+      "arquivo": "reports/etapa_09_2_manifesto_depois.json",
+      "tamanho_bytes": 26037,
+      "sha256": "6248bad0ca4480adf9380bd45eeec6647bb5707466c5b25c8b68c39ced04d24c"
+    },
+    {
+      "arquivo": "reports/etapa_09_manifesto_antes.json",
+      "tamanho_bytes": 23715,
+      "sha256": "1f8dd0ed3b28742841f46ec15549e8fceb1e922f741de26bddcad21282ded1ef"
+    },
+    {
+      "arquivo": "reports/etapa_09_manifesto_depois.json",
+      "tamanho_bytes": 23899,
+      "sha256": "db14b6fc689e789646ef0cd7dcf63fb914516b0cbc369f3b3c7bdffe732f5951"
+    },
+    {
+      "arquivo": "reports/etapa_09_validar_funcional_postgres.json",
+      "tamanho_bytes": 8548,
+      "sha256": "8a6c11f0b0ddeccd6d25756889e241a241bf9f99ab2353b0b17bff4352d74d92"
+    },
+    {
+      "arquivo": "reports/etapa_09_validar_funcional_postgres.md",
+      "tamanho_bytes": 1851,
+      "sha256": "7aaa4501eb5c4c40fa885512df17a38297433b036a39af545b036e270e1a76d6"
+    },
+    {
+      "arquivo": "reports/etapa_10_1_corrigir_sequences_postgres.json",
+      "tamanho_bytes": 6237,
+      "sha256": "2eddfe001fd5181548ff000857e811c6d8b381ae8271ba41e4fd6101c401ac29"
+    },
+    {
+      "arquivo": "reports/etapa_10_1_corrigir_sequences_postgres.md",
+      "tamanho_bytes": 2802,
+      "sha256": "04ef07be10862c0030a611079d36ce604107d93bf1789b99c6f9b841c974af8c"
+    },
+    {
+      "arquivo": "reports/etapa_10_1_manifesto_antes.json",
+      "tamanho_bytes": 28209,
+      "sha256": "cef431bed22d34129fefae46bcfa0f89a56bf8da7056e4901ba651b96afc9d35"
+    },
+    {
+      "arquivo": "reports/etapa_10_1_manifesto_depois.json",
+      "tamanho_bytes": 28395,
+      "sha256": "5b1051499a79b0ea10334934b5aa2c042a7d2300b1ccc8fc8f43acfe393aac68"
+    },
+    {
+      "arquivo": "reports/etapa_10_manifesto_antes.json",
+      "tamanho_bytes": 28974,
+      "sha256": "a61eb0d1048899f0f3404af0ac3c0cdcc3bcb5d50e5bb6bdf385b6b0f624fd8b"
+    },
+    {
+      "arquivo": "reports/etapa_10_manifesto_depois.json",
+      "tamanho_bytes": 28974,
+      "sha256": "8c5eb1150ecae6a41f965634250c12b9eb0cd9fb652849f01f5adb5d7af40e66"
+    },
+    {
+      "arquivo": "reports/etapa_10_testes_funcionais_escrita_postgres.json",
+      "tamanho_bytes": 10427,
+      "sha256": "2ad106f0c4a7c0ba7ee05e12692875c860c5ea60a35b7c39ba6ecfb60007e21d"
+    },
+    {
+      "arquivo": "reports/etapa_10_testes_funcionais_escrita_postgres.md",
+      "tamanho_bytes": 1926,
+      "sha256": "9642c53cd20af55c3db0c27cf0309467f1c4d87473a1a6bc840c378081033083"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "tamanho_bytes": 10081,
+      "sha256": "af2b42e44ebe3c8360d83b54184ea710438a6eebb64b43529bd0c22650ac5da4"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "tamanho_bytes": 3027,
+      "sha256": "234bc38503cfbe2613670e4812a94fc05b2e0e98b7bd3011ab4587a229b50d84"
+    },
+    {
+      "arquivo": "script/apply_branding.js",
+      "tamanho_bytes": 1182,
+      "sha256": "a9e53a45b7026c309c8f1837ef3a510b07060bc05536df6bb4f869d72558a6e0"
+    },
+    {
+      "arquivo": "script/audit_sync.js",
+      "tamanho_bytes": 1745,
+      "sha256": "d636a7815117901b14913899b15f65f7ecbeb44b0290e06b48bacd570c80d41e"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "tamanho_bytes": 3850,
+      "sha256": "8281c89659aec2675e39f05eca3977265480499f405b95c79de4afe59113781e"
+    },
+    {
+      "arquivo": "script/check_auth.js",
+      "tamanho_bytes": 823,
+      "sha256": "b6484dbdd2c13330b637df46c460ef9ecb297328a35e62566c9ad6486a933c00"
+    },
+    {
+      "arquivo": "script/configurar_nginx.sh",
+      "tamanho_bytes": 3109,
+      "sha256": "0e2440e981747d0bcd6fafa5bc510d8e7a7e5cc4f8e9ff707a861135ab039d7a"
+    },
+    {
+      "arquivo": "script/etapa_01_auditoria_estatica.py",
+      "tamanho_bytes": 15242,
+      "sha256": "631027e8839bfd7ef8fe547440f6322b487959170bc1aa44ee80a159bb4d2bde"
+    },
+    {
+      "arquivo": "script/etapa_02_saneamento_seguro.py",
+      "tamanho_bytes": 16624,
+      "sha256": "71aec6e2b0e4ded562b9f364fe3b3785e7ef149e2e920c6acfff893fee3170ca"
+    },
+    {
+      "arquivo": "script/etapa_03_1_hotfix_relatorio.py",
+      "tamanho_bytes": 1665,
+      "sha256": "90149f0802a5b888ed6bde4e7dd88e3f6482fccaade6d9d2dc4661c01436300a"
+    },
+    {
+      "arquivo": "script/etapa_03_1_padronizar_postgres.py",
+      "tamanho_bytes": 22467,
+      "sha256": "16ecd80444b4a0627658f3c8933d0f62314b6deaa472a6ba6900960daa0c3a47"
+    },
+    {
+      "arquivo": "script/etapa_03_corrigir_docker_mysql.py",
+      "tamanho_bytes": 16381,
+      "sha256": "001f86feb93a2e54d56abf16d51bf0964363906b648e69622e3c36abdaf77736"
+    },
+    {
+      "arquivo": "script/etapa_04_1_limpar_historico_mysql_docs.py",
+      "tamanho_bytes": 15300,
+      "sha256": "f21de2597e3e993fe7d30526fc0ad48b0e318b3ff20590d3e96c578d978cfe64"
+    },
+    {
+      "arquivo": "script/etapa_04_hotfix_docs_asterisco.py",
+      "tamanho_bytes": 2137,
+      "sha256": "73eb35b766e031cdd88fbc9924f71a0b261f69f593b881cc82ac79f18275271e"
+    },
+    {
+      "arquivo": "script/etapa_04_hotfix_indentacao.py",
+      "tamanho_bytes": 4809,
+      "sha256": "3b85a9d83a687edf4232ca77302976c2008c5b0aad2c6c58f115380f11ff8fe3"
+    },
+    {
+      "arquivo": "script/etapa_04_limpar_mysql_e_validar_postgres.py",
+      "tamanho_bytes": 35384,
+      "sha256": "fd3be8a9bd9b8ec556d2a7339d1eb20d67daf9f375e921e0d9b38ed3caba7a3e"
+    },
+    {
+      "arquivo": "script/etapa_05_validar_postgres_backend.py",
+      "tamanho_bytes": 28886,
+      "sha256": "32361cd76572b7ad3f8020dec190cb834439e6953448e6044073d790d7b0a378"
+    },
+    {
+      "arquivo": "script/etapa_06_1_corrigir_session_upsert.py",
+      "tamanho_bytes": 17960,
+      "sha256": "0dcac0f40ded915b02f4563241fec300df77c772c901be334fb54b789da50b47"
+    },
+    {
+      "arquivo": "script/etapa_06_2_corrigir_ifnull_values_postgres.py",
+      "tamanho_bytes": 17732,
+      "sha256": "7d3724829ecda346c9bc019071d43d3ef8cef72bd34bf28477bc06715d6ac5a8"
+    },
+    {
+      "arquivo": "script/etapa_06_corrigir_upserts_postgres.py",
+      "tamanho_bytes": 20340,
+      "sha256": "1c2c539c3602c9f17d76d3057f86bd82c3499fc579103f1b2719b22a793cec59"
+    },
+    {
+      "arquivo": "script/etapa_07_1_validar_constraint_runtime.py",
+      "tamanho_bytes": 27270,
+      "sha256": "c97bd182b14143b4e9c9da322f9539c91e2ff6b7f380116f2e4445767149550f"
+    },
+    {
+      "arquivo": "script/etapa_07_2_validar_postgres_docker_runtime.py",
+      "tamanho_bytes": 23680,
+      "sha256": "236c3f7002f27bae5a1cfe0e4924e55c7832c22d3d689509d4d09c8ccaa8ecc9"
+    },
+    {
+      "arquivo": "script/etapa_07_validar_schema_postgres.py",
+      "tamanho_bytes": 21478,
+      "sha256": "ec4326506182c45c19a8c9be29af7a3194d1c4f9ad4af94136178f768e75ceb1"
+    },
+    {
+      "arquivo": "script/etapa_08_1_corrigir_admin_insertid_update_limit.py",
+      "tamanho_bytes": 20952,
+      "sha256": "6a4148ed8689a9763e182a1632f4c7f6e3b0204f3e4ef51d8af16906aa2e9485"
+    },
+    {
+      "arquivo": "script/etapa_08_corrigir_queries_media_postgres.py",
+      "tamanho_bytes": 19744,
+      "sha256": "604bd811a1d0993058738308bf39a38a4d7ed4a3e211e9f03097f9830b24126a"
+    },
+    {
+      "arquivo": "script/etapa_09_1_corrigir_schema_funcional_postgres.py",
+      "tamanho_bytes": 22707,
+      "sha256": "0a05279fbe2ef2f4984aa90bd7ac31c9402d158e8fed8585f0a64422e38cdff7"
+    },
+    {
+      "arquivo": "script/etapa_09_2_executar_migration_schema_funcional.py",
+      "tamanho_bytes": 29815,
+      "sha256": "b85b0a8e2013b3a4359ef028b80dc92524ada655b35c4afd48af9957dc29a731"
+    },
+    {
+      "arquivo": "script/etapa_09_validar_funcional_postgres.py",
+      "tamanho_bytes": 25436,
+      "sha256": "1f275a3c82204681d4f01e7ade13397b8fb9c0ebae6a8319e7cc33aeced52e73"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "tamanho_bytes": 3821,
+      "sha256": "e61a5fbcdd46856d63b2370e582e3aeb69856469ed6714f07959bfbc794a5ba6"
+    },
+    {
+      "arquivo": "script/fix_access.js",
+      "tamanho_bytes": 1052,
+      "sha256": "a060338e6e52e3e5064d5d4980e9b877e39bfb6d3cb66f0036e280168a44ddc1"
+    },
+    {
+      "arquivo": "script/force_activate.js",
+      "tamanho_bytes": 933,
+      "sha256": "da17fe4b45923fa0411c8e912828f702c41ff8d2ed98c196d3e71f3fa8f66838"
+    },
+    {
+      "arquivo": "script/force_stop.js",
+      "tamanho_bytes": 2572,
+      "sha256": "e53012ae4f0e182ad8a0b153ec27ee88c40833849dac4e1ad5846719528242c5"
+    },
+    {
+      "arquivo": "script/force_sync.js",
+      "tamanho_bytes": 2775,
+      "sha256": "5f33bb003efc04c1b29cf31d596a21c482474fa3e2bb9e218d31efbf3de52a49"
+    },
+    {
+      "arquivo": "script/seed_data.js",
+      "tamanho_bytes": 1491,
+      "sha256": "d2d6846b72a42e081d8c456c3a284fc369e9ca2d55cd583679cce436296927e2"
+    },
+    {
+      "arquivo": "script/setup_reset.js",
+      "tamanho_bytes": 6283,
+      "sha256": "5df121a81822864df8e6763b33f460886c0b3fb6ebccec8535e10dc606ef18fe"
+    },
+    {
+      "arquivo": "server.js",
+      "tamanho_bytes": 6374,
+      "sha256": "d928b5c7193e6b15149072b1b44d88dfdf9d77987b95c934d019a78958679a45"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "tamanho_bytes": 2956,
+      "sha256": "462306eec1ce97b697ae5a2be08cb9a38c5405a21cc4914b9b94c99eb031ca87"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "tamanho_bytes": 3522,
+      "sha256": "a550e4def3f037cd4ee0e23c7e0ca049dfaf0b4850b91bf89a344b6ced4b6cc1"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "tamanho_bytes": 17090,
+      "sha256": "7b8a461533b471218630a8900075d9add1c3121686d24df157f3b0832921bcea"
+    },
+    {
+      "arquivo": "src/middleware/auth.js",
+      "tamanho_bytes": 2522,
+      "sha256": "56c288b2a3d22e347d41b0829bf4668322757fcf4fbe92b3afe76edc4e486b66"
+    },
+    {
+      "arquivo": "src/styles.css",
+      "tamanho_bytes": 394,
+      "sha256": "4032fa8f312c286a6777ae22d0fd0faae609b25de45a19987d04649cbfe8e904"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "tamanho_bytes": 3446,
+      "sha256": "abf5aedb4f83ca6512c4c739fd48f5eff61f3f7c805c42f384d5ad275d8b67ba"
+    },
+    {
+      "arquivo": "tailwind.config.js",
+      "tamanho_bytes": 693,
+      "sha256": "64c34b37b708646daffa446c898c3824832b51ff872d8069679605948c4b6f08"
+    },
+    {
+      "arquivo": "views/admin-panel.ejs",
+      "tamanho_bytes": 53105,
+      "sha256": "a9235c4197335efd9b59446ee406098586f6bee2c2c2e9d4711429a11320295f"
+    },
+    {
+      "arquivo": "views/crm.ejs",
+      "tamanho_bytes": 49116,
+      "sha256": "3c42b6e5f800cc304bdf04d4852b2ec9917cb3d966abefb8420c197270751a46"
+    },
+    {
+      "arquivo": "views/dashboard.ejs",
+      "tamanho_bytes": 26462,
+      "sha256": "4b7d89a58b0c2eff8e59e607318a262b53806005fdbc78fab5db9509589af107"
+    },
+    {
+      "arquivo": "views/login.ejs",
+      "tamanho_bytes": 13518,
+      "sha256": "46b94c76adfdb469fc1060255559c423dbb80d51452e9cf919c493efd5053b74"
+    },
+    {
+      "arquivo": "views/super-admin.ejs",
+      "tamanho_bytes": 21218,
+      "sha256": "f3409911593558c5883e2a7d94fff0dd9ac46953f2b131b9fdc4772778c7e904"
+    }
+  ]
+}

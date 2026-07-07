@@ -222,3 +222,28 @@ Executar testes funcionais pela interface web apos Etapa 10 passar.
 Revisar achados de baixa severidade, especialmente booleanos numericos.
 Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
 <!-- ETAPA_10_1_FIM -->
+
+<!-- ETAPA_11_INICIO -->
+## Pendencias apos Etapa 11
+
+Data: 2026-07-06T21:27:13
+
+Validar login real em etapa separada.
+Validar endpoints autenticados em ambiente controlado.
+Validar fluxo real de WhatsApp somente apos login e sessoes estarem estaveis.
+Revisar achados de logs, se houver.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+<!-- ETAPA_11_FIM -->
+
+<!-- ETAPA_12_INICIO -->
+## Pendencias apos Etapa 12
+
+Data: 2026-07-06T21:31:11
+
+Corrigir achados da Etapa 12 antes de avancar para fluxos reais.
+Validar fluxos reais da interface web com usuario logado.
+Validar endpoints autenticados com dados reais em modo controlado.
+Reduzir verbosidade de logs de sessao e cookies em producao.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+Planejar rotacao de credenciais reais expostas anteriormente.
+<!-- ETAPA_12_FIM -->

@@ -1,0 +1,200 @@
+{
+  "gerado_em": "2026-07-06T21:27:13",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_11_20260706_212713",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_11_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "compose_ps_analise": {
+    "app_mencionado": true,
+    "db_mencionado": true,
+    "redis_mencionado": true,
+    "parece_rodando": true,
+    "db_healthy": true,
+    "texto_redigido": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp\n"
+  },
+  "logs_resultados": [
+    {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--tail=120",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: M_kxgvCYsMs7lTdEMds0UgydUM4YO8MK\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: ZTMWaiimuX7RNM02DSIgGrzbAf1bHRvq\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /.env.stage\nwhatsapp_bot_app  | 🔑 Session ID: kDZfH0k_WVWsCjcK2TsXH8XjcJtK6sov\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /.env.backup\nwhatsapp_bot_app  | 🔑 Session ID: 05t-96edL_vfAMsk-U_dDzNTJHzl1MVn\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /backend/.env\nwhatsapp_bot_app  | 🔑 Session ID: WJ6XyqFYNDUtFccFism_ajZ8ke4hF3yk\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: _YBT0yYZzJQOkbo3AgthYOI_B1YTbrpk\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: yWna9MUqy3zyAADa_yFaQm2cpoQ3plcZ\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: jHrvf4yK1V6HHl232j9ZAtVH6yMhb0_w\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/config.php\nwhatsapp_bot_app  | 🔑 Session ID: vpbNlaYlOrvvZpmgR8N2wOjrkcz7GSpV\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: T4yXoYDTEqSCbsm-GqWXUSXcvg_vPXo2\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: PROPFIND /\nwhatsapp_bot_app  | 🔑 Session ID: qo9qkLXZQWgNjtBImrG_NOkfR8X7M29T\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: XMTiIaIyf0aK_VzrCClFN8rvrE1nysod\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: Lvo5dD-_6VV5cMUilx5D8Laf14neEAgk\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: fu9IeNBcy7qU91wLiawlUJH2xUL3Wj0u\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 🔑 Session ID: VDCOfEIQCOwEPY82Yyvlq-dfUxoLJU60\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AlL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)",
+      "stderr": "",
+      "ok": true
+    }
+  ],
+  "logs_analise": {
+    "total_linhas": 121,
+    "achados": [],
+    "tem_achados": false,
+    "amostra": "whatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: Lvo5dD-_6VV5cMUilx5D8Laf14neEAgk\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: fu9IeNBcy7qU91wLiawlUJH2xUL3Wj0u\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 🔑 Session ID: VDCOfEIQCOwEPY82Yyvlq-dfUxoLJU60\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AlL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)"
+  },
+  "http_resultados": [
+    {
+      "url": "http://127.0.0.1:50010/",
+      "path": "/",
+      "ok": true,
+      "status": 200,
+      "erro": null,
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full bg-slate-50\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Login - Acesso Seguro</title>\n    \n    <!-- TailwindCSS (Via CDN para desenvolvimento) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    \n    <!-- FontAwesome -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n\n    <style>\n        /* Fix: Compatibilidade de ajuste de texto (Audit) */\n        html {\n            -webkit-text-size-adjust: 100%;\n            text-size-adjust: 100%;\n        }\n        body { font-family: 'Inter', sans-serif; }\n        [x-cloak] { display: none !important; }\n        .animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }\n        @keyframes shake {\n            10%, 90% { transform: translate3d(-1px, 0, 0); }\n            20%, 80% { transform: translate3d(2px, 0, 0); }\n            30%, 50",
+      "headers": {
+        "X-Powered-By": "Express",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Length": "13518",
+        "ETag": "W/\"34ce-Coqq60QLRqsokCN1LBsUqp040z0\"",
+        "Date": "Tue, 07 Jul 2026 00:27:13 GMT",
+        "Connection": "close"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:50010/login",
+      "path": "/login",
+      "ok": true,
+      "status": 200,
+      "erro": null,
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full bg-slate-50\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Login - Acesso Seguro</title>\n    \n    <!-- TailwindCSS (Via CDN para desenvolvimento) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    \n    <!-- FontAwesome -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n\n    <style>\n        /* Fix: Compatibilidade de ajuste de texto (Audit) */\n        html {\n            -webkit-text-size-adjust: 100%;\n            text-size-adjust: 100%;\n        }\n        body { font-family: 'Inter', sans-serif; }\n        [x-cloak] { display: none !important; }\n        .animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }\n        @keyframes shake {\n            10%, 90% { transform: translate3d(-1px, 0, 0); }\n            20%, 80% { transform: translate3d(2px, 0, 0); }\n            30%, 50",
+      "headers": {
+        "X-Powered-By": "Express",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Length": "13518",
+        "ETag": "W/\"34ce-Coqq60QLRqsokCN1LBsUqp040z0\"",
+        "Date": "Tue, 07 Jul 2026 00:27:13 GMT",
+        "Connection": "close"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:50010/dashboard",
+      "path": "/dashboard",
+      "ok": true,
+      "status": 200,
+      "erro": null,
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full bg-slate-50\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Login - Acesso Seguro</title>\n    \n    <!-- TailwindCSS (Via CDN para desenvolvimento) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    \n    <!-- FontAwesome -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n\n    <style>\n        /* Fix: Compatibilidade de ajuste de texto (Audit) */\n        html {\n            -webkit-text-size-adjust: 100%;\n            text-size-adjust: 100%;\n        }\n        body { font-family: 'Inter', sans-serif; }\n        [x-cloak] { display: none !important; }\n        .animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }\n        @keyframes shake {\n            10%, 90% { transform: translate3d(-1px, 0, 0); }\n            20%, 80% { transform: translate3d(2px, 0, 0); }\n            30%, 50",
+      "headers": {
+        "X-Powered-By": "Express",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Length": "13518",
+        "ETag": "W/\"34ce-Coqq60QLRqsokCN1LBsUqp040z0\"",
+        "Date": "Tue, 07 Jul 2026 00:27:13 GMT",
+        "Connection": "close"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:50010/api",
+      "path": "/api",
+      "ok": true,
+      "status": 404,
+      "erro": "HTTP Error 404: Not Found",
+      "body_preview": "{\"success\":false,\"message\":\"Endpoint não encontrado\"}",
+      "headers": {
+        "X-Powered-By": "Express",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "54",
+        "ETag": "W/\"36-lfekg156a4tqSorAEr31mlHmFqM\"",
+        "Date": "Tue, 07 Jul 2026 00:27:13 GMT",
+        "Connection": "close"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:50010/api/health",
+      "path": "/api/health",
+      "ok": true,
+      "status": 404,
+      "erro": "HTTP Error 404: Not Found",
+      "body_preview": "{\"success\":false,\"message\":\"Endpoint não encontrado\"}",
+      "headers": {
+        "X-Powered-By": "Express",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "54",
+        "ETag": "W/\"36-lfekg156a4tqSorAEr31mlHmFqM\"",
+        "Date": "Tue, 07 Jul 2026 00:27:13 GMT",
+        "Connection": "close"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:50010/health",
+      "path": "/health",
+      "ok": true,
+      "status": 404,
+      "erro": "HTTP Error 404: Not Found",
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full bg-slate-50\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Login - Acesso Seguro</title>\n    \n    <!-- TailwindCSS (Via CDN para desenvolvimento) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    \n    <!-- FontAwesome -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n\n    <style>\n        /* Fix: Compatibilidade de ajuste de texto (Audit) */\n        html {\n            -webkit-text-size-adjust: 100%;\n            text-size-adjust: 100%;\n        }\n        body { font-family: 'Inter', sans-serif; }\n        [x-cloak] { display: none !important; }\n        .animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }\n        @keyframes shake {\n            10%, 90% { transform: translate3d(-1px, 0, 0); }\n            20%, 80% { transform: translate3d(2px, 0, 0); }\n            30%, 50",
+      "headers": {
+        "X-Powered-By": "Express",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Length": "13518",
+        "ETag": "W/\"34ce-Coqq60QLRqsokCN1LBsUqp040z0\"",
+        "Date": "Tue, 07 Jul 2026 00:27:13 GMT",
+        "Connection": "close"
+      }
+    }
+  ],
+  "http_resumo": {
+    "total": 6,
+    "ok": 6,
+    "falhas": 0,
+    "status_500": 0,
+    "cannot_get": 0,
+    "db_error": 0,
+    "paths_com_falha": [],
+    "sem_erros_graves": true
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_11_manifesto_depois.json"
+}

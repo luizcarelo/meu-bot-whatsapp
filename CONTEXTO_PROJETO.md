@@ -230,3 +230,31 @@ Sequences desalinhadas depois: 0.
 Backup logico criado antes da correcao: True.
 A Etapa 10 deve ser repetida apos esta correcao.
 <!-- ETAPA_10_1_FIM -->
+
+<!-- ETAPA_11_INICIO -->
+## Etapa 11 - Endpoints e interface
+
+Data: 2026-07-06T21:27:13
+
+Foi executada validacao de containers, logs e endpoints HTTP basicos.
+Servico app mencionado no compose: True.
+Servico db healthy: True.
+Endpoints testados: 6.
+Endpoints sem erro grave: True.
+Achados em logs: 0.
+Nenhuma escrita foi executada nesta etapa.
+<!-- ETAPA_11_FIM -->
+
+<!-- ETAPA_12_INICIO -->
+## Etapa 12 - Login e endpoints autenticados
+
+Data: 2026-07-06T21:31:11
+
+Foi executada validacao de login real e rotas autenticadas em ambiente controlado.
+Login executado: True.
+Login OK: False.
+Paginas autenticadas sem falhas graves: True.
+Endpoints autenticados sem falhas graves: True.
+Achados em logs: 0.
+Nenhuma escrita funcional foi executada nesta etapa.
+<!-- ETAPA_12_FIM -->
