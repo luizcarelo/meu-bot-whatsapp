@@ -238,3 +238,15 @@ Validados endpoints somente leitura quando existentes.
 Coletados logs recentes para detectar erros criticos.
 Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_12_FIM -->
+
+<!-- ETAPA_12_1_INICIO -->
+## Etapa 12.1 - Diagnostico de autenticacao
+
+Data: 2026-07-06T21:36:04
+
+Verificado usuario admin no banco em modo somente leitura.
+Inspecionados arquivos locais de autenticacao.
+Testados payloads de login sem imprimir senha.
+Coletados logs recentes para apoio ao diagnostico.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_12_1_FIM -->

@@ -247,3 +247,15 @@ Reduzir verbosidade de logs de sessao e cookies em producao.
 Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
 Planejar rotacao de credenciais reais expostas anteriormente.
 <!-- ETAPA_12_FIM -->
+
+<!-- ETAPA_12_1_INICIO -->
+## Pendencias apos Etapa 12.1
+
+Data: 2026-07-06T21:36:04
+
+Revisar resultado do diagnostico de login.
+Se a senha informada nao autenticar, aprovar etapa separada para reset controlado de senha.
+Validar rotas reais do sistema apos login confirmado.
+Reduzir verbosidade de logs de sessao e cookies em producao.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+<!-- ETAPA_12_1_FIM -->

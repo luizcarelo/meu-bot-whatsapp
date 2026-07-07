@@ -1,0 +1,489 @@
+{
+  "gerado_em": "2026-07-06T21:36:04",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_12_1_20260706_213603",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_12_1_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "usuario_banco": {
+    "executado": true,
+    "email_configurado": true,
+    "usuario_encontrado": true,
+    "email": "admin@saas.com",
+    "dados": {
+      "id": "1",
+      "email": "admin@saas.com",
+      "usuario_ativo": "true",
+      "is_admin": "true",
+      "empresa_id": "1",
+      "empresa_nome": "Super Admin",
+      "empresa_ativa": "true",
+      "senha_tamanho": "60",
+      "senha_tipo_provavel": "bcrypt",
+      "senha_prefixo_redigido": "$2a$..."
+    },
+    "erro": null
+  },
+  "auth_inspecao": {
+    "arquivos": [
+      {
+        "arquivo": "controllers/AuthController.js",
+        "existe": true,
+        "achados": [
+          {
+            "linha": 9,
+            "trecho": "const bcrypt = require('bcryptjs');"
+          },
+          {
+            "linha": 10,
+            "trecho": "const nodemailer = require('nodemailer');"
+          },
+          {
+            "linha": 16,
+            "trecho": "transporter = nodemailer.createTransport({"
+          },
+          {
+            "linha": 28,
+            "trecho": "[asterisco] Login Inteligente: Busca usuário pelo e-mail e descobre a empresa automaticamente"
+          },
+          {
+            "linha": 30,
+            "trecho": "async login(req, res) {"
+          },
+          {
+            "linha": 31,
+            "trecho": "// Aceita empresaId opcionalmente, mas foca no email"
+          },
+          {
+            "linha": 32,
+            "trecho": "const { email, senha } = req.body;"
+          },
+          {
+            "linha": 35,
+            "trecho": "if (!email || !senha) {"
+          },
+          {
+            "linha": 36,
+            "trecho": "return res.status(400).json({ success: false, message: 'E-mail e senha são obrigatórios.' });"
+          },
+          {
+            "linha": 43,
+            "trecho": "u.id, u.nome, u.email, u.senha, u.is_admin, u.cargo, u.ativo as user_ativo, u.empresa_id,"
+          },
+          {
+            "linha": 47,
+            "trecho": "WHERE u.email = ?"
+          },
+          {
+            "linha": 51,
+            "trecho": "const users = await db.query(sql, [email]);"
+          },
+          {
+            "linha": 68,
+            "trecho": "// 3. Validação de Senha (Suporta Texto Puro para Migração E Hash)"
+          },
+          {
+            "linha": 69,
+            "trecho": "let senhaValida = false;"
+          },
+          {
+            "linha": 72,
+            "trecho": "if (user.senha.startsWith('$2')) {"
+          },
+          {
+            "linha": 73,
+            "trecho": "// Já é Hash Bcrypt (Seu caso atual no banco)"
+          },
+          {
+            "linha": 74,
+            "trecho": "senhaValida = await bcrypt.compare(senha, user.senha);"
+          },
+          {
+            "linha": 75,
+            "trecho": "} else if (user.senha === senha) {"
+          },
+          {
+            "linha": 77,
+            "trecho": "senhaValida = true;"
+          },
+          {
+            "linha": 81,
+            "trecho": "if (!senhaValida) {"
+          },
+          {
+            "linha": 82,
+            "trecho": "return res.status(401).json({ success: false, message: 'Senha incorreta.' });"
+          },
+          {
+            "linha": 85,
+            "trecho": "// Auto-migração de senha insegura"
+          },
+          {
+            "linha": 87,
+            "trecho": "const hash = await bcrypt.hash(senha, 10);"
+          },
+          {
+            "linha": 88,
+            "trecho": "await db.run('UPDATE usuarios_painel SET senha = ? WHERE id = ?', [hash, user.id]);"
+          },
+          {
+            "linha": 89,
+            "trecho": "console.log(`[AUTH] Senha migrada para Bcrypt: ${user.email}`);"
+          },
+          {
+            "linha": 105,
+            "trecho": "email: user.email,"
+          },
+          {
+            "linha": 123,
+            "trecho": "console.log(`✅ [AUTH] Sucesso: ${user.email} @ ${user.empresa_nome}`);"
+          },
+          {
+            "linha": 127,
+            "trecho": "message: 'Login realizado com sucesso',"
+          },
+          {
+            "linha": 162,
+            "trecho": "async recuperarSenha(req, res) {"
+          },
+          {
+            "linha": 164,
+            "trecho": "const { email } = req.body;"
+          },
+          {
+            "linha": 166,
+            "trecho": "const users = await db.query(\"SELECT id, nome FROM usuarios_painel WHERE email = ?\", [email]);"
+          },
+          {
+            "linha": 170,
+            "trecho": "const novaSenha = crypto.randomBytes(4).toString('hex');"
+          },
+          {
+            "linha": 171,
+            "trecho": "const hash = await bcrypt.hash(novaSenha, 10);"
+          },
+          {
+            "linha": 173,
+            "trecho": "await db.run(\"UPDATE usuarios_painel SET senha = ? WHERE id = ?\", [hash, user.id]);"
+          },
+          {
+            "linha": 178,
+            "trecho": "to: email,"
+          },
+          {
+            "linha": 179,
+            "trecho": "subject: 'Recuperação de Senha',"
+          },
+          {
+            "linha": 180,
+            "trecho": "html: `<p>Sua nova senha temporária: <b>${novaSenha}</b></p>`"
+          },
+          {
+            "linha": 183,
+            "trecho": "console.log(`[DEBUG] Senha para ${email}: ${novaSenha}`);"
+          },
+          {
+            "linha": 191,
+            "trecho": "async trocarSenha(req, res) {"
+          },
+          {
+            "linha": 193,
+            "trecho": "const { userId, novaSenha } = req.body;"
+          },
+          {
+            "linha": 195,
+            "trecho": "const hash = await bcrypt.hash(novaSenha, 10);"
+          },
+          {
+            "linha": 196,
+            "trecho": "await db.run(\"UPDATE usuarios_painel SET senha = ? WHERE id = ?\", [hash, userId]);"
+          }
+        ],
+        "campos_detectados": [
+          "senha",
+          "email",
+          "req.body",
+          "bcrypt"
+        ]
+      },
+      {
+        "arquivo": "routes/api.js",
+        "existe": true,
+        "achados": [
+          {
+            "linha": 41,
+            "trecho": "const empresaId = req.session?.empresaId || req.headers['x-empresa-id'] || req.body.empresaId || 'temp';"
+          },
+          {
+            "linha": 82,
+            "trecho": "const empresaId = req.body.empresaId || req.user.empresaId;"
+          },
+          {
+            "linha": 94,
+            "trecho": "const empresaId = req.body.empresaId || req.user.empresaId;"
+          },
+          {
+            "linha": 128,
+            "trecho": "const { empresaId, number, message } = req.body;"
+          },
+          {
+            "linha": 153,
+            "trecho": "const { empresaId, number, caption, type } = req.body; // type: image, video, document, audio"
+          },
+          {
+            "linha": 200,
+            "trecho": "router.post('/auth/login', AuthController.login);"
+          },
+          {
+            "linha": 201,
+            "trecho": "router.post('/auth/recover-password', AuthController.recuperarSenha);"
+          },
+          {
+            "linha": 204,
+            "trecho": "router.post('/auth/change-password', isAuthenticated, AuthController.trocarSenha);"
+          }
+        ],
+        "campos_detectados": [
+          "password",
+          "senha",
+          "req.body"
+        ]
+      },
+      {
+        "arquivo": "routes/index.js",
+        "existe": true,
+        "achados": [
+          {
+            "linha": 15,
+            "trecho": "res.redirect('/login');"
+          },
+          {
+            "linha": 18,
+            "trecho": "// Login Page"
+          },
+          {
+            "linha": 19,
+            "trecho": "router.get('/login', (req, res) => {"
+          },
+          {
+            "linha": 21,
+            "trecho": "res.render('login', { error: null });"
+          },
+          {
+            "linha": 30,
+            "trecho": "console.log(`🖥️ [DASHBOARD] Acesso permitido para: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);"
+          },
+          {
+            "linha": 37,
+            "trecho": "return res.redirect('/login?error=sessao_invalida');"
+          },
+          {
+            "linha": 73,
+            "trecho": "res.status(500).render('login', { error: 'Erro crítico no sistema: ' + error.message });"
+          },
+          {
+            "linha": 79,
+            "trecho": "res.redirect('/login');"
+          }
+        ],
+        "campos_detectados": [
+          "email"
+        ]
+      },
+      {
+        "arquivo": "server.js",
+        "existe": true,
+        "achados": [
+          {
+            "linha": 45,
+            "trecho": "password: process.env.REDIS_PASSWORD || undefined,"
+          },
+          {
+            "linha": 75,
+            "trecho": "// 4. Configuração de Sessão (O Coração do Login)"
+          },
+          {
+            "linha": 111,
+            "trecho": "console.log(`👤 Usuário Logado: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);"
+          },
+          {
+            "linha": 143,
+            "trecho": "res.status(404).render('login', { error: 'Página não encontrada' });"
+          }
+        ],
+        "campos_detectados": [
+          "password",
+          "email"
+        ]
+      }
+    ],
+    "resumo": {
+      "usa_password": true,
+      "usa_senha": true,
+      "usa_bcrypt": true,
+      "rota_login_detectada": true
+    }
+  },
+  "testes_login": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "email_usado": "admin@saas.com",
+    "tentativas": [
+      {
+        "nome": "json_email_password",
+        "content_type": "json",
+        "status": 400,
+        "ok_http": false,
+        "tentativa_ok": false,
+        "cookies_total": 0,
+        "cookies": [],
+        "erro": "HTTP Error 400: Bad Request",
+        "body_preview": "{\"success\":false,\"message\":\"E-mail e senha são obrigatórios.\"}",
+        "dashboard_pos_login": null
+      },
+      {
+        "nome": "json_email_senha",
+        "content_type": "json",
+        "status": 200,
+        "ok_http": true,
+        "tentativa_ok": true,
+        "cookies_total": 1,
+        "cookies": [
+          {
+            "name": "saas_crm_sid",
+            "domain": "127.0.0.1",
+            "path": "/",
+            "secure": false
+          }
+        ],
+        "erro": null,
+        "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}",
+        "dashboard_pos_login": {
+          "path": "/dashboard",
+          "url": "http://127.0.0.1:50010/dashboard",
+          "metodo": "GET",
+          "ok": true,
+          "status": 200,
+          "erro": null,
+          "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>CRM Enterprise | Super Admin</title>\n    \n    <!-- TailwindCSS (Design) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: {\n                extend: {\n                    colors: {\n                        primary: '#10b981', // Emerald 500\n                        secondary: '#3b82f6', // Blue 500\n                        dark: '#0f172a'\n                    }\n                }\n            }\n        }\n    </script>\n\n    <!-- Alpine.js (Interatividade) -->\n    <script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n    \n    <!-- FontAwesome & Socket.IO -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    \n    <!-- Estilos Embutidos (Garante carregamento) -->\n    <style>\n        /[asterisco] Fundo Padrão WhatsApp [asterisco]/\n        .bg-chat-pattern {\n            background-color: #e5ddd5;\n        ",
+          "content_type": "text/html; charset=utf-8",
+          "redirect_url": "http://127.0.0.1:50010/dashboard"
+        }
+      },
+      {
+        "nome": "form_email_password",
+        "content_type": "form",
+        "status": 400,
+        "ok_http": false,
+        "tentativa_ok": false,
+        "cookies_total": 0,
+        "cookies": [],
+        "erro": "HTTP Error 400: Bad Request",
+        "body_preview": "{\"success\":false,\"message\":\"E-mail e senha são obrigatórios.\"}",
+        "dashboard_pos_login": null
+      },
+      {
+        "nome": "form_email_senha",
+        "content_type": "form",
+        "status": 200,
+        "ok_http": true,
+        "tentativa_ok": true,
+        "cookies_total": 1,
+        "cookies": [
+          {
+            "name": "saas_crm_sid",
+            "domain": "127.0.0.1",
+            "path": "/",
+            "secure": false
+          }
+        ],
+        "erro": null,
+        "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}",
+        "dashboard_pos_login": {
+          "path": "/dashboard",
+          "url": "http://127.0.0.1:50010/dashboard",
+          "metodo": "GET",
+          "ok": true,
+          "status": 200,
+          "erro": null,
+          "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>CRM Enterprise | Super Admin</title>\n    \n    <!-- TailwindCSS (Design) -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: {\n                extend: {\n                    colors: {\n                        primary: '#10b981', // Emerald 500\n                        secondary: '#3b82f6', // Blue 500\n                        dark: '#0f172a'\n                    }\n                }\n            }\n        }\n    </script>\n\n    <!-- Alpine.js (Interatividade) -->\n    <script src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n    \n    <!-- FontAwesome & Socket.IO -->\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    \n    <!-- Estilos Embutidos (Garante carregamento) -->\n    <style>\n        /[asterisco] Fundo Padrão WhatsApp [asterisco]/\n        .bg-chat-pattern {\n            background-color: #e5ddd5;\n        ",
+          "content_type": "text/html; charset=utf-8",
+          "redirect_url": "http://127.0.0.1:50010/dashboard"
+        }
+      }
+    ],
+    "melhor_tentativa": "json_email_senha",
+    "login_ok": true
+  },
+  "logs_resultados": [
+    {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--tail=180",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /configuracoes\nwhatsapp_bot_app  | 🔑 Session ID: X_D73pH8CpcoOVtYU9HQT2jZeC-b8DUh\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/auth/me\nwhatsapp_bot_app  | 🔑 Session ID: T4N4TA3lluar-DIPWpNstLHoVKYmesDK\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/session\nwhatsapp_bot_app  | 🔑 Session ID: Xyi4ewm-MjIa_WcTiESHO5Ktx0nuBNQT\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/empresas\nwhatsapp_bot_app  | 🔑 Session ID: jO5eQAsMawqcFx8ag3RIfQ5cGgw_2G4d\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/usuarios\nwhatsapp_bot_app  | 🔑 Session ID: vLznYPzdYUmuacNaIkY52JqpRKEUGuxP\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/contatos\nwhatsapp_bot_app  | 🔑 Session ID: Ej8A_nprv72dd_3h8YLUiNwFyAp6EAer\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/setores\nwhatsapp_bot_app  | 🔑 Session ID: 1zM6P2RyuRG0uBDcqRbcO1l3lzYo8Byz\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/mensagens\nwhatsapp_bot_app  | 🔑 Session ID: iUerbUGZQ2NsT5jPmwUzWAAnvMMMPael\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AlL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AlL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: lL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AlL4iT4oJFu8UZx8wO8mjQ4UefwuQFABj....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: 4ql_7_ZzsPS_D-OlvaxP2zD9OfaoRfSC\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: LtRk5qa1yhbJamkqtx6DreU9YuKZAnrc\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: LtRk5qa1yhbJamkqtx6DreU9YuKZAnrc\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3ALtRk5qa1yhbJamkqtx6DreU9YuKZAnrc....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: 1TS8hKWA_L1w8QJrwGHF7y-vC8Y2yHev\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: ctDGmI5czXqxZJWhcpEZYtjSObxeuDQ-\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: ctDGmI5czXqxZJWhcpEZYtjSObxeuDQ-\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3ActDGmI5czXqxZJWhcpEZYtjSObxeuDQ-....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: NKxgRGqldJwDA3ZkUp5RVvXyHGMUpjJ3\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: S6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: S6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AS6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: hre__EW-8aEKVpPbtSSMvTapTDBMGlt3\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: r2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: r2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Ar2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)",
+      "stderr": "",
+      "ok": true
+    }
+  ],
+  "logs_analise": {
+    "total_linhas": 181,
+    "achados": [],
+    "tem_achados": false,
+    "amostra": "whatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: ctDGmI5czXqxZJWhcpEZYtjSObxeuDQ-\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3ActDGmI5czXqxZJWhcpEZYtjSObxeuDQ-....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: NKxgRGqldJwDA3ZkUp5RVvXyHGMUpjJ3\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: S6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: S6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AS6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: hre__EW-8aEKVpPbtSSMvTapTDBMGlt3\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: r2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: r2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Ar2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_12_1_manifesto_depois.json"
+}

@@ -258,3 +258,17 @@ Endpoints autenticados sem falhas graves: True.
 Achados em logs: 0.
 Nenhuma escrita funcional foi executada nesta etapa.
 <!-- ETAPA_12_FIM -->
+
+<!-- ETAPA_12_1_INICIO -->
+## Etapa 12.1 - Diagnostico de login
+
+Data: 2026-07-06T21:36:04
+
+Foi executado diagnostico seguro do login e autenticacao.
+Usuario encontrado no banco: True.
+Rota de login detectada nos arquivos: True.
+Uso de password detectado: True.
+Uso de senha detectado: True.
+Login validado em payload testado: True.
+Nenhuma alteracao foi aplicada ao banco ou ao codigo.
+<!-- ETAPA_12_1_FIM -->

@@ -219,3 +219,14 @@ Decidido nao imprimir senha nem persistir credenciais.
 Decidido nao executar criacao, edicao ou exclusao de dados nesta etapa.
 Decidido separar fluxos reais de WhatsApp para etapa posterior.
 <!-- ETAPA_12_FIM -->
+
+<!-- ETAPA_12_1_INICIO -->
+## Etapa 12.1 - Decisoes tecnicas
+
+Data: 2026-07-06T21:36:04
+
+Decidido diagnosticar antes de resetar senha.
+Decidido nao persistir cookies nem credenciais.
+Decidido testar payloads JSON e form com campos password e senha.
+Decidido nao alterar banco nem codigo nesta etapa.
+<!-- ETAPA_12_1_FIM -->
