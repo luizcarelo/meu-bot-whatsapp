@@ -704,3 +704,22 @@ Logs Session ID: 0.
 Logs cookie: 0.
 Logs email: 0.
 <!-- ETAPA_23_3_FIM -->
+
+<!-- ETAPA_24_INICIO -->
+## Etapa 24 - Base de teste criada
+
+Data: 2026-07-07T00:33:13
+
+Criada ou garantida base de teste com Super Admin e tenant cliente.
+Seed OK: True.
+Empresa master ID: 1.
+Tenant cliente ID: 5.
+Super Admin login OK: True.
+Super Admin page OK: True.
+Tenant Admin login OK: True.
+Tenant Admin dashboard OK: True.
+Tenant Admin bloqueado no Super Admin: True.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_24_FIM -->

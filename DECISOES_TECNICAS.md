@@ -516,3 +516,14 @@ Decidido aceitar boolean true porque o login serializa is_admin como booleano no
 Decidido manter empresa master obrigatoria para preservar seguranca multi-tenant.
 Decidido validar o HTML de /super-admin para confirmar que nao houve redirecionamento para dashboard.
 <!-- ETAPA_23_3_FIM -->
+
+<!-- ETAPA_24_INICIO -->
+## Etapa 24 - Decisao tecnica
+
+Data: 2026-07-07T00:33:13
+
+Decidido executar o seed pelo container Node usando src/config/db.js para aproveitar a mesma conexao do sistema.
+Decidido usar operacao idempotente para evitar duplicidade de usuarios e empresas.
+Decidido nao apagar dados existentes.
+Decidido validar que o admin tenant nao acessa a area Super Admin.
+<!-- ETAPA_24_FIM -->

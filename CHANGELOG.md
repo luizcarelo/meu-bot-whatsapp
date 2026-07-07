@@ -553,3 +553,15 @@ Adicionado suporte a role superadmin.
 Mantida exigencia de empresa master igual a 1.
 Validado node --check, login, dashboard e Super Admin.
 <!-- ETAPA_23_3_FIM -->
+
+<!-- ETAPA_24_INICIO -->
+## Etapa 24 - Base de teste Super Admin e Tenant
+
+Data: 2026-07-07T00:33:13
+
+Criado ou atualizado Super Admin de teste.
+Criado ou atualizado tenant Cliente Teste LTDA.
+Criado ou atualizado Admin Cliente Teste.
+Senhas gravadas com bcrypt pelo runtime Node.
+Validados login e acesso esperado para ambos os usuarios.
+<!-- ETAPA_24_FIM -->

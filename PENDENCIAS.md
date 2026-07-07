@@ -556,3 +556,13 @@ Validar manualmente /super-admin no navegador.
 Planejar internalizacao de dependencias externas.
 Mapear scripts inline antes de CSP forte.
 <!-- ETAPA_23_3_FIM -->
+
+<!-- ETAPA_24_INICIO -->
+## Pendencias apos Etapa 24
+
+Data: 2026-07-07T00:33:13
+
+Trocar senhas padrao se a base de teste for mantida em ambiente acessivel.
+Criar dados adicionais de teste somente se forem necessarios para cenarios especificos.
+Validar manualmente login dos usuarios de teste no navegador.
+<!-- ETAPA_24_FIM -->
