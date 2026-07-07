@@ -527,3 +527,14 @@ Decidido usar operacao idempotente para evitar duplicidade de usuarios e empresa
 Decidido nao apagar dados existentes.
 Decidido validar que o admin tenant nao acessa a area Super Admin.
 <!-- ETAPA_24_FIM -->
+
+<!-- ETAPA_25_INICIO -->
+## Etapa 25 - Decisoes tecnicas
+
+Data: 2026-07-07T00:46:46
+
+Decidido aplicar o layout por camada visual injetada para evitar reescrever views grandes.
+Decidido manter backend, banco, rotas e controllers sem alteracao nesta etapa.
+Decidido usar localStorage para persistencia do tema claro/escuro.
+Decidido validar o menu lateral em runtime nas quatro telas principais.
+<!-- ETAPA_25_FIM -->

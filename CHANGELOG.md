@@ -565,3 +565,15 @@ Criado ou atualizado Admin Cliente Teste.
 Senhas gravadas com bcrypt pelo runtime Node.
 Validados login e acesso esperado para ambos os usuarios.
 <!-- ETAPA_24_FIM -->
+
+<!-- ETAPA_25_INICIO -->
+## Etapa 25 - Layout profissional aplicado
+
+Data: 2026-07-07T00:46:46
+
+Adicionado shell visual profissional nas telas principais.
+Adicionado menu lateral comum.
+Adicionado botao de tema claro/escuro com localStorage.
+Padronizada estrutura visual via public/css/style.css.
+Preservadas as funcoes existentes das telas.
+<!-- ETAPA_25_FIM -->

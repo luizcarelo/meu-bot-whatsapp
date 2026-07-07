@@ -389,5 +389,207 @@
 </script>
 <!-- ETAPA22_SUPER_ADMIN_VISUAL_FIM -->
 
+
+<!-- ETAPA25_LAYOUT_PROFISSIONAL_INICIO -->
+<script id="etapa25-layout-profissional">
+(function () {
+    if (window.__ETAPA25_LAYOUT_APLICADO__) {
+        return;
+    }
+    window.__ETAPA25_LAYOUT_APLICADO__ = true;
+
+    function pathAtual() {
+        return window.location.pathname || '/';
+    }
+
+    function labelPagina() {
+        var p = pathAtual();
+        if (p.indexOf('/crm') === 0) return ['CRM Atendimento', 'Conversas, contatos, filas e produtividade'];
+        if (p.indexOf('/admin/painel') === 0) return ['Painel Administrativo', 'Gestao da empresa, usuarios e configuracoes'];
+        if (p.indexOf('/super-admin') === 0) return ['Super Admin', 'Gestao geral da plataforma e tenants'];
+        return ['Dashboard', 'Indicadores, operacao e atalhos principais'];
+    }
+
+    function temaInicial() {
+        var salvo = localStorage.getItem('er25-theme');
+        if (salvo === 'dark' || salvo === 'light') return salvo;
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        return 'light';
+    }
+
+    function aplicarTema(tema) {
+        var escuro = tema === 'dark';
+        document.documentElement.classList.toggle('er-theme-dark', escuro);
+        document.body.classList.toggle('er-theme-dark', escuro);
+        document.documentElement.classList.toggle('dark', escuro);
+        document.documentElement.classList.toggle('light', !escuro);
+        localStorage.setItem('er25-theme', tema);
+        var btn = document.getElementById('er25-theme-toggle');
+        if (btn) {
+            btn.innerHTML = escuro ? '☀️ <span>Claro</span>' : '🌙 <span>Escuro</span>';
+            btn.setAttribute('aria-label', escuro ? 'Ativar tema claro' : 'Ativar tema escuro');
+        }
+    }
+
+    function criarLink(href, icon, text, section) {
+        if (section) {
+            var s = document.createElement('div');
+            s.className = 'er25-nav-section';
+            s.textContent = text;
+            return s;
+        }
+
+        var a = document.createElement('a');
+        a.className = 'er25-nav-link';
+        a.href = href;
+        a.innerHTML = '<span class="er25-nav-icon">' + icon + '</span><span>' + text + '</span>';
+
+        var p = pathAtual();
+        if (href === '/dashboard' && p === '/dashboard') a.classList.add('er25-active');
+        if (href !== '/dashboard' && p.indexOf(href) === 0) a.classList.add('er25-active');
+
+        return a;
+    }
+
+    function criarShell() {
+        if (document.getElementById('er25-shell')) {
+            return;
+        }
+
+        document.body.classList.add('er25-shell-ready');
+
+        var shell = document.createElement('div');
+        shell.id = 'er25-shell';
+        shell.className = 'er25-shell';
+
+        var sidebar = document.createElement('aside');
+        sidebar.id = 'er25-sidebar';
+        sidebar.className = 'er25-sidebar';
+        sidebar.innerHTML = ''
+            + '<div class="er25-brand">'
+            + '  <div class="er25-brand-logo">ER</div>'
+            + '  <div>'
+            + '    <p class="er25-brand-title">Engeradios CRM</p>'
+            + '    <p class="er25-brand-subtitle">Atendimento profissional</p>'
+            + '  </div>'
+            + '</div>';
+
+        var nav = document.createElement('nav');
+        nav.className = 'er25-nav';
+        nav.appendChild(criarLink('', '', 'Principal', true));
+        nav.appendChild(criarLink('/dashboard', '📊', 'Dashboard'));
+        nav.appendChild(criarLink('/crm', '💬', 'CRM Atendimento'));
+        nav.appendChild(criarLink('', '', 'Gestao', true));
+        nav.appendChild(criarLink('/admin/painel', '⚙️', 'Painel Administrativo'));
+        nav.appendChild(criarLink('/super-admin', '🛡️', 'Super Admin'));
+        nav.appendChild(criarLink('', '', 'Atalhos', true));
+        nav.appendChild(criarLink('/logout', '🚪', 'Sair'));
+        sidebar.appendChild(nav);
+
+        var footer = document.createElement('div');
+        footer.className = 'er25-sidebar-footer';
+        footer.innerHTML = ''
+            + '<div class="er25-user-card">'
+            + '  <div class="er25-avatar">U</div>'
+            + '  <div style="min-width:0">'
+            + '    <div style="font-weight:900;font-size:13px;color:var(--er25-text)">Usuario logado</div>'
+            + '    <div style="font-size:11px;color:var(--er25-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Sistema SaaS</div>'
+            + '  </div>'
+            + '</div>';
+        sidebar.appendChild(footer);
+
+        var overlay = document.createElement('div');
+        overlay.className = 'er25-overlay';
+        overlay.id = 'er25-overlay';
+        overlay.addEventListener('click', function () {
+            document.body.classList.remove('er25-sidebar-open');
+        });
+
+        var main = document.createElement('div');
+        main.className = 'er25-main';
+
+        var nomes = labelPagina();
+
+        var topbar = document.createElement('header');
+        topbar.className = 'er25-topbar';
+        topbar.innerHTML = ''
+            + '<div style="display:flex;align-items:center;gap:12px">'
+            + '  <button type="button" class="er25-btn er25-menu-toggle" id="er25-menu-toggle">☰</button>'
+            + '  <div>'
+            + '    <h1 class="er25-topbar-title">' + nomes[0] + '</h1>'
+            + '    <p class="er25-topbar-subtitle">' + nomes[1] + '</p>'
+            + '  </div>'
+            + '</div>'
+            + '<div class="er25-actions">'
+            + '  <button type="button" class="er25-btn" id="er25-theme-toggle">🌙 <span>Escuro</span></button>'
+            + '  <button type="button" class="er25-btn" id="er25-collapse-toggle">⇤ <span>Menu</span></button>'
+            + '</div>';
+
+        var content = document.createElement('main');
+        content.className = 'er25-content';
+        content.id = 'er25-content';
+
+        var nodes = [];
+        for (var i = 0; i < document.body.childNodes.length; i++) {
+            var n = document.body.childNodes[i];
+            if (n.nodeType === 1 && (
+                n.id === 'er25-shell' ||
+                n.id === 'etapa25-layout-profissional' ||
+                n.className === 'er25-overlay'
+            )) {
+                continue;
+            }
+            nodes.push(n);
+        }
+
+        document.body.innerHTML = '';
+
+        for (var j = 0; j < nodes.length; j++) {
+            content.appendChild(nodes[j]);
+        }
+
+        main.appendChild(topbar);
+        main.appendChild(content);
+
+        shell.appendChild(sidebar);
+        shell.appendChild(overlay);
+        shell.appendChild(main);
+
+        document.body.appendChild(shell);
+
+        var menuBtn = document.getElementById('er25-menu-toggle');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function () {
+                document.body.classList.toggle('er25-sidebar-open');
+            });
+        }
+
+        var collapseBtn = document.getElementById('er25-collapse-toggle');
+        if (collapseBtn) {
+            collapseBtn.addEventListener('click', function () {
+                document.body.classList.toggle('er25-sidebar-collapsed');
+            });
+        }
+
+        var themeBtn = document.getElementById('er25-theme-toggle');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', function () {
+                var atual = localStorage.getItem('er25-theme') || temaInicial();
+                aplicarTema(atual === 'dark' ? 'light' : 'dark');
+            });
+        }
+
+        aplicarTema(temaInicial());
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', criarShell);
+    } else {
+        criarShell();
+    }
+})();
+</script>
+<!-- ETAPA25_LAYOUT_PROFISSIONAL_FIM -->
+
 </body>
 </html>

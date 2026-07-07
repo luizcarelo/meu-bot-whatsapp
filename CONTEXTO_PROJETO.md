@@ -723,3 +723,20 @@ Logs Session ID: 0.
 Logs cookie: 0.
 Logs email: 0.
 <!-- ETAPA_24_FIM -->
+
+<!-- ETAPA_25_INICIO -->
+## Etapa 25 - Layout profissional com menu lateral
+
+Data: 2026-07-07T00:46:46
+
+Aplicado layout profissional comum com menu lateral, topbar e tema claro/escuro.
+CSS estrutural OK: True.
+Views OK: True.
+Runtime OK: True.
+Login OK: True.
+Paginas OK: True.
+Layout runtime OK: True.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_25_FIM -->

@@ -566,3 +566,14 @@ Trocar senhas padrao se a base de teste for mantida em ambiente acessivel.
 Criar dados adicionais de teste somente se forem necessarios para cenarios especificos.
 Validar manualmente login dos usuarios de teste no navegador.
 <!-- ETAPA_24_FIM -->
+
+<!-- ETAPA_25_INICIO -->
+## Pendencias apos Etapa 25
+
+Data: 2026-07-07T00:46:46
+
+Validar manualmente o layout no navegador em desktop e mobile.
+Executar Etapa 26 para auditoria funcional completa.
+Planejar Etapa 27 para Baileys e camada WhatsApp.
+Planejar refinamento visual fino apos avaliacao manual.
+<!-- ETAPA_25_FIM -->
