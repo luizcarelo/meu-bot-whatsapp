@@ -456,3 +456,14 @@ Adicionada camada visual controlada com marcadores ETAPA21.
 Preservados fetch, Socket.IO, Sortable, endpoints e logica existente.
 Validado login, dashboard e painel administrativo.
 <!-- ETAPA_21_FIM -->
+
+<!-- ETAPA_21_1_INICIO -->
+## Etapa 21.1 - Registro da rota admin panel
+
+Data: 2026-07-06T23:45:03
+
+Adicionada rota GET /admin/painel protegida por isAuthenticated.
+A rota chama AdminPanelController.renderPanel.
+Executado node --check em routes/index.js.
+Validado login, dashboard e painel administrativo.
+<!-- ETAPA_21_1_FIM -->

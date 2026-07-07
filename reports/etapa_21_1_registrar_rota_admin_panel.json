@@ -1,0 +1,169 @@
+{
+  "gerado_em": "2026-07-06T23:45:03",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_21_1_20260706_234456",
+    "copiados": [
+      "routes/index.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_21_1_manifesto_antes.json",
+  "rota_admin": {
+    "arquivo": "routes/index.js",
+    "existe_antes": true,
+    "alterado": false,
+    "adicionou_require": false,
+    "adicionou_instancia": false,
+    "adicionou_rota": false,
+    "rota_ja_existia": true,
+    "sha256_antes": "c0e85b6ffabdd80d92f03b4d417301d79467e64bcd09056f6e35ff85aba322f0",
+    "sha256_depois": "c0e85b6ffabdd80d92f03b4d417301d79467e64bcd09056f6e35ff85aba322f0"
+  },
+  "validacao_estrutura": {
+    "arquivo_existe": true,
+    "tem_require": true,
+    "tem_instancia": true,
+    "tem_rota": true,
+    "tem_render_panel": true,
+    "tem_is_authenticated": true,
+    "ok": true
+  },
+  "node_check": {
+    "cmd": [
+      "node",
+      "--check",
+      "routes/index.js"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "ok": true
+  },
+  "restart_app": {
+    "solicitado": true,
+    "executado": true,
+    "ok": true,
+    "resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "restart",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Container whatsapp_bot_app Restarting \n Container whatsapp_bot_app Started",
+      "ok": true
+    }
+  },
+  "aguardar_app": {
+    "ok": true,
+    "tentativas": [
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 104] Connection reset by peer"
+      },
+      {
+        "status": 200,
+        "ok": true,
+        "erro": null
+      }
+    ],
+    "segundos": 3
+  },
+  "logs_since": "2026-07-06T23:45:01",
+  "validacao_runtime": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "login_ok": true,
+    "dashboard_ok": true,
+    "admin_ok": false,
+    "admin_visual_ok": false,
+    "cookies": [
+      {
+        "name": "connect.sid",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "secure": false
+      }
+    ],
+    "login": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "application/json; charset=utf-8",
+      "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}"
+    },
+    "dashboard": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "text/html; charset=utf-8"
+    },
+    "admin": {
+      "status": 500,
+      "ok": false,
+      "erro": "HTTP Error 500: Internal Server Error",
+      "content_type": "text/html; charset=utf-8",
+      "body_preview": "\n                <h1>Erro 500</h1>\n                <p>Ocorreu um erro ao carregar o painel administrativo.</p>\n                <p><a href=\"/\">Voltar para Login</a></p>\n            "
+    },
+    "textos_admin": {
+      "tem_css": false,
+      "tem_marker": false,
+      "painel_administrativo": true,
+      "gestao_empresa": false,
+      "tem_fetch": false,
+      "tem_sortable": false
+    }
+  },
+  "logs_coleta": {
+    "principal": {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--since",
+        "2026-07-06T23:45:01",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DB Execute Error] column \"nome_sistema\" does not exist\nwhatsapp_bot_app  | SQL: SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia, \nwhatsapp_bot_app  |                         horario_inicio, horario_fim, dias_funcionamento,\nwhatsapp_bot_app  |                         whatsapp_status, whatsapp_numero, plano, limite_usuarios\nwhatsapp_bot_app  |                  FROM empresas WHERE id = ?\nwhatsapp_bot_app  | [AdminPanelController] Erro ao carregar painel: error: column \"nome_sistema\" does not exist\nwhatsapp_bot_app  |     at /usr/src/app/node_modules/pg-pool/index.js:45:11\nwhatsapp_bot_app  |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\nwhatsapp_bot_app  |     at async Database.execute (/usr/src/app/src/config/db.js:59:28)\nwhatsapp_bot_app  |     at async Database.query (/usr/src/app/src/config/db.js:68:24)\nwhatsapp_bot_app  |     at async AdminPanelController.renderPanel (/usr/src/app/controllers/AdminPanelController.js:50:30) {\nwhatsapp_bot_app  |   length: 112,\nwhatsapp_bot_app  |   severity: 'ERROR',\nwhatsapp_bot_app  |   code: '42703',\nwhatsapp_bot_app  |   detail: undefined,\nwhatsapp_bot_app  |   hint: undefined,\nwhatsapp_bot_app  |   position: '14',\nwhatsapp_bot_app  |   internalPosition: undefined,\nwhatsapp_bot_app  |   internalQuery: undefined,\nwhatsapp_bot_app  |   where: undefined,\nwhatsapp_bot_app  |   schema: undefined,\nwhatsapp_bot_app  |   table: undefined,\nwhatsapp_bot_app  |   column: undefined,\nwhatsapp_bot_app  |   dataType: undefined,\nwhatsapp_bot_app  |   constraint: undefined,\nwhatsapp_bot_app  |   file: 'parse_relation.c',\nwhatsapp_bot_app  |   line: '3665',\nwhatsapp_bot_app  |   routine: 'errorMissingColumn'\nwhatsapp_bot_app  | }",
+      "stderr": "",
+      "ok": true
+    },
+    "fallback": null,
+    "texto": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DB Execute Error] column \"nome_sistema\" does not exist\nwhatsapp_bot_app  | SQL: SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia, \nwhatsapp_bot_app  |                         horario_inicio, horario_fim, dias_funcionamento,\nwhatsapp_bot_app  |                         whatsapp_status, whatsapp_numero, plano, limite_usuarios\nwhatsapp_bot_app  |                  FROM empresas WHERE id = ?\nwhatsapp_bot_app  | [AdminPanelController] Erro ao carregar painel: error: column \"nome_sistema\" does not exist\nwhatsapp_bot_app  |     at /usr/src/app/node_modules/pg-pool/index.js:45:11\nwhatsapp_bot_app  |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\nwhatsapp_bot_app  |     at async Database.execute (/usr/src/app/src/config/db.js:59:28)\nwhatsapp_bot_app  |     at async Database.query (/usr/src/app/src/config/db.js:68:24)\nwhatsapp_bot_app  |     at async AdminPanelController.renderPanel (/usr/src/app/controllers/AdminPanelController.js:50:30) {\nwhatsapp_bot_app  |   length: 112,\nwhatsapp_bot_app  |   severity: 'ERROR',\nwhatsapp_bot_app  |   code: '42703',\nwhatsapp_bot_app  |   detail: undefined,\nwhatsapp_bot_app  |   hint: undefined,\nwhatsapp_bot_app  |   position: '14',\nwhatsapp_bot_app  |   internalPosition: undefined,\nwhatsapp_bot_app  |   internalQuery: undefined,\nwhatsapp_bot_app  |   where: undefined,\nwhatsapp_bot_app  |   schema: undefined,\nwhatsapp_bot_app  |   table: undefined,\nwhatsapp_bot_app  |   column: undefined,\nwhatsapp_bot_app  |   dataType: undefined,\nwhatsapp_bot_app  |   constraint: undefined,\nwhatsapp_bot_app  |   file: 'parse_relation.c',\nwhatsapp_bot_app  |   line: '3665',\nwhatsapp_bot_app  |   routine: 'errorMissingColumn'\nwhatsapp_bot_app  | }\n"
+  },
+  "logs_analise": {
+    "total_linhas": 51,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_email": 0,
+    "achados": [
+      {
+        "linha": 31,
+        "trecho": "whatsapp_bot_app  |     at async Database.execute (/usr/src/app/src/config/db.js:59:28)"
+      },
+      {
+        "linha": 32,
+        "trecho": "whatsapp_bot_app  |     at async Database.query (/usr/src/app/src/config/db.js:68:24)"
+      }
+    ],
+    "amostra": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DB Execute Error] column \"nome_sistema\" does not exist\nwhatsapp_bot_app  | SQL: SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia, \nwhatsapp_bot_app  |                         horario_inicio, horario_fim, dias_funcionamento,\nwhatsapp_bot_app  |                         whatsapp_status, whatsapp_numero, plano, limite_usuarios\nwhatsapp_bot_app  |                  FROM empresas WHERE id = ?\nwhatsapp_bot_app  | [AdminPanelController] Erro ao carregar painel: error: column \"nome_sistema\" does not exist\nwhatsapp_bot_app  |     at /usr/src/app/node_modules/pg-pool/index.js:45:11\nwhatsapp_bot_app  |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\nwhatsapp_bot_app  |     at async Database.execute (/usr/src/app/src/config/db.js:59:28)\nwhatsapp_bot_app  |     at async Database.query (/usr/src/app/src/config/db.js:68:24)\nwhatsapp_bot_app  |     at async AdminPanelController.renderPanel (/usr/src/app/controllers/AdminPanelController.js:50:30) {\nwhatsapp_bot_app  |   length: 112,\nwhatsapp_bot_app  |   severity: 'ERROR',\nwhatsapp_bot_app  |   code: '42703',\nwhatsapp_bot_app  |   detail: undefined,\nwhatsapp_bot_app  |   hint: undefined,\nwhatsapp_bot_app  |   position: '14',\nwhatsapp_bot_app  |   internalPosition: undefined,\nwhatsapp_bot_app  |   internalQuery: undefined,\nwhatsapp_bot_app  |   where: undefined,\nwhatsapp_bot_app  |   schema: undefined,\nwhatsapp_bot_app  |   table: undefined,\nwhatsapp_bot_app  |   column: undefined,\nwhatsapp_bot_app  |   dataType: undefined,\nwhatsapp_bot_app  |   constraint: undefined,\nwhatsapp_bot_app  |   file: 'parse_relation.c',\nwhatsapp_bot_app  |   line: '3665',\nwhatsapp_bot_app  |   routine: 'errorMissingColumn'\nwhatsapp_bot_app  | }"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_21_1_manifesto_depois.json"
+}

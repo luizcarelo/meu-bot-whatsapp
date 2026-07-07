@@ -8,6 +8,8 @@ const express = require('express');
 const router = express.Router();
 const { isAuthenticated } = require('../src/middleware/auth');
 const db = require('../src/config/db');
+const AdminPanelController = require('../controllers/AdminPanelController');
+const adminPanelController = new AdminPanelController(db);
 
 // Rota Raiz
 router.get('/', (req, res) => {
@@ -111,6 +113,13 @@ router.get('/crm', isAuthenticated, async (req, res) => {
     }
 });
 // ETAPA20_1_ROTA_CRM_FIM
+
+
+// ETAPA21_1_ROTA_ADMIN_PANEL_INICIO
+router.get('/admin/painel', isAuthenticated, async (req, res) => {
+    return adminPanelController.renderPanel(req, res);
+});
+// ETAPA21_1_ROTA_ADMIN_PANEL_FIM
 
 router.get('/logout', (req, res) => {
     req.session.destroy();

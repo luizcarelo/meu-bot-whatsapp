@@ -420,3 +420,14 @@ Decidido usar public/css/style.css criado na Etapa 19.
 Decidido preservar scripts e chamadas existentes.
 Decidido nao alterar backend ou banco nesta etapa.
 <!-- ETAPA_21_FIM -->
+
+<!-- ETAPA_21_1_INICIO -->
+## Etapa 21.1 - Decisoes tecnicas
+
+Data: 2026-07-06T23:45:03
+
+Decidido registrar /admin/painel em routes/index.js porque o controller ja existia.
+Decidido reutilizar AdminPanelController.renderPanel.
+Decidido nao alterar views/admin-panel.ejs nesta etapa.
+Decidido reiniciar app somente com ETAPA21_1_RESTART_APP=true.
+<!-- ETAPA_21_1_FIM -->

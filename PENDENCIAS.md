@@ -457,3 +457,14 @@ Planejar aplicacao visual em views/super-admin.ejs.
 Planejar internalizacao de dependencias externas.
 Mapear scripts inline antes de CSP forte.
 <!-- ETAPA_21_FIM -->
+
+<!-- ETAPA_21_1_INICIO -->
+## Pendencias apos Etapa 21.1
+
+Data: 2026-07-06T23:45:03
+
+Validar visual do painel administrativo manualmente no navegador.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_21_1_FIM -->

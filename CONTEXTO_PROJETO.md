@@ -532,3 +532,22 @@ Dashboard OK: True.
 Admin panel OK: False.
 Admin visual OK: False.
 <!-- ETAPA_21_FIM -->
+
+<!-- ETAPA_21_1_INICIO -->
+## Etapa 21.1 - Rota do painel administrativo registrada
+
+Data: 2026-07-06T23:45:03
+
+Foi registrada a rota GET /admin/painel em routes/index.js.
+Arquivo alterado: False.
+Require adicionado: False.
+Instancia adicionada: False.
+Rota adicionada: False.
+Validacao estrutural OK: True.
+Node check OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Admin panel OK: False.
+Admin visual OK: False.
+<!-- ETAPA_21_1_FIM -->
