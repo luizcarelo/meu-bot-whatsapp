@@ -855,3 +855,15 @@ Mantido alias @ via paths com ./src.
 Corrigida rota fallback para evitar caractere asterisco literal em TSX.
 Build OK: False.
 <!-- ETAPA_27_1_FIM -->
+
+<!-- ETAPA_27_2_INICIO -->
+## Etapa 27.2 - Frontend React corrigido
+
+Data: 2026-07-07T08:10:08
+
+Removido alias @ e paths do TypeScript para simplificar a base React.
+Convertidos imports para caminhos relativos.
+Corrigido uso do Material UI para compatibilidade de tipos.
+Substituido Grid por Box com CSS grid no dashboard.
+Build OK: True.
+<!-- ETAPA_27_2_FIM -->

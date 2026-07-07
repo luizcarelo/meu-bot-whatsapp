@@ -622,3 +622,13 @@ Decidido remover baseUrl para compatibilidade com TypeScript 6.
 Decidido manter path alias @ sem baseUrl.
 Decidido manter validacao anti-asterisco para arquivos gerados, usando String.fromCharCode(42) quando necessario.
 <!-- ETAPA_27_1_FIM -->
+
+<!-- ETAPA_27_2_INICIO -->
+## Etapa 27.2 - Decisao imports relativos
+
+Data: 2026-07-07T08:10:08
+
+Decidido remover path alias para evitar asteriscos em arquivos de configuracao.
+Decidido usar imports relativos nesta fase inicial.
+Decidido usar Box com CSS grid em vez de Grid item para evitar incompatibilidade de tipos com Material UI instalado.
+<!-- ETAPA_27_2_FIM -->

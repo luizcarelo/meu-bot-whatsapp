@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography } from '@mui/material';
-import { PageHeader } from '@/shared/components/PageHeader';
+import { PageHeader } from '../../../shared/components/PageHeader';
 
 export function CrmPage() {
   return (

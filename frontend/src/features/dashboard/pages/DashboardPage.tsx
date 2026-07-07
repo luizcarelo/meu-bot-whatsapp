@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, Card, CardContent, Chip, Grid, Stack, Typography } from '@mui/material';
-import { PageHeader } from '@/shared/components/PageHeader';
-import { httpClient } from '@/shared/services/httpClient';
-import { LegacyStatusResponse } from '@/shared/types/api';
+import { Box, Button, Card, CardContent, Chip, Stack, Typography } from '@mui/material';
+import { PageHeader } from '../../../shared/components/PageHeader';
+import { httpClient } from '../../../shared/services/httpClient';
+import { LegacyStatusResponse } from '../../../shared/types/api';
 
 export function DashboardPage() {
   const [status, setStatus] = useState('CARREGANDO');
@@ -38,25 +38,33 @@ export function DashboardPage() {
         title="Dashboard"
         description="Base inicial do frontend React com TypeScript, Vite e Material UI. Esta tela ainda nao substitui o legado em producao."
       />
-      <Grid container spacing={2}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'repeat(2, 1fr)',
+            lg: 'repeat(4, 1fr)'
+          },
+          gap: 2
+        }}
+      >
         {cards.map((card) => (
-          <Grid item xs={12} sm={6} lg={3} key={card.title}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Typography color="text.secondary" variant="body2" fontWeight={700}>
-                  {card.title}
-                </Typography>
-                <Typography variant="h5" fontWeight={900} sx={{ mt: 1 }}>
-                  {card.value}
-                </Typography>
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
-                  {card.text}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Card sx={{ height: '100%' }} key={card.title}>
+            <CardContent>
+              <Typography color="text.secondary" variant="body2" sx={{ fontWeight: 700 }}>
+                {card.title}
+              </Typography>
+              <Typography variant="h5" sx={{ mt: 1, fontWeight: 900 }}>
+                {card.value}
+              </Typography>
+              <Typography color="text.secondary" sx={{ mt: 1 }}>
+                {card.text}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Box>
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 3 }}>
         <Button variant="contained" href="/crm">Abrir CRM</Button>
         <Button variant="outlined" href="/whatsapp">Gestao WhatsApp</Button>

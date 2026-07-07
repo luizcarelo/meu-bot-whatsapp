@@ -1,5 +1,5 @@
 import { AppThemeProvider } from './providers/AppThemeProvider';
-import { AppRoutes } from '@/routes/AppRoutes';
+import { AppRoutes } from '../routes/AppRoutes';
 
 export function App() {
   return (

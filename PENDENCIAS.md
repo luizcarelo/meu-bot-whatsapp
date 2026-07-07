@@ -663,3 +663,14 @@ Validar visualmente o frontend React com npm run dev.
 Etapa 28: criar backend modular em paralelo.
 Etapa 29: padronizar respostas de API.
 <!-- ETAPA_27_1_FIM -->
+
+<!-- ETAPA_27_2_INICIO -->
+## Pendencias apos Etapa 27.2
+
+Data: 2026-07-07T08:10:08
+
+Validar visualmente o frontend com npm run dev.
+Etapa 28: criar backend modular em paralelo.
+Etapa 29: padronizar respostas reais de API.
+Etapa 30: migrar login real para React.
+<!-- ETAPA_27_2_FIM -->

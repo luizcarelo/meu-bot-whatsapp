@@ -662,3 +662,15 @@ Ajustado alias @ para ./src.
 Ajustado fallback de rotas no React Router.
 Executado typecheck e build do frontend.
 <!-- ETAPA_27_1_FIM -->
+
+<!-- ETAPA_27_2_INICIO -->
+## Etapa 27.2 - Correcao React Material UI
+
+Data: 2026-07-07T08:10:08
+
+Removido alias @ do Vite e do TypeScript.
+Ajustados imports do frontend para caminhos relativos.
+Corrigidas propriedades de Typography usando sx.
+Removido Grid item do dashboard.
+Executado typecheck e build.
+<!-- ETAPA_27_2_FIM -->

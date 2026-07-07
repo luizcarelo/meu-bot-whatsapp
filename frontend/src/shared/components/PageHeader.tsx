@@ -8,7 +8,7 @@ interface PageHeaderProps {
 export function PageHeader({ title, description }: PageHeaderProps) {
   return (
     <Box sx={{ mb: 3 }}>
-      <Typography variant="h4" fontWeight={900} gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ fontWeight: 900 }}>
         {title}
       </Typography>
       <Typography color="text.secondary" sx={{ maxWidth: 760 }}>

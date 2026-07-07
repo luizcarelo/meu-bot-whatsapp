@@ -1,11 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AppShell } from '@/layouts/AppShell';
-import { LoginPage } from '@/features/auth/pages/LoginPage';
-import { DashboardPage } from '@/features/dashboard/pages/DashboardPage';
-import { CrmPage } from '@/features/crm/pages/CrmPage';
-import { WhatsappPage } from '@/features/whatsapp/pages/WhatsappPage';
-import { AdminPage } from '@/features/settings/pages/AdminPage';
-import { SuperAdminPage } from '@/features/super-admin/pages/SuperAdminPage';
+import { AppShell } from '../layouts/AppShell';
+import { LoginPage } from '../features/auth/pages/LoginPage';
+import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
+import { CrmPage } from '../features/crm/pages/CrmPage';
+import { WhatsappPage } from '../features/whatsapp/pages/WhatsappPage';
+import { AdminPage } from '../features/settings/pages/AdminPage';
+import { SuperAdminPage } from '../features/super-admin/pages/SuperAdminPage';
 
 const fallbackRoute = String.fromCharCode(42);
 

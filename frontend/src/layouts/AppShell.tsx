@@ -23,7 +23,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useColorMode } from '@/shared/theme/ColorModeContext';
+import { useColorMode } from '../shared/theme/ColorModeContext';
 
 const drawerWidth = 288;
 
@@ -46,7 +46,7 @@ export function AppShell() {
   const drawer = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ p: 2.5 }}>
-        <Typography variant="h6" fontWeight={900} color="primary">
+        <Typography variant="h6" color="primary" sx={{ fontWeight: 900 }}>
           Engeradios CRM
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -101,7 +101,7 @@ export function AppShell() {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" fontWeight={800} sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 800 }}>
             Plataforma SaaS
           </Typography>
           <IconButton onClick={toggleMode} color="inherit">

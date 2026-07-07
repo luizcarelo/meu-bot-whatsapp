@@ -5,7 +5,7 @@ export function LoginPage() {
     <Box sx={{ minHeight: '100vh', display: 'grid', placeItems: 'center', p: 2 }}>
       <Card sx={{ width: '100%', maxWidth: 420 }}>
         <CardContent sx={{ p: 4 }}>
-          <Typography variant="h4" fontWeight={900} gutterBottom>
+          <Typography variant="h4" gutterBottom sx={{ fontWeight: 900 }}>
             Entrar
           </Typography>
           <Typography color="text.secondary" sx={{ mb: 3 }}>

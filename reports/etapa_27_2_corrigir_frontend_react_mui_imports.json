@@ -1,0 +1,331 @@
+{
+  "gerado_em": "2026-07-07T08:10:08",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_27_2_frontend_react_mui_imports_20260707_080957",
+    "copiados": [
+      "frontend/vite.config.ts",
+      "frontend/tsconfig.app.json",
+      "frontend/src/app/App.tsx",
+      "frontend/src/app/providers/AppThemeProvider.tsx",
+      "frontend/src/routes/AppRoutes.tsx",
+      "frontend/src/layouts/AppShell.tsx",
+      "frontend/src/shared/components/PageHeader.tsx",
+      "frontend/src/features/auth/pages/LoginPage.tsx",
+      "frontend/src/features/dashboard/pages/DashboardPage.tsx",
+      "frontend/src/features/crm/pages/CrmPage.tsx",
+      "frontend/src/features/whatsapp/pages/WhatsappPage.tsx",
+      "frontend/src/features/settings/pages/AdminPage.tsx",
+      "frontend/src/features/super-admin/pages/SuperAdminPage.tsx",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_27_2_manifesto_antes.json",
+  "alteracoes": [
+    {
+      "arquivo": "frontend/vite.config.ts",
+      "alterado": true,
+      "sha256_antes": "0e9f5fc6ea02278af129eca0dda7e3e302ca2d2a513eeca212de56df8a8c50d0",
+      "sha256_depois": "d5c13997b615e48fb315060a546eae5227ba68e279f2682d7db8ad8a753577b2",
+      "tamanho": 381
+    },
+    {
+      "arquivo": "frontend/tsconfig.app.json",
+      "alterado": true,
+      "sha256_antes": "fdb0c59e5ce8314595be56d83f226ebeaf9ae67d669252632e080d4f0c966408",
+      "sha256_depois": "44efc7c82fd458eaa9d7945d2680d9fedd53944ff8fa4650b2797d599acf0b74",
+      "tamanho": 507
+    },
+    {
+      "arquivo": "frontend/src/app/App.tsx",
+      "alterado": true,
+      "sha256_antes": "337901221294df6b81d0139cbc707edda2c0fbe44aac26e73000a9dd2ccec3ac",
+      "sha256_depois": "cb24247a2417f4455ee60f6a88d1c5f8388ce118f68e5087c10ce6d9976f3c61",
+      "tamanho": 224
+    },
+    {
+      "arquivo": "frontend/src/app/providers/AppThemeProvider.tsx",
+      "alterado": true,
+      "sha256_antes": "ccd9cf7336ca2659df7d5228f25ee36ffdd1a41343e3e2a7810328e760cc23c9",
+      "sha256_depois": "24266d97af7db2e1227035c22dfe56527b214df9209caffdf60db54b3b1bd1a4",
+      "tamanho": 1164
+    },
+    {
+      "arquivo": "frontend/src/routes/AppRoutes.tsx",
+      "alterado": true,
+      "sha256_antes": "9886b55e4700f7fbbaababd92cd58a82b1a705f6e73dbdb9af409e9e6111f790",
+      "sha256_depois": "4d736d3fd021e258a897dfb3fa378807a4e31cc409a7d36aea99e7aeceecc1e9",
+      "tamanho": 1134
+    },
+    {
+      "arquivo": "frontend/src/layouts/AppShell.tsx",
+      "alterado": true,
+      "sha256_antes": "ebafb7fdb2d19b2c0667b734f9264fb944b7ee94813965cb53f7ea39254c1e19",
+      "sha256_depois": "23012d393f9ca2ee7c8743b068fc6d658b66b529f50de1eb6c59a7e84f7c4f30",
+      "tamanho": 4414
+    },
+    {
+      "arquivo": "frontend/src/shared/components/PageHeader.tsx",
+      "alterado": true,
+      "sha256_antes": "2a7b0f93ffd07507890a57033d486f56c0f4b779443885832685d2236e4c0fd9",
+      "sha256_depois": "809d01fd84e478d65ba483f01125fc937fa7fe84ddf72b5a8ea220b80629fed8",
+      "tamanho": 458
+    },
+    {
+      "arquivo": "frontend/src/features/auth/pages/LoginPage.tsx",
+      "alterado": true,
+      "sha256_antes": "42d4ec5cb6abf408621ae4f71a4d0543313281544b3a303434fbc93ed6a82b4f",
+      "sha256_depois": "ff4b1f4cd7286080818ee7c2491971cc40d45b49242e8b60cf4da2d85cda5212",
+      "tamanho": 903
+    },
+    {
+      "arquivo": "frontend/src/features/dashboard/pages/DashboardPage.tsx",
+      "alterado": true,
+      "sha256_antes": "688f413153e4e4f6b4a7a7bfb92251c1cff3bbabee94c07b77eb714016108c00",
+      "sha256_depois": "39d61bd6313feb30c53b1005840d418a64d9a55f083d33ef41c4cf40b66a1015",
+      "tamanho": 2499
+    },
+    {
+      "arquivo": "frontend/src/features/crm/pages/CrmPage.tsx",
+      "alterado": true,
+      "sha256_antes": "7f0ea7b935f76ef8ad067608403340ccd3dd497cee090f73d2de167724bef508",
+      "sha256_depois": "a9b7522bc8e755b63e5eac7124b9d6f44197393f64c314471310e1ff6bcf8d62",
+      "tamanho": 490
+    },
+    {
+      "arquivo": "frontend/src/features/whatsapp/pages/WhatsappPage.tsx",
+      "alterado": true,
+      "sha256_antes": "13e295aa3943e4e79e34d6ea627ceeb5b853f885276987954800b5deb55706e9",
+      "sha256_depois": "a95be9cd323805bb53a56607244e641c8620b3468d186dfec891db1cb575eedd",
+      "tamanho": 519
+    },
+    {
+      "arquivo": "frontend/src/features/settings/pages/AdminPage.tsx",
+      "alterado": true,
+      "sha256_antes": "695527cacda3daa1b1bd1c2d082bfa894364e6d22120715c8ae4e0513b39ae23",
+      "sha256_depois": "d137e8d5b3586d0455d35655edb9fa4bed32846b9a69973e2436236a224728f4",
+      "tamanho": 486
+    },
+    {
+      "arquivo": "frontend/src/features/super-admin/pages/SuperAdminPage.tsx",
+      "alterado": true,
+      "sha256_antes": "a00ddaec42b0314cfec2523a2f969bd80bfd13163ac220dd7e69599b976251a3",
+      "sha256_depois": "7a4939ad197abc3e63b5bd6c13503841ebd347ed2068d4ad6c9e0bd891ad2e62",
+      "tamanho": 473
+    }
+  ],
+  "validacao": {
+    "arquivos": [
+      {
+        "arquivo": "frontend/vite.config.ts",
+        "existe": true,
+        "sha256": "d5c13997b615e48fb315060a546eae5227ba68e279f2682d7db8ad8a753577b2",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/tsconfig.app.json",
+        "existe": true,
+        "sha256": "44efc7c82fd458eaa9d7945d2680d9fedd53944ff8fa4650b2797d599acf0b74",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/app/App.tsx",
+        "existe": true,
+        "sha256": "cb24247a2417f4455ee60f6a88d1c5f8388ce118f68e5087c10ce6d9976f3c61",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/app/providers/AppThemeProvider.tsx",
+        "existe": true,
+        "sha256": "24266d97af7db2e1227035c22dfe56527b214df9209caffdf60db54b3b1bd1a4",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/routes/AppRoutes.tsx",
+        "existe": true,
+        "sha256": "4d736d3fd021e258a897dfb3fa378807a4e31cc409a7d36aea99e7aeceecc1e9",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/layouts/AppShell.tsx",
+        "existe": true,
+        "sha256": "23012d393f9ca2ee7c8743b068fc6d658b66b529f50de1eb6c59a7e84f7c4f30",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/shared/components/PageHeader.tsx",
+        "existe": true,
+        "sha256": "809d01fd84e478d65ba483f01125fc937fa7fe84ddf72b5a8ea220b80629fed8",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/auth/pages/LoginPage.tsx",
+        "existe": true,
+        "sha256": "ff4b1f4cd7286080818ee7c2491971cc40d45b49242e8b60cf4da2d85cda5212",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/dashboard/pages/DashboardPage.tsx",
+        "existe": true,
+        "sha256": "39d61bd6313feb30c53b1005840d418a64d9a55f083d33ef41c4cf40b66a1015",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/crm/pages/CrmPage.tsx",
+        "existe": true,
+        "sha256": "a9b7522bc8e755b63e5eac7124b9d6f44197393f64c314471310e1ff6bcf8d62",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/whatsapp/pages/WhatsappPage.tsx",
+        "existe": true,
+        "sha256": "a95be9cd323805bb53a56607244e641c8620b3468d186dfec891db1cb575eedd",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/settings/pages/AdminPage.tsx",
+        "existe": true,
+        "sha256": "d137e8d5b3586d0455d35655edb9fa4bed32846b9a69973e2436236a224728f4",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/super-admin/pages/SuperAdminPage.tsx",
+        "existe": true,
+        "sha256": "7a4939ad197abc3e63b5bd6c13503841ebd347ed2068d4ad6c9e0bd891ad2e62",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/package.json",
+        "existe": true,
+        "sha256": "76c959c1bbbf7306cc0ded2029559166ed0c13a460b58a6a760e2e620e0810d7",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/main.tsx",
+        "existe": true,
+        "sha256": "64324c7bff484307b1903aa9927a3d48d753bf71162bd5d6de96951d1fd86f59",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/shared/services/httpClient.ts",
+        "existe": true,
+        "sha256": "d40de98cf2cb630ad04de3abe5274e43145d5593b62076abd7542458c252255c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/shared/theme/theme.ts",
+        "existe": true,
+        "sha256": "b214020e5fb1ac8f5274b9ae0344740cc4f80ad6cbda6fa84207ded0670f9e3c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      }
+    ],
+    "checks": {
+      "sem_alias_arroba": true,
+      "sem_baseUrl": true,
+      "sem_paths": true,
+      "sem_import_path_node": true,
+      "sem_grid_item": true,
+      "sem_fontWeight_prop": true,
+      "sem_path_asterisco_literal": true,
+      "fallback_com_from_char_code": true
+    },
+    "erros": [],
+    "ok": true
+  },
+  "builds": {
+    "node_version": {
+      "cmd": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+      "returncode": 0,
+      "stdout": "v24.16.0",
+      "stderr": "",
+      "ok": true
+    },
+    "npm_version": {
+      "cmd": [
+        "npm",
+        "--version"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+      "returncode": 0,
+      "stdout": "11.16.0",
+      "stderr": "",
+      "ok": true
+    },
+    "typecheck": {
+      "cmd": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp/frontend",
+      "returncode": 0,
+      "stdout": "> engeradios-crm-frontend@0.1.0 typecheck\n> tsc -b --pretty false",
+      "stderr": "",
+      "ok": true
+    },
+    "build": {
+      "cmd": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp/frontend",
+      "returncode": 0,
+      "stdout": "> engeradios-crm-frontend@0.1.0 build\n> tsc -b && vite build\n\nvite v8.1.3 building client environment for production...\n\u001b[2K\ntransforming...✓ 983 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                                              0.40 kB │ gzip:   0.27 kB\ndist/assets/roboto-vietnamese-400-normal-DnpnVwnf.woff       6.34 kB\ndist/assets/roboto-vietnamese-700-normal-DsFyXAL4.woff       6.38 kB\ndist/assets/roboto-vietnamese-300-normal-INUupD3o.woff       6.39 kB\ndist/assets/roboto-vietnamese-500-normal-D380IkQ8.woff       6.41 kB\ndist/assets/roboto-greek-400-normal-Bb5mj_fZ.woff            7.66 kB\ndist/assets/roboto-greek-300-normal-C_Dgaih9.woff            7.67 kB\ndist/assets/roboto-greek-700-normal-DjRqqLBV.woff            7.67 kB\ndist/assets/roboto-greek-500-normal-oCqhoyfc.woff            7.71 kB\ndist/assets/roboto-vietnamese-400-normal-D2PTxGxD.woff2      8.36 kB\ndist/assets/roboto-vietnamese-300-normal-BPvXm_f1.woff2      8.37 kB\ndist/assets/roboto-vietnamese-700-normal-BEVeWqJt.woff2      8.41 kB\ndist/assets/roboto-vietnamese-500-normal-B3ncpOoB.woff2      8.54 kB\ndist/assets/roboto-symbols-500-normal-F7c8nfcH.woff          8.95 kB\ndist/assets/roboto-symbols-400-normal-DLYbZahX.woff          8.96 kB\ndist/assets/roboto-symbols-700-normal-BoS6HWkc.woff          8.98 kB\ndist/assets/roboto-symbols-300-normal-BCnjhQd_.woff          9.05 kB\ndist/assets/roboto-greek-300-normal-DJEM9B4Z.woff2           9.50 kB\ndist/assets/roboto-greek-400-normal-ai2Z1K3C.woff2           9.55 kB\ndist/assets/roboto-greek-500-normal-C9AnhcmC.woff2           9.61 kB\ndist/assets/roboto-greek-700-normal-0aHWxGLu.woff2           9.63 kB\ndist/assets/roboto-cyrillic-400-normal-Bjg-1-sg.woff        10.52 kB\ndist/assets/roboto-cyrillic-300-normal-DEFNdjk5.woff        10.58 kB\ndist/assets/roboto-symbols-300-normal-DDU7avhj.woff2        10.70 kB\ndist/assets/roboto-cyrillic-500-normal-CBKMylY4.woff        10.73 kB\ndist/assets/roboto-symbols-400-normal-CB1Ce4Gk.woff2        10.73 kB\ndist/assets/roboto-cyrillic-700-normal-DhZFXDSN.woff        10.74 kB\ndist/assets/roboto-symbols-500-normal-B_CZKVJS.woff2        10.83 kB\ndist/assets/roboto-symbols-700-normal-BiFDindJ.woff2        10.86 kB\ndist/assets/roboto-cyrillic-400-normal-CBPI_iaY.woff2       12.10 kB\ndist/assets/roboto-cyrillic-300-normal-DzUz0kzv.woff2       12.26 kB\ndist/assets/roboto-cyrillic-500-normal-CLao9AfR.woff2       12.35 kB\ndist/assets/roboto-cyrillic-700-normal-C2o7G-SM.woff2       12.41 kB\ndist/assets/roboto-latin-ext-400-normal-scX0fKtV.woff       14.31 kB\ndist/assets/roboto-latin-ext-700-normal-BUhwtWwy.woff       14.31 kB\ndist/assets/roboto-latin-ext-500-normal-Cyc0AKLz.woff       14.38 kB\ndist/assets/roboto-latin-ext-300-normal-CTCCHkZF.woff       14.45 kB\ndist/assets/roboto-latin-ext-300-normal-B90pq-BC.woff2      15.01 kB\ndist/assets/roboto-latin-ext-400-normal-C3tdtHj3.woff2      15.04 kB\ndist/assets/roboto-latin-ext-500-normal-pMCM9Ixg.woff2      15.16 kB\ndist/assets/roboto-latin-ext-700-normal-DSBUz0N1.woff2      15.19 kB\ndist/assets/roboto-cyrillic-ext-400-normal-CaK1767H.woff    16.33 kB\ndist/assets/roboto-cyrillic-ext-300-normal-D7ank4TF.woff    16.34 kB\ndist/assets/roboto-cyrillic-ext-500-normal-DqF2hftb.woff    16.47 kB\ndist/assets/roboto-cyrillic-ext-700-normal-CI7FH63F.woff    16.48 kB\ndist/assets/roboto-cyrillic-ext-400-normal-qHufge6k.woff2   17.37 kB\ndist/assets/roboto-cyrillic-ext-300-normal-DIxttMbC.woff2   17.49 kB\ndist/assets/roboto-cyrillic-ext-500-normal-BWC_xYeb.woff2   17.59 kB\ndist/assets/roboto-cyrillic-ext-700-normal-DmFxo5wj.woff2   17.62 kB\ndist/assets/roboto-math-400-normal-C9RxBKAh.woff            19.22 kB\ndist/assets/roboto-math-500-normal-C-7mKPO3.woff            19.30 kB\ndist/assets/roboto-math-700-normal-DVoD5t2k.woff            19.35 kB\ndist/assets/roboto-math-300-normal-Ds0YpBw2.woff            19.41 kB\ndist/assets/roboto-math-400-normal-BEFej5gc.woff2           20.08 kB\ndist/assets/roboto-math-300-normal-5dF_7mZP.woff2           20.09 kB\ndist/assets/roboto-math-500-normal-C4NU9gLX.woff2           20.30 kB\ndist/assets/roboto-math-700-normal-B8YqGHVc.woff2           20.39 kB\ndist/assets/roboto-latin-400-normal-DyYNIH4P.woff           21.77 kB\ndist/assets/roboto-latin-400-normal-BqEyEoaF.woff2          21.88 kB\ndist/assets/roboto-latin-500-normal-DQZyH_nt.woff           21.92 kB\ndist/assets/roboto-latin-700-normal-DLgJJpmK.woff           21.92 kB\ndist/assets/roboto-latin-300-normal-CCzlftfr.woff2          22.07 kB\ndist/assets/roboto-latin-300-normal-BARJ-h6h.woff           22.08 kB\ndist/assets/roboto-latin-500-normal-7RbcRiD8.woff2          22.20 kB\ndist/assets/roboto-latin-700-normal-BZpUvMxY.woff2          22.24 kB\ndist/assets/index-DC1kQYhY.css                              47.04 kB │ gzip:  20.94 kB\ndist/assets/index-BUBB7Kjh.js                              528.92 kB │ gzip: 169.52 kB │ map: 2,720.89 kB\n\n✓ built in 989ms",
+      "stderr": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.",
+      "ok": true
+    }
+  },
+  "build_ok": true,
+  "ok": true,
+  "docs_obrigatorios": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_27_2_manifesto_depois.json"
+}
