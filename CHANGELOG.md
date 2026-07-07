@@ -599,3 +599,44 @@ Garantida exposicao de appData em window para inicializacao do Alpine.
 Mantido shell seguro da Etapa 25.1.
 Validadas rotas principais em runtime.
 <!-- ETAPA_25_2_FIM -->
+
+<!-- ETAPA_25_3_INICIO -->
+## Etapa 25.3 - Correcao /api/whatsapp/status
+
+Data: 2026-07-07T01:02:26
+
+Ajustada a rota /api/whatsapp/status/:companyId para nao acessar req.whatsapp.sessions diretamente.
+Adicionado fallback defensivo para status DESCONECTADO.
+Validado node --check, dashboard e API de status.
+<!-- ETAPA_25_3_FIM -->
+
+<!-- ETAPA_25_4_INICIO -->
+## Etapa 25.4 - Dashboard principal refatorado
+
+Data: 2026-07-07T01:08:08
+
+Recriado views/dashboard.ejs como painel principal limpo e responsivo.
+Removido dashboard antigo baseado em Alpine/Tailwind CDN.
+Separado dashboard da tela de atendimento CRM.
+Adicionados cards, atalhos e status WhatsApp seguro.
+<!-- ETAPA_25_4_FIM -->
+
+<!-- ETAPA_25_4_1_INICIO -->
+## Etapa 25.4.1 - Correcao HTML dashboard
+
+Data: 2026-07-07T01:14:19
+
+Corrigida tag link para /css/style.css.
+Corrigidos hrefs para /crm, /admin/painel e /super-admin.
+Removidos textos soltos gerados por HTML quebrado.
+<!-- ETAPA_25_4_1_FIM -->
+
+<!-- ETAPA_26_INICIO -->
+## Etapa 26 - Documentacao de arquitetura nova
+
+Data: 2026-07-07T01:29:02
+
+Criados documentos de decisao, mapa do legado, arquitetura alvo, contratos de API e plano de migracao.
+Registrada diretriz de interromper remendos complexos no EJS legado.
+Nao houve alteracao funcional no sistema.
+<!-- ETAPA_26_FIM -->

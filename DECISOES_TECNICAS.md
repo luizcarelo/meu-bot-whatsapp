@@ -559,3 +559,45 @@ Decidido corrigir apenas views/dashboard.ejs para evitar impacto no CRM.
 Decidido manter Alpine via CDN por enquanto e deixar internalizacao para etapa futura.
 Decidido usar window.appData como compatibilidade segura com x-data=appData().
 <!-- ETAPA_25_2_FIM -->
+
+<!-- ETAPA_25_3_INICIO -->
+## Etapa 25.3 - Decisao tecnica
+
+Data: 2026-07-07T01:02:26
+
+Decidido tratar ausencia de req.whatsapp como estado operacional desconectado.
+Decidido nao iniciar sessao WhatsApp automaticamente apenas para consultar status.
+Decidido retornar HTTP 200 para status operacional indisponivel, preservando o dashboard.
+<!-- ETAPA_25_3_FIM -->
+
+<!-- ETAPA_25_4_INICIO -->
+## Etapa 25.4 - Decisao tecnica
+
+Data: 2026-07-07T01:08:08
+
+Decidido separar a pagina principal do CRM para evitar mistura visual e quebra de scripts.
+Decidido manter o CRM completo apenas na rota /crm.
+Decidido nao usar Alpine nem Tailwind CDN no novo dashboard.
+Decidido manter a internalizacao completa de Tailwind/Alpine como pendencia futura para as demais telas.
+<!-- ETAPA_25_4_FIM -->
+
+<!-- ETAPA_25_4_1_INICIO -->
+## Etapa 25.4.1 - Decisao tecnica
+
+Data: 2026-07-07T01:14:19
+
+Decidido corrigir apenas views/dashboard.ejs.
+Decidido manter dashboard sem Alpine e sem Tailwind CDN.
+Decidido validar HTML renderizado com parser para confirmar links e stylesheets.
+<!-- ETAPA_25_4_1_FIM -->
+
+<!-- ETAPA_26_INICIO -->
+## Etapa 26 - Decisao tecnica
+
+Data: 2026-07-07T01:29:02
+
+Decidido evoluir para frontend React, TypeScript, Vite e Material UI.
+Decidido evoluir backend para arquitetura modular por dominio.
+Decidido manter o EJS como legado operacional ate substituicao validada.
+Decidido padronizar contratos JSON para APIs novas.
+<!-- ETAPA_26_FIM -->

@@ -597,3 +597,47 @@ Validar manualmente o dashboard no navegador e confirmar ausencia de erros appDa
 Planejar etapa futura para remover Tailwind CDN e Alpine CDN em producao.
 Seguir para Etapa 26 de auditoria funcional apos validacao manual.
 <!-- ETAPA_25_2_FIM -->
+
+<!-- ETAPA_25_3_INICIO -->
+## Pendencias apos Etapa 25.3
+
+Data: 2026-07-07T01:02:26
+
+Validar no navegador se o erro 500 de /api/whatsapp/status/5 sumiu.
+Planejar Etapa 26 para auditoria funcional completa.
+Planejar etapa futura para internalizar Tailwind e Alpine.
+<!-- ETAPA_25_3_FIM -->
+
+<!-- ETAPA_25_4_INICIO -->
+## Pendencias apos Etapa 25.4
+
+Data: 2026-07-07T01:08:08
+
+Validar manualmente /dashboard em desktop, notebook, tablet e celular.
+Executar auditoria funcional completa na Etapa 26.
+Planejar etapa futura para remover CDN de Tailwind/Alpine das demais telas.
+Planejar refinamento visual do /crm sem misturar com dashboard.
+<!-- ETAPA_25_4_FIM -->
+
+<!-- ETAPA_25_4_1_INICIO -->
+## Pendencias apos Etapa 25.4.1
+
+Data: 2026-07-07T01:14:19
+
+Validar manualmente o dashboard com Ctrl+F5.
+Se aprovado, seguir para auditoria funcional completa.
+Refinar futuramente o shell em todas as telas se necessario.
+<!-- ETAPA_25_4_1_FIM -->
+
+<!-- ETAPA_26_INICIO -->
+## Pendencias apos Etapa 26
+
+Data: 2026-07-07T01:29:02
+
+Etapa 27: criar base do frontend React.
+Etapa 28: criar backend modular em paralelo.
+Etapa 29: padronizar respostas reais de API.
+Etapa 30: migrar login e sessao.
+Etapa 31: migrar dashboard.
+Etapa 32: criar gestao WhatsApp web.
+<!-- ETAPA_26_FIM -->

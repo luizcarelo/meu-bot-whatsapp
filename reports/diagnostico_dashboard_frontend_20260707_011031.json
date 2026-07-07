@@ -1,0 +1,5242 @@
+{
+  "gerado_em": "2026-07-07T01:10:31",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "credencial_email": "<EMAIL_LOGIN>",
+  "dashboard_local": {
+    "existe": true,
+    "sha256": "bb6af0a6a888397e26214cf349136ae01a5a12a16ee16fa9cc7c5fa6bfeb5e11",
+    "tamanho": 16542,
+    "contagens": {
+      "ETAPA25_4": 0,
+      "ETAPA25_1": 4,
+      "er25dash": 88,
+      "er25safe": 40,
+      "cdn.tailwindcss.com": 0,
+      "alpinejs": 0,
+      "x-data": 0,
+      "appData": 0,
+      "initApp": 0,
+      "activeTab": 0,
+      "currentChat": 0,
+      "qrCodeBase64": 0,
+      "CRM WhatsApp Enterprise": 0,
+      "/crm": 5,
+      "/admin/painel": 4,
+      "/super-admin": 4,
+      "api/whatsapp/status": 1
+    },
+    "linhas_relevantes": [
+      {
+        "termo": "er25dash",
+        "linha": 10,
+        "contexto": [
+          {
+            "linha": 8,
+            "texto": "</head>"
+          },
+          {
+            "linha": 9,
+            "texto": "<body>"
+          },
+          {
+            "linha": 10,
+            "texto": "    <main class=\"er25dash-page\" id=\"dashboard-principal\">"
+          },
+          {
+            "linha": 11,
+            "texto": "        <section class=\"er25dash-hero\">"
+          },
+          {
+            "linha": 12,
+            "texto": "            <span class=\"er25dash-badge\">● Dashboard operacional</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 11,
+        "contexto": [
+          {
+            "linha": 9,
+            "texto": "<body>"
+          },
+          {
+            "linha": 10,
+            "texto": "    <main class=\"er25dash-page\" id=\"dashboard-principal\">"
+          },
+          {
+            "linha": 11,
+            "texto": "        <section class=\"er25dash-hero\">"
+          },
+          {
+            "linha": 12,
+            "texto": "            <span class=\"er25dash-badge\">● Dashboard operacional</span>"
+          },
+          {
+            "linha": 13,
+            "texto": "            <h1 class=\"er25dash-title\">Visao geral do atendimento</h1>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 12,
+        "contexto": [
+          {
+            "linha": 10,
+            "texto": "    <main class=\"er25dash-page\" id=\"dashboard-principal\">"
+          },
+          {
+            "linha": 11,
+            "texto": "        <section class=\"er25dash-hero\">"
+          },
+          {
+            "linha": 12,
+            "texto": "            <span class=\"er25dash-badge\">● Dashboard operacional</span>"
+          },
+          {
+            "linha": 13,
+            "texto": "            <h1 class=\"er25dash-title\">Visao geral do atendimento</h1>"
+          },
+          {
+            "linha": 14,
+            "texto": "            <p class=\"er25dash-subtitle\">"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 13,
+        "contexto": [
+          {
+            "linha": 11,
+            "texto": "        <section class=\"er25dash-hero\">"
+          },
+          {
+            "linha": 12,
+            "texto": "            <span class=\"er25dash-badge\">● Dashboard operacional</span>"
+          },
+          {
+            "linha": 13,
+            "texto": "            <h1 class=\"er25dash-title\">Visao geral do atendimento</h1>"
+          },
+          {
+            "linha": 14,
+            "texto": "            <p class=\"er25dash-subtitle\">"
+          },
+          {
+            "linha": 15,
+            "texto": "                Acompanhe conexao WhatsApp, atalhos de operacao, acesso ao CRM e indicadores principais em uma pagina limpa, responsiva e separada da tela de atendimento."
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 14,
+        "contexto": [
+          {
+            "linha": 12,
+            "texto": "            <span class=\"er25dash-badge\">● Dashboard operacional</span>"
+          },
+          {
+            "linha": 13,
+            "texto": "            <h1 class=\"er25dash-title\">Visao geral do atendimento</h1>"
+          },
+          {
+            "linha": 14,
+            "texto": "            <p class=\"er25dash-subtitle\">"
+          },
+          {
+            "linha": 15,
+            "texto": "                Acompanhe conexao WhatsApp, atalhos de operacao, acesso ao CRM e indicadores principais em uma pagina limpa, responsiva e separada da tela de atendimento."
+          },
+          {
+            "linha": 16,
+            "texto": "            </p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 18,
+        "contexto": [
+          {
+            "linha": 16,
+            "texto": "            </p>"
+          },
+          {
+            "linha": 17,
+            "texto": ""
+          },
+          {
+            "linha": 18,
+            "texto": "            <div class=\"er25dash-hero-actions\">"
+          },
+          {
+            "linha": 19,
+            "texto": "                /crmAbrir CRM Atendimento</a>"
+          },
+          {
+            "linha": 20,
+            "texto": "                /admin/painelPainel Administrativo</a>"
+          }
+        ]
+      },
+      {
+        "termo": "/crm",
+        "linha": 19,
+        "contexto": [
+          {
+            "linha": 17,
+            "texto": ""
+          },
+          {
+            "linha": 18,
+            "texto": "            <div class=\"er25dash-hero-actions\">"
+          },
+          {
+            "linha": 19,
+            "texto": "                /crmAbrir CRM Atendimento</a>"
+          },
+          {
+            "linha": 20,
+            "texto": "                /admin/painelPainel Administrativo</a>"
+          },
+          {
+            "linha": 21,
+            "texto": "                /super-adminSuper Admin</a>"
+          }
+        ]
+      },
+      {
+        "termo": "/admin/painel",
+        "linha": 20,
+        "contexto": [
+          {
+            "linha": 18,
+            "texto": "            <div class=\"er25dash-hero-actions\">"
+          },
+          {
+            "linha": 19,
+            "texto": "                /crmAbrir CRM Atendimento</a>"
+          },
+          {
+            "linha": 20,
+            "texto": "                /admin/painelPainel Administrativo</a>"
+          },
+          {
+            "linha": 21,
+            "texto": "                /super-adminSuper Admin</a>"
+          },
+          {
+            "linha": 22,
+            "texto": "            </div>"
+          }
+        ]
+      },
+      {
+        "termo": "/super-admin",
+        "linha": 21,
+        "contexto": [
+          {
+            "linha": 19,
+            "texto": "                /crmAbrir CRM Atendimento</a>"
+          },
+          {
+            "linha": 20,
+            "texto": "                /admin/painelPainel Administrativo</a>"
+          },
+          {
+            "linha": 21,
+            "texto": "                /super-adminSuper Admin</a>"
+          },
+          {
+            "linha": 22,
+            "texto": "            </div>"
+          },
+          {
+            "linha": 23,
+            "texto": "        </section>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 25,
+        "contexto": [
+          {
+            "linha": 23,
+            "texto": "        </section>"
+          },
+          {
+            "linha": 24,
+            "texto": ""
+          },
+          {
+            "linha": 25,
+            "texto": "        <section class=\"er25dash-grid er25dash-grid-metrics\" aria-label=\"Indicadores principais\">"
+          },
+          {
+            "linha": 26,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 27,
+            "texto": "                <div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 26,
+        "contexto": [
+          {
+            "linha": 24,
+            "texto": ""
+          },
+          {
+            "linha": 25,
+            "texto": "        <section class=\"er25dash-grid er25dash-grid-metrics\" aria-label=\"Indicadores principais\">"
+          },
+          {
+            "linha": 26,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 27,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 28,
+            "texto": "                    <div class=\"er25dash-label\">Sessao</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 28,
+        "contexto": [
+          {
+            "linha": 26,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 27,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 28,
+            "texto": "                    <div class=\"er25dash-label\">Sessao</div>"
+          },
+          {
+            "linha": 29,
+            "texto": "                    <div class=\"er25dash-value\" id=\"dash-session-value\">Ativa</div>"
+          },
+          {
+            "linha": 30,
+            "texto": "                    <p class=\"er25dash-helper\">Usuario autenticado no painel.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 29,
+        "contexto": [
+          {
+            "linha": 27,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 28,
+            "texto": "                    <div class=\"er25dash-label\">Sessao</div>"
+          },
+          {
+            "linha": 29,
+            "texto": "                    <div class=\"er25dash-value\" id=\"dash-session-value\">Ativa</div>"
+          },
+          {
+            "linha": 30,
+            "texto": "                    <p class=\"er25dash-helper\">Usuario autenticado no painel.</p>"
+          },
+          {
+            "linha": 31,
+            "texto": "                </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 30,
+        "contexto": [
+          {
+            "linha": 28,
+            "texto": "                    <div class=\"er25dash-label\">Sessao</div>"
+          },
+          {
+            "linha": 29,
+            "texto": "                    <div class=\"er25dash-value\" id=\"dash-session-value\">Ativa</div>"
+          },
+          {
+            "linha": 30,
+            "texto": "                    <p class=\"er25dash-helper\">Usuario autenticado no painel.</p>"
+          },
+          {
+            "linha": 31,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 32,
+            "texto": "                <div class=\"er25dash-icon\">S</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 32,
+        "contexto": [
+          {
+            "linha": 30,
+            "texto": "                    <p class=\"er25dash-helper\">Usuario autenticado no painel.</p>"
+          },
+          {
+            "linha": 31,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 32,
+            "texto": "                <div class=\"er25dash-icon\">S</div>"
+          },
+          {
+            "linha": 33,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 34,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 35,
+        "contexto": [
+          {
+            "linha": 33,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 34,
+            "texto": ""
+          },
+          {
+            "linha": 35,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 36,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 37,
+            "texto": "                    <div class=\"er25dash-label\">WhatsApp</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 37,
+        "contexto": [
+          {
+            "linha": 35,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 36,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 37,
+            "texto": "                    <div class=\"er25dash-label\">WhatsApp</div>"
+          },
+          {
+            "linha": 38,
+            "texto": "                    <div class=\"er25dash-value\" id=\"dash-whatsapp-value\">...</div>"
+          },
+          {
+            "linha": 39,
+            "texto": "                    <p class=\"er25dash-helper\" id=\"dash-whatsapp-helper\">Verificando status da conexao.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 38,
+        "contexto": [
+          {
+            "linha": 36,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 37,
+            "texto": "                    <div class=\"er25dash-label\">WhatsApp</div>"
+          },
+          {
+            "linha": 38,
+            "texto": "                    <div class=\"er25dash-value\" id=\"dash-whatsapp-value\">...</div>"
+          },
+          {
+            "linha": 39,
+            "texto": "                    <p class=\"er25dash-helper\" id=\"dash-whatsapp-helper\">Verificando status da conexao.</p>"
+          },
+          {
+            "linha": 40,
+            "texto": "                </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 39,
+        "contexto": [
+          {
+            "linha": 37,
+            "texto": "                    <div class=\"er25dash-label\">WhatsApp</div>"
+          },
+          {
+            "linha": 38,
+            "texto": "                    <div class=\"er25dash-value\" id=\"dash-whatsapp-value\">...</div>"
+          },
+          {
+            "linha": 39,
+            "texto": "                    <p class=\"er25dash-helper\" id=\"dash-whatsapp-helper\">Verificando status da conexao.</p>"
+          },
+          {
+            "linha": 40,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 41,
+            "texto": "                <div class=\"er25dash-icon\">W</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 41,
+        "contexto": [
+          {
+            "linha": 39,
+            "texto": "                    <p class=\"er25dash-helper\" id=\"dash-whatsapp-helper\">Verificando status da conexao.</p>"
+          },
+          {
+            "linha": 40,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 41,
+            "texto": "                <div class=\"er25dash-icon\">W</div>"
+          },
+          {
+            "linha": 42,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 43,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 44,
+        "contexto": [
+          {
+            "linha": 42,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 43,
+            "texto": ""
+          },
+          {
+            "linha": 44,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 45,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 46,
+            "texto": "                    <div class=\"er25dash-label\">Atendimento</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 46,
+        "contexto": [
+          {
+            "linha": 44,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 45,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 46,
+            "texto": "                    <div class=\"er25dash-label\">Atendimento</div>"
+          },
+          {
+            "linha": 47,
+            "texto": "                    <div class=\"er25dash-value\">CRM</div>"
+          },
+          {
+            "linha": 48,
+            "texto": "                    <p class=\"er25dash-helper\">Conversas e contatos em area dedicada.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 47,
+        "contexto": [
+          {
+            "linha": 45,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 46,
+            "texto": "                    <div class=\"er25dash-label\">Atendimento</div>"
+          },
+          {
+            "linha": 47,
+            "texto": "                    <div class=\"er25dash-value\">CRM</div>"
+          },
+          {
+            "linha": 48,
+            "texto": "                    <p class=\"er25dash-helper\">Conversas e contatos em area dedicada.</p>"
+          },
+          {
+            "linha": 49,
+            "texto": "                </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 48,
+        "contexto": [
+          {
+            "linha": 46,
+            "texto": "                    <div class=\"er25dash-label\">Atendimento</div>"
+          },
+          {
+            "linha": 47,
+            "texto": "                    <div class=\"er25dash-value\">CRM</div>"
+          },
+          {
+            "linha": 48,
+            "texto": "                    <p class=\"er25dash-helper\">Conversas e contatos em area dedicada.</p>"
+          },
+          {
+            "linha": 49,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 50,
+            "texto": "                <div class=\"er25dash-icon\">C</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 50,
+        "contexto": [
+          {
+            "linha": 48,
+            "texto": "                    <p class=\"er25dash-helper\">Conversas e contatos em area dedicada.</p>"
+          },
+          {
+            "linha": 49,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 50,
+            "texto": "                <div class=\"er25dash-icon\">C</div>"
+          },
+          {
+            "linha": 51,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 52,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 53,
+        "contexto": [
+          {
+            "linha": 51,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 52,
+            "texto": ""
+          },
+          {
+            "linha": 53,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 54,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 55,
+            "texto": "                    <div class=\"er25dash-label\">Interface</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 55,
+        "contexto": [
+          {
+            "linha": 53,
+            "texto": "            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">"
+          },
+          {
+            "linha": 54,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 55,
+            "texto": "                    <div class=\"er25dash-label\">Interface</div>"
+          },
+          {
+            "linha": 56,
+            "texto": "                    <div class=\"er25dash-value\">Online</div>"
+          },
+          {
+            "linha": 57,
+            "texto": "                    <p class=\"er25dash-helper\">Layout claro/escuro e responsivo.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 56,
+        "contexto": [
+          {
+            "linha": 54,
+            "texto": "                <div>"
+          },
+          {
+            "linha": 55,
+            "texto": "                    <div class=\"er25dash-label\">Interface</div>"
+          },
+          {
+            "linha": 56,
+            "texto": "                    <div class=\"er25dash-value\">Online</div>"
+          },
+          {
+            "linha": 57,
+            "texto": "                    <p class=\"er25dash-helper\">Layout claro/escuro e responsivo.</p>"
+          },
+          {
+            "linha": 58,
+            "texto": "                </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 57,
+        "contexto": [
+          {
+            "linha": 55,
+            "texto": "                    <div class=\"er25dash-label\">Interface</div>"
+          },
+          {
+            "linha": 56,
+            "texto": "                    <div class=\"er25dash-value\">Online</div>"
+          },
+          {
+            "linha": 57,
+            "texto": "                    <p class=\"er25dash-helper\">Layout claro/escuro e responsivo.</p>"
+          },
+          {
+            "linha": 58,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 59,
+            "texto": "                <div class=\"er25dash-icon\">UI</div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 59,
+        "contexto": [
+          {
+            "linha": 57,
+            "texto": "                    <p class=\"er25dash-helper\">Layout claro/escuro e responsivo.</p>"
+          },
+          {
+            "linha": 58,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 59,
+            "texto": "                <div class=\"er25dash-icon\">UI</div>"
+          },
+          {
+            "linha": 60,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 61,
+            "texto": "        </section>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 63,
+        "contexto": [
+          {
+            "linha": 61,
+            "texto": "        </section>"
+          },
+          {
+            "linha": 62,
+            "texto": ""
+          },
+          {
+            "linha": 63,
+            "texto": "        <section class=\"er25dash-grid er25dash-grid-main\">"
+          },
+          {
+            "linha": 64,
+            "texto": "            <article class=\"er25dash-card\">"
+          },
+          {
+            "linha": 65,
+            "texto": "                <h2 class=\"er25dash-section-title\">Atalhos de operacao</h2>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 64,
+        "contexto": [
+          {
+            "linha": 62,
+            "texto": ""
+          },
+          {
+            "linha": 63,
+            "texto": "        <section class=\"er25dash-grid er25dash-grid-main\">"
+          },
+          {
+            "linha": 64,
+            "texto": "            <article class=\"er25dash-card\">"
+          },
+          {
+            "linha": 65,
+            "texto": "                <h2 class=\"er25dash-section-title\">Atalhos de operacao</h2>"
+          },
+          {
+            "linha": 66,
+            "texto": "                <p class=\"er25dash-section-subtitle\">"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 65,
+        "contexto": [
+          {
+            "linha": 63,
+            "texto": "        <section class=\"er25dash-grid er25dash-grid-main\">"
+          },
+          {
+            "linha": 64,
+            "texto": "            <article class=\"er25dash-card\">"
+          },
+          {
+            "linha": 65,
+            "texto": "                <h2 class=\"er25dash-section-title\">Atalhos de operacao</h2>"
+          },
+          {
+            "linha": 66,
+            "texto": "                <p class=\"er25dash-section-subtitle\">"
+          },
+          {
+            "linha": 67,
+            "texto": "                    Acesse rapidamente as areas principais sem misturar dashboard com tela de atendimento."
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 66,
+        "contexto": [
+          {
+            "linha": 64,
+            "texto": "            <article class=\"er25dash-card\">"
+          },
+          {
+            "linha": 65,
+            "texto": "                <h2 class=\"er25dash-section-title\">Atalhos de operacao</h2>"
+          },
+          {
+            "linha": 66,
+            "texto": "                <p class=\"er25dash-section-subtitle\">"
+          },
+          {
+            "linha": 67,
+            "texto": "                    Acesse rapidamente as areas principais sem misturar dashboard com tela de atendimento."
+          },
+          {
+            "linha": 68,
+            "texto": "                </p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 70,
+        "contexto": [
+          {
+            "linha": 68,
+            "texto": "                </p>"
+          },
+          {
+            "linha": 69,
+            "texto": ""
+          },
+          {
+            "linha": 70,
+            "texto": "                <div class=\"er25dash-actions-list\">"
+          },
+          {
+            "linha": 71,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 72,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          }
+        ]
+      },
+      {
+        "termo": "/crm",
+        "linha": 71,
+        "contexto": [
+          {
+            "linha": 69,
+            "texto": ""
+          },
+          {
+            "linha": 70,
+            "texto": "                <div class=\"er25dash-actions-list\">"
+          },
+          {
+            "linha": 71,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 72,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 73,
+            "texto": "                            <h3 class=\"er25dash-action-title\">CRM Atendimento</h3>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 72,
+        "contexto": [
+          {
+            "linha": 70,
+            "texto": "                <div class=\"er25dash-actions-list\">"
+          },
+          {
+            "linha": 71,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 72,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 73,
+            "texto": "                            <h3 class=\"er25dash-action-title\">CRM Atendimento</h3>"
+          },
+          {
+            "linha": 74,
+            "texto": "                            <span class=\"er25dash-pill\">Abrir</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 73,
+        "contexto": [
+          {
+            "linha": 71,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 72,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 73,
+            "texto": "                            <h3 class=\"er25dash-action-title\">CRM Atendimento</h3>"
+          },
+          {
+            "linha": 74,
+            "texto": "                            <span class=\"er25dash-pill\">Abrir</span>"
+          },
+          {
+            "linha": 75,
+            "texto": "                        </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 74,
+        "contexto": [
+          {
+            "linha": 72,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 73,
+            "texto": "                            <h3 class=\"er25dash-action-title\">CRM Atendimento</h3>"
+          },
+          {
+            "linha": 74,
+            "texto": "                            <span class=\"er25dash-pill\">Abrir</span>"
+          },
+          {
+            "linha": 75,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 76,
+            "texto": "                        <p class=\"er25dash-action-desc\">Conversas, contatos, atendimento humano, mensagens e fila operacional.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 76,
+        "contexto": [
+          {
+            "linha": 74,
+            "texto": "                            <span class=\"er25dash-pill\">Abrir</span>"
+          },
+          {
+            "linha": 75,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 76,
+            "texto": "                        <p class=\"er25dash-action-desc\">Conversas, contatos, atendimento humano, mensagens e fila operacional.</p>"
+          },
+          {
+            "linha": 77,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 78,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "/admin/painel",
+        "linha": 79,
+        "contexto": [
+          {
+            "linha": 77,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 78,
+            "texto": ""
+          },
+          {
+            "linha": 79,
+            "texto": "                    /admin/painel"
+          },
+          {
+            "linha": 80,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 81,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Painel Administrativo</h3>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 80,
+        "contexto": [
+          {
+            "linha": 78,
+            "texto": ""
+          },
+          {
+            "linha": 79,
+            "texto": "                    /admin/painel"
+          },
+          {
+            "linha": 80,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 81,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Painel Administrativo</h3>"
+          },
+          {
+            "linha": 82,
+            "texto": "                            <span class=\"er25dash-pill\">Gerir</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 81,
+        "contexto": [
+          {
+            "linha": 79,
+            "texto": "                    /admin/painel"
+          },
+          {
+            "linha": 80,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 81,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Painel Administrativo</h3>"
+          },
+          {
+            "linha": 82,
+            "texto": "                            <span class=\"er25dash-pill\">Gerir</span>"
+          },
+          {
+            "linha": 83,
+            "texto": "                        </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 82,
+        "contexto": [
+          {
+            "linha": 80,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 81,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Painel Administrativo</h3>"
+          },
+          {
+            "linha": 82,
+            "texto": "                            <span class=\"er25dash-pill\">Gerir</span>"
+          },
+          {
+            "linha": 83,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 84,
+            "texto": "                        <p class=\"er25dash-action-desc\">Usuarios, configuracoes da empresa, setores, mensagens rapidas e recursos do tenant.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 84,
+        "contexto": [
+          {
+            "linha": 82,
+            "texto": "                            <span class=\"er25dash-pill\">Gerir</span>"
+          },
+          {
+            "linha": 83,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 84,
+            "texto": "                        <p class=\"er25dash-action-desc\">Usuarios, configuracoes da empresa, setores, mensagens rapidas e recursos do tenant.</p>"
+          },
+          {
+            "linha": 85,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 86,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "/super-admin",
+        "linha": 87,
+        "contexto": [
+          {
+            "linha": 85,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 86,
+            "texto": ""
+          },
+          {
+            "linha": 87,
+            "texto": "                    /super-admin"
+          },
+          {
+            "linha": 88,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 89,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Super Admin</h3>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 88,
+        "contexto": [
+          {
+            "linha": 86,
+            "texto": ""
+          },
+          {
+            "linha": 87,
+            "texto": "                    /super-admin"
+          },
+          {
+            "linha": 88,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 89,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Super Admin</h3>"
+          },
+          {
+            "linha": 90,
+            "texto": "                            <span class=\"er25dash-pill\">Master</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 89,
+        "contexto": [
+          {
+            "linha": 87,
+            "texto": "                    /super-admin"
+          },
+          {
+            "linha": 88,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 89,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Super Admin</h3>"
+          },
+          {
+            "linha": 90,
+            "texto": "                            <span class=\"er25dash-pill\">Master</span>"
+          },
+          {
+            "linha": 91,
+            "texto": "                        </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 90,
+        "contexto": [
+          {
+            "linha": 88,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 89,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Super Admin</h3>"
+          },
+          {
+            "linha": 90,
+            "texto": "                            <span class=\"er25dash-pill\">Master</span>"
+          },
+          {
+            "linha": 91,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 92,
+            "texto": "                        <p class=\"er25dash-action-desc\">Gestao de tenants, empresas, limites e administracao geral da plataforma.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 92,
+        "contexto": [
+          {
+            "linha": 90,
+            "texto": "                            <span class=\"er25dash-pill\">Master</span>"
+          },
+          {
+            "linha": 91,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 92,
+            "texto": "                        <p class=\"er25dash-action-desc\">Gestao de tenants, empresas, limites e administracao geral da plataforma.</p>"
+          },
+          {
+            "linha": 93,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 94,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "/crm",
+        "linha": 95,
+        "contexto": [
+          {
+            "linha": 93,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 94,
+            "texto": ""
+          },
+          {
+            "linha": 95,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 96,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 97,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Conexao WhatsApp</h3>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 96,
+        "contexto": [
+          {
+            "linha": 94,
+            "texto": ""
+          },
+          {
+            "linha": 95,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 96,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 97,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Conexao WhatsApp</h3>"
+          },
+          {
+            "linha": 98,
+            "texto": "                            <span class=\"er25dash-pill\" id=\"dash-whatsapp-pill\">Status</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 97,
+        "contexto": [
+          {
+            "linha": 95,
+            "texto": "                    /crm"
+          },
+          {
+            "linha": 96,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 97,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Conexao WhatsApp</h3>"
+          },
+          {
+            "linha": 98,
+            "texto": "                            <span class=\"er25dash-pill\" id=\"dash-whatsapp-pill\">Status</span>"
+          },
+          {
+            "linha": 99,
+            "texto": "                        </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 98,
+        "contexto": [
+          {
+            "linha": 96,
+            "texto": "                        <div class=\"er25dash-action-top\">"
+          },
+          {
+            "linha": 97,
+            "texto": "                            <h3 class=\"er25dash-action-title\">Conexao WhatsApp</h3>"
+          },
+          {
+            "linha": 98,
+            "texto": "                            <span class=\"er25dash-pill\" id=\"dash-whatsapp-pill\">Status</span>"
+          },
+          {
+            "linha": 99,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 100,
+            "texto": "                        <p class=\"er25dash-action-desc\">Status operacional exibido no dashboard. Gestao completa sera organizada em etapa propria.</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 100,
+        "contexto": [
+          {
+            "linha": 98,
+            "texto": "                            <span class=\"er25dash-pill\" id=\"dash-whatsapp-pill\">Status</span>"
+          },
+          {
+            "linha": 99,
+            "texto": "                        </div>"
+          },
+          {
+            "linha": 100,
+            "texto": "                        <p class=\"er25dash-action-desc\">Status operacional exibido no dashboard. Gestao completa sera organizada em etapa propria.</p>"
+          },
+          {
+            "linha": 101,
+            "texto": "                    </a>"
+          },
+          {
+            "linha": 102,
+            "texto": "                </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 105,
+        "contexto": [
+          {
+            "linha": 103,
+            "texto": "            </article>"
+          },
+          {
+            "linha": 104,
+            "texto": ""
+          },
+          {
+            "linha": 105,
+            "texto": "            <aside class=\"er25dash-card\">"
+          },
+          {
+            "linha": 106,
+            "texto": "                <h2 class=\"er25dash-section-title\">Estado do sistema</h2>"
+          },
+          {
+            "linha": 107,
+            "texto": "                <p class=\"er25dash-section-subtitle\">"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 106,
+        "contexto": [
+          {
+            "linha": 104,
+            "texto": ""
+          },
+          {
+            "linha": 105,
+            "texto": "            <aside class=\"er25dash-card\">"
+          },
+          {
+            "linha": 106,
+            "texto": "                <h2 class=\"er25dash-section-title\">Estado do sistema</h2>"
+          },
+          {
+            "linha": 107,
+            "texto": "                <p class=\"er25dash-section-subtitle\">"
+          },
+          {
+            "linha": 108,
+            "texto": "                    Leitura rapida das areas principais."
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 107,
+        "contexto": [
+          {
+            "linha": 105,
+            "texto": "            <aside class=\"er25dash-card\">"
+          },
+          {
+            "linha": 106,
+            "texto": "                <h2 class=\"er25dash-section-title\">Estado do sistema</h2>"
+          },
+          {
+            "linha": 107,
+            "texto": "                <p class=\"er25dash-section-subtitle\">"
+          },
+          {
+            "linha": 108,
+            "texto": "                    Leitura rapida das areas principais."
+          },
+          {
+            "linha": 109,
+            "texto": "                </p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 111,
+        "contexto": [
+          {
+            "linha": 109,
+            "texto": "                </p>"
+          },
+          {
+            "linha": 110,
+            "texto": ""
+          },
+          {
+            "linha": 111,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 112,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 113,
+            "texto": "                        <p class=\"er25dash-status-name\">Dashboard</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 113,
+        "contexto": [
+          {
+            "linha": 111,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 112,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 113,
+            "texto": "                        <p class=\"er25dash-status-name\">Dashboard</p>"
+          },
+          {
+            "linha": 114,
+            "texto": "                        <p class=\"er25dash-status-desc\">Pagina principal refatorada.</p>"
+          },
+          {
+            "linha": 115,
+            "texto": "                    </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 114,
+        "contexto": [
+          {
+            "linha": 112,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 113,
+            "texto": "                        <p class=\"er25dash-status-name\">Dashboard</p>"
+          },
+          {
+            "linha": 114,
+            "texto": "                        <p class=\"er25dash-status-desc\">Pagina principal refatorada.</p>"
+          },
+          {
+            "linha": 115,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 116,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-ok\">OK</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 116,
+        "contexto": [
+          {
+            "linha": 114,
+            "texto": "                        <p class=\"er25dash-status-desc\">Pagina principal refatorada.</p>"
+          },
+          {
+            "linha": 115,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 116,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-ok\">OK</span>"
+          },
+          {
+            "linha": 117,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 118,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 119,
+        "contexto": [
+          {
+            "linha": 117,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 118,
+            "texto": ""
+          },
+          {
+            "linha": 119,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 120,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 121,
+            "texto": "                        <p class=\"er25dash-status-name\">WhatsApp</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 121,
+        "contexto": [
+          {
+            "linha": 119,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 120,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 121,
+            "texto": "                        <p class=\"er25dash-status-name\">WhatsApp</p>"
+          },
+          {
+            "linha": 122,
+            "texto": "                        <p class=\"er25dash-status-desc\" id=\"dash-whatsapp-status-desc\">Aguardando leitura.</p>"
+          },
+          {
+            "linha": 123,
+            "texto": "                    </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 122,
+        "contexto": [
+          {
+            "linha": 120,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 121,
+            "texto": "                        <p class=\"er25dash-status-name\">WhatsApp</p>"
+          },
+          {
+            "linha": 122,
+            "texto": "                        <p class=\"er25dash-status-desc\" id=\"dash-whatsapp-status-desc\">Aguardando leitura.</p>"
+          },
+          {
+            "linha": 123,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 124,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-warn\" id=\"dash-whatsapp-status-pill\">Verificando</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 124,
+        "contexto": [
+          {
+            "linha": 122,
+            "texto": "                        <p class=\"er25dash-status-desc\" id=\"dash-whatsapp-status-desc\">Aguardando leitura.</p>"
+          },
+          {
+            "linha": 123,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 124,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-warn\" id=\"dash-whatsapp-status-pill\">Verificando</span>"
+          },
+          {
+            "linha": 125,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 126,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 127,
+        "contexto": [
+          {
+            "linha": 125,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 126,
+            "texto": ""
+          },
+          {
+            "linha": 127,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 128,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 129,
+            "texto": "                        <p class=\"er25dash-status-name\">Menu lateral</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 129,
+        "contexto": [
+          {
+            "linha": 127,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 128,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 129,
+            "texto": "                        <p class=\"er25dash-status-name\">Menu lateral</p>"
+          },
+          {
+            "linha": 130,
+            "texto": "                        <p class=\"er25dash-status-desc\">Shell seguro sem reconstruir o body.</p>"
+          },
+          {
+            "linha": 131,
+            "texto": "                    </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 130,
+        "contexto": [
+          {
+            "linha": 128,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 129,
+            "texto": "                        <p class=\"er25dash-status-name\">Menu lateral</p>"
+          },
+          {
+            "linha": 130,
+            "texto": "                        <p class=\"er25dash-status-desc\">Shell seguro sem reconstruir o body.</p>"
+          },
+          {
+            "linha": 131,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 132,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-ok\">Ativo</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 132,
+        "contexto": [
+          {
+            "linha": 130,
+            "texto": "                        <p class=\"er25dash-status-desc\">Shell seguro sem reconstruir o body.</p>"
+          },
+          {
+            "linha": 131,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 132,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-ok\">Ativo</span>"
+          },
+          {
+            "linha": 133,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 134,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 135,
+        "contexto": [
+          {
+            "linha": 133,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 134,
+            "texto": ""
+          },
+          {
+            "linha": 135,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 136,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 137,
+            "texto": "                        <p class=\"er25dash-status-name\">Tema</p>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 137,
+        "contexto": [
+          {
+            "linha": 135,
+            "texto": "                <div class=\"er25dash-status-row\">"
+          },
+          {
+            "linha": 136,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 137,
+            "texto": "                        <p class=\"er25dash-status-name\">Tema</p>"
+          },
+          {
+            "linha": 138,
+            "texto": "                        <p class=\"er25dash-status-desc\">Claro e escuro via localStorage.</p>"
+          },
+          {
+            "linha": 139,
+            "texto": "                    </div>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 138,
+        "contexto": [
+          {
+            "linha": 136,
+            "texto": "                    <div>"
+          },
+          {
+            "linha": 137,
+            "texto": "                        <p class=\"er25dash-status-name\">Tema</p>"
+          },
+          {
+            "linha": 138,
+            "texto": "                        <p class=\"er25dash-status-desc\">Claro e escuro via localStorage.</p>"
+          },
+          {
+            "linha": 139,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 140,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-ok\">Ativo</span>"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 140,
+        "contexto": [
+          {
+            "linha": 138,
+            "texto": "                        <p class=\"er25dash-status-desc\">Claro e escuro via localStorage.</p>"
+          },
+          {
+            "linha": 139,
+            "texto": "                    </div>"
+          },
+          {
+            "linha": 140,
+            "texto": "                    <span class=\"er25dash-pill er25dash-pill-ok\">Ativo</span>"
+          },
+          {
+            "linha": 141,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 142,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 143,
+        "contexto": [
+          {
+            "linha": 141,
+            "texto": "                </div>"
+          },
+          {
+            "linha": 142,
+            "texto": ""
+          },
+          {
+            "linha": 143,
+            "texto": "                <div class=\"er25dash-footer-note\">"
+          },
+          {
+            "linha": 144,
+            "texto": "                    Esta pagina foi separada da tela de atendimento. Use o menu lateral ou o botao \"Abrir CRM Atendimento\" para acessar o fluxo completo de conversas."
+          },
+          {
+            "linha": 145,
+            "texto": "                </div>"
+          }
+        ]
+      },
+      {
+        "termo": "api/whatsapp/status",
+        "linha": 196,
+        "contexto": [
+          {
+            "linha": 194,
+            "texto": ""
+          },
+          {
+            "linha": 195,
+            "texto": "        try {"
+          },
+          {
+            "linha": 196,
+            "texto": "            var resp = await fetch('/api/whatsapp/status/' + empresaId, {"
+          },
+          {
+            "linha": 197,
+            "texto": "                headers: {"
+          },
+          {
+            "linha": 198,
+            "texto": "                    'Accept': 'application/json'"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 217,
+        "contexto": [
+          {
+            "linha": 215,
+            "texto": "            setText('dash-whatsapp-status-pill', 'Conectado');"
+          },
+          {
+            "linha": 216,
+            "texto": "            setText('dash-whatsapp-status-desc', 'Sessao WhatsApp operacional.');"
+          },
+          {
+            "linha": 217,
+            "texto": "            setClass('dash-whatsapp-status-pill', 'er25dash-pill er25dash-pill-ok');"
+          },
+          {
+            "linha": 218,
+            "texto": "            return;"
+          },
+          {
+            "linha": 219,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 226,
+        "contexto": [
+          {
+            "linha": 224,
+            "texto": "            setText('dash-whatsapp-status-pill', 'QR Code');"
+          },
+          {
+            "linha": 225,
+            "texto": "            setText('dash-whatsapp-status-desc', 'Conexao aguardando pareamento.');"
+          },
+          {
+            "linha": 226,
+            "texto": "            setClass('dash-whatsapp-status-pill', 'er25dash-pill er25dash-pill-warn');"
+          },
+          {
+            "linha": 227,
+            "texto": "            return;"
+          },
+          {
+            "linha": 228,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash",
+        "linha": 234,
+        "contexto": [
+          {
+            "linha": 232,
+            "texto": "        setText('dash-whatsapp-status-pill', 'Desconectado');"
+          },
+          {
+            "linha": 233,
+            "texto": "        setText('dash-whatsapp-status-desc', 'Nenhuma sessao ativa no momento.');"
+          },
+          {
+            "linha": 234,
+            "texto": "        setClass('dash-whatsapp-status-pill', 'er25dash-pill er25dash-pill-off');"
+          },
+          {
+            "linha": 235,
+            "texto": "    }"
+          },
+          {
+            "linha": 236,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_1",
+        "linha": 245,
+        "contexto": [
+          {
+            "linha": 243,
+            "texto": "</script>"
+          },
+          {
+            "linha": 244,
+            "texto": ""
+          },
+          {
+            "linha": 245,
+            "texto": "<!-- ETAPA25_1_SHELL_SEGURO_INICIO -->"
+          },
+          {
+            "linha": 246,
+            "texto": "<script id=\"etapa25-1-shell-seguro\">"
+          },
+          {
+            "linha": 247,
+            "texto": "(function () {"
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_1",
+        "linha": 248,
+        "contexto": [
+          {
+            "linha": 246,
+            "texto": "<script id=\"etapa25-1-shell-seguro\">"
+          },
+          {
+            "linha": 247,
+            "texto": "(function () {"
+          },
+          {
+            "linha": 248,
+            "texto": "    if (window.__ETAPA25_1_SHELL_SEGURO__) {"
+          },
+          {
+            "linha": 249,
+            "texto": "        return;"
+          },
+          {
+            "linha": 250,
+            "texto": "    }"
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_1",
+        "linha": 251,
+        "contexto": [
+          {
+            "linha": 249,
+            "texto": "        return;"
+          },
+          {
+            "linha": 250,
+            "texto": "    }"
+          },
+          {
+            "linha": 251,
+            "texto": "    window.__ETAPA25_1_SHELL_SEGURO__ = true;"
+          },
+          {
+            "linha": 252,
+            "texto": ""
+          },
+          {
+            "linha": 253,
+            "texto": "    function pagina() {"
+          }
+        ]
+      },
+      {
+        "termo": "/crm",
+        "linha": 260,
+        "contexto": [
+          {
+            "linha": 258,
+            "texto": "        var p = pagina();"
+          },
+          {
+            "linha": 259,
+            "texto": ""
+          },
+          {
+            "linha": 260,
+            "texto": "        if (p.indexOf('/crm') === 0) {"
+          },
+          {
+            "linha": 261,
+            "texto": "            return ['CRM Atendimento', 'Conversas, filas e contatos'];"
+          },
+          {
+            "linha": 262,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "/admin/painel",
+        "linha": 264,
+        "contexto": [
+          {
+            "linha": 262,
+            "texto": "        }"
+          },
+          {
+            "linha": 263,
+            "texto": ""
+          },
+          {
+            "linha": 264,
+            "texto": "        if (p.indexOf('/admin/painel') === 0) {"
+          },
+          {
+            "linha": 265,
+            "texto": "            return ['Painel Administrativo', 'Usuarios, empresa e configuracoes'];"
+          },
+          {
+            "linha": 266,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "/super-admin",
+        "linha": 268,
+        "contexto": [
+          {
+            "linha": 266,
+            "texto": "        }"
+          },
+          {
+            "linha": 267,
+            "texto": ""
+          },
+          {
+            "linha": 268,
+            "texto": "        if (p.indexOf('/super-admin') === 0) {"
+          },
+          {
+            "linha": 269,
+            "texto": "            return ['Super Admin', 'Tenants e gestao geral'];"
+          },
+          {
+            "linha": 270,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 276,
+        "contexto": [
+          {
+            "linha": 274,
+            "texto": ""
+          },
+          {
+            "linha": 275,
+            "texto": "    function temaAtual() {"
+          },
+          {
+            "linha": 276,
+            "texto": "        var salvo = localStorage.getItem('er25safe-theme');"
+          },
+          {
+            "linha": 277,
+            "texto": "        if (salvo === 'dark' || salvo === 'light') {"
+          },
+          {
+            "linha": 278,
+            "texto": "            return salvo;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 291,
+        "contexto": [
+          {
+            "linha": 289,
+            "texto": "        var dark = tema === 'dark';"
+          },
+          {
+            "linha": 290,
+            "texto": ""
+          },
+          {
+            "linha": 291,
+            "texto": "        document.documentElement.classList.toggle('er25safe-dark', dark);"
+          },
+          {
+            "linha": 292,
+            "texto": "        document.body.classList.toggle('er25safe-dark', dark);"
+          },
+          {
+            "linha": 293,
+            "texto": "        document.documentElement.classList.toggle('dark', dark);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 292,
+        "contexto": [
+          {
+            "linha": 290,
+            "texto": ""
+          },
+          {
+            "linha": 291,
+            "texto": "        document.documentElement.classList.toggle('er25safe-dark', dark);"
+          },
+          {
+            "linha": 292,
+            "texto": "        document.body.classList.toggle('er25safe-dark', dark);"
+          },
+          {
+            "linha": 293,
+            "texto": "        document.documentElement.classList.toggle('dark', dark);"
+          },
+          {
+            "linha": 294,
+            "texto": "        document.documentElement.classList.toggle('light', !dark);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 296,
+        "contexto": [
+          {
+            "linha": 294,
+            "texto": "        document.documentElement.classList.toggle('light', !dark);"
+          },
+          {
+            "linha": 295,
+            "texto": ""
+          },
+          {
+            "linha": 296,
+            "texto": "        localStorage.setItem('er25safe-theme', tema);"
+          },
+          {
+            "linha": 297,
+            "texto": ""
+          },
+          {
+            "linha": 298,
+            "texto": "        var btn = document.getElementById('er25safe-theme');"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 298,
+        "contexto": [
+          {
+            "linha": 296,
+            "texto": "        localStorage.setItem('er25safe-theme', tema);"
+          },
+          {
+            "linha": 297,
+            "texto": ""
+          },
+          {
+            "linha": 298,
+            "texto": "        var btn = document.getElementById('er25safe-theme');"
+          },
+          {
+            "linha": 299,
+            "texto": "        if (btn) {"
+          },
+          {
+            "linha": 300,
+            "texto": "            btn.innerHTML = dark ? '☀️ <span>Claro</span>' : '🌙 <span>Escuro</span>';"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 307,
+        "contexto": [
+          {
+            "linha": 305,
+            "texto": "        var a = document.createElement('a');"
+          },
+          {
+            "linha": 306,
+            "texto": "        a.href = href;"
+          },
+          {
+            "linha": 307,
+            "texto": "        a.className = 'er25safe-link';"
+          },
+          {
+            "linha": 308,
+            "texto": "        a.innerHTML = '<span>' + icon + '</span><span>' + text + '</span>';"
+          },
+          {
+            "linha": 309,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 313,
+        "contexto": [
+          {
+            "linha": 311,
+            "texto": ""
+          },
+          {
+            "linha": 312,
+            "texto": "        if (href === '/dashboard' && p === '/dashboard') {"
+          },
+          {
+            "linha": 313,
+            "texto": "            a.classList.add('er25safe-active');"
+          },
+          {
+            "linha": 314,
+            "texto": "        } else if (href !== '/dashboard' && p.indexOf(href) === 0) {"
+          },
+          {
+            "linha": 315,
+            "texto": "            a.classList.add('er25safe-active');"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 315,
+        "contexto": [
+          {
+            "linha": 313,
+            "texto": "            a.classList.add('er25safe-active');"
+          },
+          {
+            "linha": 314,
+            "texto": "        } else if (href !== '/dashboard' && p.indexOf(href) === 0) {"
+          },
+          {
+            "linha": 315,
+            "texto": "            a.classList.add('er25safe-active');"
+          },
+          {
+            "linha": 316,
+            "texto": "        }"
+          },
+          {
+            "linha": 317,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 323,
+        "contexto": [
+          {
+            "linha": 321,
+            "texto": "    function section(text) {"
+          },
+          {
+            "linha": 322,
+            "texto": "        var div = document.createElement('div');"
+          },
+          {
+            "linha": 323,
+            "texto": "        div.className = 'er25safe-section';"
+          },
+          {
+            "linha": 324,
+            "texto": "        div.textContent = text;"
+          },
+          {
+            "linha": 325,
+            "texto": "        return div;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 329,
+        "contexto": [
+          {
+            "linha": 327,
+            "texto": ""
+          },
+          {
+            "linha": 328,
+            "texto": "    function criar() {"
+          },
+          {
+            "linha": 329,
+            "texto": "        if (document.getElementById('er25safe-sidebar')) {"
+          },
+          {
+            "linha": 330,
+            "texto": "            return;"
+          },
+          {
+            "linha": 331,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 333,
+        "contexto": [
+          {
+            "linha": 331,
+            "texto": "        }"
+          },
+          {
+            "linha": 332,
+            "texto": ""
+          },
+          {
+            "linha": 333,
+            "texto": "        document.body.classList.add('er25safe-ready');"
+          },
+          {
+            "linha": 334,
+            "texto": ""
+          },
+          {
+            "linha": 335,
+            "texto": "        var sidebar = document.createElement('aside');"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 336,
+        "contexto": [
+          {
+            "linha": 334,
+            "texto": ""
+          },
+          {
+            "linha": 335,
+            "texto": "        var sidebar = document.createElement('aside');"
+          },
+          {
+            "linha": 336,
+            "texto": "        sidebar.id = 'er25safe-sidebar';"
+          },
+          {
+            "linha": 337,
+            "texto": "        sidebar.className = 'er25safe-sidebar';"
+          },
+          {
+            "linha": 338,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 337,
+        "contexto": [
+          {
+            "linha": 335,
+            "texto": "        var sidebar = document.createElement('aside');"
+          },
+          {
+            "linha": 336,
+            "texto": "        sidebar.id = 'er25safe-sidebar';"
+          },
+          {
+            "linha": 337,
+            "texto": "        sidebar.className = 'er25safe-sidebar';"
+          },
+          {
+            "linha": 338,
+            "texto": ""
+          },
+          {
+            "linha": 339,
+            "texto": "        sidebar.innerHTML = ''"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 340,
+        "contexto": [
+          {
+            "linha": 338,
+            "texto": ""
+          },
+          {
+            "linha": 339,
+            "texto": "        sidebar.innerHTML = ''"
+          },
+          {
+            "linha": 340,
+            "texto": "            + '<div class=\"er25safe-brand\">'"
+          },
+          {
+            "linha": 341,
+            "texto": "            + '  <div class=\"er25safe-brand-mark\">ER</div>'"
+          },
+          {
+            "linha": 342,
+            "texto": "            + '  <div>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 341,
+        "contexto": [
+          {
+            "linha": 339,
+            "texto": "        sidebar.innerHTML = ''"
+          },
+          {
+            "linha": 340,
+            "texto": "            + '<div class=\"er25safe-brand\">'"
+          },
+          {
+            "linha": 341,
+            "texto": "            + '  <div class=\"er25safe-brand-mark\">ER</div>'"
+          },
+          {
+            "linha": 342,
+            "texto": "            + '  <div>'"
+          },
+          {
+            "linha": 343,
+            "texto": "            + '    <p class=\"er25safe-brand-title\">Engeradios CRM</p>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 343,
+        "contexto": [
+          {
+            "linha": 341,
+            "texto": "            + '  <div class=\"er25safe-brand-mark\">ER</div>'"
+          },
+          {
+            "linha": 342,
+            "texto": "            + '  <div>'"
+          },
+          {
+            "linha": 343,
+            "texto": "            + '    <p class=\"er25safe-brand-title\">Engeradios CRM</p>'"
+          },
+          {
+            "linha": 344,
+            "texto": "            + '    <p class=\"er25safe-brand-subtitle\">Atendimento profissional</p>'"
+          },
+          {
+            "linha": 345,
+            "texto": "            + '  </div>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 344,
+        "contexto": [
+          {
+            "linha": 342,
+            "texto": "            + '  <div>'"
+          },
+          {
+            "linha": 343,
+            "texto": "            + '    <p class=\"er25safe-brand-title\">Engeradios CRM</p>'"
+          },
+          {
+            "linha": 344,
+            "texto": "            + '    <p class=\"er25safe-brand-subtitle\">Atendimento profissional</p>'"
+          },
+          {
+            "linha": 345,
+            "texto": "            + '  </div>'"
+          },
+          {
+            "linha": 346,
+            "texto": "            + '</div>';"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 349,
+        "contexto": [
+          {
+            "linha": 347,
+            "texto": ""
+          },
+          {
+            "linha": 348,
+            "texto": "        var nav = document.createElement('nav');"
+          },
+          {
+            "linha": 349,
+            "texto": "        nav.className = 'er25safe-nav';"
+          },
+          {
+            "linha": 350,
+            "texto": "        nav.appendChild(section('Principal'));"
+          },
+          {
+            "linha": 351,
+            "texto": "        nav.appendChild(link('/dashboard', '📊', 'Dashboard'));"
+          }
+        ]
+      },
+      {
+        "termo": "/crm",
+        "linha": 352,
+        "contexto": [
+          {
+            "linha": 350,
+            "texto": "        nav.appendChild(section('Principal'));"
+          },
+          {
+            "linha": 351,
+            "texto": "        nav.appendChild(link('/dashboard', '📊', 'Dashboard'));"
+          },
+          {
+            "linha": 352,
+            "texto": "        nav.appendChild(link('/crm', '💬', 'CRM Atendimento'));"
+          },
+          {
+            "linha": 353,
+            "texto": "        nav.appendChild(section('Gestao'));"
+          },
+          {
+            "linha": 354,
+            "texto": "        nav.appendChild(link('/admin/painel', '⚙️', 'Painel Administrativo'));"
+          }
+        ]
+      },
+      {
+        "termo": "/admin/painel",
+        "linha": 354,
+        "contexto": [
+          {
+            "linha": 352,
+            "texto": "        nav.appendChild(link('/crm', '💬', 'CRM Atendimento'));"
+          },
+          {
+            "linha": 353,
+            "texto": "        nav.appendChild(section('Gestao'));"
+          },
+          {
+            "linha": 354,
+            "texto": "        nav.appendChild(link('/admin/painel', '⚙️', 'Painel Administrativo'));"
+          },
+          {
+            "linha": 355,
+            "texto": "        nav.appendChild(link('/super-admin', '🛡️', 'Super Admin'));"
+          },
+          {
+            "linha": 356,
+            "texto": "        nav.appendChild(section('Sessao'));"
+          }
+        ]
+      },
+      {
+        "termo": "/super-admin",
+        "linha": 355,
+        "contexto": [
+          {
+            "linha": 353,
+            "texto": "        nav.appendChild(section('Gestao'));"
+          },
+          {
+            "linha": 354,
+            "texto": "        nav.appendChild(link('/admin/painel', '⚙️', 'Painel Administrativo'));"
+          },
+          {
+            "linha": 355,
+            "texto": "        nav.appendChild(link('/super-admin', '🛡️', 'Super Admin'));"
+          },
+          {
+            "linha": 356,
+            "texto": "        nav.appendChild(section('Sessao'));"
+          },
+          {
+            "linha": 357,
+            "texto": "        nav.appendChild(link('/logout', '🚪', 'Sair'));"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 362,
+        "contexto": [
+          {
+            "linha": 360,
+            "texto": ""
+          },
+          {
+            "linha": 361,
+            "texto": "        var footer = document.createElement('div');"
+          },
+          {
+            "linha": 362,
+            "texto": "        footer.className = 'er25safe-footer';"
+          },
+          {
+            "linha": 363,
+            "texto": "        footer.innerHTML = '<div class=\"er25safe-user\"><strong>Usuario logado</strong><br><span>Sistema SaaS</span></div>';"
+          },
+          {
+            "linha": 364,
+            "texto": "        sidebar.appendChild(footer);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 363,
+        "contexto": [
+          {
+            "linha": 361,
+            "texto": "        var footer = document.createElement('div');"
+          },
+          {
+            "linha": 362,
+            "texto": "        footer.className = 'er25safe-footer';"
+          },
+          {
+            "linha": 363,
+            "texto": "        footer.innerHTML = '<div class=\"er25safe-user\"><strong>Usuario logado</strong><br><span>Sistema SaaS</span></div>';"
+          },
+          {
+            "linha": 364,
+            "texto": "        sidebar.appendChild(footer);"
+          },
+          {
+            "linha": 365,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 369,
+        "contexto": [
+          {
+            "linha": 367,
+            "texto": ""
+          },
+          {
+            "linha": 368,
+            "texto": "        var topbar = document.createElement('header');"
+          },
+          {
+            "linha": 369,
+            "texto": "        topbar.id = 'er25safe-topbar';"
+          },
+          {
+            "linha": 370,
+            "texto": "        topbar.className = 'er25safe-topbar';"
+          },
+          {
+            "linha": 371,
+            "texto": "        topbar.innerHTML = ''"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 370,
+        "contexto": [
+          {
+            "linha": 368,
+            "texto": "        var topbar = document.createElement('header');"
+          },
+          {
+            "linha": 369,
+            "texto": "        topbar.id = 'er25safe-topbar';"
+          },
+          {
+            "linha": 370,
+            "texto": "        topbar.className = 'er25safe-topbar';"
+          },
+          {
+            "linha": 371,
+            "texto": "        topbar.innerHTML = ''"
+          },
+          {
+            "linha": 372,
+            "texto": "            + '<div style=\"display:flex;align-items:center;gap:10px\">'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 373,
+        "contexto": [
+          {
+            "linha": 371,
+            "texto": "        topbar.innerHTML = ''"
+          },
+          {
+            "linha": 372,
+            "texto": "            + '<div style=\"display:flex;align-items:center;gap:10px\">'"
+          },
+          {
+            "linha": 373,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-mobile\">☰</button>'"
+          },
+          {
+            "linha": 374,
+            "texto": "            + '  <div>'"
+          },
+          {
+            "linha": 375,
+            "texto": "            + '    <h1 class=\"er25safe-title\">' + nomes[0] + '</h1>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 375,
+        "contexto": [
+          {
+            "linha": 373,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-mobile\">☰</button>'"
+          },
+          {
+            "linha": 374,
+            "texto": "            + '  <div>'"
+          },
+          {
+            "linha": 375,
+            "texto": "            + '    <h1 class=\"er25safe-title\">' + nomes[0] + '</h1>'"
+          },
+          {
+            "linha": 376,
+            "texto": "            + '    <p class=\"er25safe-subtitle\">' + nomes[1] + '</p>'"
+          },
+          {
+            "linha": 377,
+            "texto": "            + '  </div>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 376,
+        "contexto": [
+          {
+            "linha": 374,
+            "texto": "            + '  <div>'"
+          },
+          {
+            "linha": 375,
+            "texto": "            + '    <h1 class=\"er25safe-title\">' + nomes[0] + '</h1>'"
+          },
+          {
+            "linha": 376,
+            "texto": "            + '    <p class=\"er25safe-subtitle\">' + nomes[1] + '</p>'"
+          },
+          {
+            "linha": 377,
+            "texto": "            + '  </div>'"
+          },
+          {
+            "linha": 378,
+            "texto": "            + '</div>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 379,
+        "contexto": [
+          {
+            "linha": 377,
+            "texto": "            + '  </div>'"
+          },
+          {
+            "linha": 378,
+            "texto": "            + '</div>'"
+          },
+          {
+            "linha": 379,
+            "texto": "            + '<div class=\"er25safe-actions\">'"
+          },
+          {
+            "linha": 380,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-theme\">🌙 <span>Escuro</span></button>'"
+          },
+          {
+            "linha": 381,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-collapse\">⇤ <span>Menu</span></button>'"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 380,
+        "contexto": [
+          {
+            "linha": 378,
+            "texto": "            + '</div>'"
+          },
+          {
+            "linha": 379,
+            "texto": "            + '<div class=\"er25safe-actions\">'"
+          },
+          {
+            "linha": 380,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-theme\">🌙 <span>Escuro</span></button>'"
+          },
+          {
+            "linha": 381,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-collapse\">⇤ <span>Menu</span></button>'"
+          },
+          {
+            "linha": 382,
+            "texto": "            + '</div>';"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 381,
+        "contexto": [
+          {
+            "linha": 379,
+            "texto": "            + '<div class=\"er25safe-actions\">'"
+          },
+          {
+            "linha": 380,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-theme\">🌙 <span>Escuro</span></button>'"
+          },
+          {
+            "linha": 381,
+            "texto": "            + '  <button type=\"button\" class=\"er25safe-btn\" id=\"er25safe-collapse\">⇤ <span>Menu</span></button>'"
+          },
+          {
+            "linha": 382,
+            "texto": "            + '</div>';"
+          },
+          {
+            "linha": 383,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 385,
+        "contexto": [
+          {
+            "linha": 383,
+            "texto": ""
+          },
+          {
+            "linha": 384,
+            "texto": "        var overlay = document.createElement('div');"
+          },
+          {
+            "linha": 385,
+            "texto": "        overlay.id = 'er25safe-overlay';"
+          },
+          {
+            "linha": 386,
+            "texto": "        overlay.className = 'er25safe-overlay';"
+          },
+          {
+            "linha": 387,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 386,
+        "contexto": [
+          {
+            "linha": 384,
+            "texto": "        var overlay = document.createElement('div');"
+          },
+          {
+            "linha": 385,
+            "texto": "        overlay.id = 'er25safe-overlay';"
+          },
+          {
+            "linha": 386,
+            "texto": "        overlay.className = 'er25safe-overlay';"
+          },
+          {
+            "linha": 387,
+            "texto": ""
+          },
+          {
+            "linha": 388,
+            "texto": "        document.body.insertBefore(overlay, document.body.firstChild);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 392,
+        "contexto": [
+          {
+            "linha": 390,
+            "texto": "        document.body.insertBefore(sidebar, document.body.firstChild);"
+          },
+          {
+            "linha": 391,
+            "texto": ""
+          },
+          {
+            "linha": 392,
+            "texto": "        var mobile = document.getElementById('er25safe-mobile');"
+          },
+          {
+            "linha": 393,
+            "texto": "        if (mobile) {"
+          },
+          {
+            "linha": 394,
+            "texto": "            mobile.addEventListener('click', function () {"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 395,
+        "contexto": [
+          {
+            "linha": 393,
+            "texto": "        if (mobile) {"
+          },
+          {
+            "linha": 394,
+            "texto": "            mobile.addEventListener('click', function () {"
+          },
+          {
+            "linha": 395,
+            "texto": "                document.body.classList.toggle('er25safe-open');"
+          },
+          {
+            "linha": 396,
+            "texto": "            });"
+          },
+          {
+            "linha": 397,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 400,
+        "contexto": [
+          {
+            "linha": 398,
+            "texto": ""
+          },
+          {
+            "linha": 399,
+            "texto": "        overlay.addEventListener('click', function () {"
+          },
+          {
+            "linha": 400,
+            "texto": "            document.body.classList.remove('er25safe-open');"
+          },
+          {
+            "linha": 401,
+            "texto": "        });"
+          },
+          {
+            "linha": 402,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 403,
+        "contexto": [
+          {
+            "linha": 401,
+            "texto": "        });"
+          },
+          {
+            "linha": 402,
+            "texto": ""
+          },
+          {
+            "linha": 403,
+            "texto": "        var collapse = document.getElementById('er25safe-collapse');"
+          },
+          {
+            "linha": 404,
+            "texto": "        if (collapse) {"
+          },
+          {
+            "linha": 405,
+            "texto": "            collapse.addEventListener('click', function () {"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 406,
+        "contexto": [
+          {
+            "linha": 404,
+            "texto": "        if (collapse) {"
+          },
+          {
+            "linha": 405,
+            "texto": "            collapse.addEventListener('click', function () {"
+          },
+          {
+            "linha": 406,
+            "texto": "                document.body.classList.toggle('er25safe-collapsed');"
+          },
+          {
+            "linha": 407,
+            "texto": "            });"
+          },
+          {
+            "linha": 408,
+            "texto": "        }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 410,
+        "contexto": [
+          {
+            "linha": 408,
+            "texto": "        }"
+          },
+          {
+            "linha": 409,
+            "texto": ""
+          },
+          {
+            "linha": 410,
+            "texto": "        var theme = document.getElementById('er25safe-theme');"
+          },
+          {
+            "linha": 411,
+            "texto": "        if (theme) {"
+          },
+          {
+            "linha": 412,
+            "texto": "            theme.addEventListener('click', function () {"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe",
+        "linha": 413,
+        "contexto": [
+          {
+            "linha": 411,
+            "texto": "        if (theme) {"
+          },
+          {
+            "linha": 412,
+            "texto": "            theme.addEventListener('click', function () {"
+          },
+          {
+            "linha": 413,
+            "texto": "                var atual = localStorage.getItem('er25safe-theme') || temaAtual();"
+          },
+          {
+            "linha": 414,
+            "texto": "                aplicarTema(atual === 'dark' ? 'light' : 'dark');"
+          },
+          {
+            "linha": 415,
+            "texto": "            });"
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_1",
+        "linha": 428,
+        "contexto": [
+          {
+            "linha": 426,
+            "texto": "})();"
+          },
+          {
+            "linha": 427,
+            "texto": "</script>"
+          },
+          {
+            "linha": 428,
+            "texto": "<!-- ETAPA25_1_SHELL_SEGURO_FIM -->"
+          },
+          {
+            "linha": 429,
+            "texto": "</body>"
+          },
+          {
+            "linha": 430,
+            "texto": "</html>"
+          }
+        ]
+      }
+    ]
+  },
+  "css_local": {
+    "existe": true,
+    "sha256": "afdeb4f2b8d33f960e6b9a699cdd4bd2eec43ecffbd30b6a762c40922d96f163",
+    "tamanho": 25404,
+    "contagens": {
+      "ETAPA25_1_SHELL_SEGURO": 2,
+      "ETAPA25_4_DASHBOARD_PROFISSIONAL": 2,
+      "er25safe-sidebar": 10,
+      "er25safe-topbar": 8,
+      "er25dash-page": 2,
+      "@media": 6,
+      "max-width: 720px": 1,
+      "position: fixed": 5,
+      "z-index": 6
+    },
+    "linhas_relevantes": [
+      {
+        "termo": "@media",
+        "linha": 307,
+        "contexto": [
+          {
+            "linha": 305,
+            "texto": "}"
+          },
+          {
+            "linha": 306,
+            "texto": ""
+          },
+          {
+            "linha": 307,
+            "texto": "@media (max-width: 900px) {"
+          },
+          {
+            "linha": 308,
+            "texto": "    .er-grid-2,"
+          },
+          {
+            "linha": 309,
+            "texto": "    .er-grid-3,"
+          }
+        ]
+      },
+      {
+        "termo": "position: fixed",
+        "linha": 377,
+        "contexto": [
+          {
+            "linha": 375,
+            "texto": ""
+          },
+          {
+            "linha": 376,
+            "texto": ".er25-sidebar {"
+          },
+          {
+            "linha": 377,
+            "texto": "    position: fixed;"
+          },
+          {
+            "linha": 378,
+            "texto": "    inset: 0 auto 0 0;"
+          },
+          {
+            "linha": 379,
+            "texto": "    width: var(--er25-sidebar-w);"
+          }
+        ]
+      },
+      {
+        "termo": "z-index",
+        "linha": 385,
+        "contexto": [
+          {
+            "linha": 383,
+            "texto": "    border-right: 1px solid var(--er25-border);"
+          },
+          {
+            "linha": 384,
+            "texto": "    box-shadow: var(--er25-shadow);"
+          },
+          {
+            "linha": 385,
+            "texto": "    z-index: 9990;"
+          },
+          {
+            "linha": 386,
+            "texto": "    display: flex;"
+          },
+          {
+            "linha": 387,
+            "texto": "    flex-direction: column;"
+          }
+        ]
+      },
+      {
+        "termo": "z-index",
+        "linha": 522,
+        "contexto": [
+          {
+            "linha": 520,
+            "texto": "    backdrop-filter: blur(16px);"
+          },
+          {
+            "linha": 521,
+            "texto": "    border-bottom: 1px solid var(--er25-border);"
+          },
+          {
+            "linha": 522,
+            "texto": "    z-index: 9980;"
+          },
+          {
+            "linha": 523,
+            "texto": "    display: flex;"
+          },
+          {
+            "linha": 524,
+            "texto": "    align-items: center;"
+          }
+        ]
+      },
+      {
+        "termo": "@media",
+        "linha": 606,
+        "contexto": [
+          {
+            "linha": 604,
+            "texto": "}"
+          },
+          {
+            "linha": 605,
+            "texto": ""
+          },
+          {
+            "linha": 606,
+            "texto": "@media (max-width: 1024px) {"
+          },
+          {
+            "linha": 607,
+            "texto": "    .er25-sidebar {"
+          },
+          {
+            "linha": 608,
+            "texto": "        transform: translateX(calc(-1 * var(--er25-sidebar-w)));"
+          }
+        ]
+      },
+      {
+        "termo": "position: fixed",
+        "linha": 625,
+        "contexto": [
+          {
+            "linha": 623,
+            "texto": "    .er25-overlay {"
+          },
+          {
+            "linha": 624,
+            "texto": "        display: none;"
+          },
+          {
+            "linha": 625,
+            "texto": "        position: fixed;"
+          },
+          {
+            "linha": 626,
+            "texto": "        inset: 0;"
+          },
+          {
+            "linha": 627,
+            "texto": "        background: rgba(15, 23, 42, 0.48);"
+          }
+        ]
+      },
+      {
+        "termo": "z-index",
+        "linha": 628,
+        "contexto": [
+          {
+            "linha": 626,
+            "texto": "        inset: 0;"
+          },
+          {
+            "linha": 627,
+            "texto": "        background: rgba(15, 23, 42, 0.48);"
+          },
+          {
+            "linha": 628,
+            "texto": "        z-index: 9985;"
+          },
+          {
+            "linha": 629,
+            "texto": "    }"
+          },
+          {
+            "linha": 630,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_1_SHELL_SEGURO",
+        "linha": 638,
+        "contexto": [
+          {
+            "linha": 636,
+            "texto": ""
+          },
+          {
+            "linha": 637,
+            "texto": ""
+          },
+          {
+            "linha": 638,
+            "texto": "/* ETAPA25_1_SHELL_SEGURO_INICIO */"
+          },
+          {
+            "linha": 639,
+            "texto": ":root {"
+          },
+          {
+            "linha": 640,
+            "texto": "    --er25safe-sidebar-w: 280px;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 640,
+        "contexto": [
+          {
+            "linha": 638,
+            "texto": "/* ETAPA25_1_SHELL_SEGURO_INICIO */"
+          },
+          {
+            "linha": 639,
+            "texto": ":root {"
+          },
+          {
+            "linha": 640,
+            "texto": "    --er25safe-sidebar-w: 280px;"
+          },
+          {
+            "linha": 641,
+            "texto": "    --er25safe-topbar-h: 64px;"
+          },
+          {
+            "linha": 642,
+            "texto": "    --er25safe-bg: #f6f7fb;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 641,
+        "contexto": [
+          {
+            "linha": 639,
+            "texto": ":root {"
+          },
+          {
+            "linha": 640,
+            "texto": "    --er25safe-sidebar-w: 280px;"
+          },
+          {
+            "linha": 641,
+            "texto": "    --er25safe-topbar-h: 64px;"
+          },
+          {
+            "linha": 642,
+            "texto": "    --er25safe-bg: #f6f7fb;"
+          },
+          {
+            "linha": 643,
+            "texto": "    --er25safe-card: #ffffff;"
+          }
+        ]
+      },
+      {
+        "termo": "@media",
+        "linha": 670,
+        "contexto": [
+          {
+            "linha": 668,
+            "texto": "}"
+          },
+          {
+            "linha": 669,
+            "texto": ""
+          },
+          {
+            "linha": 670,
+            "texto": "@media (min-width: 1025px) {"
+          },
+          {
+            "linha": 671,
+            "texto": "    body.er25safe-ready {"
+          },
+          {
+            "linha": 672,
+            "texto": "        padding-left: var(--er25safe-sidebar-w);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 672,
+        "contexto": [
+          {
+            "linha": 670,
+            "texto": "@media (min-width: 1025px) {"
+          },
+          {
+            "linha": 671,
+            "texto": "    body.er25safe-ready {"
+          },
+          {
+            "linha": 672,
+            "texto": "        padding-left: var(--er25safe-sidebar-w);"
+          },
+          {
+            "linha": 673,
+            "texto": "        padding-top: var(--er25safe-topbar-h);"
+          },
+          {
+            "linha": 674,
+            "texto": "    }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 673,
+        "contexto": [
+          {
+            "linha": 671,
+            "texto": "    body.er25safe-ready {"
+          },
+          {
+            "linha": 672,
+            "texto": "        padding-left: var(--er25safe-sidebar-w);"
+          },
+          {
+            "linha": 673,
+            "texto": "        padding-top: var(--er25safe-topbar-h);"
+          },
+          {
+            "linha": 674,
+            "texto": "    }"
+          },
+          {
+            "linha": 675,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 681,
+        "contexto": [
+          {
+            "linha": 679,
+            "texto": "}"
+          },
+          {
+            "linha": 680,
+            "texto": ""
+          },
+          {
+            "linha": 681,
+            "texto": ".er25safe-sidebar {"
+          },
+          {
+            "linha": 682,
+            "texto": "    position: fixed;"
+          },
+          {
+            "linha": 683,
+            "texto": "    left: 0;"
+          }
+        ]
+      },
+      {
+        "termo": "position: fixed",
+        "linha": 682,
+        "contexto": [
+          {
+            "linha": 680,
+            "texto": ""
+          },
+          {
+            "linha": 681,
+            "texto": ".er25safe-sidebar {"
+          },
+          {
+            "linha": 682,
+            "texto": "    position: fixed;"
+          },
+          {
+            "linha": 683,
+            "texto": "    left: 0;"
+          },
+          {
+            "linha": 684,
+            "texto": "    top: 0;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 686,
+        "contexto": [
+          {
+            "linha": 684,
+            "texto": "    top: 0;"
+          },
+          {
+            "linha": 685,
+            "texto": "    bottom: 0;"
+          },
+          {
+            "linha": 686,
+            "texto": "    width: var(--er25safe-sidebar-w);"
+          },
+          {
+            "linha": 687,
+            "texto": "    background:"
+          },
+          {
+            "linha": 688,
+            "texto": "        linear-gradient(180deg, rgba(185, 28, 28, 0.14), transparent 28%),"
+          }
+        ]
+      },
+      {
+        "termo": "z-index",
+        "linha": 692,
+        "contexto": [
+          {
+            "linha": 690,
+            "texto": "    border-right: 1px solid var(--er25safe-border);"
+          },
+          {
+            "linha": 691,
+            "texto": "    box-shadow: var(--er25safe-shadow);"
+          },
+          {
+            "linha": 692,
+            "texto": "    z-index: 2147483000;"
+          },
+          {
+            "linha": 693,
+            "texto": "    display: flex;"
+          },
+          {
+            "linha": 694,
+            "texto": "    flex-direction: column;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 699,
+        "contexto": [
+          {
+            "linha": 697,
+            "texto": ""
+          },
+          {
+            "linha": 698,
+            "texto": ".er25safe-brand {"
+          },
+          {
+            "linha": 699,
+            "texto": "    min-height: var(--er25safe-topbar-h);"
+          },
+          {
+            "linha": 700,
+            "texto": "    padding: 13px 16px;"
+          },
+          {
+            "linha": 701,
+            "texto": "    border-bottom: 1px solid var(--er25safe-border);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 786,
+        "contexto": [
+          {
+            "linha": 784,
+            "texto": "}"
+          },
+          {
+            "linha": 785,
+            "texto": ""
+          },
+          {
+            "linha": 786,
+            "texto": ".er25safe-topbar {"
+          },
+          {
+            "linha": 787,
+            "texto": "    position: fixed;"
+          },
+          {
+            "linha": 788,
+            "texto": "    top: 0;"
+          }
+        ]
+      },
+      {
+        "termo": "position: fixed",
+        "linha": 787,
+        "contexto": [
+          {
+            "linha": 785,
+            "texto": ""
+          },
+          {
+            "linha": 786,
+            "texto": ".er25safe-topbar {"
+          },
+          {
+            "linha": 787,
+            "texto": "    position: fixed;"
+          },
+          {
+            "linha": 788,
+            "texto": "    top: 0;"
+          },
+          {
+            "linha": 789,
+            "texto": "    right: 0;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 790,
+        "contexto": [
+          {
+            "linha": 788,
+            "texto": "    top: 0;"
+          },
+          {
+            "linha": 789,
+            "texto": "    right: 0;"
+          },
+          {
+            "linha": 790,
+            "texto": "    left: var(--er25safe-sidebar-w);"
+          },
+          {
+            "linha": 791,
+            "texto": "    min-height: var(--er25safe-topbar-h);"
+          },
+          {
+            "linha": 792,
+            "texto": "    background: color-mix(in srgb, var(--er25safe-card) 92%, transparent);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 791,
+        "contexto": [
+          {
+            "linha": 789,
+            "texto": "    right: 0;"
+          },
+          {
+            "linha": 790,
+            "texto": "    left: var(--er25safe-sidebar-w);"
+          },
+          {
+            "linha": 791,
+            "texto": "    min-height: var(--er25safe-topbar-h);"
+          },
+          {
+            "linha": 792,
+            "texto": "    background: color-mix(in srgb, var(--er25safe-card) 92%, transparent);"
+          },
+          {
+            "linha": 793,
+            "texto": "    backdrop-filter: blur(16px);"
+          }
+        ]
+      },
+      {
+        "termo": "z-index",
+        "linha": 795,
+        "contexto": [
+          {
+            "linha": 793,
+            "texto": "    backdrop-filter: blur(16px);"
+          },
+          {
+            "linha": 794,
+            "texto": "    border-bottom: 1px solid var(--er25safe-border);"
+          },
+          {
+            "linha": 795,
+            "texto": "    z-index: 2147482990;"
+          },
+          {
+            "linha": 796,
+            "texto": "    display: flex;"
+          },
+          {
+            "linha": 797,
+            "texto": "    align-items: center;"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 804,
+        "contexto": [
+          {
+            "linha": 802,
+            "texto": "}"
+          },
+          {
+            "linha": 803,
+            "texto": ""
+          },
+          {
+            "linha": 804,
+            "texto": "body.er25safe-collapsed .er25safe-topbar {"
+          },
+          {
+            "linha": 805,
+            "texto": "    left: 0;"
+          },
+          {
+            "linha": 806,
+            "texto": "}"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 808,
+        "contexto": [
+          {
+            "linha": 806,
+            "texto": "}"
+          },
+          {
+            "linha": 807,
+            "texto": ""
+          },
+          {
+            "linha": 808,
+            "texto": "body.er25safe-collapsed .er25safe-sidebar {"
+          },
+          {
+            "linha": 809,
+            "texto": "    transform: translateX(calc(-1 * var(--er25safe-sidebar-w)));"
+          },
+          {
+            "linha": 810,
+            "texto": "}"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 809,
+        "contexto": [
+          {
+            "linha": 807,
+            "texto": ""
+          },
+          {
+            "linha": 808,
+            "texto": "body.er25safe-collapsed .er25safe-sidebar {"
+          },
+          {
+            "linha": 809,
+            "texto": "    transform: translateX(calc(-1 * var(--er25safe-sidebar-w)));"
+          },
+          {
+            "linha": 810,
+            "texto": "}"
+          },
+          {
+            "linha": 811,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "@media",
+        "linha": 850,
+        "contexto": [
+          {
+            "linha": 848,
+            "texto": "}"
+          },
+          {
+            "linha": 849,
+            "texto": ""
+          },
+          {
+            "linha": 850,
+            "texto": "@media (max-width: 1024px) {"
+          },
+          {
+            "linha": 851,
+            "texto": "    body.er25safe-ready {"
+          },
+          {
+            "linha": 852,
+            "texto": "        padding-top: var(--er25safe-topbar-h);"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 852,
+        "contexto": [
+          {
+            "linha": 850,
+            "texto": "@media (max-width: 1024px) {"
+          },
+          {
+            "linha": 851,
+            "texto": "    body.er25safe-ready {"
+          },
+          {
+            "linha": 852,
+            "texto": "        padding-top: var(--er25safe-topbar-h);"
+          },
+          {
+            "linha": 853,
+            "texto": "    }"
+          },
+          {
+            "linha": 854,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 855,
+        "contexto": [
+          {
+            "linha": 853,
+            "texto": "    }"
+          },
+          {
+            "linha": 854,
+            "texto": ""
+          },
+          {
+            "linha": 855,
+            "texto": "    .er25safe-sidebar {"
+          },
+          {
+            "linha": 856,
+            "texto": "        transform: translateX(calc(-1 * var(--er25safe-sidebar-w)));"
+          },
+          {
+            "linha": 857,
+            "texto": "    }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 856,
+        "contexto": [
+          {
+            "linha": 854,
+            "texto": ""
+          },
+          {
+            "linha": 855,
+            "texto": "    .er25safe-sidebar {"
+          },
+          {
+            "linha": 856,
+            "texto": "        transform: translateX(calc(-1 * var(--er25safe-sidebar-w)));"
+          },
+          {
+            "linha": 857,
+            "texto": "    }"
+          },
+          {
+            "linha": 858,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-topbar",
+        "linha": 859,
+        "contexto": [
+          {
+            "linha": 857,
+            "texto": "    }"
+          },
+          {
+            "linha": 858,
+            "texto": ""
+          },
+          {
+            "linha": 859,
+            "texto": "    .er25safe-topbar {"
+          },
+          {
+            "linha": 860,
+            "texto": "        left: 0;"
+          },
+          {
+            "linha": 861,
+            "texto": "    }"
+          }
+        ]
+      },
+      {
+        "termo": "er25safe-sidebar",
+        "linha": 863,
+        "contexto": [
+          {
+            "linha": 861,
+            "texto": "    }"
+          },
+          {
+            "linha": 862,
+            "texto": ""
+          },
+          {
+            "linha": 863,
+            "texto": "    body.er25safe-open .er25safe-sidebar {"
+          },
+          {
+            "linha": 864,
+            "texto": "        transform: translateX(0);"
+          },
+          {
+            "linha": 865,
+            "texto": "    }"
+          }
+        ]
+      },
+      {
+        "termo": "position: fixed",
+        "linha": 869,
+        "contexto": [
+          {
+            "linha": 867,
+            "texto": "    .er25safe-overlay {"
+          },
+          {
+            "linha": 868,
+            "texto": "        display: none;"
+          },
+          {
+            "linha": 869,
+            "texto": "        position: fixed;"
+          },
+          {
+            "linha": 870,
+            "texto": "        inset: 0;"
+          },
+          {
+            "linha": 871,
+            "texto": "        background: rgba(15, 23, 42, 0.48);"
+          }
+        ]
+      },
+      {
+        "termo": "z-index",
+        "linha": 872,
+        "contexto": [
+          {
+            "linha": 870,
+            "texto": "        inset: 0;"
+          },
+          {
+            "linha": 871,
+            "texto": "        background: rgba(15, 23, 42, 0.48);"
+          },
+          {
+            "linha": 872,
+            "texto": "        z-index: 2147482980;"
+          },
+          {
+            "linha": 873,
+            "texto": "    }"
+          },
+          {
+            "linha": 874,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_1_SHELL_SEGURO",
+        "linha": 879,
+        "contexto": [
+          {
+            "linha": 877,
+            "texto": "    }"
+          },
+          {
+            "linha": 878,
+            "texto": "}"
+          },
+          {
+            "linha": 879,
+            "texto": "/* ETAPA25_1_SHELL_SEGURO_FIM */"
+          },
+          {
+            "linha": 880,
+            "texto": ""
+          },
+          {
+            "linha": 881,
+            "texto": ""
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_4_DASHBOARD_PROFISSIONAL",
+        "linha": 882,
+        "contexto": [
+          {
+            "linha": 880,
+            "texto": ""
+          },
+          {
+            "linha": 881,
+            "texto": ""
+          },
+          {
+            "linha": 882,
+            "texto": "/* ETAPA25_4_DASHBOARD_PROFISSIONAL_INICIO */"
+          },
+          {
+            "linha": 883,
+            "texto": ".er25dash-page {"
+          },
+          {
+            "linha": 884,
+            "texto": "    width: 100%;"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash-page",
+        "linha": 883,
+        "contexto": [
+          {
+            "linha": 881,
+            "texto": ""
+          },
+          {
+            "linha": 882,
+            "texto": "/* ETAPA25_4_DASHBOARD_PROFISSIONAL_INICIO */"
+          },
+          {
+            "linha": 883,
+            "texto": ".er25dash-page {"
+          },
+          {
+            "linha": 884,
+            "texto": "    width: 100%;"
+          },
+          {
+            "linha": 885,
+            "texto": "    max-width: 1440px;"
+          }
+        ]
+      },
+      {
+        "termo": "@media",
+        "linha": 1189,
+        "contexto": [
+          {
+            "linha": 1187,
+            "texto": "}"
+          },
+          {
+            "linha": 1188,
+            "texto": ""
+          },
+          {
+            "linha": 1189,
+            "texto": "@media (max-width: 1180px) {"
+          },
+          {
+            "linha": 1190,
+            "texto": "    .er25dash-grid-metrics {"
+          },
+          {
+            "linha": 1191,
+            "texto": "        grid-template-columns: repeat(2, minmax(0, 1fr));"
+          }
+        ]
+      },
+      {
+        "termo": "@media",
+        "linha": 1199,
+        "contexto": [
+          {
+            "linha": 1197,
+            "texto": "}"
+          },
+          {
+            "linha": 1198,
+            "texto": ""
+          },
+          {
+            "linha": 1199,
+            "texto": "@media (max-width: 720px) {"
+          },
+          {
+            "linha": 1200,
+            "texto": "    .er25dash-page {"
+          },
+          {
+            "linha": 1201,
+            "texto": "        padding: 14px;"
+          }
+        ]
+      },
+      {
+        "termo": "er25dash-page",
+        "linha": 1200,
+        "contexto": [
+          {
+            "linha": 1198,
+            "texto": ""
+          },
+          {
+            "linha": 1199,
+            "texto": "@media (max-width: 720px) {"
+          },
+          {
+            "linha": 1200,
+            "texto": "    .er25dash-page {"
+          },
+          {
+            "linha": 1201,
+            "texto": "        padding: 14px;"
+          },
+          {
+            "linha": 1202,
+            "texto": "    }"
+          }
+        ]
+      },
+      {
+        "termo": "ETAPA25_4_DASHBOARD_PROFISSIONAL",
+        "linha": 1226,
+        "contexto": [
+          {
+            "linha": 1224,
+            "texto": "    }"
+          },
+          {
+            "linha": 1225,
+            "texto": "}"
+          },
+          {
+            "linha": 1226,
+            "texto": "/* ETAPA25_4_DASHBOARD_PROFISSIONAL_FIM */"
+          },
+          {
+            "linha": 1227,
+            "texto": ""
+          }
+        ]
+      }
+    ]
+  },
+  "comparacao_container": {
+    "views/dashboard.ejs": {
+      "local_sha256": "bb6af0a6a888397e26214cf349136ae01a5a12a16ee16fa9cc7c5fa6bfeb5e11",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/views/dashboard.ejs ]; then sha256sum /usr/src/app/views/dashboard.ejs && wc -c /usr/src/app/views/dashboard.ejs; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "bb6af0a6a888397e26214cf349136ae01a5a12a16ee16fa9cc7c5fa6bfeb5e11  /usr/src/app/views/dashboard.ejs\n16576 /usr/src/app/views/dashboard.ejs",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "views/crm.ejs": {
+      "local_sha256": "d7197e4616f2d88d90fb03cfe2369029aa7376a146fc1d50152282d2b6edeed8",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/views/crm.ejs ]; then sha256sum /usr/src/app/views/crm.ejs && wc -c /usr/src/app/views/crm.ejs; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "d7197e4616f2d88d90fb03cfe2369029aa7376a146fc1d50152282d2b6edeed8  /usr/src/app/views/crm.ejs\n58382 /usr/src/app/views/crm.ejs",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "views/admin-panel.ejs": {
+      "local_sha256": "2dc089fa0ba1bbaa0a54f9d54dd7bb6099ab0283caff313ada5a23ad17505099",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/views/admin-panel.ejs ]; then sha256sum /usr/src/app/views/admin-panel.ejs && wc -c /usr/src/app/views/admin-panel.ejs; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "2dc089fa0ba1bbaa0a54f9d54dd7bb6099ab0283caff313ada5a23ad17505099  /usr/src/app/views/admin-panel.ejs\n62433 /usr/src/app/views/admin-panel.ejs",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "views/super-admin.ejs": {
+      "local_sha256": "090e796249d9a052ddd4cd0e593689d3b7abb36d025050194068071199d2b69d",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/views/super-admin.ejs ]; then sha256sum /usr/src/app/views/super-admin.ejs && wc -c /usr/src/app/views/super-admin.ejs; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "090e796249d9a052ddd4cd0e593689d3b7abb36d025050194068071199d2b69d  /usr/src/app/views/super-admin.ejs\n30559 /usr/src/app/views/super-admin.ejs",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "public/css/style.css": {
+      "local_sha256": "afdeb4f2b8d33f960e6b9a699cdd4bd2eec43ecffbd30b6a762c40922d96f163",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/public/css/style.css ]; then sha256sum /usr/src/app/public/css/style.css && wc -c /usr/src/app/public/css/style.css; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "afdeb4f2b8d33f960e6b9a699cdd4bd2eec43ecffbd30b6a762c40922d96f163  /usr/src/app/public/css/style.css\n25404 /usr/src/app/public/css/style.css",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "routes/api.js": {
+      "local_sha256": "3b2d8a48b5e19f012e3b81cc84d85d3e5d10391d79e5a725fa2376c7b382d5a6",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/routes/api.js ]; then sha256sum /usr/src/app/routes/api.js && wc -c /usr/src/app/routes/api.js; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "3b2d8a48b5e19f012e3b81cc84d85d3e5d10391d79e5a725fa2376c7b382d5a6  /usr/src/app/routes/api.js\n11385 /usr/src/app/routes/api.js",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "server.js": {
+      "local_sha256": "62a07cb03201b09ebc5c0bbe1aa7e1e9c082c657926fec17c9d770b317b42a99",
+      "container": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "app",
+          "sh",
+          "-lc",
+          "if [ -f /usr/src/app/server.js ]; then sha256sum /usr/src/app/server.js && wc -c /usr/src/app/server.js; else echo AUSENTE; fi"
+        ],
+        "returncode": 0,
+        "stdout": "62a07cb03201b09ebc5c0bbe1aa7e1e9c082c657926fec17c9d770b317b42a99  /usr/src/app/server.js\n7884 /usr/src/app/server.js",
+        "stderr": "",
+        "ok": true
+      }
+    }
+  },
+  "htmls_autenticados": {
+    "login": {
+      "status": 200,
+      "ok": true,
+      "content_type": "application/json; charset=utf-8",
+      "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":4,\"nome\":\"Admin Cliente Teste\",\"email\":\"<EMAIL_LOGIN>\",\"is_admin\":true,\"cargo\":\"Gerente\",\"role\":\"admin\"},\"empresa\":{\"id\":5,\"nome\":\"Cliente Teste LTDA\",\"logo\":null,\"cor\":\"#4f46e5\"}}",
+      "cookies": [
+        {
+          "name": "connect.sid",
+          "domain": "127.0.0.1",
+          "path": "/",
+          "secure": false
+        }
+      ]
+    },
+    "paginas": {
+      "/dashboard": {
+        "status": 200,
+        "ok": true,
+        "content_type": "text/html; charset=utf-8",
+        "tamanho_html": 16542,
+        "preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Dashboard | Engeradios CRM</title>\n    /css/style.css\n</head>\n<body>\n    <main class=\"er25dash-page\" id=\"dashboard-principal\">\n        <section class=\"er25dash-hero\">\n            <span class=\"er25dash-badge\">● Dashboard operacional</span>\n            <h1 class=\"er25dash-title\">Visao geral do atendimento</h1>\n            <p class=\"er25dash-subtitle\">\n                Acompanhe conexao WhatsApp, atalhos de operacao, acesso ao CRM e indicadores principais em uma pagina limpa, responsiva e separada da tela de atendimento.\n            </p>\n\n            <div class=\"er25dash-hero-actions\">\n                /crmAbrir CRM Atendimento</a>\n                /admin/painelPainel Administrativo</a>\n                /super-adminSuper Admin</a>\n            </div>\n        </section>\n\n        <section class=\"er25dash-grid er25dash-grid-metrics\" aria-label=\"Indicadores principais\">\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">Sessao</div>\n                    <div class=\"er25dash-value\" id=\"dash-session-value\">Ativa</div>\n                    <p class=\"er25dash-helper\">Usuario autenticado no painel.</p>\n                </div>\n                <div class=\"er25dash-icon\">S</div>\n            </article>\n\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">WhatsApp</div>\n                    <div class=\"er25dash-value\" id=\"dash-whatsapp-value\">...</div>\n                    <p class=\"er25dash-helper\" id=\"dash-whatsapp-helper\">Verificando status da conexao.</p>\n                </div>\n                <div class=\"er25dash-icon\">W</div>\n            </article>\n\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">Atendimento</div>\n                    <div class=\"er25dash-value\">CRM</div>\n                    <p class=\"er25dash-helper\">Conversas e contatos em area dedicada.</p>\n                </div>\n                <div class=\"er25dash-icon\">C</div>\n            </article>\n\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">Interface</div>\n                    <div class=\"er25dash-value\">Online</div>\n                    <p class=\"er25dash-helper\">Layout claro/escuro e responsivo.</p>\n                </div>\n                <div class=\"er25dash-icon\">UI</div>\n            </article>\n        </section>\n\n        <section class=\"er25dash-grid er25dash-grid-main\">\n            <article class=\"er25dash-card\">\n                <h2 class=\"er25dash-section-title\">Atalhos de operacao</h2>\n                <p class=\"er25dash-section-subtitle\">\n                   ",
+        "inspecao": {
+          "title": "Dashboard | Engeradios CRM",
+          "tags": {
+            "html": 1,
+            "head": 1,
+            "meta": 2,
+            "title": 1,
+            "body": 1,
+            "main": 1,
+            "section": 3,
+            "span": 9,
+            "h1": 1,
+            "p": 19,
+            "div": 31,
+            "article": 5,
+            "h2": 2,
+            "h3": 4,
+            "aside": 1,
+            "script": 2
+          },
+          "body_attrs": {},
+          "scripts": [
+            "",
+            ""
+          ],
+          "stylesheets": [],
+          "links_total": 0,
+          "links_sample": [],
+          "links_vazios": [],
+          "links_suspeitos": [],
+          "parse_errors": []
+        },
+        "marcadores": {
+          "etapa25_4": true,
+          "etapa25_1": true,
+          "er25dash": true,
+          "er25safe": true,
+          "tailwind_cdn": false,
+          "alpine": false,
+          "dashboard_antigo": false,
+          "api_status": true,
+          "href_crm_literal": false,
+          "href_admin_literal": false,
+          "href_super_literal": false,
+          "texto_link_quebrado_crm": true,
+          "texto_link_quebrado_admin": true,
+          "texto_link_quebrado_super": true
+        }
+      },
+      "/crm": {
+        "status": 200,
+        "ok": true,
+        "content_type": "text/html; charset=utf-8",
+        "tamanho_html": 58182,
+        "preview": "<!DOCTYPE html>\n<html lang=\"pt-br\" class=\"desktop-mode\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n    <meta name=\"theme-color\" content=\"#4f46e5\">\n    <title>CRM - Atendimento</title>\n    \n    <link href=\"/css/style.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    \n    <script>\n        const IS_MOBILE_ROUTE = \"false\" === \"true\";\n        tailwind.config = { \n            darkMode: 'class', \n            theme: { \n                extend: { \n                    colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' },\n                    animation: { 'fade-in': 'fadeIn 0.2s ease-out' },\n                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } } }\n                } \n            } \n        }\n    </script>\n    <style>\n        :root { --color-primary: #4f46e5; }\n        body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; overscroll-behavior-y: none; }\n        \n        /* Scrollbar */\n        ::-webkit-scrollbar { width: 6px; } \n        ::-webkit-scrollbar-track { background: transparent; }\n        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }\n        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }\n        .dark ::-webkit-scrollbar-thumb { background: #475569; }\n\n        /* Mensagens */\n        .msg-bubble { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 14px; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); position: relative; word-wrap: break-word; }\n        .msg-in { background: #ffffff; border-radius: 0 12px 12px 12px; align-self: flex-start; margin-right: auto; border-top-left-radius: 0; }\n        .msg-out { background: #d9fdd3; border-radius: 12px 0 12px 12px; align-self: flex-end; margin-left: auto; border-top-right-radius: 0; }\n        \n        .dark .msg-in { background: #202c33; color: #e9edef; } \n        .dark .msg-out { background: #005c4b; color: #e9edef; }\n        \n        /* Fundo */\n        .chat-background { background-color: #efeae2; background-image: url(\"https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png\"); opacity: 0.9; }\n        .dark .chat-background { background-color: #0b141a; background-blend-mode: soft-light; opacity: 1; }\n        \n        /* Modal Tags */\n        .tag-badge { font-size: 10px; padding: 2px 6px; border-radius: 12px; font-weight: 600; color: white; text-shadow: 0 1px 1px rgba(0,0,0,0.1); display: inline-flex; align-items: center; gap: 3px; }\n    </style>\n</head>\n<body class=\"h-screen flex flex-col text-slate-800 overflow-hidden bg-white dark:bg-slate-900\">\n\n    <div id=\"toast\" class=\"fixed top-5 right-5 z-[999] bg-slate",
+        "inspecao": {
+          "title": "CRM - Atendimento",
+          "tags": {
+            "html": 1,
+            "head": 1,
+            "meta": 3,
+            "title": 1,
+            "link": 2,
+            "script": 5,
+            "style": 1,
+            "body": 1,
+            "div": 53,
+            "i": 25,
+            "span": 3,
+            "img": 1,
+            "h2": 1,
+            "button": 25,
+            "input": 5,
+            "h3": 5,
+            "p": 2,
+            "label": 1,
+            "textarea": 1,
+            "a": 1
+          },
+          "body_attrs": {
+            "class": "h-screen flex flex-col text-slate-800 overflow-hidden bg-white dark:bg-slate-900"
+          },
+          "scripts": [
+            "/socket.io/socket.io.js",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "stylesheets": [
+            {
+              "href": "/css/style.css",
+              "rel": "stylesheet"
+            },
+            {
+              "href": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+              "rel": "stylesheet"
+            }
+          ],
+          "links_total": 1,
+          "links_sample": [
+            "/admin/painel"
+          ],
+          "links_vazios": [],
+          "links_suspeitos": [],
+          "parse_errors": []
+        },
+        "marcadores": {
+          "etapa25_4": false,
+          "etapa25_1": true,
+          "er25dash": false,
+          "er25safe": true,
+          "tailwind_cdn": false,
+          "alpine": false,
+          "dashboard_antigo": false,
+          "api_status": false,
+          "href_crm_literal": false,
+          "href_admin_literal": true,
+          "href_super_literal": false,
+          "texto_link_quebrado_crm": false,
+          "texto_link_quebrado_admin": false,
+          "texto_link_quebrado_super": false
+        }
+      },
+      "/admin/painel": {
+        "status": 200,
+        "ok": true,
+        "content_type": "text/html; charset=utf-8",
+        "tamanho_html": 62310,
+        "preview": "<!DOCTYPE html>\n<html lang=\"pt-br\" class=\"light\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Configurações da Empresa</title>\n    <link href=\"/css/style.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n    <script>\n        tailwind.config = { \n            darkMode: 'class', \n            theme: { \n                extend: { \n                    colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' } \n                } \n            } \n        }\n    </script>\n    <style>\n        :root { --color-primary: #4f46e5; }\n        body { font-family: 'Inter', sans-serif; }\n        .fade-in { animation: fadeIn 0.3s ease-in-out; }\n        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }\n        \n        /* Estilos de Abas */\n        .tab-active { border-bottom: 2px solid var(--color-primary); color: var(--color-primary); font-weight: 600; }\n        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }\n        .tab-inactive:hover { color: #334155; border-bottom: 2px solid #cbd5e1; }\n        .dark .tab-inactive { color: #94a3b8; }\n        .dark .tab-inactive:hover { color: #e2e8f0; border-bottom: 2px solid #475569; }\n        \n        /* Cores Etiquetas */\n        .color-option { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }\n        .color-option:hover { transform: scale(1.1); }\n        .color-option.selected { border-color: #475569; transform: scale(1.1); }\n\n        /* Sortable ghost element */\n        .sortable-ghost { opacity: 0.4; background-color: #f1f5f9; border: 2px dashed #cbd5e1; }\n        .dark .sortable-ghost { background-color: #1e293b; border-color: #475569; }\n    </style>\n</head>\n<body class=\"bg-slate-50 text-slate-800 min-h-screen flex flex-col dark:bg-slate-900 dark:text-white\">\n\n    <!-- TOAST NOTIFICATION -->\n    <div id=\"toast\" class=\"fixed top-5 right-5 z-50 bg-slate-800 text-white px-4 py-3 rounded shadow-lg transform translate-x-full transition duration-300 border-l-4 border-indigo-500 flex items-center gap-3\">\n        <i class=\"fas fa-info-circle\"></i> <span id=\"toast-msg\">...</span>\n    </div>\n\n    <!-- NAVBAR -->\n    <nav class=\"bg-white border-b border-slate-200 px-6 h-16 flex items-center justify-between sticky top-0 z-40 shadow-sm dark:bg-slate-800 dark:border-slate-700\">\n        <div class=\"flex items-center gap-4\">\n            <button onclick=\"window.location.href='/crm'\" class=\"text-slate-500 hover:text-indigo-600 transition f",
+        "inspecao": {
+          "title": "Configurações da Empresa",
+          "tags": {
+            "html": 1,
+            "head": 1,
+            "meta": 2,
+            "title": 1,
+            "link": 3,
+            "script": 6,
+            "style": 1,
+            "body": 1,
+            "div": 113,
+            "i": 24,
+            "span": 8,
+            "nav": 1,
+            "button": 22,
+            "h1": 1,
+            "h2": 3,
+            "p": 11,
+            "img": 1,
+            "h3": 14,
+            "table": 3,
+            "thead": 3,
+            "tr": 4,
+            "th": 15,
+            "tbody": 3,
+            "input": 17,
+            "textarea": 7,
+            "label": 13,
+            "b": 1,
+            "form": 1,
+            "td": 1
+          },
+          "body_attrs": {
+            "class": "bg-slate-50 text-slate-800 min-h-screen flex flex-col dark:bg-slate-900 dark:text-white"
+          },
+          "scripts": [
+            "/socket.io/socket.io.js",
+            "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "stylesheets": [
+            {
+              "href": "/css/style.css",
+              "rel": "stylesheet"
+            },
+            {
+              "href": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+              "rel": "stylesheet"
+            },
+            {
+              "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+              "rel": "stylesheet"
+            }
+          ],
+          "links_total": 0,
+          "links_sample": [],
+          "links_vazios": [],
+          "links_suspeitos": [],
+          "parse_errors": []
+        },
+        "marcadores": {
+          "etapa25_4": false,
+          "etapa25_1": true,
+          "er25dash": false,
+          "er25safe": true,
+          "tailwind_cdn": false,
+          "alpine": false,
+          "dashboard_antigo": false,
+          "api_status": false,
+          "href_crm_literal": false,
+          "href_admin_literal": false,
+          "href_super_literal": false,
+          "texto_link_quebrado_crm": false,
+          "texto_link_quebrado_admin": false,
+          "texto_link_quebrado_super": false
+        }
+      },
+      "/super-admin": {
+        "status": 200,
+        "ok": true,
+        "content_type": "text/html; charset=utf-8",
+        "tamanho_html": 16542,
+        "preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Dashboard | Engeradios CRM</title>\n    /css/style.css\n</head>\n<body>\n    <main class=\"er25dash-page\" id=\"dashboard-principal\">\n        <section class=\"er25dash-hero\">\n            <span class=\"er25dash-badge\">● Dashboard operacional</span>\n            <h1 class=\"er25dash-title\">Visao geral do atendimento</h1>\n            <p class=\"er25dash-subtitle\">\n                Acompanhe conexao WhatsApp, atalhos de operacao, acesso ao CRM e indicadores principais em uma pagina limpa, responsiva e separada da tela de atendimento.\n            </p>\n\n            <div class=\"er25dash-hero-actions\">\n                /crmAbrir CRM Atendimento</a>\n                /admin/painelPainel Administrativo</a>\n                /super-adminSuper Admin</a>\n            </div>\n        </section>\n\n        <section class=\"er25dash-grid er25dash-grid-metrics\" aria-label=\"Indicadores principais\">\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">Sessao</div>\n                    <div class=\"er25dash-value\" id=\"dash-session-value\">Ativa</div>\n                    <p class=\"er25dash-helper\">Usuario autenticado no painel.</p>\n                </div>\n                <div class=\"er25dash-icon\">S</div>\n            </article>\n\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">WhatsApp</div>\n                    <div class=\"er25dash-value\" id=\"dash-whatsapp-value\">...</div>\n                    <p class=\"er25dash-helper\" id=\"dash-whatsapp-helper\">Verificando status da conexao.</p>\n                </div>\n                <div class=\"er25dash-icon\">W</div>\n            </article>\n\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">Atendimento</div>\n                    <div class=\"er25dash-value\">CRM</div>\n                    <p class=\"er25dash-helper\">Conversas e contatos em area dedicada.</p>\n                </div>\n                <div class=\"er25dash-icon\">C</div>\n            </article>\n\n            <article class=\"er25dash-card er25dash-card-soft er25dash-metric\">\n                <div>\n                    <div class=\"er25dash-label\">Interface</div>\n                    <div class=\"er25dash-value\">Online</div>\n                    <p class=\"er25dash-helper\">Layout claro/escuro e responsivo.</p>\n                </div>\n                <div class=\"er25dash-icon\">UI</div>\n            </article>\n        </section>\n\n        <section class=\"er25dash-grid er25dash-grid-main\">\n            <article class=\"er25dash-card\">\n                <h2 class=\"er25dash-section-title\">Atalhos de operacao</h2>\n                <p class=\"er25dash-section-subtitle\">\n                   ",
+        "inspecao": {
+          "title": "Dashboard | Engeradios CRM",
+          "tags": {
+            "html": 1,
+            "head": 1,
+            "meta": 2,
+            "title": 1,
+            "body": 1,
+            "main": 1,
+            "section": 3,
+            "span": 9,
+            "h1": 1,
+            "p": 19,
+            "div": 31,
+            "article": 5,
+            "h2": 2,
+            "h3": 4,
+            "aside": 1,
+            "script": 2
+          },
+          "body_attrs": {},
+          "scripts": [
+            "",
+            ""
+          ],
+          "stylesheets": [],
+          "links_total": 0,
+          "links_sample": [],
+          "links_vazios": [],
+          "links_suspeitos": [],
+          "parse_errors": []
+        },
+        "marcadores": {
+          "etapa25_4": true,
+          "etapa25_1": true,
+          "er25dash": true,
+          "er25safe": true,
+          "tailwind_cdn": false,
+          "alpine": false,
+          "dashboard_antigo": false,
+          "api_status": true,
+          "href_crm_literal": false,
+          "href_admin_literal": false,
+          "href_super_literal": false,
+          "texto_link_quebrado_crm": true,
+          "texto_link_quebrado_admin": true,
+          "texto_link_quebrado_super": true
+        }
+      }
+    },
+    "status_api_5": {
+      "status": 200,
+      "ok": true,
+      "content_type": "application/json; charset=utf-8",
+      "body_preview": "{\"success\":true,\"empresaId\":5,\"connected\":false,\"status\":\"DESCONECTADO\",\"qr\":null}",
+      "json": {
+        "success": true,
+        "empresaId": 5,
+        "connected": false,
+        "status": "DESCONECTADO",
+        "qr": null
+      }
+    }
+  },
+  "status_arquivos_suspeitos": {
+    "views/dashboard.ejs": {
+      "existe": true,
+      "sha256": "bb6af0a6a888397e26214cf349136ae01a5a12a16ee16fa9cc7c5fa6bfeb5e11",
+      "padroes": {
+        "href_sem_tag_crm": true,
+        "href_sem_tag_admin": true,
+        "href_sem_tag_super": true,
+        "link_literal_css_quebrado": true,
+        "a_tag_quebrada": true,
+        "html_escaped_links": false,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": [
+        {
+          "termo": "/css/style.css",
+          "linha": 7,
+          "contexto": [
+            {
+              "linha": 6,
+              "texto": "    <title>Dashboard | Engeradios CRM</title>"
+            },
+            {
+              "linha": 7,
+              "texto": "    /css/style.css"
+            },
+            {
+              "linha": 8,
+              "texto": "</head>"
+            }
+          ]
+        },
+        {
+          "termo": "/crmAbrir",
+          "linha": 19,
+          "contexto": [
+            {
+              "linha": 18,
+              "texto": "            <div class=\"er25dash-hero-actions\">"
+            },
+            {
+              "linha": 19,
+              "texto": "                /crmAbrir CRM Atendimento</a>"
+            },
+            {
+              "linha": 20,
+              "texto": "                /admin/painelPainel Administrativo</a>"
+            }
+          ]
+        },
+        {
+          "termo": "/admin/painelPainel",
+          "linha": 20,
+          "contexto": [
+            {
+              "linha": 19,
+              "texto": "                /crmAbrir CRM Atendimento</a>"
+            },
+            {
+              "linha": 20,
+              "texto": "                /admin/painelPainel Administrativo</a>"
+            },
+            {
+              "linha": 21,
+              "texto": "                /super-adminSuper Admin</a>"
+            }
+          ]
+        },
+        {
+          "termo": "/super-adminSuper",
+          "linha": 21,
+          "contexto": [
+            {
+              "linha": 20,
+              "texto": "                /admin/painelPainel Administrativo</a>"
+            },
+            {
+              "linha": 21,
+              "texto": "                /super-adminSuper Admin</a>"
+            },
+            {
+              "linha": 22,
+              "texto": "            </div>"
+            }
+          ]
+        }
+      ]
+    },
+    "views/crm.ejs": {
+      "existe": true,
+      "sha256": "d7197e4616f2d88d90fb03cfe2369029aa7376a146fc1d50152282d2b6edeed8",
+      "padroes": {
+        "href_sem_tag_crm": false,
+        "href_sem_tag_admin": false,
+        "href_sem_tag_super": false,
+        "link_literal_css_quebrado": false,
+        "a_tag_quebrada": false,
+        "html_escaped_links": true,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": [
+        {
+          "termo": "/css/style.css",
+          "linha": 9,
+          "contexto": [
+            {
+              "linha": 8,
+              "texto": "    "
+            },
+            {
+              "linha": 9,
+              "texto": "    <link href=\"/css/style.css\" rel=\"stylesheet\">"
+            },
+            {
+              "linha": 10,
+              "texto": "    <script src=\"/socket.io/socket.io.js\"></script>"
+            }
+          ]
+        }
+      ]
+    },
+    "views/admin-panel.ejs": {
+      "existe": true,
+      "sha256": "2dc089fa0ba1bbaa0a54f9d54dd7bb6099ab0283caff313ada5a23ad17505099",
+      "padroes": {
+        "href_sem_tag_crm": false,
+        "href_sem_tag_admin": false,
+        "href_sem_tag_super": false,
+        "link_literal_css_quebrado": false,
+        "a_tag_quebrada": false,
+        "html_escaped_links": false,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": [
+        {
+          "termo": "/css/style.css",
+          "linha": 7,
+          "contexto": [
+            {
+              "linha": 6,
+              "texto": "    <title>Configurações da Empresa</title>"
+            },
+            {
+              "linha": 7,
+              "texto": "    <link href=\"/css/style.css\" rel=\"stylesheet\">"
+            },
+            {
+              "linha": 8,
+              "texto": "    <script src=\"/socket.io/socket.io.js\"></script>"
+            }
+          ]
+        }
+      ]
+    },
+    "views/super-admin.ejs": {
+      "existe": true,
+      "sha256": "090e796249d9a052ddd4cd0e593689d3b7abb36d025050194068071199d2b69d",
+      "padroes": {
+        "href_sem_tag_crm": false,
+        "href_sem_tag_admin": false,
+        "href_sem_tag_super": false,
+        "link_literal_css_quebrado": false,
+        "a_tag_quebrada": false,
+        "html_escaped_links": false,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": [
+        {
+          "termo": "/css/style.css",
+          "linha": 7,
+          "contexto": [
+            {
+              "linha": 6,
+              "texto": "    <title>Gestão Master SaaS</title>"
+            },
+            {
+              "linha": 7,
+              "texto": "    <link href=\"/css/style.css\" rel=\"stylesheet\">"
+            },
+            {
+              "linha": 8,
+              "texto": "    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">"
+            }
+          ]
+        }
+      ]
+    },
+    "public/css/style.css": {
+      "existe": true,
+      "sha256": "afdeb4f2b8d33f960e6b9a699cdd4bd2eec43ecffbd30b6a762c40922d96f163",
+      "padroes": {
+        "href_sem_tag_crm": false,
+        "href_sem_tag_admin": false,
+        "href_sem_tag_super": false,
+        "link_literal_css_quebrado": false,
+        "a_tag_quebrada": false,
+        "html_escaped_links": false,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": []
+    },
+    "routes/api.js": {
+      "existe": true,
+      "sha256": "3b2d8a48b5e19f012e3b81cc84d85d3e5d10391d79e5a725fa2376c7b382d5a6",
+      "padroes": {
+        "href_sem_tag_crm": false,
+        "href_sem_tag_admin": false,
+        "href_sem_tag_super": false,
+        "link_literal_css_quebrado": false,
+        "a_tag_quebrada": false,
+        "html_escaped_links": false,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": []
+    },
+    "server.js": {
+      "existe": true,
+      "sha256": "62a07cb03201b09ebc5c0bbe1aa7e1e9c082c657926fec17c9d770b317b42a99",
+      "padroes": {
+        "href_sem_tag_crm": false,
+        "href_sem_tag_admin": false,
+        "href_sem_tag_super": false,
+        "link_literal_css_quebrado": false,
+        "a_tag_quebrada": false,
+        "html_escaped_links": false,
+        "document_body_innerhtml": false,
+        "tailwind_cdn": false,
+        "alpine": false
+      },
+      "linhas_suspeitas": []
+    }
+  },
+  "logs": {
+    "cmd": [
+      "docker",
+      "compose",
+      "logs",
+      "--tail=220",
+      "app"
+    ],
+    "ok": true,
+    "total_linhas": 220,
+    "suspeitas": [
+      {
+        "linha": 1,
+        "texto": "whatsapp_bot_app  | npm error command failed"
+      },
+      {
+        "linha": 2,
+        "texto": "whatsapp_bot_app  | npm error signal SIGTERM"
+      },
+      {
+        "linha": 3,
+        "texto": "whatsapp_bot_app  | npm error command sh -c node server.js"
+      },
+      {
+        "linha": 4,
+        "texto": "whatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-07T04_02_21_626Z-debug-0.log"
+      },
+      {
+        "linha": 14,
+        "texto": "whatsapp_bot_app  | 🚀 [System] SAAS Server rodando na porta 50010"
+      },
+      {
+        "linha": 36,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 39,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 57,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 60,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 63,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 68,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 71,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 74,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 79,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 82,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 85,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 90,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 93,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 96,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 116,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 119,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 122,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 137,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 140,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 143,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 148,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 151,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 154,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 174,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 177,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 180,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      },
+      {
+        "linha": 191,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 194,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 212,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /dashboard"
+      },
+      {
+        "linha": 215,
+        "texto": "whatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5"
+      },
+      {
+        "linha": 218,
+        "texto": "whatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5"
+      }
+    ],
+    "amostra": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=4 empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /super-admin\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=5\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/whatsapp/status/5\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=5\nwhatsapp_bot_app  | ------------------------"
+  },
+  "diagnostico_resumido": {
+    "problemas_provaveis": [
+      "Dashboard renderizado contem texto de links quebrados, como /crmAbrir ou /admin/painelPainel.",
+      "Dashboard nao contem href=\"/crm\" valido.",
+      "Dashboard nao contem href=\"/admin/painel\" valido.",
+      "Dashboard nao contem href=\"/super-admin\" valido.",
+      "views/dashboard.ejs pode conter /css/style.css sem tag <link href=...> valida."
+    ],
+    "recomendacoes": [
+      "Se houver links quebrados no relatorio, corrigir views/dashboard.ejs para usar tags <a href=\"...\"> completas.",
+      "Se /css/style.css estiver como texto solto, corrigir para <link href=\"/css/style.css\" rel=\"stylesheet\">.",
+      "Se o HTML local divergir do container, sincronizar arquivos ou reiniciar/recriar container.",
+      "Se tudo estiver correto no HTML e ainda quebrar visualmente, fazer captura do HTML renderizado e CSS computado no navegador."
+    ]
+  }
+}

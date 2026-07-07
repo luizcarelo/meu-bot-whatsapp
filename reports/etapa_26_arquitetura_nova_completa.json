@@ -1,0 +1,239 @@
+{
+  "gerado_em": "2026-07-07T01:29:02",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_26_arquitetura_nova_completa_20260707_012902",
+    "copiados": [
+      "package.json",
+      "package-lock.json",
+      "server.js",
+      "routes/api.js",
+      "controllers/AuthController.js",
+      "controllers/CrmController.js",
+      "controllers/WhatsAppController.js",
+      "controllers/AdminController.js",
+      "src/managers/SessionManager.js",
+      "views/dashboard.ejs",
+      "views/crm.ejs",
+      "views/admin-panel.ejs",
+      "views/super-admin.ejs",
+      "public/css/style.css",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [
+      "docs/DECISAO_ARQUITETURA_NOVA.md",
+      "docs/MAPA_LEGADO_ATUAL.md",
+      "docs/ARQUITETURA_BACKEND_MODULAR.md",
+      "docs/ARQUITETURA_FRONTEND_REACT.md",
+      "docs/CONTRATOS_API.md",
+      "docs/PLANO_MIGRACAO_REACT.md",
+      "docs/RESUMO_ETAPA_26.md"
+    ],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_26_manifesto_antes.json",
+  "manifesto_depois": "reports/etapa_26_manifesto_depois.json",
+  "docs_novos": [
+    {
+      "arquivo": "docs/DECISAO_ARQUITETURA_NOVA.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "4862c381bea29f22bed88593d51ca99b0c3be58d2989cb9e78ff5bc65e8756db",
+      "tamanho": 2180
+    },
+    {
+      "arquivo": "docs/MAPA_LEGADO_ATUAL.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "4adea3a185c7ee0ff812b6913a257037a66c7cff13e766faae458cab7f47c7f0",
+      "tamanho": 1794
+    },
+    {
+      "arquivo": "docs/ARQUITETURA_BACKEND_MODULAR.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "5c713dc1f942b4ae776e06e5f204b1125268e57dd9861190523300349ae4b55b",
+      "tamanho": 1876
+    },
+    {
+      "arquivo": "docs/ARQUITETURA_FRONTEND_REACT.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "2c353fb64f4bed173b92d0c5d09903b809cfadcf9ce79e1097ee931990130da3",
+      "tamanho": 1826
+    },
+    {
+      "arquivo": "docs/CONTRATOS_API.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "e96e73a756aac33eeab46c114cc304b6d94bf79d2763b6ee0841cac68b116781",
+      "tamanho": 1966
+    },
+    {
+      "arquivo": "docs/PLANO_MIGRACAO_REACT.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "94d6a5f612c41c835553a2f81c5c3e22e69410fd6c9d17d6e46bc7c61ef1d961",
+      "tamanho": 1593
+    },
+    {
+      "arquivo": "docs/RESUMO_ETAPA_26.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "9d09b1e47ffead860fb239d4037fb334df52f92326e46d37e69c3c7159dc9c23",
+      "tamanho": 533
+    }
+  ],
+  "docs_obrigatorios": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "validacao": {
+    "arquivos": [
+      {
+        "arquivo": "docs/DECISAO_ARQUITETURA_NOVA.md",
+        "sha256": "4862c381bea29f22bed88593d51ca99b0c3be58d2989cb9e78ff5bc65e8756db",
+        "tamanho": 2180,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true,
+          "tem_react": true,
+          "tem_typescript": true,
+          "tem_vite": true,
+          "tem_material_ui": true,
+          "tem_legado": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/MAPA_LEGADO_ATUAL.md",
+        "sha256": "4adea3a185c7ee0ff812b6913a257037a66c7cff13e766faae458cab7f47c7f0",
+        "tamanho": 1794,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/ARQUITETURA_BACKEND_MODULAR.md",
+        "sha256": "5c713dc1f942b4ae776e06e5f204b1125268e57dd9861190523300349ae4b55b",
+        "tamanho": 1876,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/ARQUITETURA_FRONTEND_REACT.md",
+        "sha256": "2c353fb64f4bed173b92d0c5d09903b809cfadcf9ce79e1097ee931990130da3",
+        "tamanho": 1826,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/CONTRATOS_API.md",
+        "sha256": "e96e73a756aac33eeab46c114cc304b6d94bf79d2763b6ee0841cac68b116781",
+        "tamanho": 1966,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/PLANO_MIGRACAO_REACT.md",
+        "sha256": "94d6a5f612c41c835553a2f81c5c3e22e69410fd6c9d17d6e46bc7c61ef1d961",
+        "tamanho": 1593,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/RESUMO_ETAPA_26.md",
+        "sha256": "9d09b1e47ffead860fb239d4037fb334df52f92326e46d37e69c3c7159dc9c23",
+        "tamanho": 533,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "CONTEXTO_PROJETO.md",
+        "sha256": "3dc40277812e2d9f6086c77fa84a55b9b144415d769a37ae990de96b4ac3f9e6",
+        "tamanho": 23023,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "CHANGELOG.md",
+        "sha256": "476a5f466017856efedca745fac72dc289e317cf811bf0fe67d37427aeb75b0b",
+        "tamanho": 20351,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "DECISOES_TECNICAS.md",
+        "sha256": "2d5889dda7d7b0a4d04296381c48b0f218dfc94389f0618ba177cdb4768a923b",
+        "tamanho": 20457,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "PENDENCIAS.md",
+        "sha256": "b8210acb2b892c80248dbaf1715e1fd6e6e52b5bf66b44b6688c6357f6e2ce0c",
+        "tamanho": 20832,
+        "checks": {
+          "existe": true,
+          "tamanho_maior_que_zero": true,
+          "sem_asterisco": true
+        },
+        "asteriscos": [],
+        "ok": true
+      }
+    ],
+    "erros": [],
+    "ok": true
+  }
+}

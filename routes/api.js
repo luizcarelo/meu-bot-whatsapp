@@ -101,23 +101,58 @@ router.post('/whatsapp/logout', isAuthenticated, isAdmin, async (req, res) => {
 });
 
 // Status e QR Code
+// ETAPA25_3_WHATSAPP_STATUS_SEGURO_INICIO
 router.get('/whatsapp/status/:companyId', isAuthenticated, (req, res) => {
-    const empresaId = parseInt(req.params.companyId);
-    
-    const session = req.whatsapp.sessions.get(empresaId);
-    const qr = req.whatsapp.qrCodes.get(empresaId);
-    const isConnected = session?.user ? true : false;
-    
-    // Formatação segura do usuário
-    const userJid = session?.user?.id ? session.user.id.split(':')[0] : null;
+    try {
+        const rawEmpresaId = req.params.companyId || req.session?.empresaId || req.empresaId;
+        const empresaId = parseInt(rawEmpresaId, 10);
 
-    res.json({
-        connected: isConnected,
-        status: isConnected ? 'CONECTADO' : (qr ? 'AGUARDANDO_QR' : 'DESCONECTADO'),
-        qrcode: (!isConnected && qr) ? qr : null,
-        number: userJid
-    });
+        if (!empresaId) {
+            return res.status(400).json({
+                success: false,
+                error: 'ID da empresa obrigatorio.'
+            });
+        }
+
+        const manager = req.whatsapp || req.app?.locals?.whatsapp || req.app?.locals?.sessionManager || null;
+        const sessions = manager && manager.sessions && typeof manager.sessions.get === 'function'
+            ? manager.sessions
+            : null;
+
+        const session = sessions ? sessions.get(empresaId) : null;
+
+        const wsState = session && session.ws ? session.ws.readyState : null;
+        const hasUser = !!(session && session.user);
+        const isConnected = !!(hasUser && (wsState === 1 || wsState === undefined || wsState === null));
+
+        let qr = null;
+
+        if (manager && manager.qrCodes && typeof manager.qrCodes.get === 'function') {
+            qr = manager.qrCodes.get(empresaId) || null;
+        } else if (manager && manager.qr && typeof manager.qr.get === 'function') {
+            qr = manager.qr.get(empresaId) || null;
+        }
+
+        return res.json({
+            success: true,
+            empresaId: empresaId,
+            connected: isConnected,
+            status: isConnected ? 'CONECTADO' : (qr ? 'AGUARDANDO_QR' : 'DESCONECTADO'),
+            qr: qr || null
+        });
+    } catch (error) {
+        console.error('[API WhatsApp Status] Erro seguro:', error.message);
+
+        return res.json({
+            success: true,
+            connected: false,
+            status: 'DESCONECTADO',
+            qr: null,
+            error: 'Status indisponivel no momento.'
+        });
+    }
 });
+// ETAPA25_3_WHATSAPP_STATUS_SEGURO_FIM
 
 // ============================================
 // ROTAS DE CRM / MENSAGEM (VIA FILA)

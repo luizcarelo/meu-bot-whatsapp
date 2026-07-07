@@ -773,3 +773,63 @@ Logs Session ID: 0.
 Logs cookie: 0.
 Logs email: 0.
 <!-- ETAPA_25_2_FIM -->
+
+<!-- ETAPA_25_3_INICIO -->
+## Etapa 25.3 - API status WhatsApp corrigida
+
+Data: 2026-07-07T01:02:26
+
+Corrigida rota /api/whatsapp/status/:companyId para resposta segura quando req.whatsapp estiver ausente.
+routes/api.js alterado: True.
+Dashboard OK: True.
+Status API OK: True.
+Status API sem 500: True.
+Erro req.whatsapp.sessions nos logs: 0.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_25_3_FIM -->
+
+<!-- ETAPA_25_4_INICIO -->
+## Etapa 25.4 - Dashboard profissional e responsivo
+
+Data: 2026-07-07T01:08:08
+
+O dashboard principal foi refatorado para remover mistura entre layout antigo e novo.
+Dashboard limpo em runtime: True.
+Paginas OK: True.
+Status API OK: True.
+Validacao estrutural OK: True.
+Termos antigos encontrados: [].
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_25_4_FIM -->
+
+<!-- ETAPA_25_4_1_INICIO -->
+## Etapa 25.4.1 - HTML do dashboard corrigido
+
+Data: 2026-07-07T01:14:19
+
+Corrigidos link CSS e links de navegacao do dashboard.
+Validacao estrutural OK: False.
+Dashboard HTML OK: False.
+Links renderizados: [].
+Stylesheets renderizados: [].
+Runtime OK: False.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 2.
+<!-- ETAPA_25_4_1_FIM -->
+
+<!-- ETAPA_26_INICIO -->
+## Etapa 26 - Arquitetura Nova
+
+Data: 2026-07-07T01:29:02
+
+Registrada a migracao progressiva para frontend React, TypeScript, Vite e Material UI.
+Registrada a diretriz de backend modular por dominio.
+O frontend EJS atual passa a ser tratado como legado operacional.
+Nenhum codigo funcional foi alterado nesta etapa.
+Documentos criados na pasta docs.
+<!-- ETAPA_26_FIM -->
