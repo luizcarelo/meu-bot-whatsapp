@@ -1,7 +1,7 @@
 {
-  "gerado_em": "2026-07-06T21:44:35",
+  "gerado_em": "2026-07-06T21:46:57",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
-  "total_arquivos": 175,
+  "total_arquivos": 177,
   "arquivos": [
     {
       "arquivo": ".env",
@@ -30,18 +30,18 @@
     },
     {
       "arquivo": "CHANGELOG.md",
-      "tamanho_bytes": 8343,
-      "sha256": "5452a6ff854aecf0dd9f436690ee973cc69508fa809c49aa57863ddde1969003"
+      "tamanho_bytes": 8700,
+      "sha256": "5a768f4b5943a1900d6bce5f087c0b302031b69e355162b8340ccc49206f07eb"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 9278,
-      "sha256": "e5693592dbb5ea33d03300c3c19c7049372f1bd69dc30ce17b0ac7752fad4583"
+      "tamanho_bytes": 9687,
+      "sha256": "7eb0862a235253c6c21309be50f2dafec97588d0c8c41a2cced0f33a54d2b006"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
-      "tamanho_bytes": 8167,
-      "sha256": "a5827e3922c1c715dc82b66e915d93b77caaeb41df726fd96eff813c36c96c1a"
+      "tamanho_bytes": 8533,
+      "sha256": "4602328034f23e5e249757bcd737c1245537dcce8e775747be8ec8f608860585"
     },
     {
       "arquivo": "Dockerfile",
@@ -55,8 +55,8 @@
     },
     {
       "arquivo": "PENDENCIAS.md",
-      "tamanho_bytes": 9363,
-      "sha256": "5f806df544ce556e5623cd5f5b0e5475512d2f734a319b41edaa0f06b5db4404"
+      "tamanho_bytes": 9804,
+      "sha256": "ec44197240b6cc80344008e71b73d0b895ab362f12a3ba6d00f845136579dbb8"
     },
     {
       "arquivo": "README.md",
@@ -127,6 +127,11 @@
       "arquivo": "etapa_12_validar_login_endpoints_autenticados.py",
       "tamanho_bytes": 29802,
       "sha256": "f37a3da9db0e6261ec734d0f6d9ff30964f01be45d52b291a87a608bb91d2f03"
+    },
+    {
+      "arquivo": "etapa_13_validar_fluxos_interface_logada.py",
+      "tamanho_bytes": 31179,
+      "sha256": "1ebb975d13bbf458ef91768d2b94b48698334a307bc5285c0c26834c797e8c7e"
     },
     {
       "arquivo": "favicon.ico",
@@ -605,18 +610,23 @@
     },
     {
       "arquivo": "reports/etapa_12_manifesto_depois.json",
-      "tamanho_bytes": 30890,
-      "sha256": "ef07647a6d54a9d8ff3676a2e42b67269ade12b5200b4f933707c51c6086430d"
+      "tamanho_bytes": 32269,
+      "sha256": "c8fc0a0c35883fa161c1931479f2ea10f783220a1fcdeb4e00fa968c5edb5c02"
     },
     {
       "arquivo": "reports/etapa_12_validar_login_endpoints_autenticados.json",
-      "tamanho_bytes": 27647,
-      "sha256": "2ebf9631861613ed7abc51c687da9293cb4be4f16623f95be05da39872f9d3ef"
+      "tamanho_bytes": 29348,
+      "sha256": "3477e7d480876e97c35637c56807ab163acd87e6826fbcd2349e90145e4ae4da"
     },
     {
       "arquivo": "reports/etapa_12_validar_login_endpoints_autenticados.md",
-      "tamanho_bytes": 2521,
-      "sha256": "f4950768d6e88aaad9b716219eab52f6841afddd9477a1e33e3303dc7c76fbf5"
+      "tamanho_bytes": 2704,
+      "sha256": "756f1e809d3ad18d4ce6a9e7dca01b46fc85432408c0a5520de9bf16824e140a"
+    },
+    {
+      "arquivo": "reports/etapa_13_manifesto_antes.json",
+      "tamanho_bytes": 32459,
+      "sha256": "b11a4e733464b9ea2c878d6d129451ea30a695805abd6475c8ecbc6f173bae99"
     },
     {
       "arquivo": "routes/api.js",

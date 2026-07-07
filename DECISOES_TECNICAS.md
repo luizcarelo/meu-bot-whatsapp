@@ -212,7 +212,7 @@ Decidido registrar achados de logs para triagem posterior.
 <!-- ETAPA_12_INICIO -->
 ## Etapa 12 - Decisoes tecnicas
 
-Data: 2026-07-06T21:31:11
+Data: 2026-07-06T21:44:35
 
 Decidido manter cookie apenas em memoria durante a validacao.
 Decidido nao imprimir senha nem persistir credenciais.
@@ -230,3 +230,37 @@ Decidido nao persistir cookies nem credenciais.
 Decidido testar payloads JSON e form com campos password e senha.
 Decidido nao alterar banco nem codigo nesta etapa.
 <!-- ETAPA_12_1_FIM -->
+
+<!-- ETAPA_12_2_INICIO -->
+## Etapa 12.2 - Decisoes tecnicas
+
+Data: 2026-07-06T21:44:23
+
+Decidido alinhar o script ao AuthController, que espera email e senha.
+Decidido manter fallback com password para compatibilidade futura.
+Decidido nao executar login automaticamente nesta correcao.
+Decidido nao alterar codigo da aplicacao.
+<!-- ETAPA_12_2_FIM -->
+
+<!-- ETAPA_13_INICIO -->
+## Etapa 13 - Decisoes tecnicas
+
+Data: 2026-07-06T21:46:57
+
+Decidido testar links reais do dashboard em vez de rotas presumidas.
+Decidido limitar a etapa a requisicoes GET/HEAD seguras.
+Decidido nao executar operacoes de escrita.
+Decidido registrar exposicao de Session ID e cookies nos logs para hardening posterior.
+<!-- ETAPA_13_FIM -->
+
+<!-- ETAPA_14_INICIO -->
+## Etapa 14 - Decisoes tecnicas
+
+Data: 2026-07-06T21:50:01
+
+Decidido remover dados de sessao e cookie dos logs.
+Decidido manter logs uteis sem identificadores sensiveis.
+Decidido nao reiniciar app por padrao.
+Decidido permitir restart somente com ETAPA14_RESTART_APP=true.
+Decidido adicionar headers basicos sem alterar regras de negocio.
+<!-- ETAPA_14_FIM -->

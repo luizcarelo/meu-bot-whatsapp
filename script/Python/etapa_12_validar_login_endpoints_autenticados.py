@@ -547,7 +547,7 @@ def realizar_login(opener, jar):
 
     payload = {
         "email": cred["email"],
-        "password": cred["senha"]
+        "senha": cred["senha"]
     }
 
     http = http_request(opener, "POST", LOGIN_PATH, payload)
@@ -562,6 +562,20 @@ def realizar_login(opener, jar):
     body_ok = "sucesso" in body or "success" in body or "dashboard" in body or "ok" in body
 
     resultado["ok"] = bool(status_ok and (cookie_ok or body_ok))
+
+    if not resultado["ok"]:
+        fallback_payload = {
+            "email": cred["email"],
+            "password": cred["senha"]
+        }
+        fallback_http = http_request(opener, "POST", LOGIN_PATH, fallback_payload)
+        resultado["fallback_password"] = fallback_http
+        fallback_body = (fallback_http.get("body_preview") or "").lower()
+        fallback_status_ok = fallback_http.get("status") in [200, 201, 302]
+        fallback_body_ok = "sucesso" in fallback_body or "success" in fallback_body or "dashboard" in fallback_body or "ok" in fallback_body
+        resultado["cookies"] = cookies_resumo(jar)
+        fallback_cookie_ok = len(resultado["cookies"]) > 0
+        resultado["ok"] = bool(fallback_status_ok and (fallback_cookie_ok or fallback_body_ok))
 
     return resultado
 

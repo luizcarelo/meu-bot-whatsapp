@@ -248,11 +248,11 @@ Nenhuma escrita foi executada nesta etapa.
 <!-- ETAPA_12_INICIO -->
 ## Etapa 12 - Login e endpoints autenticados
 
-Data: 2026-07-06T21:31:11
+Data: 2026-07-06T21:44:35
 
 Foi executada validacao de login real e rotas autenticadas em ambiente controlado.
 Login executado: True.
-Login OK: False.
+Login OK: True.
 Paginas autenticadas sem falhas graves: True.
 Endpoints autenticados sem falhas graves: True.
 Achados em logs: 0.
@@ -272,3 +272,44 @@ Uso de senha detectado: True.
 Login validado em payload testado: True.
 Nenhuma alteracao foi aplicada ao banco ou ao codigo.
 <!-- ETAPA_12_1_FIM -->
+
+<!-- ETAPA_12_2_INICIO -->
+## Etapa 12.2 - Payload de login corrigido
+
+Data: 2026-07-06T21:44:23
+
+Foi corrigido o script da Etapa 12 para usar o campo senha no payload principal de login.
+Foi mantido fallback opcional com password para compatibilidade.
+Alteracoes aplicadas: Payload principal alterado de password para senha, Fallback opcional com password adicionado.
+Nenhuma alteracao foi aplicada ao banco ou a aplicacao.
+A Etapa 12 deve ser reexecutada com as credenciais em variaveis de ambiente.
+<!-- ETAPA_12_2_FIM -->
+
+<!-- ETAPA_13_INICIO -->
+## Etapa 13 - Interface logada validada
+
+Data: 2026-07-06T21:46:57
+
+Foi executada validacao de fluxos reais da interface logada.
+Login OK: True.
+Links reais encontrados no dashboard: 0.
+Assets reais encontrados no dashboard: 1.
+Links sem falhas graves: True.
+Assets sem falhas graves: True.
+Achados criticos em logs: 0.
+Nenhuma escrita funcional foi executada.
+<!-- ETAPA_13_FIM -->
+
+<!-- ETAPA_14_INICIO -->
+## Etapa 14 - Hardening de logs e headers
+
+Data: 2026-07-06T21:50:01
+
+Foi aplicado hardening inicial em server.js.
+Linhas sensiveis antes session id: 0.
+Linhas sensiveis antes cookie: 0.
+Linhas sensiveis depois session id: 0.
+Linhas sensiveis depois cookie: 0.
+Node check OK: True.
+Restart app executado: True.
+<!-- ETAPA_14_FIM -->

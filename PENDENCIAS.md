@@ -238,9 +238,8 @@ Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
 <!-- ETAPA_12_INICIO -->
 ## Pendencias apos Etapa 12
 
-Data: 2026-07-06T21:31:11
+Data: 2026-07-06T21:44:35
 
-Corrigir achados da Etapa 12 antes de avancar para fluxos reais.
 Validar fluxos reais da interface web com usuario logado.
 Validar endpoints autenticados com dados reais em modo controlado.
 Reduzir verbosidade de logs de sessao e cookies em producao.
@@ -259,3 +258,37 @@ Validar rotas reais do sistema apos login confirmado.
 Reduzir verbosidade de logs de sessao e cookies em producao.
 Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
 <!-- ETAPA_12_1_FIM -->
+
+<!-- ETAPA_12_2_INICIO -->
+## Pendencias apos Etapa 12.2
+
+Data: 2026-07-06T21:44:23
+
+Reexecutar a Etapa 12 com credenciais via variaveis de ambiente.
+Confirmar Login OK e cookie recebido no relatorio da Etapa 12.
+Validar fluxos reais da interface web em etapa posterior.
+<!-- ETAPA_12_2_FIM -->
+
+<!-- ETAPA_13_INICIO -->
+## Pendencias apos Etapa 13
+
+Data: 2026-07-06T21:46:57
+
+Revisar eventuais 404 de links reais encontrados no dashboard.
+Reduzir verbosidade de logs de sessao e cookies em producao.
+Validar fluxos reais de cadastro/edicao em ambiente controlado e com dados de teste.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+Planejar rotacao de credenciais reais expostas anteriormente.
+<!-- ETAPA_13_FIM -->
+
+<!-- ETAPA_14_INICIO -->
+## Pendencias apos Etapa 14
+
+Data: 2026-07-06T21:50:01
+
+Se o app nao foi reiniciado, reiniciar em janela controlada para aplicar server.js.
+Reexecutar Etapa 13 apos restart para confirmar reducao dos logs em runtime.
+Revisar CORS permissivo em etapa dedicada.
+Revisar configuracao completa de cookie de sessao para HTTPS producao.
+Planejar rate limit e politica de seguranca de conteudo.
+<!-- ETAPA_14_FIM -->

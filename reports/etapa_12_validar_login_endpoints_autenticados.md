@@ -1,19 +1,19 @@
 # Etapa 12 - Validar login e endpoints autenticados
 
-Data: 2026-07-06T21:31:11
+Data: 2026-07-06T21:44:35
 
 ## Resumo
 
-- Backup documental criado em: backups/etapa_12_20260706_213111
+- Backup documental criado em: backups/etapa_12_20260706_214435
 - Manifesto antes: reports/etapa_12_manifesto_antes.json
 - Manifesto depois: reports/etapa_12_manifesto_depois.json
 - Docker OK: True
 - Docker Compose OK: True
 - Login executado: True
-- Login OK: False
+- Login OK: True
 - Email configurado: True
 - Senha configurada: True
-- Cookies recebidos: 0
+- Cookies recebidos: 1
 - Paginas autenticadas testadas: 7
 - Paginas sem falhas graves: True
 - Endpoints leitura testados: 7
@@ -23,15 +23,15 @@ Data: 2026-07-06T21:31:11
 ## Login
 
 - Executado: True
-- OK: False
+- OK: True
 - Email usado: admin@saas.com
-- Status HTTP: 400
-- Erro: HTTP Error 400: Bad Request
-- Preview: {"success":false,"message":"E-mail e senha são obrigatórios."}
+- Status HTTP: 200
+- Erro: None
+- Preview: {"success":true,"message":"Login realizado com sucesso","redirectUrl":"/dashboard","user":{"id":1,"nome":"Administrador","email":"admin@saas.com","is_admin":true,"cargo":null,"role":"user"},"empresa":{"id":1,"nome":"Super Admin","logo":null
 
 ## Cookies
 
-- Nenhum cookie registrado.
+- name=saas_crm_sid, domain=127.0.0.1, path=/, secure=False
 
 ## Paginas autenticadas
 

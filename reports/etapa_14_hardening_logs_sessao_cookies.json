@@ -1,0 +1,187 @@
+{
+  "gerado_em": "2026-07-06T21:50:01",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_14_20260706_215000",
+    "copiados": [
+      "server.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_14_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "auditoria_antes": {
+    "existe": true,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_usuario_email": 0,
+    "x_powered_disable": true,
+    "headers_etapa14": true,
+    "cookie_http_only": true,
+    "cookie_same_site": false,
+    "cookie_secure": true
+  },
+  "correcao_server": {
+    "arquivo": "server.js",
+    "existe": true,
+    "alterado": false,
+    "alteracoes": [],
+    "sha256_antes": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65",
+    "sha256_depois": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65"
+  },
+  "auditoria_depois": {
+    "existe": true,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_usuario_email": 0,
+    "x_powered_disable": true,
+    "headers_etapa14": true,
+    "cookie_http_only": true,
+    "cookie_same_site": false,
+    "cookie_secure": true
+  },
+  "node_check": {
+    "cmd": [
+      "node",
+      "--check",
+      "server.js"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "ok": true
+  },
+  "restart_app": {
+    "solicitado": true,
+    "executado": true,
+    "ok": true,
+    "resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "restart",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Container whatsapp_bot_app Restarting \n Container whatsapp_bot_app Started",
+      "ok": true
+    }
+  },
+  "validacao_login_dashboard": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "login_ok": false,
+    "dashboard_ok": false,
+    "cookies": [],
+    "login": {
+      "path": "/api/auth/login",
+      "metodo": "POST",
+      "ok": false,
+      "status": null,
+      "erro": "[Errno 104] Connection reset by peer",
+      "body_preview": "",
+      "content_type": "",
+      "redirect_url": null
+    },
+    "dashboard": {
+      "path": "/dashboard",
+      "metodo": "GET",
+      "ok": false,
+      "status": null,
+      "erro": "[Errno 104] Connection reset by peer",
+      "body_preview": "",
+      "content_type": "",
+      "redirect_url": null
+    }
+  },
+  "logs_resultados": [
+    {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--tail=220",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: S6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: S6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AS6SeDU9B_kxgloVSqx_J_q_8LtN5cQ2r....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: hre__EW-8aEKVpPbtSSMvTapTDBMGlt3\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: r2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: r2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Ar2LwWCy_ZRkkWDGofKqE1h50vd4oXqL-....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: ojtJU5gDTwUFrsSsQohSj2FLRA-Aq9fR\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: PROPFIND /\nwhatsapp_bot_app  | 🔑 Session ID: rkl2Kc4-kTP7rdvXj9afJ3qogQaNCkNU\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 🔑 Session ID: aH92_wbawO6eVIDtFRfkkH_mC-ytzpN5\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /crm\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /contatos\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /setores\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /usuarios\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /configuracoes\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/auth/me\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/session\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/empresas\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/usuarios\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/contatos\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/setores\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/mensagens\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: vqsmQpKjAH-EdWEuf_nmffRwlwDqvbHH\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: vqsmQpKjAH-EdWEuf_nmffRwlwDqvbHH\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AvqsmQpKjAH-EdWEuf_nmffRwlwDqvbHH....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: v-aNwRtD9Nj8kr5v_JCf2O-nazHc4zfG\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: v-aNwRtD9Nj8kr5v_JCf2O-nazHc4zfG\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Av-aNwRtD9Nj8kr5v_JCf2O-nazHc4zfG....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | npm error path /usr/src/app\nwhatsapp_bot_app  | npm error command failed\nwhatsapp_bot_app  | npm error signal SIGTERM\nwhatsapp_bot_app  | npm error command sh -c node server.js\nwhatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-06T13_33_45_598Z-debug-0.log",
+      "stderr": "",
+      "ok": true
+    }
+  ],
+  "logs_runtime": {
+    "total_linhas": 221,
+    "linhas_session_id": 27,
+    "linhas_cookie": 45,
+    "achados": [
+      {
+        "linha": 217,
+        "trecho": "whatsapp_bot_app  | npm error path /usr/src/app"
+      },
+      {
+        "linha": 218,
+        "trecho": "whatsapp_bot_app  | npm error command failed"
+      },
+      {
+        "linha": 219,
+        "trecho": "whatsapp_bot_app  | npm error signal SIGTERM"
+      },
+      {
+        "linha": 220,
+        "trecho": "whatsapp_bot_app  | npm error command sh -c node server.js"
+      },
+      {
+        "linha": 221,
+        "trecho": "whatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-06T13_33_45_598Z-debug-0.log"
+      }
+    ],
+    "amostra": "whatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/setores\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /api/mensagens\nwhatsapp_bot_app  | 🔑 Session ID: mf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Amf3_aNR8hHf2zheL9fRoF8eCuHG3OJ9p....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: vqsmQpKjAH-EdWEuf_nmffRwlwDqvbHH\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: vqsmQpKjAH-EdWEuf_nmffRwlwDqvbHH\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3AvqsmQpKjAH-EdWEuf_nmffRwlwDqvbHH....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 🔑 Session ID: v-aNwRtD9Nj8kr5v_JCf2O-nazHc4zfG\nwhatsapp_bot_app  | 🍪 Header Cookie: AUSENTE ❌\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | ✅ [AUTH] Sucesso: admin@saas.com @ Super Admin\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | 🔑 Session ID: v-aNwRtD9Nj8kr5v_JCf2O-nazHc4zfG\nwhatsapp_bot_app  | 🍪 Header Cookie: RECEBIDO\nwhatsapp_bot_app  |    Conteúdo: saas_crm_sid=s%3Av-aNwRtD9Nj8kr5v_JCf2O-nazHc4zfG....\nwhatsapp_bot_app  | 👤 Usuário Logado: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | 🖥️ [DASHBOARD] Acesso permitido para: admin@saas.com (Empresa: 1)\nwhatsapp_bot_app  | npm error path /usr/src/app\nwhatsapp_bot_app  | npm error command failed\nwhatsapp_bot_app  | npm error signal SIGTERM\nwhatsapp_bot_app  | npm error command sh -c node server.js\nwhatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-06T13_33_45_598Z-debug-0.log"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_14_manifesto_depois.json"
+}

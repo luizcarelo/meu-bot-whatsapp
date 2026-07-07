@@ -1,7 +1,7 @@
 {
-  "gerado_em": "2026-07-06T21:44:35",
+  "gerado_em": "2026-07-06T21:50:00",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
-  "total_arquivos": 175,
+  "total_arquivos": 185,
   "arquivos": [
     {
       "arquivo": ".env",
@@ -30,18 +30,18 @@
     },
     {
       "arquivo": "CHANGELOG.md",
-      "tamanho_bytes": 8343,
-      "sha256": "5452a6ff854aecf0dd9f436690ee973cc69508fa809c49aa57863ddde1969003"
+      "tamanho_bytes": 9172,
+      "sha256": "492961eec66b8df431a4a440441d4354ceb2fd4627fab9a4576482884be06f10"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 9278,
-      "sha256": "e5693592dbb5ea33d03300c3c19c7049372f1bd69dc30ce17b0ac7752fad4583"
+      "tamanho_bytes": 10047,
+      "sha256": "37bc325588aa76c4f55bfcb3cc3a99d13f3871bb07e3a48dd51f1b1fa335bee7"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
-      "tamanho_bytes": 8167,
-      "sha256": "a5827e3922c1c715dc82b66e915d93b77caaeb41df726fd96eff813c36c96c1a"
+      "tamanho_bytes": 8920,
+      "sha256": "f4488d03d483213c0802ad5bb6c41a7ee44dadc788ea187003605fec9c879426"
     },
     {
       "arquivo": "Dockerfile",
@@ -55,8 +55,8 @@
     },
     {
       "arquivo": "PENDENCIAS.md",
-      "tamanho_bytes": 9363,
-      "sha256": "5f806df544ce556e5623cd5f5b0e5475512d2f734a319b41edaa0f06b5db4404"
+      "tamanho_bytes": 10240,
+      "sha256": "a27c7c8cc025e53884bb128f99089b334be527916cedfda59b30e2f4bd6917a6"
     },
     {
       "arquivo": "README.md",
@@ -127,6 +127,16 @@
       "arquivo": "etapa_12_validar_login_endpoints_autenticados.py",
       "tamanho_bytes": 29802,
       "sha256": "f37a3da9db0e6261ec734d0f6d9ff30964f01be45d52b291a87a608bb91d2f03"
+    },
+    {
+      "arquivo": "etapa_13_validar_fluxos_interface_logada.py",
+      "tamanho_bytes": 31179,
+      "sha256": "1ebb975d13bbf458ef91768d2b94b48698334a307bc5285c0c26834c797e8c7e"
+    },
+    {
+      "arquivo": "etapa_14_hardening_logs_sessao_cookies.py",
+      "tamanho_bytes": 33018,
+      "sha256": "3e1c309785e1c97e392a3a2f284923ab477854b4dbaf83c9df634029d8b52a87"
     },
     {
       "arquivo": "favicon.ico",
@@ -605,18 +615,58 @@
     },
     {
       "arquivo": "reports/etapa_12_manifesto_depois.json",
-      "tamanho_bytes": 30890,
-      "sha256": "ef07647a6d54a9d8ff3676a2e42b67269ade12b5200b4f933707c51c6086430d"
+      "tamanho_bytes": 32269,
+      "sha256": "c8fc0a0c35883fa161c1931479f2ea10f783220a1fcdeb4e00fa968c5edb5c02"
     },
     {
       "arquivo": "reports/etapa_12_validar_login_endpoints_autenticados.json",
-      "tamanho_bytes": 27647,
-      "sha256": "2ebf9631861613ed7abc51c687da9293cb4be4f16623f95be05da39872f9d3ef"
+      "tamanho_bytes": 29348,
+      "sha256": "3477e7d480876e97c35637c56807ab163acd87e6826fbcd2349e90145e4ae4da"
     },
     {
       "arquivo": "reports/etapa_12_validar_login_endpoints_autenticados.md",
-      "tamanho_bytes": 2521,
-      "sha256": "f4950768d6e88aaad9b716219eab52f6841afddd9477a1e33e3303dc7c76fbf5"
+      "tamanho_bytes": 2704,
+      "sha256": "756f1e809d3ad18d4ce6a9e7dca01b46fc85432408c0a5520de9bf16824e140a"
+    },
+    {
+      "arquivo": "reports/etapa_13_manifesto_antes.json",
+      "tamanho_bytes": 32459,
+      "sha256": "b11a4e733464b9ea2c878d6d129451ea30a695805abd6475c8ecbc6f173bae99"
+    },
+    {
+      "arquivo": "reports/etapa_13_manifesto_depois.json",
+      "tamanho_bytes": 32643,
+      "sha256": "369e58a8ca905fcf9676f42da986c74d5d47ed1e6ee9be7d7e27cccbcadcaa12"
+    },
+    {
+      "arquivo": "reports/etapa_13_validar_fluxos_interface_logada.json",
+      "tamanho_bytes": 23133,
+      "sha256": "c31b6cf88f5f6920b21e3b81a8cabd18cb171762a433846ef9559a43abec5246"
+    },
+    {
+      "arquivo": "reports/etapa_13_validar_fluxos_interface_logada.md",
+      "tamanho_bytes": 1514,
+      "sha256": "1a96ab5f29c1096e883f5eb5d0c04b654fd6dbc478b54d37e0b6d8840220a35e"
+    },
+    {
+      "arquivo": "reports/etapa_14_hardening_logs_sessao_cookies.json",
+      "tamanho_bytes": 21321,
+      "sha256": "8818bfd7eec4339c77fa9eed08db1153f03673b1138cac6c82e1cd624614f5f0"
+    },
+    {
+      "arquivo": "reports/etapa_14_hardening_logs_sessao_cookies.md",
+      "tamanho_bytes": 1944,
+      "sha256": "baf232ae31a37a2ed61e9c76392992acd6a350b7fdf197a38434c6490674c153"
+    },
+    {
+      "arquivo": "reports/etapa_14_manifesto_antes.json",
+      "tamanho_bytes": 33413,
+      "sha256": "7fb69774b15c4949be6e3381beea72bd637203c8e11f5a7e4d545c9590389a04"
+    },
+    {
+      "arquivo": "reports/etapa_14_manifesto_depois.json",
+      "tamanho_bytes": 33599,
+      "sha256": "ddc276ecf61e515bd0f140d397a869194f03c8f6804d7892f19594862452bcad"
     },
     {
       "arquivo": "routes/api.js",
@@ -815,8 +865,8 @@
     },
     {
       "arquivo": "server.js",
-      "tamanho_bytes": 6374,
-      "sha256": "d928b5c7193e6b15149072b1b44d88dfdf9d77987b95c934d019a78958679a45"
+      "tamanho_bytes": 6401,
+      "sha256": "f28820b1b84a905d1563cd35c66364c2b2abb444aea4441bedfaaf769904bb65"
     },
     {
       "arquivo": "src/config/db.js",

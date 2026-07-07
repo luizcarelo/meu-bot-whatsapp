@@ -1,7 +1,7 @@
 {
-  "gerado_em": "2026-07-06T21:31:11",
+  "gerado_em": "2026-07-06T21:44:35",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
-  "total_arquivos": 168,
+  "total_arquivos": 175,
   "arquivos": [
     {
       "arquivo": ".env",
@@ -30,18 +30,18 @@
     },
     {
       "arquivo": "CHANGELOG.md",
-      "tamanho_bytes": 7608,
-      "sha256": "48e8569d15d4ee7b952ccbf87c646285d9823934b4431dc2a325d33d5a4140f9"
+      "tamanho_bytes": 8343,
+      "sha256": "da203f89bcb83d3402ce1e31d798c7a9b2a0c7b3bf5fb596d2489cc9377bc7bd"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 8341,
-      "sha256": "115b3573e70bd5b93dc864b7098bd5f61c9298d15dff3c82563015d2c8ef36dc"
+      "tamanho_bytes": 9279,
+      "sha256": "4767fdf20f44f2ad436b2ce0ae21de5924f8e0afcf988b432765238c380edc7f"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
-      "tamanho_bytes": 7488,
-      "sha256": "881e02c22def29a9cb2d08b0c480fbc56f132ac4e27c275741b0a00dbd8f1a33"
+      "tamanho_bytes": 8167,
+      "sha256": "9de206f979dc59711985dcc52fa5c21ea85a9faca3a5f7ffb29ac4c17ba69a52"
     },
     {
       "arquivo": "Dockerfile",
@@ -55,8 +55,8 @@
     },
     {
       "arquivo": "PENDENCIAS.md",
-      "tamanho_bytes": 8706,
-      "sha256": "85419863f57ae368b278e9ae1a4b2194066fe8c03b638878f7f9aaffb1e696bf"
+      "tamanho_bytes": 9428,
+      "sha256": "ad085b894a0964ffd04241b5809520b9f2d91fce2b7879f3cde1f425f7fbc91b"
     },
     {
       "arquivo": "README.md",
@@ -67,6 +67,11 @@
       "arquivo": "__pycache__/etapa_10_testes_funcionais_escrita_postgres.cpython-314.pyc",
       "tamanho_bytes": 39981,
       "sha256": "ab4a3bda1a8342f0d3afec99efd00e32f792e7d767f081bd6524b8179ea4be44"
+    },
+    {
+      "arquivo": "__pycache__/etapa_12_validar_login_endpoints_autenticados.cpython-314.pyc",
+      "tamanho_bytes": 41671,
+      "sha256": "837fc212f1c7f288d4015d2b3ad0380cfab3e07827a6269d9b2ddf368703c84d"
     },
     {
       "arquivo": "controllers/AdminController.js",
@@ -109,29 +114,19 @@
       "sha256": "a6519c62daba983fb0364a506a7254cf8c52101f87a6e39ac076016c28508d5b"
     },
     {
-      "arquivo": "etapa_10_1_corrigir_sequences_postgres.py",
-      "tamanho_bytes": 25434,
-      "sha256": "373998c28e9eb9c72098c41f3c52d2e3d88eb31b0fcf3bf8d8b70a42220a9fbd"
+      "arquivo": "etapa_12_1_diagnosticar_login_auth.py",
+      "tamanho_bytes": 33100,
+      "sha256": "6784bb3fafe99148edd3ea235f590b1364a7d4965f4e415dc98c075d5d17d681"
     },
     {
-      "arquivo": "etapa_10_hotfix_syntax.py",
-      "tamanho_bytes": 5358,
-      "sha256": "b4744ed68ef83080368789a93a2e5468845e0cd8f044cecc4c7757b84f48fb74"
-    },
-    {
-      "arquivo": "etapa_10_testes_funcionais_escrita_postgres.py",
-      "tamanho_bytes": 29895,
-      "sha256": "bc852279d74c76c32837b37b015fadac0c8690f6f3bfa369d2efb74fae74d5d9"
-    },
-    {
-      "arquivo": "etapa_11_validar_endpoints_interface.py",
-      "tamanho_bytes": 22793,
-      "sha256": "ca092dd03ae70a26e579a32254b65e38d5d1fb88a4fcf9a683f969f4cbbfa890"
+      "arquivo": "etapa_12_2_corrigir_script_login_payload.py",
+      "tamanho_bytes": 8944,
+      "sha256": "7e6777c86212b07b5c52cdf98b9dbe67983fcc3d147e8ce43868cedfc3386f55"
     },
     {
       "arquivo": "etapa_12_validar_login_endpoints_autenticados.py",
-      "tamanho_bytes": 29028,
-      "sha256": "33cd85c7f11d0e787ddc34e37478538e5edf7c27a274fe5006f3cdd22c32a8c1"
+      "tamanho_bytes": 29802,
+      "sha256": "f37a3da9db0e6261ec734d0f6d9ff30964f01be45d52b291a87a608bb91d2f03"
     },
     {
       "arquivo": "favicon.ico",
@@ -584,24 +579,44 @@
       "sha256": "7c51cd0cf8b1d421136062ac16a15b950a13287dc9a3b4cf542b49c87d386f13"
     },
     {
+      "arquivo": "reports/etapa_12_1_diagnosticar_login_auth.json",
+      "tamanho_bytes": 30121,
+      "sha256": "9270080b34ae6b2a36ed44ca4a223d56af8ba9f46b39bb5a62b4d26c8f321302"
+    },
+    {
+      "arquivo": "reports/etapa_12_1_diagnosticar_login_auth.md",
+      "tamanho_bytes": 5174,
+      "sha256": "577c5da1a05f36366a73311938a527db8b3fe065028edfd2fe6145ac0e34eac6"
+    },
+    {
+      "arquivo": "reports/etapa_12_1_manifesto_antes.json",
+      "tamanho_bytes": 31867,
+      "sha256": "6409d9b8b184f59046a71f7f0e89d6d3500341d4086edbd62ffee86136e271da"
+    },
+    {
+      "arquivo": "reports/etapa_12_1_manifesto_depois.json",
+      "tamanho_bytes": 31867,
+      "sha256": "9751ee5c42b49acea4e5b00fdb31e2d9fe410b2f402b8df4fb8c3166b5de54c9"
+    },
+    {
       "arquivo": "reports/etapa_12_manifesto_antes.json",
-      "tamanho_bytes": 30114,
-      "sha256": "d6639a585ad3e06ebda4d0a568d1ae2a9d488785d0ffb2b558e8fcfa4eb14d2e"
+      "tamanho_bytes": 30890,
+      "sha256": "11042185ed7894d0bbe180ce08ec67a841081e0b7145a81ffb51cca59c74e34b"
     },
     {
       "arquivo": "reports/etapa_12_manifesto_depois.json",
-      "tamanho_bytes": 30298,
-      "sha256": "0b90c5c6426e2a6ee7a2e15ab00aac5cace0ef1331b20ab4fca20ecb51636286"
+      "tamanho_bytes": 30890,
+      "sha256": "ef07647a6d54a9d8ff3676a2e42b67269ade12b5200b4f933707c51c6086430d"
     },
     {
       "arquivo": "reports/etapa_12_validar_login_endpoints_autenticados.json",
-      "tamanho_bytes": 27275,
-      "sha256": "8aafa3c299c88fa5f98c0b349e9d378b362aa83db99d089f47276105e40da065"
+      "tamanho_bytes": 27647,
+      "sha256": "2ebf9631861613ed7abc51c687da9293cb4be4f16623f95be05da39872f9d3ef"
     },
     {
       "arquivo": "reports/etapa_12_validar_login_endpoints_autenticados.md",
-      "tamanho_bytes": 2439,
-      "sha256": "9d71e6fc396f3c23fc3c8275d08e2d150d0be3ef517c0dda226de7e116193235"
+      "tamanho_bytes": 2521,
+      "sha256": "f4950768d6e88aaad9b716219eab52f6841afddd9477a1e33e3303dc7c76fbf5"
     },
     {
       "arquivo": "routes/api.js",
@@ -742,6 +757,26 @@
       "arquivo": "script/etapa_09_validar_funcional_postgres.py",
       "tamanho_bytes": 25436,
       "sha256": "1f275a3c82204681d4f01e7ade13397b8fb9c0ebae6a8319e7cc33aeced52e73"
+    },
+    {
+      "arquivo": "script/etapa_10_1_corrigir_sequences_postgres.py",
+      "tamanho_bytes": 25434,
+      "sha256": "373998c28e9eb9c72098c41f3c52d2e3d88eb31b0fcf3bf8d8b70a42220a9fbd"
+    },
+    {
+      "arquivo": "script/etapa_10_hotfix_syntax.py",
+      "tamanho_bytes": 5358,
+      "sha256": "b4744ed68ef83080368789a93a2e5468845e0cd8f044cecc4c7757b84f48fb74"
+    },
+    {
+      "arquivo": "script/etapa_10_testes_funcionais_escrita_postgres.py",
+      "tamanho_bytes": 29895,
+      "sha256": "bc852279d74c76c32837b37b015fadac0c8690f6f3bfa369d2efb74fae74d5d9"
+    },
+    {
+      "arquivo": "script/etapa_11_validar_endpoints_interface.py",
+      "tamanho_bytes": 22793,
+      "sha256": "ca092dd03ae70a26e579a32254b65e38d5d1fb88a4fcf9a683f969f4cbbfa890"
     },
     {
       "arquivo": "script/export_full.js",

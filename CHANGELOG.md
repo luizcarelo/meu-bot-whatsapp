@@ -230,7 +230,7 @@ Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_12_INICIO -->
 ## Etapa 12 - Validacao de login e autenticacao
 
-Data: 2026-07-06T21:31:11
+Data: 2026-07-06T21:44:35
 
 Validado login real via endpoint de autenticacao.
 Validadas paginas autenticadas com cookie mantido em memoria.
@@ -250,3 +250,40 @@ Testados payloads de login sem imprimir senha.
 Coletados logs recentes para apoio ao diagnostico.
 Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_12_1_FIM -->
+
+<!-- ETAPA_12_2_INICIO -->
+## Etapa 12.2 - Correcao do script de login
+
+Data: 2026-07-06T21:44:23
+
+Corrigido payload principal do script etapa_12_validar_login_endpoints_autenticados.py.
+Campo principal alterado para senha.
+Fallback com password mantido.
+Validada sintaxe com py_compile.
+Criado backup do script antes da alteracao.
+<!-- ETAPA_12_2_FIM -->
+
+<!-- ETAPA_13_INICIO -->
+## Etapa 13 - Validacao de interface logada
+
+Data: 2026-07-06T21:46:57
+
+Realizado login com cookie em memoria.
+Extraidos links e assets reais do HTML do dashboard.
+Testados fluxos GET encontrados no dashboard.
+Testados assets locais encontrados no dashboard.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_13_FIM -->
+
+<!-- ETAPA_14_INICIO -->
+## Etapa 14 - Hardening de seguranca operacional
+
+Data: 2026-07-06T21:50:01
+
+Removida impressao de Session ID e cookie em logs do middleware geral quando localizada.
+Reduzido log de usuario autenticado para empresa_id sem email.
+Adicionado app.disable para x-powered-by quando possivel.
+Adicionados headers HTTP basicos quando possivel.
+Executado node --check em server.js.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_14_FIM -->

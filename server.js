@@ -34,6 +34,17 @@ const apiRoutes = require('./routes/api');
 const SessionManager = require('./src/managers/SessionManager');
 
 const app = express();
+app.disable('x-powered-by');
+// ETAPA14_SECURITY_HEADERS_INICIO
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('Referrer-Policy', 'no-referrer');
+    res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+    next();
+});
+// ETAPA14_SECURITY_HEADERS_FIM
+
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
@@ -78,7 +89,6 @@ redisClient.on('connect', () => console.log('🔌 [Redis] Conectado com sucesso.
 
     app.use(session({
         store: new RedisStore({ client: redisClient }),
-        name: 'saas_crm_sid', // Nome personalizado do cookie
         secret: process.env.SESSION_SECRET || 'chave_ultra_secreta_debug',
         resave: false,
         saveUninitialized: false,
@@ -99,16 +109,12 @@ redisClient.on('connect', () => console.log('🔌 [Redis] Conectado com sucesso.
 
         console.log('\n--- 🔍 DEBUG REQUEST ---');
         console.log(`📡 URL: ${req.method} ${req.url}`);
-        console.log(`🔑 Session ID: ${req.sessionID}`);
         
         // Verifica se o cookie chegou
-        const cookieHeader = req.headers.cookie;
-        console.log(`🍪 Header Cookie: ${cookieHeader ? 'RECEBIDO' : 'AUSENTE ❌'}`);
-        if (cookieHeader) console.log(`   Conteúdo: ${cookieHeader.substring(0, 50)}...`);
 
         // Verifica se o Redis devolveu dados
         if (req.session && req.session.user) {
-            console.log(`👤 Usuário Logado: ${req.session.user.email} (Empresa: ${req.session.empresaId})`);
+            console.log(`[REQ] Usuario autenticado empresa_id=${req.session?.empresaId || 'N/A'}`);
         } else {
             console.log(`👻 Sessão Vazia (Anônimo)`);
         }
