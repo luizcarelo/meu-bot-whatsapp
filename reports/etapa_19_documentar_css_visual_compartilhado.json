@@ -1,0 +1,30 @@
+{
+  "gerado_em": "2026-07-06T23:01:50",
+  "backup": {
+    "destino": "backups/etapa_19_docs_20260706_230150",
+    "copiados": [
+      "public/css/style.css",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": []
+  },
+  "validacao_css": {
+    "arquivo": "public/css/style.css",
+    "existe": true,
+    "sha256": "18440595d600dc44d456ed97d79d518130f569f912e7ea67274687a7c03470d7",
+    "tem_er_card": true,
+    "tem_er_btn": true,
+    "tem_er_badge": true,
+    "tem_variaveis": true,
+    "sem_asterisco": true
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ]
+}

@@ -74,6 +74,44 @@ router.get('/dashboard', isAuthenticated, async (req, res) => {
     }
 });
 
+
+// ETAPA20_1_ROTA_CRM_INICIO
+router.get('/crm', isAuthenticated, async (req, res) => {
+    try {
+        const empresaId = req.session.empresaId;
+
+        if (!empresaId) {
+            req.session.destroy();
+            return res.redirect('/login?error=sessao_invalida');
+        }
+
+        const result = await db.query(
+            'SELECT id, nome, logo, cor, plano, limite_usuarios FROM empresas WHERE id = ? LIMIT 1',
+            [empresaId]
+        );
+
+        const empresa = Array.isArray(result) ? result[0] : (result.rows ? result.rows[0] : null);
+
+        if (!empresa) {
+            return res.status(404).send('Empresa não encontrada.');
+        }
+
+        return res.render('crm', {
+            titulo: 'CRM - Atendimento',
+            user: req.session.user,
+            empresa: empresa,
+            isMobile: false,
+            socketUrl: process.env.SOCKET_URL || ''
+        });
+    } catch (error) {
+        console.error('[CRM PAGE] Erro ao carregar CRM:', error);
+        return res.status(500).render('login', {
+            error: 'Erro ao carregar CRM: ' + error.message
+        });
+    }
+});
+// ETAPA20_1_ROTA_CRM_FIM
+
 router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/login');

@@ -350,3 +350,87 @@ Definir COOKIE_SECURE=true apenas com HTTPS valido.
 Validar ambiente externo com HTTPS.
 Planejar rate limit e politica CSP dedicada.
 <!-- ETAPA_15_2_FIM -->
+
+<!-- ETAPA_16_INICIO -->
+## Pendencias apos Etapa 16
+
+Data: 2026-07-06T22:36:17
+
+Corrigir referencias locais ausentes identificadas na auditoria.
+Definir primeira melhoria visual controlada para a tela de login.
+Planejar internalizacao gradual de dependencias externas.
+Avaliar substituicao de FontAwesome CDN por assets locais.
+Avaliar Alpine local em public/vendor.
+Planejar build local do Tailwind sem quebrar classes existentes.
+Mapear scripts inline antes de aplicar CSP forte.
+<!-- ETAPA_16_FIM -->
+
+<!-- ETAPA_17_INICIO -->
+## Pendencias apos Etapa 17
+
+Data: 2026-07-06T22:40:03
+
+Validar visual da tela de login manualmente no navegador.
+Planejar melhoria controlada do dashboard.
+Planejar internalizacao de Alpine, FontAwesome e Tailwind em etapas separadas.
+Mapear scripts inline antes de CSP forte.
+Revisar assets locais ausentes apontados na Etapa 16.
+<!-- ETAPA_17_FIM -->
+
+<!-- ETAPA_17_1_INICIO -->
+## Pendencias apos Etapa 17.1
+
+Data: 2026-07-06T22:46:40
+
+Validar visual manualmente no navegador.
+Planejar melhoria controlada do dashboard.
+Planejar internalizacao de dependencias externas em etapas separadas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_17_1_FIM -->
+
+<!-- ETAPA_18_INICIO -->
+## Pendencias apos Etapa 18
+
+Data: 2026-07-06T22:51:14
+
+Validar visual do dashboard manualmente no navegador.
+Planejar internalizacao de dependencias externas.
+Corrigir ou criar CSS local compartilhado para /css/style.css.
+Planejar melhoria de views/crm.ejs e views/admin-panel.ejs em etapas separadas.
+Mapear scripts inline antes de aplicar CSP forte.
+<!-- ETAPA_18_FIM -->
+
+<!-- ETAPA_19_INICIO -->
+## Pendencias apos Etapa 19
+
+Data: 2026-07-06T23:01:50
+
+Validar visual de admin-panel, crm e super-admin no navegador.
+Planejar etapa para aplicar classes er de forma controlada nas views antigas.
+Planejar internalizacao de FontAwesome, Alpine, Tailwind e imagens externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_19_FIM -->
+
+<!-- ETAPA_20_INICIO -->
+## Pendencias apos Etapa 20
+
+Data: 2026-07-06T23:13:14
+
+Validar visual do CRM manualmente no navegador.
+Planejar aplicacao visual em views/admin-panel.ejs.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_20_FIM -->
+
+<!-- ETAPA_20_1_INICIO -->
+## Pendencias apos Etapa 20.1
+
+Data: 2026-07-06T23:19:41
+
+Validar visual do CRM manualmente no navegador.
+Planejar aplicacao visual em views/admin-panel.ejs.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_20_1_FIM -->

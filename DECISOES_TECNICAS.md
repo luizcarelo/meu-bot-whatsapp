@@ -320,3 +320,81 @@ Decidido nao reiniciar app nesta etapa.
 Decidido usar teste com Origin local e Origin externo nao permitido.
 Decidido manter esta etapa como baseline de seguranca HTTP.
 <!-- ETAPA_15_2_FIM -->
+
+<!-- ETAPA_16_INICIO -->
+## Etapa 16 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T22:36:17
+
+Decidido auditar antes de alterar telas.
+Decidido separar melhorias visuais de internalizacao de dependencias.
+Decidido iniciar melhorias futuras por login e dashboard.
+Decidido tratar Tailwind CDN com cautela para evitar quebra de layout.
+<!-- ETAPA_16_FIM -->
+
+<!-- ETAPA_17_INICIO -->
+## Etapa 17 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T22:40:03
+
+Decidido melhorar apenas views/login.ejs nesta etapa.
+Decidido nao remover CDNs ainda para reduzir risco.
+Decidido manter endpoint /api/auth/login.
+Decidido manter campo senha no payload.
+Decidido tratar dashboard em etapa posterior.
+<!-- ETAPA_17_FIM -->
+
+<!-- ETAPA_17_1_INICIO -->
+## Etapa 17.1 - Decisoes tecnicas
+
+Data: 2026-07-06T22:46:40
+
+Decidido validar runtime antes de novas melhorias visuais.
+Decidido comparar hashes local/container para confirmar aplicacao da view.
+Decidido nao alterar frontend nesta etapa.
+Decidido reiniciar app somente com ETAPA17_1_RESTART_APP=true.
+<!-- ETAPA_17_1_FIM -->
+
+<!-- ETAPA_18_INICIO -->
+## Etapa 18 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T22:51:14
+
+Decidido melhorar o dashboard por injecao controlada de CSS e script marcados.
+Decidido nao substituir completamente views/dashboard.ejs para reduzir risco.
+Decidido nao remover CDNs nesta etapa.
+Decidido manter a logica e os endpoints existentes.
+<!-- ETAPA_18_FIM -->
+
+<!-- ETAPA_19_INICIO -->
+## Etapa 19 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T23:01:50
+
+Decidido criar CSS compartilhado antes de alterar views antigas.
+Decidido evitar seletor universal para reduzir efeito colateral.
+Decidido manter escopo visual por classes er.
+Decidido manter esta etapa limitada a CSS e documentacao.
+<!-- ETAPA_19_FIM -->
+
+<!-- ETAPA_20_INICIO -->
+## Etapa 20 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T23:13:14
+
+Decidido aplicar visual no CRM por injecao controlada, sem substituir a view inteira.
+Decidido usar public/css/style.css criado na Etapa 19.
+Decidido preservar scripts e chamadas existentes.
+Decidido nao alterar backend ou banco nesta etapa.
+<!-- ETAPA_20_FIM -->
+
+<!-- ETAPA_20_1_INICIO -->
+## Etapa 20.1 - Decisoes tecnicas
+
+Data: 2026-07-06T23:19:41
+
+Decidido registrar /crm em routes/index.js porque a view existia mas nao havia rota frontend.
+Decidido nao alterar views/crm.ejs nesta etapa.
+Decidido reutilizar consulta de empresa semelhante ao dashboard.
+Decidido reiniciar app somente com ETAPA20_1_RESTART_APP=true.
+<!-- ETAPA_20_1_FIM -->

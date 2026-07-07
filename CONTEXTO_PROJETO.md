@@ -391,3 +391,109 @@ Logs novos com Session ID: 0.
 Logs novos com cookie: 0.
 Logs novos com email: 0.
 <!-- ETAPA_15_2_FIM -->
+
+<!-- ETAPA_16_INICIO -->
+## Etapa 16 - Auditoria frontend e melhorias
+
+Data: 2026-07-06T22:36:17
+
+Foi executada auditoria do frontend sem alterar telas ou regras de negocio.
+Arquivos analisados: 12.
+Referencias externas encontradas: 24.
+Referencias locais encontradas: 8.
+Assets locais ausentes: 7.
+Arquivos com Tailwind CDN: 2.
+Arquivos com FontAwesome CDN: 5.
+Arquivos com Alpine CDN: 2.
+Nenhuma alteracao foi aplicada ao frontend nesta etapa.
+<!-- ETAPA_16_FIM -->
+
+<!-- ETAPA_17_INICIO -->
+## Etapa 17 - Melhoria visual da tela de login
+
+Data: 2026-07-06T22:40:03
+
+Foi aplicada melhoria visual controlada em views/login.ejs.
+Arquivo alterado: True.
+Validacao estrutural OK: True.
+Pagina de login OK: False.
+Login OK: True.
+Dashboard OK: True.
+Nenhuma regra de backend ou banco foi alterada.
+<!-- ETAPA_17_FIM -->
+
+<!-- ETAPA_17_1_INICIO -->
+## Etapa 17.1 - Runtime da tela de login visual validado
+
+Data: 2026-07-06T22:46:40
+
+Foi validado o runtime da tela de login visual.
+Hash local igual ao container: True.
+Restart solicitado: True.
+Restart executado: True.
+Tela nova validada em /login: True.
+Login OK: True.
+Dashboard OK: True.
+Nenhum codigo foi alterado nesta etapa.
+<!-- ETAPA_17_1_FIM -->
+
+<!-- ETAPA_18_INICIO -->
+## Etapa 18 - Melhoria visual controlada do dashboard
+
+Data: 2026-07-06T22:51:14
+
+Foi aplicada melhoria visual controlada em views/dashboard.ejs.
+Arquivo alterado: True.
+Validacao estrutural OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Dashboard visual OK: True.
+Nenhum backend ou banco foi alterado.
+<!-- ETAPA_18_FIM -->
+
+<!-- ETAPA_19_INICIO -->
+## Etapa 19 - CSS visual compartilhado
+
+Data: 2026-07-06T23:01:50
+
+Foi criado public/css/style.css como base visual compartilhada.
+O arquivo define cores, cards, botoes, inputs, tabelas, badges e responsividade.
+Nenhuma view, backend, rota, autenticacao ou banco foi alterado nesta etapa.
+CSS existe: True.
+CSS sem asterisco: True.
+SHA256: 18440595d600dc44d456ed97d79d518130f569f912e7ea67274687a7c03470d7.
+<!-- ETAPA_19_FIM -->
+
+<!-- ETAPA_20_INICIO -->
+## Etapa 20 - Visual compartilhado aplicado ao CRM
+
+Data: 2026-07-06T23:13:14
+
+Foi aplicada melhoria visual controlada em views/crm.ejs.
+Arquivo alterado: True.
+CSS compartilhado adicionado: False.
+Script visual adicionado: True.
+Validacao estrutural OK: True.
+Login OK: True.
+Dashboard OK: True.
+CRM OK: False.
+CRM visual OK: False.
+<!-- ETAPA_20_FIM -->
+
+<!-- ETAPA_20_1_INICIO -->
+## Etapa 20.1 - Rota CRM registrada
+
+Data: 2026-07-06T23:19:41
+
+Foi registrada a rota GET /crm em routes/index.js.
+Arquivo alterado: True.
+Rota ja existia: False.
+Validacao estrutural OK: True.
+Node check OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+CRM OK: False.
+CRM visual OK: False.
+<!-- ETAPA_20_1_FIM -->

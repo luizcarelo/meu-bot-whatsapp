@@ -80,6 +80,88 @@
             opacity: 0;
         }
     </style>
+
+<!-- ETAPA18_DASHBOARD_VISUAL_INICIO -->
+<style id="etapa18-dashboard-visual">
+    :root {
+        --etapa18-red: #b91c1c;
+        --etapa18-red-soft: #fef2f2;
+        --etapa18-slate: #0f172a;
+        --etapa18-muted: #64748b;
+        --etapa18-border: #e2e8f0;
+        --etapa18-card: rgba(255, 255, 255, 0.94);
+    }
+
+    body {
+        background:
+            radial-gradient(circle at top left, rgba(239, 68, 68, 0.10), transparent 28rem),
+            radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.08), transparent 30rem),
+            #f8fafc !important;
+    }
+
+    .etapa18-shell {
+        min-height: 100vh;
+        background:
+            linear-gradient(135deg, rgba(15, 23, 42, 0.02), rgba(185, 28, 28, 0.04));
+    }
+
+    .etapa18-hero {
+        border: 1px solid rgba(226, 232, 240, 0.9);
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.96), rgba(254,242,242,0.88));
+        box-shadow: 0 18px 55px rgba(15, 23, 42, 0.08);
+    }
+
+    .etapa18-card {
+        border: 1px solid var(--etapa18-border);
+        background: var(--etapa18-card);
+        box-shadow: 0 16px 35px rgba(15, 23, 42, 0.07);
+        transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .etapa18-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.10);
+    }
+
+    .etapa18-pill {
+        border: 1px solid rgba(185, 28, 28, 0.16);
+        background: rgba(254, 242, 242, 0.85);
+        color: #991b1b;
+    }
+
+    .etapa18-title {
+        color: var(--etapa18-slate);
+        letter-spacing: -0.03em;
+    }
+
+    .etapa18-subtitle {
+        color: var(--etapa18-muted);
+    }
+
+    .etapa18-icon {
+        background: linear-gradient(135deg, #991b1b, #dc2626, #f97316);
+        box-shadow: 0 12px 24px rgba(220, 38, 38, 0.22);
+    }
+
+    .etapa18-section-title {
+        color: #0f172a;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+    }
+
+    .etapa18-soft-border {
+        border-color: rgba(226, 232, 240, 0.85) !important;
+    }
+
+    .etapa18-main-wrap {
+        max-width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<!-- ETAPA18_DASHBOARD_VISUAL_FIM -->
+
 </head>
 
 <!-- Alpine Store: Gerencia estado global da aplicação -->
@@ -517,5 +599,93 @@
             }
         }
     </script>
+
+<!-- ETAPA18_DASHBOARD_SCRIPT_INICIO -->
+<script id="etapa18-dashboard-script">
+(function () {
+    function criarCard(titulo, valor, icone, detalhe) {
+        var card = document.createElement('div');
+        card.className = 'etapa18-card rounded-3xl p-5';
+        card.innerHTML = ''
+            + '<div class="flex items-center justify-between gap-4">'
+            + '  <div>'
+            + '    <p class="text-sm font-bold text-slate-500">' + titulo + '</p>'
+            + '    <p class="text-2xl font-black text-slate-900 mt-1">' + valor + '</p>'
+            + '    <p class="text-xs text-slate-400 mt-1">' + detalhe + '</p>'
+            + '  </div>'
+            + '  <div class="etapa18-icon h-12 w-12 rounded-2xl flex items-center justify-center text-white">'
+            + '    <i class="' + icone + '"></i>'
+            + '  </div>'
+            + '</div>';
+        return card;
+    }
+
+    function aplicarMelhoria() {
+        if (document.getElementById('etapa18-dashboard-banner')) {
+            return;
+        }
+
+        var body = document.body;
+        if (body) {
+            body.classList.add('etapa18-shell');
+        }
+
+        var alvo = document.querySelector('main') || document.querySelector('.container') || document.body;
+        if (!alvo) {
+            return;
+        }
+
+        alvo.classList.add('etapa18-main-wrap');
+
+        var banner = document.createElement('section');
+        banner.id = 'etapa18-dashboard-banner';
+        banner.className = 'etapa18-hero rounded-3xl p-6 sm:p-8 mb-6';
+        banner.innerHTML = ''
+            + '<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">'
+            + '  <div>'
+            + '    <div class="etapa18-pill inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold mb-4">'
+            + '      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>'
+            + '      Dashboard operacional'
+            + '    </div>'
+            + '    <h1 class="etapa18-title text-3xl sm:text-4xl font-black">Visao geral do atendimento</h1>'
+            + '    <p class="etapa18-subtitle mt-2 max-w-2xl">Acompanhe conversas, contatos, setores e atividades do sistema em uma area mais clara e organizada.</p>'
+            + '  </div>'
+            + '  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-full lg:min-w-[520px]">'
+            + '    <div id="etapa18-card-1"></div>'
+            + '    <div id="etapa18-card-2"></div>'
+            + '    <div id="etapa18-card-3"></div>'
+            + '  </div>'
+            + '</div>';
+
+        alvo.insertBefore(banner, alvo.firstChild);
+
+        var c1 = document.getElementById('etapa18-card-1');
+        var c2 = document.getElementById('etapa18-card-2');
+        var c3 = document.getElementById('etapa18-card-3');
+
+        if (c1) c1.appendChild(criarCard('Sessao', 'Ativa', 'fa-solid fa-shield-halved', 'Usuario autenticado'));
+        if (c2) c2.appendChild(criarCard('Interface', 'Online', 'fa-solid fa-gauge-high', 'Painel carregado'));
+        if (c3) c3.appendChild(criarCard('Mensagens', 'Tempo real', 'fa-solid fa-comments', 'Socket.IO preservado'));
+
+        var cards = document.querySelectorAll('.card, .bg-white, section, article');
+        for (var i = 0; i < cards.length; i++) {
+            if (cards[i].id === 'etapa18-dashboard-banner') {
+                continue;
+            }
+            if (cards[i].classList) {
+                cards[i].classList.add('etapa18-soft-border');
+            }
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', aplicarMelhoria);
+    } else {
+        aplicarMelhoria();
+    }
+})();
+</script>
+<!-- ETAPA18_DASHBOARD_SCRIPT_FIM -->
+
 </body>
 </html>

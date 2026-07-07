@@ -1,257 +1,294 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="h-full bg-slate-50">
+<html lang="pt-BR" class="h-full bg-slate-950">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Acesso Seguro</title>
-    
-    <!-- TailwindCSS (Via CDN para desenvolvimento) -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
-        /* Fix: Compatibilidade de ajuste de texto (Audit) */
         html {
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
         }
-        body { font-family: 'Inter', sans-serif; }
-        [x-cloak] { display: none !important; }
-        .animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .login-bg {
+            background:
+                radial-gradient(circle at top left, rgba(239, 68, 68, 0.22), transparent 32rem),
+                radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.16), transparent 30rem),
+                linear-gradient(135deg, #0f172a 0%, #111827 48%, #1f2937 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.42);
+        }
+
+        .brand-mark {
+            background: linear-gradient(135deg, #b91c1c 0%, #ef4444 52%, #f97316 100%);
+            box-shadow: 0 16px 32px rgba(239, 68, 68, 0.34);
+        }
+
+        .field-focus:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.13);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #991b1b 0%, #dc2626 50%, #ef4444 100%);
+            box-shadow: 0 16px 28px rgba(220, 38, 38, 0.28);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 20px 34px rgba(220, 38, 38, 0.34);
+        }
+
+        .soft-grid {
+            background-image:
+                linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 42px 42px;
         }
     </style>
-    
-    <!-- Alpine.js (CORREÇÃO: atributo 'defer' adicionado para corrigir o erro de inicialização) -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8" x-data="{ showRecovery: false }">
-    
-    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div class="mx-auto h-12 w-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xl font-bold shadow-lg">
-            <i class="fas fa-layer-group"></i>
-        </div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 tracking-tight">Sistemas de Gestão</h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
-            Acesso administrativo ao CRM & WhatsApp
-        </p>
-    </div>
+<body class="h-full login-bg">
+    <main class="min-h-screen relative overflow-hidden soft-grid">
+        <section class="relative z-10 min-h-screen flex items-center justify-center px-5 py-10">
+            <div class="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10 border border-gray-100 relative overflow-hidden">
-            
-            <!-- Barra de Status Superior (Decorativa) -->
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+                <div class="hidden lg:block text-white">
+                    <div class="inline-flex items-center gap-3 rounded-full bg-white/10 border border-white/15 px-4 py-2 text-sm text-white/85 mb-8">
+                        <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                        Ambiente seguro de atendimento e gestão
+                    </div>
 
-            <!-- ALERTA DE ERRO -->
-            <div id="errorDiv" class="hidden mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <i class="fas fa-exclamation-circle text-red-500"></i>
+                    <h1 class="text-5xl font-black tracking-tight leading-tight mb-6">
+                        Centralize sua operação em uma plataforma moderna.
+                    </h1>
+
+                    <p class="text-lg text-slate-200 leading-relaxed max-w-xl mb-8">
+                        Acesse seus atendimentos, painel administrativo, contatos e indicadores com uma experiência mais limpa e profissional.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-4 max-w-xl">
+                        <div class="rounded-2xl bg-white/10 border border-white/15 p-4">
+                            <div class="text-2xl mb-2"><i class="fa-solid fa-lock"></i></div>
+                            <div class="font-bold">Seguro</div>
+                            <div class="text-sm text-slate-300">Sessão protegida</div>
+                        </div>
+                        <div class="rounded-2xl bg-white/10 border border-white/15 p-4">
+                            <div class="text-2xl mb-2"><i class="fa-solid fa-gauge-high"></i></div>
+                            <div class="font-bold">Rápido</div>
+                            <div class="text-sm text-slate-300">Acesso direto</div>
+                        </div>
+                        <div class="rounded-2xl bg-white/10 border border-white/15 p-4">
+                            <div class="text-2xl mb-2"><i class="fa-solid fa-building"></i></div>
+                            <div class="font-bold">Multiempresa</div>
+                            <div class="text-sm text-slate-300">Gestão centralizada</div>
+                        </div>
                     </div>
-                    <div class="ml-3">
-                        <h3 class="text-sm font-medium text-red-800">Falha no acesso</h3>
-                        <div class="mt-1 text-sm text-red-700" id="errorText">Erro desconhecido</div>
+                </div>
+
+                <div class="w-full max-w-md mx-auto">
+                    <div class="glass-card rounded-3xl p-8 sm:p-10">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="brand-mark h-14 w-14 rounded-2xl flex items-center justify-center text-white text-2xl">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-black text-slate-900">Acesso Seguro</h2>
+                                <p class="text-sm text-slate-500">Entre para continuar no painel</p>
+                            </div>
+                        </div>
+
+                        <% if (typeof error !== 'undefined' && error) { %>
+                            <div class="mb-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-700 text-sm flex gap-3">
+                                <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+                                <span><%= error %></span>
+                            </div>
+                        <% } %>
+
+                        <div id="login-alert" class="hidden mb-5 rounded-2xl border px-4 py-3 text-sm"></div>
+
+                        <form id="loginForm" class="space-y-5" autocomplete="on">
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-slate-700 mb-2">
+                                    E-mail
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        required
+                                        autocomplete="email"
+                                        class="field-focus w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-slate-900 outline-none transition"
+                                        placeholder="seuemail@empresa.com">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <label for="senha" class="block text-sm font-bold text-slate-700">
+                                        Senha
+                                    </label>
+                                    <span class="text-xs text-slate-400">Campo obrigatório</span>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                                        <i class="fa-solid fa-key"></i>
+                                    </span>
+                                    <input
+                                        id="senha"
+                                        name="senha"
+                                        type="password"
+                                        required
+                                        autocomplete="current-password"
+                                        class="field-focus w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-11 pr-12 text-slate-900 outline-none transition"
+                                        placeholder="Digite sua senha">
+                                    <button
+                                        type="button"
+                                        id="toggleSenha"
+                                        class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                                        aria-label="Mostrar ou ocultar senha">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button
+                                id="submitBtn"
+                                type="submit"
+                                class="btn-login w-full rounded-2xl py-3.5 px-4 font-black text-white transition duration-150 flex items-center justify-center gap-2">
+                                <span id="submitIcon"><i class="fa-solid fa-right-to-bracket"></i></span>
+                                <span id="submitText">Entrar no painel</span>
+                            </button>
+                        </form>
+
+                        <div class="mt-7 border-t border-slate-200 pt-5">
+                            <div class="flex items-center justify-between text-xs text-slate-500">
+                                <span>Conexão protegida</span>
+                                <span class="inline-flex items-center gap-1">
+                                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                                    Sistema online
+                                </span>
+                            </div>
+                        </div>
                     </div>
+
+                    <p class="text-center text-xs text-white/60 mt-6">
+                        Use apenas credenciais autorizadas. Todos os acessos podem ser auditados.
+                    </p>
                 </div>
             </div>
-
-            <!-- FORMULÁRIO DE LOGIN -->
-            <form id="loginForm" class="space-y-6" x-show="!showRecovery" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail Corporativo</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-envelope text-gray-400"></i>
-                        </div>
-                        <input id="email" name="email" type="email" autocomplete="email" required 
-                            class="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
-                            placeholder="seu@email.com">
-                    </div>
-                </div>
-
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-lock text-gray-400"></i>
-                        </div>
-                        <!-- CORREÇÃO: name="password" alterado para name="senha" para compatibilidade com AuthController -->
-                        <input id="password" name="senha" type="password" autocomplete="current-password" required 
-                            class="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
-                            placeholder="••••••••">
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer">
-                        <label for="remember_me" class="ml-2 block text-sm text-gray-900 cursor-pointer">Lembrar dispositivo</label>
-                    </div>
-
-                    <div class="text-sm">
-                        <a href="#" @click.prevent="showRecovery = true" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
-                            Esqueceu a senha?
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit" id="btnLogin"
-                        class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 transform hover:scale-[1.02]">
-                        <span id="btnText">Acessar Painel</span>
-                        <i id="btnIcon" class="fas fa-arrow-right ml-2 pt-1"></i>
-                        <i id="btnLoading" class="fas fa-circle-notch fa-spin hidden"></i>
-                    </button>
-                </div>
-            </form>
-
-            <!-- FORMULÁRIO DE RECUPERAÇÃO -->
-            <div x-show="showRecovery" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="space-y-6">
-                <div class="text-center">
-                    <div class="mx-auto h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center mb-3">
-                        <i class="fas fa-key text-indigo-600"></i>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900">Recuperação de Acesso</h3>
-                    <p class="text-sm text-gray-500 px-4">Digite seu e-mail cadastrado. Enviaremos um link temporário.</p>
-                </div>
-                
-                <form id="recoveryForm">
-                    <div>
-                        <label for="rec_email" class="block text-sm font-medium text-gray-700">E-mail</label>
-                        <input id="rec_email" name="email" type="email" required autocomplete="email"
-                            class="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    </div>
-                    <div class="mt-5 flex space-x-3">
-                        <button type="button" @click="showRecovery = false" class="w-1/2 flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Voltar
-                        </button>
-                        <button type="submit" class="w-1/2 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Enviar
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-        
-        <p class="mt-6 text-center text-xs text-gray-400">
-            &copy; 2025 Sistemas de Gestão. Ambiente Seguro (SSL).
-        </p>
-    </div>
+        </section>
+    </main>
 
     <script>
-        // Lógica de Login (COM DEBUG DETALHADO)
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('btnLogin');
-            const btnText = document.getElementById('btnText');
-            const btnIcon = document.getElementById('btnIcon');
-            const btnLoading = document.getElementById('btnLoading');
-            const errorDiv = document.getElementById('errorDiv');
-            const errorText = document.getElementById('errorText');
-            const container = document.querySelector('.bg-white');
+        const form = document.getElementById('loginForm');
+        const alertBox = document.getElementById('login-alert');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitIcon = document.getElementById('submitIcon');
+        const senhaInput = document.getElementById('senha');
+        const toggleSenha = document.getElementById('toggleSenha');
 
-            // UI: Carregando
-            btn.disabled = true;
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
-            btnText.innerText = 'Autenticando...';
-            btnIcon.classList.add('hidden');
-            btnLoading.classList.remove('hidden');
-            errorDiv.classList.add('hidden');
+        function mostrarAlerta(tipo, mensagem) {
+            alertBox.className = 'mb-5 rounded-2xl border px-4 py-3 text-sm';
 
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-
-            // 1. Log do Envio
-            console.log('📡 [DEBUG] Tentando Logar:', { email: data.email });
-
-            try {
-                // Requisição para API de Login
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                // 2. Log do Status
-                console.log('📡 [DEBUG] Status HTTP:', response.status);
-
-                const result = await response.json();
-                
-                // 3. Log da Resposta Completa
-                console.log('📡 [DEBUG] Payload do Servidor:', result);
-
-                if (response.ok && result.success) {
-                    btnText.innerText = 'Redirecionando...';
-                    btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
-                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
-                    
-                    const destino = result.redirectUrl || '/dashboard';
-                    console.log('🚀 [DEBUG] Iniciando navegação para:', destino);
-                    
-                    // Sucesso: Redireciona com pequeno delay para debug visual
-                    setTimeout(() => {
-                        window.location.replace(destino);
-                    }, 500);
-
-                } else {
-                    throw new Error(result.message || 'Credenciais inválidas');
-                }
-
-            } catch (error) {
-                console.error('❌ [DEBUG ERROR] Falha no Login:', error);
-                
-                // Exibe erro
-                errorText.innerText = error.message;
-                errorDiv.classList.remove('hidden');
-                
-                // Efeito visual de erro (Shake)
-                container.classList.add('animate-shake');
-                setTimeout(() => container.classList.remove('animate-shake'), 500);
-
-                // Reset UI
-                btn.disabled = false;
-                btn.classList.remove('opacity-75', 'cursor-not-allowed');
-                btnText.innerText = 'Acessar Painel';
-                btnIcon.classList.remove('hidden');
-                btnLoading.classList.add('hidden');
+            if (tipo === 'erro') {
+                alertBox.className += ' border-red-200 bg-red-50 text-red-700';
+            } else {
+                alertBox.className += ' border-emerald-200 bg-emerald-50 text-emerald-700';
             }
+
+            alertBox.textContent = mensagem;
+            alertBox.classList.remove('hidden');
+        }
+
+        function setCarregando(ativo) {
+            submitBtn.disabled = ativo;
+
+            if (ativo) {
+                submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+                submitIcon.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+                submitText.textContent = 'Validando acesso...';
+            } else {
+                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                submitIcon.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i>';
+                submitText.textContent = 'Entrar no painel';
+            }
+        }
+
+        toggleSenha.addEventListener('click', function () {
+            const tipoAtual = senhaInput.getAttribute('type');
+            const novoTipo = tipoAtual === 'password' ? 'text' : 'password';
+            senhaInput.setAttribute('type', novoTipo);
+            toggleSenha.innerHTML = novoTipo === 'password'
+                ? '<i class="fa-solid fa-eye"></i>'
+                : '<i class="fa-solid fa-eye-slash"></i>';
         });
 
-        // Lógica de Recuperação
-        document.getElementById('recoveryForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            
-            btn.disabled = true;
-            btn.innerText = 'Enviando...';
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            
+            alertBox.classList.add('hidden');
+
+            const email = document.getElementById('email').value.trim();
+            const senha = document.getElementById('senha').value;
+
+            if (!email || !senha) {
+                mostrarAlerta('erro', 'Informe e-mail e senha para continuar.');
+                return;
+            }
+
+            setCarregando(true);
+
             try {
-                const response = await fetch('/api/auth/recuperar-senha', {
+                const resposta = await fetch('/api/auth/login', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        email: email,
+                        senha: senha
+                    })
                 });
-                const result = await response.json();
-                
-                alert(result.message || 'Verifique sua caixa de entrada.');
-                window.location.reload();
-            } catch (err) {
-                alert('Erro ao conectar com o servidor.');
-                btn.disabled = false;
-                btn.innerText = originalText;
+
+                const dados = await resposta.json().catch(function () {
+                    return {};
+                });
+
+                if (!resposta.ok || !dados.success) {
+                    mostrarAlerta('erro', dados.message || 'Não foi possível realizar o login.');
+                    setCarregando(false);
+                    return;
+                }
+
+                mostrarAlerta('sucesso', 'Login realizado com sucesso. Redirecionando...');
+                window.location.href = dados.redirectUrl || '/dashboard';
+            } catch (erro) {
+                mostrarAlerta('erro', 'Erro de conexão. Verifique o servidor e tente novamente.');
+                setCarregando(false);
             }
         });
     </script>

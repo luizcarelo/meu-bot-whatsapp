@@ -349,3 +349,87 @@ Validado login e dashboard.
 Coletados logs novos para verificar sanitizacao.
 Nenhum arquivo de codigo foi alterado pela auditoria.
 <!-- ETAPA_15_2_FIM -->
+
+<!-- ETAPA_16_INICIO -->
+## Etapa 16 - Auditoria frontend
+
+Data: 2026-07-06T22:36:17
+
+Mapeados arquivos de frontend em views, public, routes e arquivos principais.
+Identificadas dependencias externas e CDNs.
+Identificados estilos e scripts inline.
+Identificados assets locais referenciados.
+Gerados relatorios JSON e Markdown da auditoria.
+<!-- ETAPA_16_FIM -->
+
+<!-- ETAPA_17_INICIO -->
+## Etapa 17 - Login visual melhorado
+
+Data: 2026-07-06T22:40:03
+
+Melhorado layout da tela de login.
+Mantido payload email e senha para /api/auth/login.
+Adicionado estado visual de carregamento.
+Adicionado botao para mostrar ou ocultar senha.
+Validado login real e dashboard quando credenciais foram fornecidas.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_17_FIM -->
+
+<!-- ETAPA_17_1_INICIO -->
+## Etapa 17.1 - Validacao runtime do login visual
+
+Data: 2026-07-06T22:46:40
+
+Comparado views/login.ejs local com arquivo dentro do container app.
+Restart executado somente quando solicitado por variavel de ambiente.
+Validada tela /login com textos e classes da nova interface.
+Validado login real e dashboard.
+Gerados backup documental, manifestos e relatorios da etapa.
+<!-- ETAPA_17_1_FIM -->
+
+<!-- ETAPA_18_INICIO -->
+## Etapa 18 - Dashboard visual melhorado
+
+Data: 2026-07-06T22:51:14
+
+Adicionada camada visual controlada ao dashboard.
+Preservada estrutura existente da view.
+Preservados Tailwind, FontAwesome, Alpine e Socket.IO.
+Validado login real e dashboard.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_18_FIM -->
+
+<!-- ETAPA_19_INICIO -->
+## Etapa 19 - CSS compartilhado criado
+
+Data: 2026-07-06T23:01:50
+
+Criado arquivo public/css/style.css.
+Adicionada base visual compartilhada para telas antigas.
+Nenhuma view foi modificada.
+Nenhum backend ou banco foi modificado.
+<!-- ETAPA_19_FIM -->
+
+<!-- ETAPA_20_INICIO -->
+## Etapa 20 - Visual aplicado em views/crm.ejs
+
+Data: 2026-07-06T23:13:14
+
+Incluido link para /css/style.css em views/crm.ejs quando ausente.
+Adicionada camada visual controlada com marcadores ETAPA20.
+Preservados fetch, Socket.IO, endpoints e logica existente.
+Validado login, dashboard e rota /crm.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_20_FIM -->
+
+<!-- ETAPA_20_1_INICIO -->
+## Etapa 20.1 - Registro da rota /crm
+
+Data: 2026-07-06T23:19:41
+
+Adicionada rota GET /crm protegida por isAuthenticated.
+A rota renderiza views/crm.ejs com titulo, usuario, empresa, isMobile e socketUrl.
+Executado node --check em routes/index.js.
+Validado login, dashboard e CRM.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_20_1_FIM -->

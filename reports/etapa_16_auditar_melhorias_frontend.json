@@ -1,0 +1,807 @@
+{
+  "gerado_em": "2026-07-06T22:36:17",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_16_20260706_223616",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_16_manifesto_antes.json",
+  "auditoria_frontend": {
+    "arquivos_analisados": [
+      "package.json",
+      "postcss.config.js",
+      "public/uploads/empresa_2/css/style.css",
+      "routes/api.js",
+      "routes/index.js",
+      "server.js",
+      "tailwind.config.js",
+      "views/admin-panel.ejs",
+      "views/crm.ejs",
+      "views/dashboard.ejs",
+      "views/login.ejs",
+      "views/super-admin.ejs"
+    ],
+    "detalhes": [
+      {
+        "arquivo": "package.json",
+        "extensao": ".json",
+        "tamanho_bytes": 2162,
+        "referencias": [
+          {
+            "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp.git",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp/issues",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp#readme",
+            "tipo": "externo"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp.git",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp/issues",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp#readme",
+            "tipo": "externo"
+          }
+        ],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 2,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 3
+        }
+      },
+      {
+        "arquivo": "postcss.config.js",
+        "extensao": ".js",
+        "tamanho_bytes": 81,
+        "referencias": [],
+        "externos": [],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 0,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 0
+        }
+      },
+      {
+        "arquivo": "public/uploads/empresa_2/css/style.css",
+        "extensao": ".css",
+        "tamanho_bytes": 187,
+        "referencias": [],
+        "externos": [],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 0,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 0
+        }
+      },
+      {
+        "arquivo": "routes/api.js",
+        "extensao": ".js",
+        "tamanho_bytes": 10081,
+        "referencias": [],
+        "externos": [],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 0,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 0
+        }
+      },
+      {
+        "arquivo": "routes/index.js",
+        "extensao": ".js",
+        "tamanho_bytes": 2997,
+        "referencias": [],
+        "externos": [],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 0,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 0
+        }
+      },
+      {
+        "arquivo": "server.js",
+        "extensao": ".js",
+        "tamanho_bytes": 7884,
+        "referencias": [
+          {
+            "referencia": "http://127.0.0.1:50010",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "http://localhost:50010",
+            "tipo": "externo"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "http://127.0.0.1:50010",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "http://localhost:50010",
+            "tipo": "externo"
+          }
+        ],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 2,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 2
+        }
+      },
+      {
+        "arquivo": "tailwind.config.js",
+        "extensao": ".js",
+        "tamanho_bytes": 693,
+        "referencias": [],
+        "externos": [],
+        "locais": [],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 0,
+          "tags_style": 0,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 0,
+          "alpine_cdn": 0,
+          "socket_io": 0,
+          "fetch_calls": 0,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 0
+        }
+      },
+      {
+        "arquivo": "views/admin-panel.ejs",
+        "extensao": ".ejs",
+        "tamanho_bytes": 53105,
+        "referencias": [
+          {
+            "referencia": "/css/style.css",
+            "tipo": "local"
+          },
+          {
+            "referencia": "/socket.io/socket.io.js",
+            "tipo": "local"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+            "tipo": "externo"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+            "tipo": "externo"
+          }
+        ],
+        "locais": [
+          "/css/style.css",
+          "/socket.io/socket.io.js"
+        ],
+        "assets_locais": [
+          {
+            "referencia": "/css/style.css",
+            "normalizada": "/css/style.css",
+            "existe": false,
+            "caminho_encontrado": ""
+          },
+          {
+            "referencia": "/socket.io/socket.io.js",
+            "normalizada": "/socket.io/socket.io.js",
+            "existe": false,
+            "caminho_encontrado": ""
+          }
+        ],
+        "contagens": {
+          "tags_script": 4,
+          "tags_style": 1,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 1,
+          "alpine_cdn": 0,
+          "socket_io": 2,
+          "fetch_calls": 24,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 3
+        }
+      },
+      {
+        "arquivo": "views/crm.ejs",
+        "extensao": ".ejs",
+        "tamanho_bytes": 49116,
+        "referencias": [
+          {
+            "referencia": "/css/style.css",
+            "tipo": "local"
+          },
+          {
+            "referencia": "/socket.io/socket.io.js",
+            "tipo": "local"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "/admin/painel",
+            "tipo": "local"
+          },
+          {
+            "referencia": "https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png",
+            "tipo": "imagem_externa"
+          },
+          {
+            "referencia": "https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=${c.nome||",
+            "tipo": "externo"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png",
+            "tipo": "imagem_externa"
+          },
+          {
+            "referencia": "https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=${c.nome||",
+            "tipo": "externo"
+          }
+        ],
+        "locais": [
+          "/css/style.css",
+          "/socket.io/socket.io.js",
+          "/admin/painel"
+        ],
+        "assets_locais": [
+          {
+            "referencia": "/css/style.css",
+            "normalizada": "/css/style.css",
+            "existe": false,
+            "caminho_encontrado": ""
+          },
+          {
+            "referencia": "/socket.io/socket.io.js",
+            "normalizada": "/socket.io/socket.io.js",
+            "existe": false,
+            "caminho_encontrado": ""
+          },
+          {
+            "referencia": "/admin/painel",
+            "normalizada": "/admin/painel",
+            "existe": false,
+            "caminho_encontrado": ""
+          }
+        ],
+        "contagens": {
+          "tags_script": 3,
+          "tags_style": 1,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 1,
+          "alpine_cdn": 0,
+          "socket_io": 2,
+          "fetch_calls": 17,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 5
+        }
+      },
+      {
+        "arquivo": "views/dashboard.ejs",
+        "extensao": ".ejs",
+        "tamanho_bytes": 26462,
+        "referencias": [
+          {
+            "referencia": "https://cdn.tailwindcss.com",
+            "tipo": "tailwind_cdn"
+          },
+          {
+            "referencia": "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+            "tipo": "jsdelivr_cdn"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "/socket.io/socket.io.js",
+            "tipo": "local"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=<%= user.nome %>&background=random",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png",
+            "tipo": "imagem_externa"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=${chat.nome}`",
+            "tipo": "externo"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "https://cdn.tailwindcss.com",
+            "tipo": "tailwind_cdn"
+          },
+          {
+            "referencia": "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+            "tipo": "jsdelivr_cdn"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=<%= user.nome %>&background=random",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png",
+            "tipo": "imagem_externa"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=",
+            "tipo": "externo"
+          },
+          {
+            "referencia": "https://ui-avatars.com/api/?name=${chat.nome}`",
+            "tipo": "externo"
+          }
+        ],
+        "locais": [
+          "/socket.io/socket.io.js"
+        ],
+        "assets_locais": [
+          {
+            "referencia": "/socket.io/socket.io.js",
+            "normalizada": "/socket.io/socket.io.js",
+            "existe": false,
+            "caminho_encontrado": ""
+          }
+        ],
+        "contagens": {
+          "tags_script": 5,
+          "tags_style": 1,
+          "atributo_style": 0,
+          "tailwind_cdn": 1,
+          "fontawesome_cdn": 2,
+          "alpine_cdn": 2,
+          "socket_io": 3,
+          "fetch_calls": 4,
+          "axios_calls": 0,
+          "cdn_mentions": 3,
+          "http_externo": 7
+        }
+      },
+      {
+        "arquivo": "views/login.ejs",
+        "extensao": ".ejs",
+        "tamanho_bytes": 13518,
+        "referencias": [
+          {
+            "referencia": "https://cdn.tailwindcss.com",
+            "tipo": "tailwind_cdn"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+            "tipo": "jsdelivr_cdn"
+          },
+          {
+            "referencia": "#",
+            "tipo": "local"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "https://cdn.tailwindcss.com",
+            "tipo": "tailwind_cdn"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+            "tipo": "jsdelivr_cdn"
+          }
+        ],
+        "locais": [
+          "#"
+        ],
+        "assets_locais": [],
+        "contagens": {
+          "tags_script": 3,
+          "tags_style": 1,
+          "atributo_style": 0,
+          "tailwind_cdn": 1,
+          "fontawesome_cdn": 2,
+          "alpine_cdn": 2,
+          "socket_io": 0,
+          "fetch_calls": 2,
+          "axios_calls": 0,
+          "cdn_mentions": 3,
+          "http_externo": 3
+        }
+      },
+      {
+        "arquivo": "views/super-admin.ejs",
+        "extensao": ".ejs",
+        "tamanho_bytes": 21218,
+        "referencias": [
+          {
+            "referencia": "/css/style.css",
+            "tipo": "local"
+          },
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap",
+            "tipo": "externo"
+          }
+        ],
+        "externos": [
+          {
+            "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+            "tipo": "cdnjs_cdn"
+          },
+          {
+            "referencia": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap",
+            "tipo": "externo"
+          }
+        ],
+        "locais": [
+          "/css/style.css"
+        ],
+        "assets_locais": [
+          {
+            "referencia": "/css/style.css",
+            "normalizada": "/css/style.css",
+            "existe": false,
+            "caminho_encontrado": ""
+          }
+        ],
+        "contagens": {
+          "tags_script": 1,
+          "tags_style": 1,
+          "atributo_style": 0,
+          "tailwind_cdn": 0,
+          "fontawesome_cdn": 1,
+          "alpine_cdn": 0,
+          "socket_io": 0,
+          "fetch_calls": 6,
+          "axios_calls": 0,
+          "cdn_mentions": 0,
+          "http_externo": 2
+        }
+      }
+    ],
+    "resumo": {
+      "total_arquivos": 12,
+      "arquivos_por_extensao": {
+        ".json": 1,
+        ".js": 5,
+        ".css": 1,
+        ".ejs": 5
+      },
+      "total_referencias": 32,
+      "total_externos": 24,
+      "total_locais": 8,
+      "externos_por_tipo": {
+        "externo": 12,
+        "cdnjs_cdn": 6,
+        "imagem_externa": 2,
+        "tailwind_cdn": 2,
+        "jsdelivr_cdn": 2
+      },
+      "externos_unicos": [
+        {
+          "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp.git",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp/issues",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://github.com/luizcarelo/meu-bot-whatsapp#readme",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "http://127.0.0.1:50010",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "http://localhost:50010",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js",
+          "tipo": "cdnjs_cdn"
+        },
+        {
+          "referencia": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
+          "tipo": "cdnjs_cdn"
+        },
+        {
+          "referencia": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png",
+          "tipo": "imagem_externa"
+        },
+        {
+          "referencia": "https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://ui-avatars.com/api/?name=${c.nome||",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://cdn.tailwindcss.com",
+          "tipo": "tailwind_cdn"
+        },
+        {
+          "referencia": "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+          "tipo": "jsdelivr_cdn"
+        },
+        {
+          "referencia": "https://ui-avatars.com/api/?name=<%= user.nome %>&background=random",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://ui-avatars.com/api/?name=",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://ui-avatars.com/api/?name=${chat.nome}`",
+          "tipo": "externo"
+        },
+        {
+          "referencia": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap",
+          "tipo": "externo"
+        }
+      ],
+      "assets_locais_total": 7,
+      "assets_locais_ausentes": [
+        {
+          "arquivo": "views/admin-panel.ejs",
+          "referencia": "/css/style.css"
+        },
+        {
+          "arquivo": "views/admin-panel.ejs",
+          "referencia": "/socket.io/socket.io.js"
+        },
+        {
+          "arquivo": "views/crm.ejs",
+          "referencia": "/css/style.css"
+        },
+        {
+          "arquivo": "views/crm.ejs",
+          "referencia": "/socket.io/socket.io.js"
+        },
+        {
+          "arquivo": "views/crm.ejs",
+          "referencia": "/admin/painel"
+        },
+        {
+          "arquivo": "views/dashboard.ejs",
+          "referencia": "/socket.io/socket.io.js"
+        },
+        {
+          "arquivo": "views/super-admin.ejs",
+          "referencia": "/css/style.css"
+        }
+      ],
+      "arquivos_com_script_inline": [
+        "views/admin-panel.ejs",
+        "views/crm.ejs",
+        "views/dashboard.ejs",
+        "views/login.ejs",
+        "views/super-admin.ejs"
+      ],
+      "arquivos_com_style_inline": [
+        "views/admin-panel.ejs",
+        "views/crm.ejs",
+        "views/dashboard.ejs",
+        "views/login.ejs",
+        "views/super-admin.ejs"
+      ],
+      "arquivos_com_tailwind_cdn": [
+        "views/dashboard.ejs",
+        "views/login.ejs"
+      ],
+      "arquivos_com_fontawesome_cdn": [
+        "views/admin-panel.ejs",
+        "views/crm.ejs",
+        "views/dashboard.ejs",
+        "views/login.ejs",
+        "views/super-admin.ejs"
+      ],
+      "arquivos_com_alpine_cdn": [
+        "views/dashboard.ejs",
+        "views/login.ejs"
+      ],
+      "arquivos_com_fetch": [
+        "views/admin-panel.ejs",
+        "views/crm.ejs",
+        "views/dashboard.ejs",
+        "views/login.ejs",
+        "views/super-admin.ejs"
+      ],
+      "arquivos_com_socket": [
+        "package.json",
+        "server.js",
+        "views/admin-panel.ejs",
+        "views/crm.ejs",
+        "views/dashboard.ejs"
+      ]
+    },
+    "recomendacoes": [
+      {
+        "prioridade": "alta",
+        "tema": "Dependencias externas",
+        "acao": "Planejar internalizacao gradual dos assets externos criticos."
+      },
+      {
+        "prioridade": "alta",
+        "tema": "Tailwind CDN",
+        "acao": "Planejar build local do Tailwind com cuidado para preservar layout atual."
+      },
+      {
+        "prioridade": "media",
+        "tema": "Icones externos",
+        "acao": "Substituir FontAwesome CDN por pacote local ou SVGs internos."
+      },
+      {
+        "prioridade": "media",
+        "tema": "Alpine externo",
+        "acao": "Servir Alpine localmente por public/vendor ou pacote instalado."
+      },
+      {
+        "prioridade": "alta",
+        "tema": "Assets locais ausentes",
+        "acao": "Corrigir referencias locais ausentes antes de aplicar melhoria visual."
+      },
+      {
+        "prioridade": "media",
+        "tema": "CSS inline",
+        "acao": "Extrair estilos repetidos para public/css em etapa futura."
+      },
+      {
+        "prioridade": "media",
+        "tema": "Scripts inline",
+        "acao": "Mapear scripts inline antes de aplicar CSP forte."
+      },
+      {
+        "prioridade": "alta",
+        "tema": "Primeira melhoria visual",
+        "acao": "Aplicar melhoria controlada na tela de login antes de mexer no dashboard."
+      }
+    ]
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_16_manifesto_depois.json"
+}
