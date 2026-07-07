@@ -1,0 +1,148 @@
+{
+  "gerado_em": "2026-07-06T23:35:11",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_21_20260706_233504",
+    "copiados": [
+      "views/admin-panel.ejs",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_21_manifesto_antes.json",
+  "melhoria_admin": {
+    "arquivo": "views/admin-panel.ejs",
+    "existe_antes": true,
+    "alterado": true,
+    "adicionou_css": false,
+    "adicionou_script": true,
+    "sha256_antes": "a9235c4197335efd9b59446ee406098586f6bee2c2c2e9d4711429a11320295f",
+    "sha256_depois": "7b77576ad10eaa1be0f8e02e3049da64abcd4f27636300750165efca53f59ec3"
+  },
+  "validacao_estrutura": {
+    "arquivo_existe": true,
+    "tem_css_compartilhado": true,
+    "tem_marker": true,
+    "tem_socket_io": true,
+    "tem_fetch": true,
+    "tem_sortable": true,
+    "tem_texto_visual": true,
+    "ok": true
+  },
+  "restart_app": {
+    "solicitado": true,
+    "executado": true,
+    "ok": true,
+    "resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "restart",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Container whatsapp_bot_app Restarting \n Container whatsapp_bot_app Started",
+      "ok": true
+    }
+  },
+  "aguardar_app": {
+    "ok": true,
+    "tentativas": [
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 104] Connection reset by peer"
+      },
+      {
+        "status": 200,
+        "ok": true,
+        "erro": null
+      }
+    ],
+    "segundos": 3
+  },
+  "logs_since": "2026-07-06T23:35:04",
+  "validacao_runtime": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "login_ok": true,
+    "dashboard_ok": true,
+    "admin_ok": false,
+    "admin_visual_ok": false,
+    "cookies": [
+      {
+        "name": "connect.sid",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "secure": false
+      }
+    ],
+    "login": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "application/json; charset=utf-8",
+      "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}"
+    },
+    "dashboard": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "text/html; charset=utf-8"
+    },
+    "admin": {
+      "status": 404,
+      "ok": false,
+      "erro": "HTTP Error 404: Not Found",
+      "content_type": "text/html; charset=utf-8",
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-BR\" class=\"h-full bg-slate-950\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Login - Acesso Seguro</title>\n\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n\n    <style>\n        html {\n            -webkit-text-size-adjust: 100%;\n            text-size-adjust: 100%;\n        }\n\n        body {\n            font-family: Inter, Arial, sans-serif;\n        }\n\n        [x-cloak] {\n            display: none !important;\n        }\n\n        .login-bg {\n            background:\n                radial-gradient(circle at top left, rgba(239, 68, 68, 0.22), transparent 32rem),\n                radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.16), transparent 30rem),\n                linear-gradient(135deg, #0f172a 0%, #111827 48%, #1f2937 100%);\n        }\n\n        .glass-card {\n            background: rgba(255, 255, 255, 0.94);\n            backdrop-filter: blur(18px);\n            b"
+    },
+    "textos_admin": {
+      "tem_css": false,
+      "tem_marker": false,
+      "painel_administrativo": true,
+      "gestao_empresa": false,
+      "tem_fetch": true,
+      "tem_sortable": false
+    }
+  },
+  "logs_coleta": {
+    "principal": {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--since",
+        "2026-07-06T23:35:04",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | npm error path /usr/src/app\nwhatsapp_bot_app  | npm error command failed\nwhatsapp_bot_app  | npm error signal SIGTERM\nwhatsapp_bot_app  | npm error command sh -c node server.js\nwhatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-07T02_30_26_169Z-debug-0.log\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | > saas-whatsapp-crm@3.7.1 start\nwhatsapp_bot_app  | > node server.js\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | 🔌 [Redis] Conectado com sucesso.\nwhatsapp_bot_app  | 🔌 [Redis Config] Host: redis | Auth: Sim (********)\nwhatsapp_bot_app  | ⚙️ [SessionManager] Iniciando Workers e Jobs...\nwhatsapp_bot_app  | 🚀 [Worker] Iniciando processador da fila: whatsapp-messages\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | 🚀 [System] SAAS Server rodando na porta 50010\nwhatsapp_bot_app  | 📡 [Env] production\nwhatsapp_bot_app  | 🔒 [Security] Cookie Secure: DESATIVADO\nwhatsapp_bot_app  | 📊 [PostgreSQL] Conectado: postgres @ db\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------",
+      "stderr": "",
+      "ok": true
+    },
+    "fallback": null,
+    "texto": "whatsapp_bot_app  | npm error path /usr/src/app\nwhatsapp_bot_app  | npm error command failed\nwhatsapp_bot_app  | npm error signal SIGTERM\nwhatsapp_bot_app  | npm error command sh -c node server.js\nwhatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-07T02_30_26_169Z-debug-0.log\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | > saas-whatsapp-crm@3.7.1 start\nwhatsapp_bot_app  | > node server.js\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | 🔌 [Redis] Conectado com sucesso.\nwhatsapp_bot_app  | 🔌 [Redis Config] Host: redis | Auth: Sim (********)\nwhatsapp_bot_app  | ⚙️ [SessionManager] Iniciando Workers e Jobs...\nwhatsapp_bot_app  | 🚀 [Worker] Iniciando processador da fila: whatsapp-messages\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | 🚀 [System] SAAS Server rodando na porta 50010\nwhatsapp_bot_app  | 📡 [Env] production\nwhatsapp_bot_app  | 🔒 [Security] Cookie Secure: DESATIVADO\nwhatsapp_bot_app  | 📊 [PostgreSQL] Conectado: postgres @ db\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\n"
+  },
+  "logs_analise": {
+    "total_linhas": 45,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_email": 0,
+    "achados": [],
+    "amostra": "whatsapp_bot_app  | npm error path /usr/src/app\nwhatsapp_bot_app  | npm error command failed\nwhatsapp_bot_app  | npm error signal SIGTERM\nwhatsapp_bot_app  | npm error command sh -c node server.js\nwhatsapp_bot_app  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-07T02_30_26_169Z-debug-0.log\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | > saas-whatsapp-crm@3.7.1 start\nwhatsapp_bot_app  | > node server.js\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | 🔌 [Redis] Conectado com sucesso.\nwhatsapp_bot_app  | 🔌 [Redis Config] Host: redis | Auth: Sim (********)\nwhatsapp_bot_app  | ⚙️ [SessionManager] Iniciando Workers e Jobs...\nwhatsapp_bot_app  | 🚀 [Worker] Iniciando processador da fila: whatsapp-messages\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | 🚀 [System] SAAS Server rodando na porta 50010\nwhatsapp_bot_app  | 📡 [Env] production\nwhatsapp_bot_app  | 🔒 [Security] Cookie Secure: DESATIVADO\nwhatsapp_bot_app  | 📊 [PostgreSQL] Conectado: postgres @ db\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_21_manifesto_depois.json"
+}

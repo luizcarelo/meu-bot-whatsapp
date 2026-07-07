@@ -1,7 +1,7 @@
 {
-  "gerado_em": "2026-07-06T23:30:23",
+  "gerado_em": "2026-07-06T23:35:11",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
-  "total_arquivos": 108,
+  "total_arquivos": 109,
   "arquivos": [
     {
       "arquivo": ".env",
@@ -30,18 +30,18 @@
     },
     {
       "arquivo": "CHANGELOG.md",
-      "tamanho_bytes": 13827,
-      "sha256": "edb461d393ffc610efcfcdb391dc3750f1659699cc991db88a87c3622d271733"
+      "tamanho_bytes": 14591,
+      "sha256": "130457af6d8ebf2c61eccb9b3e1c696ea57c6c84e594fd1c61ddd60240897505"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 14777,
-      "sha256": "67043fbf3c5b2bc1dfd59407ef21fbd96aa6d268d15c7a2df64b7b004165c28c"
+      "tamanho_bytes": 15646,
+      "sha256": "7bb117a2b71e30c9344ba2d7728ac85845769646c30c8819908520ba77394784"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
-      "tamanho_bytes": 13305,
-      "sha256": "963454afb90dece0ff085b7d2c913ba3340559e74c8560554095a8d442309441"
+      "tamanho_bytes": 14029,
+      "sha256": "06c011166101d4c8803778881c9246d51b33bf5000ea254264a3f4c70a0b272c"
     },
     {
       "arquivo": "Dockerfile",
@@ -55,8 +55,8 @@
     },
     {
       "arquivo": "PENDENCIAS.md",
-      "tamanho_bytes": 14717,
-      "sha256": "73181f02dce95aff647593d1b5f8a6e2a253ffc7cab75d338b7f1f49063e70c6"
+      "tamanho_bytes": 15385,
+      "sha256": "8aa7db63a26bd866ac5de7817ea17bbf8df5fa66ede3e1877291cd6c34a85ea6"
     },
     {
       "arquivo": "README.md",
@@ -189,6 +189,11 @@
       "sha256": "62eed5b3874a737faa09db9871d13b8e01a59ac8030bf8645961edc540fa7965"
     },
     {
+      "arquivo": "etapa_21_aplicar_visual_admin_panel.py",
+      "tamanho_bytes": 31927,
+      "sha256": "a38a274ffdb648a7e4b660ef9073357a917f58c3b7d97d75358faac2f5cc93ed"
+    },
+    {
       "arquivo": "favicon.ico",
       "tamanho_bytes": 630994,
       "sha256": "e5d92feb710ede82563c6b4000ac15659dd9de0d7412da54438c0716756b8df6"
@@ -255,8 +260,8 @@
     },
     {
       "arquivo": "routes/index.js",
-      "tamanho_bytes": 4143,
-      "sha256": "8d0672813fef4d0957a4b8367fafc125b3dd971a9bbf183acd303385c69075f7"
+      "tamanho_bytes": 4101,
+      "sha256": "fc3cd935bae96f6c0515bb81a2da7de67c6abf857351dc6e77b01426fcdf8573"
     },
     {
       "arquivo": "script/Python/etapa_01_auditoria_estatica.py",
@@ -520,8 +525,8 @@
     },
     {
       "arquivo": "views/admin-panel.ejs",
-      "tamanho_bytes": 53105,
-      "sha256": "a9235c4197335efd9b59446ee406098586f6bee2c2c2e9d4711429a11320295f"
+      "tamanho_bytes": 56060,
+      "sha256": "7b77576ad10eaa1be0f8e02e3049da64abcd4f27636300750165efca53f59ec3"
     },
     {
       "arquivo": "views/crm.ejs",

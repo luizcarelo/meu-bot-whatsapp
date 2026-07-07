@@ -434,3 +434,26 @@ Planejar aplicacao visual em views/super-admin.ejs.
 Planejar internalizacao de dependencias externas.
 Mapear scripts inline antes de CSP forte.
 <!-- ETAPA_20_1_FIM -->
+
+<!-- ETAPA_20_2_INICIO -->
+## Pendencias apos Etapa 20.2
+
+Data: 2026-07-06T23:30:31
+
+Validar visual do CRM manualmente no navegador.
+Planejar aplicacao visual em views/admin-panel.ejs.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_20_2_FIM -->
+
+<!-- ETAPA_21_INICIO -->
+## Pendencias apos Etapa 21
+
+Data: 2026-07-06T23:35:11
+
+Validar visual do painel administrativo manualmente no navegador.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_21_FIM -->

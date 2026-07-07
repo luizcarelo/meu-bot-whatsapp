@@ -86,7 +86,7 @@ router.get('/crm', isAuthenticated, async (req, res) => {
         }
 
         const result = await db.query(
-            'SELECT id, nome, logo, cor, plano, limite_usuarios FROM empresas WHERE id = ? LIMIT 1',
+            'SELECT * FROM empresas WHERE id = ? LIMIT 1',
             [empresaId]
         );
 

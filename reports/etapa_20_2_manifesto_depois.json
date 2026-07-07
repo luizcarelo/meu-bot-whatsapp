@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-07-06T23:30:23",
+  "gerado_em": "2026-07-06T23:30:31",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
   "total_arquivos": 108,
   "arquivos": [
@@ -30,18 +30,18 @@
     },
     {
       "arquivo": "CHANGELOG.md",
-      "tamanho_bytes": 13827,
-      "sha256": "edb461d393ffc610efcfcdb391dc3750f1659699cc991db88a87c3622d271733"
+      "tamanho_bytes": 14214,
+      "sha256": "6574fb5289dc58bdc0c25731718bfb7ce09e75e14574ee9fa36797c338e733b6"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 14777,
-      "sha256": "67043fbf3c5b2bc1dfd59407ef21fbd96aa6d268d15c7a2df64b7b004165c28c"
+      "tamanho_bytes": 15203,
+      "sha256": "373a3b43c60e0cba157e81320be0174e9e0194fb5680e4d6d46de8911b373c58"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
-      "tamanho_bytes": 13305,
-      "sha256": "963454afb90dece0ff085b7d2c913ba3340559e74c8560554095a8d442309441"
+      "tamanho_bytes": 13683,
+      "sha256": "da1b5ebd1a26f3a0c2a5f6f1de71268ab5bbb0bc66e2055056a2341770aa6521"
     },
     {
       "arquivo": "Dockerfile",
@@ -55,8 +55,8 @@
     },
     {
       "arquivo": "PENDENCIAS.md",
-      "tamanho_bytes": 14717,
-      "sha256": "73181f02dce95aff647593d1b5f8a6e2a253ffc7cab75d338b7f1f49063e70c6"
+      "tamanho_bytes": 15071,
+      "sha256": "6ea4e2194d8575939cbf508b1e95608b3a5f26280a6993a5270e3219e1808b13"
     },
     {
       "arquivo": "README.md",
@@ -255,8 +255,8 @@
     },
     {
       "arquivo": "routes/index.js",
-      "tamanho_bytes": 4143,
-      "sha256": "8d0672813fef4d0957a4b8367fafc125b3dd971a9bbf183acd303385c69075f7"
+      "tamanho_bytes": 4101,
+      "sha256": "fc3cd935bae96f6c0515bb81a2da7de67c6abf857351dc6e77b01426fcdf8573"
     },
     {
       "arquivo": "script/Python/etapa_01_auditoria_estatica.py",

@@ -398,3 +398,25 @@ Decidido nao alterar views/crm.ejs nesta etapa.
 Decidido reutilizar consulta de empresa semelhante ao dashboard.
 Decidido reiniciar app somente com ETAPA20_1_RESTART_APP=true.
 <!-- ETAPA_20_1_FIM -->
+
+<!-- ETAPA_20_2_INICIO -->
+## Etapa 20.2 - Decisao tecnica
+
+Data: 2026-07-06T23:30:31
+
+Decidido alinhar a consulta da rota /crm com a abordagem ja usada pelo dashboard.
+Decidido usar SELECT  FROM empresas para evitar dependencia de colunas inexistentes.
+Decidido nao alterar banco nesta etapa.
+Decidido manter a rota /crm protegida por isAuthenticated.
+<!-- ETAPA_20_2_FIM -->
+
+<!-- ETAPA_21_INICIO -->
+## Etapa 21 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T23:35:11
+
+Decidido aplicar visual no painel administrativo por injecao controlada.
+Decidido usar public/css/style.css criado na Etapa 19.
+Decidido preservar scripts e chamadas existentes.
+Decidido nao alterar backend ou banco nesta etapa.
+<!-- ETAPA_21_FIM -->

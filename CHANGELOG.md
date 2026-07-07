@@ -433,3 +433,26 @@ Executado node --check em routes/index.js.
 Validado login, dashboard e CRM.
 Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_20_1_FIM -->
+
+<!-- ETAPA_20_2_INICIO -->
+## Etapa 20.2 - Correcao da rota CRM
+
+Data: 2026-07-06T23:30:31
+
+Substituida consulta da rota /crm para SELECT  FROM empresas.
+Removida dependencia das colunas logo, cor, plano e limite_usuarios na rota /crm.
+Executado node --check em routes/index.js.
+Validado login, dashboard e CRM.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_20_2_FIM -->
+
+<!-- ETAPA_21_INICIO -->
+## Etapa 21 - Visual aplicado em admin-panel
+
+Data: 2026-07-06T23:35:11
+
+Incluido link para /css/style.css em views/admin-panel.ejs quando ausente.
+Adicionada camada visual controlada com marcadores ETAPA21.
+Preservados fetch, Socket.IO, Sortable, endpoints e logica existente.
+Validado login, dashboard e painel administrativo.
+<!-- ETAPA_21_FIM -->

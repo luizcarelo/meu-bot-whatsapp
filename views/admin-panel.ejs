@@ -800,5 +800,93 @@
         }
 
     </script>
+
+<!-- ETAPA21_ADMIN_PANEL_VISUAL_INICIO -->
+<script id="etapa21-admin-panel-visual">
+(function () {
+    function existe(id) {
+        return document.getElementById(id);
+    }
+
+    function criarCabecalho() {
+        if (existe('etapa21-admin-panel-header')) {
+            return;
+        }
+
+        var alvo = document.querySelector('main') || document.querySelector('.container') || document.body;
+        if (!alvo) {
+            return;
+        }
+
+        if (alvo.classList) {
+            alvo.classList.add('er-page');
+        }
+
+        var header = document.createElement('section');
+        header.id = 'etapa21-admin-panel-header';
+        header.className = 'er-page-header';
+        header.innerHTML = ''
+            + '<div class="er-top-actions" style="justify-content: space-between;">'
+            + '  <div>'
+            + '    <div class="er-badge er-badge-success">Painel administrativo</div>'
+            + '    <h1 class="er-page-title" style="margin-top: 12px;">Gestao da empresa</h1>'
+            + '    <p class="er-page-subtitle">Usuarios, setores, permissoes e configuracoes com visual padronizado.</p>'
+            + '  </div>'
+            + '  <div class="er-top-actions">'
+            + '    <span class="er-badge er-badge-muted">Visual Etapa 21</span>'
+            + '    <span class="er-badge">CSS compartilhado</span>'
+            + '  </div>'
+            + '</div>';
+
+        alvo.insertBefore(header, alvo.firstChild);
+    }
+
+    function aplicarClasses() {
+        var cards = document.querySelectorAll('.card, .panel, .box, article, section, .bg-white');
+        for (var i = 0; i < cards.length; i++) {
+            if (cards[i].id === 'etapa21-admin-panel-header') {
+                continue;
+            }
+            if (cards[i].classList) {
+                cards[i].classList.add('er-card');
+            }
+        }
+
+        var botoes = document.querySelectorAll('button, input[type="button"], input[type="submit"]');
+        for (var b = 0; b < botoes.length; b++) {
+            if (botoes[b].classList) {
+                botoes[b].classList.add('er-btn');
+            }
+        }
+
+        var tabelas = document.querySelectorAll('table');
+        for (var t = 0; t < tabelas.length; t++) {
+            if (tabelas[t].parentElement && tabelas[t].parentElement.classList) {
+                tabelas[t].parentElement.classList.add('er-soft-panel');
+            }
+        }
+
+        var status = document.querySelectorAll('.status, .badge, .tag, .pill');
+        for (var s = 0; s < status.length; s++) {
+            if (status[s].classList) {
+                status[s].classList.add('er-badge');
+            }
+        }
+    }
+
+    function iniciar() {
+        criarCabecalho();
+        aplicarClasses();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciar);
+    } else {
+        iniciar();
+    }
+})();
+</script>
+<!-- ETAPA21_ADMIN_PANEL_VISUAL_FIM -->
+
 </body>
 </html>

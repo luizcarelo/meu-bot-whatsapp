@@ -497,3 +497,38 @@ Dashboard OK: True.
 CRM OK: False.
 CRM visual OK: False.
 <!-- ETAPA_20_1_FIM -->
+
+<!-- ETAPA_20_2_INICIO -->
+## Etapa 20.2 - Consulta da rota CRM corrigida
+
+Data: 2026-07-06T23:30:31
+
+Foi corrigida a consulta da rota /crm em routes/index.js.
+Arquivo alterado: True.
+Consulta antiga encontrada: True.
+Consulta corrigida presente: True.
+Validacao estrutural OK: True.
+Node check OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+CRM OK: True.
+CRM visual OK: True.
+<!-- ETAPA_20_2_FIM -->
+
+<!-- ETAPA_21_INICIO -->
+## Etapa 21 - Visual compartilhado aplicado ao painel administrativo
+
+Data: 2026-07-06T23:35:11
+
+Foi aplicada melhoria visual controlada em views/admin-panel.ejs.
+Arquivo alterado: True.
+CSS compartilhado adicionado: False.
+Script visual adicionado: True.
+Validacao estrutural OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Admin panel OK: False.
+Admin visual OK: False.
+<!-- ETAPA_21_FIM -->

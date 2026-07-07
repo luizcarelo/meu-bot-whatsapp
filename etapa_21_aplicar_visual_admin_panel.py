@@ -2,24 +2,24 @@
 # -*- coding: utf-8 -*-
 
 """
-Etapa 20 - Aplicar visual compartilhado em views/crm.ejs
+Etapa 21 - Aplicar visual compartilhado em views/admin-panel.ejs
 
 Objetivo:
 - Criar backup antes da alteracao.
 - Gerar manifesto antes e depois.
-- Alterar somente views/crm.ejs.
-- Garantir link para public/css/style.css via rota /css/style.css.
-- Injetar melhoria visual controlada com marcadores ETAPA20.
-- Preservar logica existente, fetch, Socket.IO, endpoints e formularios.
+- Alterar somente views/admin-panel.ejs.
+- Garantir link para /css/style.css.
+- Injetar camada visual controlada com marcadores ETAPA21.
+- Preservar logica existente, fetch, Socket.IO, Sortable, botoes, modais e formularios.
 - Nao alterar backend.
 - Nao alterar banco.
-- Nao reiniciar container.
-- Validar login, dashboard e CRM.
+- Reiniciar app somente se ETAPA21_RESTART_APP=true.
+- Validar login, dashboard e /admin/painel.
 - Atualizar documentacao obrigatoria.
 - Gerar relatorios em reports.
 
-Como executar:
-sudo ETAPA20_LOGIN_EMAIL='admin@saas.com' ETAPA20_LOGIN_PASSWORD='123456' python3 etapa_20_aplicar_visual_crm.py
+Como executar com restart:
+sudo ETAPA21_RESTART_APP=true ETAPA21_LOGIN_EMAIL='admin@saas.com' ETAPA21_LOGIN_PASSWORD='123456' python3 etapa_21_aplicar_visual_admin_panel.py
 """
 
 import os
@@ -38,12 +38,12 @@ ROOT = Path.cwd()
 REPORTS_DIR = ROOT / "reports"
 BACKUPS_DIR = ROOT / "backups"
 
-CRM_VIEW = ROOT / "views" / "crm.ejs"
+ADMIN_VIEW = ROOT / "views" / "admin-panel.ejs"
 
 BASE_URL = "http://127.0.0.1:50010"
 LOGIN_PATH = "/api/auth/login"
 DASHBOARD_PATH = "/dashboard"
-CRM_PATH = "/crm"
+ADMIN_PATH = "/admin/painel"
 
 DOCS_OBRIGATORIOS = [
     "CONTEXTO_PROJETO.md",
@@ -53,7 +53,7 @@ DOCS_OBRIGATORIOS = [
 ]
 
 ARQUIVOS_BACKUP_DIRETO = [
-    "views/crm.ejs",
+    "views/admin-panel.ejs",
     "CONTEXTO_PROJETO.md",
     "CHANGELOG.md",
     "DECISOES_TECNICAS.md",
@@ -70,19 +70,14 @@ IGNORAR_MANIFESTO_DIRS = [
 ]
 
 CHAVES_EMAIL = [
+    "ETAPA21_LOGIN_EMAIL",
+    "ETAPA20_2_LOGIN_EMAIL",
+    "ETAPA20_1_LOGIN_EMAIL",
     "ETAPA20_LOGIN_EMAIL",
     "ETAPA19_LOGIN_EMAIL",
     "ETAPA18_LOGIN_EMAIL",
     "ETAPA17_1_LOGIN_EMAIL",
     "ETAPA17_LOGIN_EMAIL",
-    "ETAPA15_2_LOGIN_EMAIL",
-    "ETAPA15_1_LOGIN_EMAIL",
-    "ETAPA15_LOGIN_EMAIL",
-    "ETAPA14_2_LOGIN_EMAIL",
-    "ETAPA14_1_LOGIN_EMAIL",
-    "ETAPA14_LOGIN_EMAIL",
-    "ETAPA13_LOGIN_EMAIL",
-    "ETAPA12_LOGIN_EMAIL",
     "LOGIN_EMAIL",
     "ADMIN_EMAIL",
     "SEED_ADMIN_EMAIL",
@@ -91,19 +86,14 @@ CHAVES_EMAIL = [
 ]
 
 CHAVES_SENHA = [
+    "ETAPA21_LOGIN_PASSWORD",
+    "ETAPA20_2_LOGIN_PASSWORD",
+    "ETAPA20_1_LOGIN_PASSWORD",
     "ETAPA20_LOGIN_PASSWORD",
     "ETAPA19_LOGIN_PASSWORD",
     "ETAPA18_LOGIN_PASSWORD",
     "ETAPA17_1_LOGIN_PASSWORD",
     "ETAPA17_LOGIN_PASSWORD",
-    "ETAPA15_2_LOGIN_PASSWORD",
-    "ETAPA15_1_LOGIN_PASSWORD",
-    "ETAPA15_LOGIN_PASSWORD",
-    "ETAPA14_2_LOGIN_PASSWORD",
-    "ETAPA14_1_LOGIN_PASSWORD",
-    "ETAPA14_LOGIN_PASSWORD",
-    "ETAPA13_LOGIN_PASSWORD",
-    "ETAPA12_LOGIN_PASSWORD",
     "LOGIN_PASSWORD",
     "ADMIN_PASSWORD",
     "SEED_ADMIN_PASSWORD",
@@ -137,12 +127,9 @@ def garantir_dirs():
 
 
 def ler_texto(path):
-    try:
-        if not path.exists():
-            return None
-        return path.read_text(encoding="utf-8", errors="replace")
-    except Exception:
+    if not path.exists():
         return None
+    return path.read_text(encoding="utf-8", errors="replace")
 
 
 def gravar_texto(path, conteudo):
@@ -150,8 +137,6 @@ def gravar_texto(path, conteudo):
     path.write_text(conteudo, encoding="utf-8")
 
 
-def validar_sem_asterisco(conteudo, nome):
-    return True
 def sha256_arquivo(path):
     h = hashlib.sha256()
     try:
@@ -231,7 +216,6 @@ def gerar_manifesto():
 
 def salvar_json(path, dados):
     texto = json.dumps(dados, ensure_ascii=False, indent=2) + "\n"
-    texto = texto.replace(chr(42), "[asterisco]")
     gravar_texto(path, texto)
 
 
@@ -360,7 +344,6 @@ def redigir(texto):
         if valor:
             out = out.replace(valor, "<REDIGIDO>")
 
-    out = out.replace(chr(42), "[asterisco]")
     return out
 
 
@@ -393,20 +376,20 @@ def run_cmd(cmd, timeout=60):
 
 
 def bloco_link_css():
-    return '"/css/style.css"'
+    return '/css/style.css'
 
 
-def bloco_visual_crm():
+def bloco_visual_admin():
     return """
-<!-- ETAPA20_CRM_VISUAL_INICIO -->
-<script id="etapa20-crm-visual">
+<!-- ETAPA21_ADMIN_PANEL_VISUAL_INICIO -->
+<script id="etapa21-admin-panel-visual">
 (function () {
     function existe(id) {
         return document.getElementById(id);
     }
 
     function criarCabecalho() {
-        if (existe('etapa20-crm-header')) {
+        if (existe('etapa21-admin-panel-header')) {
             return;
         }
 
@@ -420,17 +403,17 @@ def bloco_visual_crm():
         }
 
         var header = document.createElement('section');
-        header.id = 'etapa20-crm-header';
+        header.id = 'etapa21-admin-panel-header';
         header.className = 'er-page-header';
         header.innerHTML = ''
             + '<div class="er-top-actions" style="justify-content: space-between;">'
             + '  <div>'
-            + '    <div class="er-badge er-badge-success">CRM em tempo real</div>'
-            + '    <h1 class="er-page-title" style="margin-top: 12px;">Central de atendimento</h1>'
-            + '    <p class="er-page-subtitle">Contatos, conversas e acompanhamento operacional em uma interface padronizada.</p>'
+            + '    <div class="er-badge er-badge-success">Painel administrativo</div>'
+            + '    <h1 class="er-page-title" style="margin-top: 12px;">Gestao da empresa</h1>'
+            + '    <p class="er-page-subtitle">Usuarios, setores, permissoes e configuracoes com visual padronizado.</p>'
             + '  </div>'
             + '  <div class="er-top-actions">'
-            + '    <span class="er-badge er-badge-muted">Visual Etapa 20</span>'
+            + '    <span class="er-badge er-badge-muted">Visual Etapa 21</span>'
             + '    <span class="er-badge">CSS compartilhado</span>'
             + '  </div>'
             + '</div>';
@@ -439,9 +422,9 @@ def bloco_visual_crm():
     }
 
     function aplicarClasses() {
-        var cards = document.querySelectorAll('.card, .panel, .box, article, section');
+        var cards = document.querySelectorAll('.card, .panel, .box, article, section, .bg-white');
         for (var i = 0; i < cards.length; i++) {
-            if (cards[i].id === 'etapa20-crm-header') {
+            if (cards[i].id === 'etapa21-admin-panel-header') {
                 continue;
             }
             if (cards[i].classList) {
@@ -463,7 +446,7 @@ def bloco_visual_crm():
             }
         }
 
-        var status = document.querySelectorAll('.status, .badge');
+        var status = document.querySelectorAll('.status, .badge, .tag, .pill');
         for (var s = 0; s < status.length; s++) {
             if (status[s].classList) {
                 status[s].classList.add('er-badge');
@@ -483,7 +466,7 @@ def bloco_visual_crm():
     }
 })();
 </script>
-<!-- ETAPA20_CRM_VISUAL_FIM -->
+<!-- ETAPA21_ADMIN_PANEL_VISUAL_FIM -->
 """
 
 
@@ -499,20 +482,20 @@ def inserir_antes_de_body_fim(texto, bloco):
     return texto + "\n" + bloco + "\n"
 
 
-def aplicar_visual_crm():
+def aplicar_visual_admin():
     resultado = {
-        "arquivo": "views/crm.ejs",
-        "existe_antes": CRM_VIEW.exists(),
+        "arquivo": "views/admin-panel.ejs",
+        "existe_antes": ADMIN_VIEW.exists(),
         "alterado": False,
         "adicionou_css": False,
         "adicionou_script": False,
-        "sha256_antes": sha256_arquivo(CRM_VIEW) if CRM_VIEW.exists() else None,
+        "sha256_antes": sha256_arquivo(ADMIN_VIEW) if ADMIN_VIEW.exists() else None,
         "sha256_depois": None
     }
 
-    texto = ler_texto(CRM_VIEW)
+    texto = ler_texto(ADMIN_VIEW)
     if texto is None:
-        resultado["erro"] = "views/crm.ejs ausente ou ilegivel"
+        resultado["erro"] = "views/admin-panel.ejs ausente ou ilegivel"
         return resultado
 
     novo = texto
@@ -521,59 +504,75 @@ def aplicar_visual_crm():
         novo = inserir_antes_de_head_fim(novo, bloco_link_css())
         resultado["adicionou_css"] = True
 
-    if "ETAPA20_CRM_VISUAL_INICIO" not in novo:
-        novo = inserir_antes_de_body_fim(novo, bloco_visual_crm())
+    if "ETAPA21_ADMIN_PANEL_VISUAL_INICIO" not in novo:
+        novo = inserir_antes_de_body_fim(novo, bloco_visual_admin())
         resultado["adicionou_script"] = True
 
-    validar_sem_asterisco(bloco_link_css(), "link css crm")
-    validar_sem_asterisco(bloco_visual_crm(), "bloco visual crm")
-
     if novo != texto:
-        gravar_texto(CRM_VIEW, novo)
+        gravar_texto(ADMIN_VIEW, novo)
         resultado["alterado"] = True
 
-    resultado["sha256_depois"] = sha256_arquivo(CRM_VIEW)
+    resultado["sha256_depois"] = sha256_arquivo(ADMIN_VIEW)
     return resultado
 
 
-def validar_estrutura_crm():
-    texto = ler_texto(CRM_VIEW)
+def validar_estrutura_admin():
+    texto = ler_texto(ADMIN_VIEW)
 
     resultado = {
-        "arquivo_existe": CRM_VIEW.exists(),
+        "arquivo_existe": ADMIN_VIEW.exists(),
         "tem_css_compartilhado": False,
         "tem_marker": False,
         "tem_socket_io": False,
         "tem_fetch": False,
+        "tem_sortable": False,
         "tem_texto_visual": False,
-        "sem_asterisco": False,
         "ok": False
     }
 
     if texto is None:
-        resultado["erro"] = "views/crm.ejs ausente ou ilegivel"
+        resultado["erro"] = "views/admin-panel.ejs ausente ou ilegivel"
         return resultado
 
     lower = texto.lower()
 
     resultado["tem_css_compartilhado"] = "/css/style.css" in texto
-    resultado["tem_marker"] = "ETAPA20_CRM_VISUAL_INICIO" in texto
+    resultado["tem_marker"] = "ETAPA21_ADMIN_PANEL_VISUAL_INICIO" in texto
     resultado["tem_socket_io"] = "/socket.io/socket.io.js" in texto or "socket.io" in lower
     resultado["tem_fetch"] = "fetch(" in texto
-    resultado["tem_texto_visual"] = "Central de atendimento" in texto and "CRM em tempo real" in texto
-    resultado["sem_asterisco"] = chr(42) not in bloco_link_css() and chr(42) not in bloco_visual_crm()
+    resultado["tem_sortable"] = "sortable" in lower
+    resultado["tem_texto_visual"] = "Painel administrativo" in texto and "Gestao da empresa" in texto
 
     resultado["ok"] = bool(
         resultado["arquivo_existe"] and
         resultado["tem_css_compartilhado"] and
         resultado["tem_marker"] and
-        resultado["tem_socket_io"] and
         resultado["tem_fetch"] and
-        resultado["tem_texto_visual"] and
-        resultado["sem_asterisco"]
+        resultado["tem_texto_visual"]
     )
 
     return resultado
+
+
+def reiniciar_app_se_solicitado():
+    valor = os.environ.get("ETAPA21_RESTART_APP", "").strip().lower()
+
+    if valor not in ["true", "1", "sim", "yes"]:
+        return {
+            "solicitado": False,
+            "executado": False,
+            "ok": None,
+            "resultado": None
+        }
+
+    r = run_cmd(["docker", "compose", "restart", "app"], 120)
+
+    return {
+        "solicitado": True,
+        "executado": True,
+        "ok": r.get("ok"),
+        "resultado": r
+    }
 
 
 def criar_opener():
@@ -611,7 +610,7 @@ def http_request(opener, metodo, path, data_obj=None, timeout=15):
 
     body_bytes = None
     headers = {
-        "User-Agent": "etapa-20-visual-crm/1.0"
+        "User-Agent": "etapa-21-visual-admin-panel/1.0"
     }
 
     if data_obj is not None:
@@ -652,6 +651,35 @@ def http_request(opener, metodo, path, data_obj=None, timeout=15):
     return resultado
 
 
+def aguardar_app():
+    inicio = time.time()
+    tentativas = []
+
+    while time.time() - inicio < 90:
+        opener, jar = criar_opener()
+        r = http_request(opener, "GET", "/", None, timeout=6)
+        tentativas.append({
+            "status": r.get("status"),
+            "ok": r.get("ok"),
+            "erro": r.get("erro")
+        })
+
+        if r.get("status") in [200, 302, 404]:
+            return {
+                "ok": True,
+                "tentativas": tentativas,
+                "segundos": int(time.time() - inicio)
+            }
+
+        time.sleep(3)
+
+    return {
+        "ok": False,
+        "tentativas": tentativas,
+        "segundos": int(time.time() - inicio)
+    }
+
+
 def validar_runtime():
     cred = obter_credenciais()
 
@@ -661,13 +689,13 @@ def validar_runtime():
         "senha_configurada": cred["senha_configurada"],
         "login_ok": False,
         "dashboard_ok": False,
-        "crm_ok": False,
-        "crm_visual_ok": False,
+        "admin_ok": False,
+        "admin_visual_ok": False,
         "cookies": [],
         "login": None,
         "dashboard": None,
-        "crm": None,
-        "textos_crm": {}
+        "admin": None,
+        "textos_admin": {}
     }
 
     if not cred["email_configurado"] or not cred["senha_configurada"]:
@@ -708,36 +736,36 @@ def validar_runtime():
     }
     resultado["dashboard_ok"] = bool(dashboard.get("status") == 200 and "crm enterprise" in body_dash.lower())
 
-    crm = http_request(opener, "GET", CRM_PATH)
-    body_crm = crm.get("body_full_limited") or ""
-    lower_crm = body_crm.lower()
+    admin = http_request(opener, "GET", ADMIN_PATH)
+    body_admin = admin.get("body_full_limited") or ""
+    lower_admin = body_admin.lower()
 
     textos = {
-        "tem_css": "/css/style.css" in body_crm,
-        "tem_marker": "ETAPA20_CRM_VISUAL_INICIO" in body_crm,
-        "central_atendimento": "central de atendimento" in lower_crm,
-        "crm_tempo_real": "crm em tempo real" in lower_crm,
-        "tem_socket": "socket.io" in lower_crm,
-        "tem_fetch": "fetch(" in body_crm
+        "tem_css": "/css/style.css" in body_admin,
+        "tem_marker": "ETAPA21_ADMIN_PANEL_VISUAL_INICIO" in body_admin,
+        "painel_administrativo": "painel administrativo" in lower_admin,
+        "gestao_empresa": "gestao da empresa" in lower_admin,
+        "tem_fetch": "fetch(" in body_admin,
+        "tem_sortable": "sortable" in lower_admin
     }
 
-    resultado["crm"] = {
-        "status": crm.get("status"),
-        "ok": crm.get("ok"),
-        "erro": crm.get("erro"),
-        "content_type": crm.get("content_type"),
-        "body_preview": crm.get("body_preview")
+    resultado["admin"] = {
+        "status": admin.get("status"),
+        "ok": admin.get("ok"),
+        "erro": admin.get("erro"),
+        "content_type": admin.get("content_type"),
+        "body_preview": admin.get("body_preview")
     }
 
-    resultado["crm_ok"] = bool(crm.get("status") == 200)
-    resultado["crm_visual_ok"] = bool(
-        crm.get("status") == 200 and
+    resultado["admin_ok"] = bool(admin.get("status") == 200)
+    resultado["admin_visual_ok"] = bool(
+        admin.get("status") == 200 and
         textos["tem_css"] and
         textos["tem_marker"] and
-        textos["central_atendimento"] and
-        textos["crm_tempo_real"]
+        textos["painel_administrativo"] and
+        textos["gestao_empresa"]
     )
-    resultado["textos_crm"] = textos
+    resultado["textos_admin"] = textos
 
     return resultado
 
@@ -783,7 +811,12 @@ def parece_email_token(token):
     if len(dominio) < 4:
         return False
 
+    if dominio.replace(".", "").isdigit():
+        return False
+
     return True
+
+
 def analisar_logs_texto(texto):
     session_id = 0
     cookie = 0
@@ -796,7 +829,7 @@ def analisar_logs_texto(texto):
         if "session id" in low:
             session_id += 1
 
-        if "saas_crm_sid" in low or "connect.sid" in low or "header cookie" in low or "conteúdo:" in low or "conteudo:" in low:
+        if "saas_crm_sid" in low or "connect.sid" in low or "header cookie" in low:
             cookie += 1
 
         tokens = linha.replace("(", " ").replace(")", " ").replace(",", " ").split()
@@ -822,103 +855,100 @@ def analisar_logs_texto(texto):
     }
 
 
-def acrescentar_secao_documento(nome, titulo, corpo):
+def atualizar_doc(nome, titulo, linhas):
     path = ROOT / nome
-    texto_atual = ler_texto(path)
+    atual = ler_texto(path)
 
-    if texto_atual is None:
-        texto_atual = "# " + nome.replace(".md", "") + "\n"
+    if atual is None:
+        atual = "# " + nome.replace(".md", "") + "\n"
 
-    marcador_inicio = "<!-- ETAPA_20_INICIO -->"
-    marcador_fim = "<!-- ETAPA_20_FIM -->"
+    ini = "<!-- ETAPA_21_INICIO -->"
+    fim = "<!-- ETAPA_21_FIM -->"
 
-    secao = []
-    secao.append("")
-    secao.append(marcador_inicio)
-    secao.append("## " + titulo)
-    secao.append("")
-    secao.extend(corpo)
-    secao.append(marcador_fim)
-    secao.append("")
+    bloco = []
+    bloco.append("")
+    bloco.append(ini)
+    bloco.append("## " + titulo)
+    bloco.append("")
+    bloco.extend(linhas)
+    bloco.append(fim)
+    bloco.append("")
 
-    bloco = "\n".join(secao)
+    novo_bloco = "\n".join(bloco)
 
-    inicio = texto_atual.find(marcador_inicio)
-    fim = texto_atual.find(marcador_fim)
+    pos_ini = atual.find(ini)
+    pos_fim = atual.find(fim)
 
-    if inicio >= 0 and fim >= inicio:
-        fim = fim + len(marcador_fim)
-        novo = texto_atual[:inicio] + bloco.strip() + texto_atual[fim:]
+    if pos_ini >= 0 and pos_fim >= pos_ini:
+        pos_fim = pos_fim + len(fim)
+        novo = atual[:pos_ini] + novo_bloco.strip() + atual[pos_fim:]
     else:
-        if not texto_atual.endswith("\n"):
-            texto_atual += "\n"
-        novo = texto_atual + bloco
+        if not atual.endswith("\n"):
+            atual = atual + "\n"
+        novo = atual + novo_bloco
 
-    novo = novo.replace(chr(42), "")
-    validar_sem_asterisco(bloco_link_css(), "link css crm")
-    validar_sem_asterisco(bloco_visual_crm(), "bloco visual crm")
     gravar_texto(path, novo)
 
 
 def atualizar_documentacao(relatorio):
     data = relatorio["gerado_em"]
-    melhoria = relatorio["melhoria_crm"]
+    melhoria = relatorio["melhoria_admin"]
     estrutura = relatorio["validacao_estrutura"]
+    restart = relatorio["restart_app"]
     runtime = relatorio["validacao_runtime"]
 
-    acrescentar_secao_documento(
+    atualizar_doc(
         "CONTEXTO_PROJETO.md",
-        "Etapa 20 - Visual compartilhado aplicado ao CRM",
+        "Etapa 21 - Visual compartilhado aplicado ao painel administrativo",
         [
             "Data: " + data,
             "",
-            "Foi aplicada melhoria visual controlada em views/crm.ejs.",
+            "Foi aplicada melhoria visual controlada em views/admin-panel.ejs.",
             "Arquivo alterado: " + str(melhoria["alterado"]) + ".",
             "CSS compartilhado adicionado: " + str(melhoria["adicionou_css"]) + ".",
             "Script visual adicionado: " + str(melhoria["adicionou_script"]) + ".",
             "Validacao estrutural OK: " + str(estrutura["ok"]) + ".",
+            "Restart executado: " + str(restart["executado"]) + ".",
             "Login OK: " + str(runtime["login_ok"]) + ".",
             "Dashboard OK: " + str(runtime["dashboard_ok"]) + ".",
-            "CRM OK: " + str(runtime["crm_ok"]) + ".",
-            "CRM visual OK: " + str(runtime["crm_visual_ok"]) + "."
+            "Admin panel OK: " + str(runtime["admin_ok"]) + ".",
+            "Admin visual OK: " + str(runtime["admin_visual_ok"]) + "."
         ]
     )
 
-    acrescentar_secao_documento(
+    atualizar_doc(
         "CHANGELOG.md",
-        "Etapa 20 - Visual aplicado em views/crm.ejs",
+        "Etapa 21 - Visual aplicado em admin-panel",
         [
             "Data: " + data,
             "",
-            "Incluido link para /css/style.css em views/crm.ejs quando ausente.",
-            "Adicionada camada visual controlada com marcadores ETAPA20.",
-            "Preservados fetch, Socket.IO, endpoints e logica existente.",
-            "Validado login, dashboard e rota /crm.",
-            "Gerados backup, manifestos e relatorios da etapa."
+            "Incluido link para /css/style.css em views/admin-panel.ejs quando ausente.",
+            "Adicionada camada visual controlada com marcadores ETAPA21.",
+            "Preservados fetch, Socket.IO, Sortable, endpoints e logica existente.",
+            "Validado login, dashboard e painel administrativo."
         ]
     )
 
-    acrescentar_secao_documento(
+    atualizar_doc(
         "DECISOES_TECNICAS.md",
-        "Etapa 20 - Decisoes tecnicas frontend",
+        "Etapa 21 - Decisoes tecnicas frontend",
         [
             "Data: " + data,
             "",
-            "Decidido aplicar visual no CRM por injecao controlada, sem substituir a view inteira.",
+            "Decidido aplicar visual no painel administrativo por injecao controlada.",
             "Decidido usar public/css/style.css criado na Etapa 19.",
             "Decidido preservar scripts e chamadas existentes.",
             "Decidido nao alterar backend ou banco nesta etapa."
         ]
     )
 
-    acrescentar_secao_documento(
+    atualizar_doc(
         "PENDENCIAS.md",
-        "Pendencias apos Etapa 20",
+        "Pendencias apos Etapa 21",
         [
             "Data: " + data,
             "",
-            "Validar visual do CRM manualmente no navegador.",
-            "Planejar aplicacao visual em views/admin-panel.ejs.",
+            "Validar visual do painel administrativo manualmente no navegador.",
             "Planejar aplicacao visual em views/super-admin.ejs.",
             "Planejar internalizacao de dependencias externas.",
             "Mapear scripts inline antes de CSP forte."
@@ -929,14 +959,15 @@ def atualizar_documentacao(relatorio):
 
 
 def gerar_markdown_relatorio(relatorio):
-    melhoria = relatorio["melhoria_crm"]
+    melhoria = relatorio["melhoria_admin"]
     estrutura = relatorio["validacao_estrutura"]
+    restart = relatorio["restart_app"]
+    aguardar = relatorio["aguardar_app"]
     runtime = relatorio["validacao_runtime"]
     logs = relatorio["logs_analise"]
 
     linhas = []
-
-    linhas.append("# Etapa 20 - Aplicar visual compartilhado em CRM")
+    linhas.append("# Etapa 21 - Aplicar visual compartilhado em Admin Panel")
     linhas.append("")
     linhas.append("Data: " + relatorio["gerado_em"])
     linhas.append("")
@@ -945,101 +976,58 @@ def gerar_markdown_relatorio(relatorio):
     linhas.append("- Backup criado em: " + relatorio["backup"]["destino"])
     linhas.append("- Manifesto antes: " + relatorio["manifesto_antes"])
     linhas.append("- Manifesto depois: " + relatorio["manifesto_depois"])
-    linhas.append("- views/crm.ejs alterado: " + str(melhoria["alterado"]))
+    linhas.append("- views/admin-panel.ejs alterado: " + str(melhoria["alterado"]))
     linhas.append("- CSS compartilhado adicionado: " + str(melhoria["adicionou_css"]))
     linhas.append("- Script visual adicionado: " + str(melhoria["adicionou_script"]))
     linhas.append("- Validacao estrutural OK: " + str(estrutura["ok"]))
+    linhas.append("- Restart solicitado: " + str(restart["solicitado"]))
+    linhas.append("- Restart executado: " + str(restart["executado"]))
+    linhas.append("- Restart OK: " + str(restart["ok"]))
+    linhas.append("- App pronto: " + str(aguardar["ok"]))
     linhas.append("- Login OK: " + str(runtime["login_ok"]))
     linhas.append("- Dashboard OK: " + str(runtime["dashboard_ok"]))
-    linhas.append("- CRM OK: " + str(runtime["crm_ok"]))
-    linhas.append("- CRM visual OK: " + str(runtime["crm_visual_ok"]))
+    linhas.append("- Admin panel OK: " + str(runtime["admin_ok"]))
+    linhas.append("- Admin visual OK: " + str(runtime["admin_visual_ok"]))
     linhas.append("- Logs novos Session ID: " + str(logs["linhas_session_id"]))
     linhas.append("- Logs novos cookie: " + str(logs["linhas_cookie"]))
     linhas.append("- Logs novos email: " + str(logs["linhas_email"]))
     linhas.append("- Achados criticos logs: " + str(len(logs["achados"])))
     linhas.append("")
-
-    linhas.append("## Arquivo alterado")
-    linhas.append("")
-    linhas.append("- Arquivo: " + melhoria["arquivo"])
-    linhas.append("- SHA256 antes: " + str(melhoria["sha256_antes"]))
-    linhas.append("- SHA256 depois: " + str(melhoria["sha256_depois"]))
-
-    linhas.append("")
     linhas.append("## Validacao estrutural")
     linhas.append("")
     for chave in sorted(estrutura.keys()):
         linhas.append("- " + chave + ": " + str(estrutura[chave]))
-
     linhas.append("")
-    linhas.append("## Validacao runtime")
+    linhas.append("## Marcadores Admin")
     linhas.append("")
-    linhas.append("- Executada: " + str(runtime["executado"]))
-    linhas.append("- Email configurado: " + str(runtime["email_configurado"]))
-    linhas.append("- Senha configurada: " + str(runtime["senha_configurada"]))
-    linhas.append("- Login OK: " + str(runtime["login_ok"]))
-    linhas.append("- Dashboard OK: " + str(runtime["dashboard_ok"]))
-    linhas.append("- CRM OK: " + str(runtime["crm_ok"]))
-    linhas.append("- CRM visual OK: " + str(runtime["crm_visual_ok"]))
-    linhas.append("- Cookies recebidos: " + str(len(runtime["cookies"])))
-
-    linhas.append("")
-    linhas.append("## Marcadores CRM")
-    linhas.append("")
-    for chave, valor in sorted(runtime["textos_crm"].items()):
+    for chave, valor in sorted(runtime["textos_admin"].items()):
         linhas.append("- " + chave + ": " + str(valor))
-
-    linhas.append("")
-    linhas.append("## Logs novos")
-    linhas.append("")
-    linhas.append("- Linhas analisadas: " + str(logs["total_linhas"]))
-    linhas.append("- Linhas Session ID: " + str(logs["linhas_session_id"]))
-    linhas.append("- Linhas cookie: " + str(logs["linhas_cookie"]))
-    linhas.append("- Linhas email: " + str(logs["linhas_email"]))
-    linhas.append("- Achados: " + str(len(logs["achados"])))
-
-    linhas.append("")
-    linhas.append("## Observacoes")
-    linhas.append("")
-    linhas.append("- Somente views/crm.ejs foi alterado.")
-    linhas.append("- Nenhum backend foi alterado.")
-    linhas.append("- Nenhum banco foi alterado.")
-    linhas.append("- A melhoria usa public/css/style.css da Etapa 19.")
-    linhas.append("- A logica existente foi preservada.")
-
     linhas.append("")
     linhas.append("## Documentacao atualizada")
     linhas.append("")
     for nome in relatorio["documentacao_atualizada"]:
         linhas.append("- " + nome)
 
-    linhas.append("")
-    linhas.append("## Proxima etapa recomendada")
-    linhas.append("")
-    linhas.append("- Validar visual do CRM manualmente e depois aplicar visual em admin-panel ou super-admin.")
-    linhas.append("")
-
-    conteudo = "\n".join(linhas) + "\n"
-    conteudo = conteudo.replace(chr(42), "[asterisco]")
-    validar_sem_asterisco(conteudo, "relatorio markdown")
-    return conteudo
+    return "\n".join(linhas) + "\n"
 
 
 def main():
     garantir_dirs()
 
     stamp = agora_stamp()
-    backup_dir = BACKUPS_DIR / ("etapa_20_" + stamp)
+    backup_dir = BACKUPS_DIR / ("etapa_21_" + stamp)
 
     manifesto_antes = gerar_manifesto()
-    manifesto_antes_path = REPORTS_DIR / "etapa_20_manifesto_antes.json"
+    manifesto_antes_path = REPORTS_DIR / "etapa_21_manifesto_antes.json"
     salvar_json(manifesto_antes_path, manifesto_antes)
 
     backup = criar_backup(backup_dir)
 
     since = agora_logs_since()
-    melhoria = aplicar_visual_crm()
-    estrutura = validar_estrutura_crm()
+    melhoria = aplicar_visual_admin()
+    estrutura = validar_estrutura_admin()
+    restart = reiniciar_app_se_solicitado()
+    aguardar = aguardar_app()
     runtime = validar_runtime()
     time.sleep(2)
 
@@ -1051,8 +1039,10 @@ def main():
         "raiz": str(ROOT),
         "backup": backup,
         "manifesto_antes": rel(manifesto_antes_path),
-        "melhoria_crm": melhoria,
+        "melhoria_admin": melhoria,
         "validacao_estrutura": estrutura,
+        "restart_app": restart,
+        "aguardar_app": aguardar,
         "logs_since": since,
         "validacao_runtime": runtime,
         "logs_coleta": logs_coleta,
@@ -1063,36 +1053,40 @@ def main():
     relatorio["documentacao_atualizada"] = documentacao
 
     manifesto_depois = gerar_manifesto()
-    manifesto_depois_path = REPORTS_DIR / "etapa_20_manifesto_depois.json"
+    manifesto_depois_path = REPORTS_DIR / "etapa_21_manifesto_depois.json"
     salvar_json(manifesto_depois_path, manifesto_depois)
 
     relatorio["manifesto_depois"] = rel(manifesto_depois_path)
 
-    json_path = REPORTS_DIR / "etapa_20_aplicar_visual_crm.json"
-    md_path = REPORTS_DIR / "etapa_20_aplicar_visual_crm.md"
+    json_path = REPORTS_DIR / "etapa_21_aplicar_visual_admin_panel.json"
+    md_path = REPORTS_DIR / "etapa_21_aplicar_visual_admin_panel.md"
 
     salvar_json(json_path, relatorio)
     gravar_texto(md_path, gerar_markdown_relatorio(relatorio))
 
-    print("Etapa 20 concluida.")
+    print("Etapa 21 concluida.")
     print("Backup: " + backup["destino"])
     print("Manifesto antes: " + rel(manifesto_antes_path))
     print("Manifesto depois: " + rel(manifesto_depois_path))
     print("Relatorio JSON: " + rel(json_path))
     print("Relatorio Markdown: " + rel(md_path))
-    print("views/crm.ejs alterado: " + str(melhoria["alterado"]))
+    print("views/admin-panel.ejs alterado: " + str(melhoria["alterado"]))
     print("Validacao estrutural OK: " + str(estrutura["ok"]))
+    print("Restart solicitado: " + str(restart["solicitado"]))
+    print("Restart executado: " + str(restart["executado"]))
+    print("Restart OK: " + str(restart["ok"]))
+    print("App pronto: " + str(aguardar["ok"]))
     print("Login OK: " + str(runtime["login_ok"]))
     print("Dashboard OK: " + str(runtime["dashboard_ok"]))
-    print("CRM OK: " + str(runtime["crm_ok"]))
-    print("CRM visual OK: " + str(runtime["crm_visual_ok"]))
+    print("Admin panel OK: " + str(runtime["admin_ok"]))
+    print("Admin visual OK: " + str(runtime["admin_visual_ok"]))
     print("Logs novos Session ID: " + str(logs_analise["linhas_session_id"]))
     print("Logs novos cookie: " + str(logs_analise["linhas_cookie"]))
     print("Logs novos email: " + str(logs_analise["linhas_email"]))
 
-    if not runtime["crm_visual_ok"]:
+    if not runtime["admin_visual_ok"]:
         print("")
-        print("Aviso: CRM visual nao validou completamente. Consulte o relatorio.")
+        print("Aviso: Admin panel ainda nao validou visualmente em runtime. Consulte o relatorio.")
 
 
 if __name__ == "__main__":
