@@ -325,3 +325,15 @@ Validados headers HTTP basicos.
 Executado node --check em server.js.
 Gerados backup, manifestos e relatorios da etapa.
 <!-- ETAPA_15_FIM -->
+
+<!-- ETAPA_15_1_INICIO -->
+## Etapa 15.1 - Correcao emergencial de sintaxe
+
+Data: 2026-07-06T22:17:23
+
+Corrigidas virgulas ausentes no bloco cookie do server.js.
+Executado node --check em server.js.
+Reiniciado app somente apos validacao de sintaxe.
+Validado app, login e dashboard apos restart.
+Gerados backup, manifestos e relatorios da etapa.
+<!-- ETAPA_15_1_FIM -->

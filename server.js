@@ -133,9 +133,9 @@ redisClient.on('connect', () => console.log('🔌 [Redis] Conectado com sucesso.
         saveUninitialized: false,
         rolling: true,
         cookie: {
-            secure: process.env.NODE_ENV === 'production' && process.env.COOKIE_SECURE === 'true', // Mantenha false se não tiver certeza do SSL
+            secure: process.env.NODE_ENV === 'production' && process.env.COOKIE_SECURE === 'true', // Mantenha false se não tiver certeza do SSL,
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 // 1 dia,
+            maxAge: 1000 * 60 * 60 * 24, // 1 dia,
         sameSite: 'lax'
 }
     }));

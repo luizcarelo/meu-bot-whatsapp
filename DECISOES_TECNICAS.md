@@ -298,3 +298,14 @@ Decidido usar origens locais somente como fallback de desenvolvimento.
 Decidido condicionar secure do cookie a NODE_ENV production e COOKIE_SECURE true.
 Decidido manter restart dependente de ETAPA15_RESTART_APP=true.
 <!-- ETAPA_15_FIM -->
+
+<!-- ETAPA_15_1_INICIO -->
+## Etapa 15.1 - Decisao tecnica
+
+Data: 2026-07-06T22:17:23
+
+Decidido corrigir apenas sintaxe do bloco cookie.
+Decidido nao alterar banco nem regra de autenticacao.
+Decidido reiniciar app somente apos node --check OK.
+Decidido manter a Etapa 15 para revisao posterior de CORS e headers.
+<!-- ETAPA_15_1_FIM -->

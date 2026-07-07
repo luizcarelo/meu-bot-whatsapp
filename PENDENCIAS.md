@@ -326,3 +326,15 @@ Definir COOKIE_SECURE=true apenas com HTTPS valido.
 Validar ambiente externo com HTTPS.
 Planejar rate limit e politica CSP dedicada.
 <!-- ETAPA_15_FIM -->
+
+<!-- ETAPA_15_1_INICIO -->
+## Pendencias apos Etapa 15.1
+
+Data: 2026-07-06T22:17:23
+
+Reexecutar ou revisar Etapa 15 apos hotfix se necessario.
+Confirmar headers e CORS em runtime com app estavel.
+Definir CORS_ORIGINS no ambiente final com dominio real HTTPS.
+Definir COOKIE_SECURE=true apenas com HTTPS valido.
+Planejar rate limit e politica CSP dedicada.
+<!-- ETAPA_15_1_FIM -->

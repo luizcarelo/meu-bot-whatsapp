@@ -358,3 +358,17 @@ Restart executado: True.
 Headers basicos OK em runtime: False.
 CORS sem origem aberta em runtime: True.
 <!-- ETAPA_15_FIM -->
+
+<!-- ETAPA_15_1_INICIO -->
+## Etapa 15.1 - Hotfix de sintaxe do cookie
+
+Data: 2026-07-06T22:17:23
+
+Foi executado hotfix para corrigir sintaxe do bloco cookie em server.js.
+Linhas corrigidas: [].
+Node check OK: True.
+Restart executado: True.
+App home OK: True.
+Login OK: True.
+Dashboard OK: True.
+<!-- ETAPA_15_1_FIM -->
