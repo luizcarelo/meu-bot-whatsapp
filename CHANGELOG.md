@@ -640,3 +640,25 @@ Criados documentos de decisao, mapa do legado, arquitetura alvo, contratos de AP
 Registrada diretriz de interromper remendos complexos no EJS legado.
 Nao houve alteracao funcional no sistema.
 <!-- ETAPA_26_FIM -->
+
+<!-- ETAPA_27_INICIO -->
+## Etapa 27 - Criacao do frontend React
+
+Data: 2026-07-07T01:34:21
+
+Adicionada pasta frontend com base React.
+Adicionados arquivos de Vite, TypeScript, Material UI e rotas iniciais.
+Adicionados placeholders para login, dashboard, CRM, WhatsApp, admin e super admin.
+Nenhuma rota legada foi removida.
+<!-- ETAPA_27_FIM -->
+
+<!-- ETAPA_27_1_INICIO -->
+## Etapa 27.1 - Ajustes de build React
+
+Data: 2026-07-07T08:02:24
+
+Removido baseUrl de frontend/tsconfig.app.json.
+Ajustado alias @ para ./src.
+Ajustado fallback de rotas no React Router.
+Executado typecheck e build do frontend.
+<!-- ETAPA_27_1_FIM -->

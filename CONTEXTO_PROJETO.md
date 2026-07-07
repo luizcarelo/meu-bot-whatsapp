@@ -833,3 +833,25 @@ O frontend EJS atual passa a ser tratado como legado operacional.
 Nenhum codigo funcional foi alterado nesta etapa.
 Documentos criados na pasta docs.
 <!-- ETAPA_26_FIM -->
+
+<!-- ETAPA_27_INICIO -->
+## Etapa 27 - Base frontend React
+
+Data: 2026-07-07T01:34:21
+
+Criada a base do frontend em frontend/ com React, TypeScript, Vite e Material UI.
+Criada estrutura modular inicial por app, routes, layouts, shared e features.
+Criado AppShell responsivo com Drawer, AppBar e tema claro/escuro.
+O frontend legado EJS nao foi substituido nesta etapa.
+<!-- ETAPA_27_FIM -->
+
+<!-- ETAPA_27_1_INICIO -->
+## Etapa 27.1 - Correcao build frontend React
+
+Data: 2026-07-07T08:02:24
+
+Corrigida configuracao TypeScript do frontend React removendo baseUrl.
+Mantido alias @ via paths com ./src.
+Corrigida rota fallback para evitar caractere asterisco literal em TSX.
+Build OK: False.
+<!-- ETAPA_27_1_FIM -->

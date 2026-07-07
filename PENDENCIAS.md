@@ -641,3 +641,25 @@ Etapa 30: migrar login e sessao.
 Etapa 31: migrar dashboard.
 Etapa 32: criar gestao WhatsApp web.
 <!-- ETAPA_26_FIM -->
+
+<!-- ETAPA_27_INICIO -->
+## Pendencias apos Etapa 27
+
+Data: 2026-07-07T01:34:21
+
+Validar npm install e npm run build no frontend.
+Etapa 28: criar backend modular em paralelo.
+Etapa 29: padronizar respostas de API.
+Etapa 30: migrar login e sessao para o frontend React.
+Etapa 31: migrar dashboard definitivo.
+<!-- ETAPA_27_FIM -->
+
+<!-- ETAPA_27_1_INICIO -->
+## Pendencias apos Etapa 27.1
+
+Data: 2026-07-07T08:02:24
+
+Validar visualmente o frontend React com npm run dev.
+Etapa 28: criar backend modular em paralelo.
+Etapa 29: padronizar respostas de API.
+<!-- ETAPA_27_1_FIM -->

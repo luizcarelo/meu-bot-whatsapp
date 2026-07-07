@@ -601,3 +601,24 @@ Decidido evoluir backend para arquitetura modular por dominio.
 Decidido manter o EJS como legado operacional ate substituicao validada.
 Decidido padronizar contratos JSON para APIs novas.
 <!-- ETAPA_26_FIM -->
+
+<!-- ETAPA_27_INICIO -->
+## Etapa 27 - Decisoes do frontend React
+
+Data: 2026-07-07T01:34:21
+
+Decidido criar o frontend novo em pasta isolada frontend/.
+Decidido usar Material UI com Emotion e ThemeProvider.
+Decidido usar Vite com proxy /api para o backend atual em desenvolvimento.
+Decidido manter coexistencia com o legado ate migracoes futuras.
+<!-- ETAPA_27_FIM -->
+
+<!-- ETAPA_27_1_INICIO -->
+## Etapa 27.1 - Decisao TypeScript
+
+Data: 2026-07-07T08:02:24
+
+Decidido remover baseUrl para compatibilidade com TypeScript 6.
+Decidido manter path alias @ sem baseUrl.
+Decidido manter validacao anti-asterisco para arquivos gerados, usando String.fromCharCode(42) quando necessario.
+<!-- ETAPA_27_1_FIM -->

@@ -1,0 +1,174 @@
+{
+  "gerado_em": "2026-07-07T08:02:24",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_27_1_frontend_react_build_20260707_080217",
+    "copiados": [
+      "frontend/tsconfig.app.json",
+      "frontend/src/routes/AppRoutes.tsx",
+      "frontend/package.json",
+      "frontend/package-lock.json",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_27_1_manifesto_antes.json",
+  "alteracoes": [
+    {
+      "arquivo": "frontend/tsconfig.app.json",
+      "alterado": true,
+      "sha256_antes": "90f96ec972e723c2e6151f2845f02d963bcbaab5515621d4574d4caab3df9229",
+      "sha256_depois": "fdb0c59e5ce8314595be56d83f226ebeaf9ae67d669252632e080d4f0c966408",
+      "tamanho": 554
+    },
+    {
+      "arquivo": "frontend/src/routes/AppRoutes.tsx",
+      "alterado": true,
+      "sha256_antes": "10b54b92ff1ac9ba008aded04d025d4764c68d5a166fffc59532e57e09a584ea",
+      "sha256_depois": "9886b55e4700f7fbbaababd92cd58a82b1a705f6e73dbdb9af409e9e6111f790",
+      "tamanho": 1127
+    }
+  ],
+  "validacao": {
+    "arquivos": [
+      {
+        "arquivo": "frontend/tsconfig.app.json",
+        "existe": true,
+        "sha256": "fdb0c59e5ce8314595be56d83f226ebeaf9ae67d669252632e080d4f0c966408",
+        "sem_asterisco": false,
+        "asteriscos": [
+          {
+            "arquivo": "frontend/tsconfig.app.json",
+            "linha": 19,
+            "texto": "      \"@/*\": [\"./src/*\"]"
+          }
+        ],
+        "ok": false
+      },
+      {
+        "arquivo": "frontend/src/routes/AppRoutes.tsx",
+        "existe": true,
+        "sha256": "9886b55e4700f7fbbaababd92cd58a82b1a705f6e73dbdb9af409e9e6111f790",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/package.json",
+        "existe": true,
+        "sha256": "76c959c1bbbf7306cc0ded2029559166ed0c13a460b58a6a760e2e620e0810d7",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/main.tsx",
+        "existe": true,
+        "sha256": "64324c7bff484307b1903aa9927a3d48d753bf71162bd5d6de96951d1fd86f59",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/layouts/AppShell.tsx",
+        "existe": true,
+        "sha256": "ebafb7fdb2d19b2c0667b734f9264fb944b7ee94813965cb53f7ea39254c1e19",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/dashboard/pages/DashboardPage.tsx",
+        "existe": true,
+        "sha256": "688f413153e4e4f6b4a7a7bfb92251c1cff3bbabee94c07b77eb714016108c00",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      }
+    ],
+    "checks": {
+      "sem_baseUrl": true,
+      "alias_com_paths": true,
+      "sem_path_asterisco_literal": true,
+      "fallback_com_from_char_code": true
+    },
+    "erros": [
+      {
+        "arquivo": "frontend/tsconfig.app.json",
+        "existe": true,
+        "sha256": "fdb0c59e5ce8314595be56d83f226ebeaf9ae67d669252632e080d4f0c966408",
+        "sem_asterisco": false,
+        "asteriscos": [
+          {
+            "arquivo": "frontend/tsconfig.app.json",
+            "linha": 19,
+            "texto": "      \"@/*\": [\"./src/*\"]"
+          }
+        ],
+        "ok": false
+      }
+    ],
+    "ok": false
+  },
+  "builds": {
+    "node_version": {
+      "cmd": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+      "returncode": 0,
+      "stdout": "v24.16.0",
+      "stderr": "",
+      "ok": true
+    },
+    "npm_version": {
+      "cmd": [
+        "npm",
+        "--version"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+      "returncode": 0,
+      "stdout": "11.16.0",
+      "stderr": "",
+      "ok": true
+    },
+    "typecheck": {
+      "cmd": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp/frontend",
+      "returncode": 1,
+      "stdout": "> engeradios-crm-frontend@0.1.0 typecheck\n> tsc -b --pretty false\n\nsrc/features/auth/pages/LoginPage.tsx(8,12): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/features/dashboard/pages/DashboardPage.tsx(43,12): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & GridBaseProps & { sx?: SxProps<Theme> | undefined; } & Omit<...>): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: Element; item: true; xs: number; sm: number; lg: number; key: string; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<GridTypeMap<{}, \"div\">>): Element | null', gave the following error.\n    Type '{ children: Element; item: true; xs: number; sm: number; lg: number; key: string; }' is not assignable to type 'IntrinsicAttributes & GridBaseProps & { sx?: SxProps<Theme> | undefined; } & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"sx\" | keyof GridBaseProps>'.\n      Property 'item' does not exist on type 'IntrinsicAttributes & GridBaseProps & { sx?: SxProps<Theme> | undefined; } & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"sx\" | keyof GridBaseProps>'.\nsrc/features/dashboard/pages/DashboardPage.tsx(46,18): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; color: \"text.secondary\"; variant: \"body2\"; fontWeight: number; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; color: \"text.secondary\"; variant: \"body2\"; fontWeight: number; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/features/dashboard/pages/DashboardPage.tsx(49,18): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h5\"; fontWeight: number; sx: { mt: number; }; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h5\"; fontWeight: number; sx: { mt: number; }; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/layouts/AppShell.tsx(49,10): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h6\"; fontWeight: number; color: \"primary\"; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h6\"; fontWeight: number; color: \"primary\"; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/layouts/AppShell.tsx(104,12): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h6\"; fontWeight: number; sx: { flexGrow: number; }; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h6\"; fontWeight: number; sx: { flexGrow: number; }; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/shared/components/PageHeader.tsx(11,8): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.",
+      "stderr": "",
+      "ok": false
+    },
+    "build": {
+      "cmd": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp/frontend",
+      "returncode": 1,
+      "stdout": "> engeradios-crm-frontend@0.1.0 build\n> tsc -b && vite build\n\nsrc/features/auth/pages/LoginPage.tsx(8,12): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/features/dashboard/pages/DashboardPage.tsx(43,12): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & GridBaseProps & { sx?: SxProps<Theme> | undefined; } & Omit<...>): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: Element; item: true; xs: number; sm: number; lg: number; key: string; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<GridTypeMap<{}, \"div\">>): Element | null', gave the following error.\n    Type '{ children: Element; item: true; xs: number; sm: number; lg: number; key: string; }' is not assignable to type 'IntrinsicAttributes & GridBaseProps & { sx?: SxProps<Theme> | undefined; } & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"sx\" | keyof GridBaseProps>'.\n      Property 'item' does not exist on type 'IntrinsicAttributes & GridBaseProps & { sx?: SxProps<Theme> | undefined; } & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"sx\" | keyof GridBaseProps>'.\nsrc/features/dashboard/pages/DashboardPage.tsx(46,18): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; color: \"text.secondary\"; variant: \"body2\"; fontWeight: number; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; color: \"text.secondary\"; variant: \"body2\"; fontWeight: number; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/features/dashboard/pages/DashboardPage.tsx(49,18): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h5\"; fontWeight: number; sx: { mt: number; }; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h5\"; fontWeight: number; sx: { mt: number; }; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/layouts/AppShell.tsx(49,10): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h6\"; fontWeight: number; color: \"primary\"; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h6\"; fontWeight: number; color: \"primary\"; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/layouts/AppShell.tsx(104,12): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h6\"; fontWeight: number; sx: { flexGrow: number; }; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h6\"; fontWeight: number; sx: { flexGrow: number; }; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\nsrc/shared/components/PageHeader.tsx(11,8): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(props: { component: ElementType<any, keyof IntrinsicElements>; } & TypographyOwnProps & CommonProps & Omit<any, \"className\" | ... 9 more ... | \"variantMapping\">): Element | null', gave the following error.\n    Property 'component' is missing in type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' but required in type '{ component: ElementType<any, keyof IntrinsicElements>; }'.\n  Overload 2 of 2, '(props: DefaultComponentProps<TypographyTypeMap<{}, \"span\">>): Element | null', gave the following error.\n    Type '{ children: string; variant: \"h4\"; fontWeight: number; gutterBottom: true; }' is not assignable to type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.\n      Property 'fontWeight' does not exist on type 'IntrinsicAttributes & TypographyOwnProps & CommonProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, \"className\" | ... 9 more ... | \"variantMapping\">'.",
+      "stderr": "",
+      "ok": false
+    }
+  },
+  "build_ok": false,
+  "ok": false,
+  "docs_obrigatorios": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_27_1_manifesto_depois.json"
+}

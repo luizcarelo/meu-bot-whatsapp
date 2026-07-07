@@ -1,0 +1,430 @@
+{
+  "gerado_em": "2026-07-07T01:34:57",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_27_frontend_react_base_20260707_013421",
+    "copiados": [
+      "frontend",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md",
+      "docs/ARQUITETURA_FRONTEND_REACT.md",
+      "docs/PLANO_MIGRACAO_REACT.md",
+      "docs/RESUMO_ETAPA_26.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_27_manifesto_antes.json",
+  "manifesto_depois": "reports/etapa_27_manifesto_depois.json",
+  "frontend_arquivos": [
+    {
+      "arquivo": "frontend/package.json",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "76c959c1bbbf7306cc0ded2029559166ed0c13a460b58a6a760e2e620e0810d7",
+      "tamanho": 782
+    },
+    {
+      "arquivo": "frontend/index.html",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "a09969fafdd745da5aecbfbd54e3b52d30cf34783b08055f031885e04dc077f5",
+      "tamanho": 304
+    },
+    {
+      "arquivo": "frontend/vite.config.ts",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "0e9f5fc6ea02278af129eca0dda7e3e302ca2d2a513eeca212de56df8a8c50d0",
+      "tamanho": 490
+    },
+    {
+      "arquivo": "frontend/tsconfig.json",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808",
+      "tamanho": 119
+    },
+    {
+      "arquivo": "frontend/tsconfig.app.json",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "90f96ec972e723c2e6151f2845f02d963bcbaab5515621d4574d4caab3df9229",
+      "tamanho": 572
+    },
+    {
+      "arquivo": "frontend/tsconfig.node.json",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "b5805e4738367879e03012a1807daba34fc4dfbfab445472529f2611d4d41fb0",
+      "tamanho": 233
+    },
+    {
+      "arquivo": "frontend/.env.example",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7825e47e2f431eac8dfcc75c70a1c837f86ad70e7f2966d145be59b8376b39c7",
+      "tamanho": 52
+    },
+    {
+      "arquivo": "frontend/.gitignore",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "2f83b5236596c898b6f882186d2d1154abaf20c01b7f9e2e84b4652f5144da02",
+      "tamanho": 44
+    },
+    {
+      "arquivo": "frontend/README.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "4c66cdc6bec644ebca4785473eb5809a89af34d250f6adca5271fc76e8c1380e",
+      "tamanho": 312
+    },
+    {
+      "arquivo": "frontend/src/main.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "64324c7bff484307b1903aa9927a3d48d753bf71162bd5d6de96951d1fd86f59",
+      "tamanho": 477
+    },
+    {
+      "arquivo": "frontend/src/app/App.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "337901221294df6b81d0139cbc707edda2c0fbe44aac26e73000a9dd2ccec3ac",
+      "tamanho": 223
+    },
+    {
+      "arquivo": "frontend/src/app/providers/AppThemeProvider.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "ccd9cf7336ca2659df7d5228f25ee36ffdd1a41343e3e2a7810328e760cc23c9",
+      "tamanho": 1159
+    },
+    {
+      "arquivo": "frontend/src/shared/theme/ColorModeContext.ts",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "a8897ca508b03c1c45e028375d5d608a2ce3d3a860079490aa751cc6154e9d55",
+      "tamanho": 389
+    },
+    {
+      "arquivo": "frontend/src/shared/theme/theme.ts",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "b214020e5fb1ac8f5274b9ae0344740cc4f80ad6cbda6fa84207ded0670f9e3c",
+      "tamanho": 975
+    },
+    {
+      "arquivo": "frontend/src/routes/AppRoutes.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "10b54b92ff1ac9ba008aded04d025d4764c68d5a166fffc59532e57e09a584ea",
+      "tamanho": 1067
+    },
+    {
+      "arquivo": "frontend/src/layouts/AppShell.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "ebafb7fdb2d19b2c0667b734f9264fb944b7ee94813965cb53f7ea39254c1e19",
+      "tamanho": 4405
+    },
+    {
+      "arquivo": "frontend/src/shared/types/api.ts",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "a41689105f7cf350c399f24c8d7f08b6591fa7cadda677884a56491618dc886a",
+      "tamanho": 308
+    },
+    {
+      "arquivo": "frontend/src/shared/services/httpClient.ts",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "d40de98cf2cb630ad04de3abe5274e43145d5593b62076abd7542458c252255c",
+      "tamanho": 482
+    },
+    {
+      "arquivo": "frontend/src/shared/components/PageHeader.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "2a7b0f93ffd07507890a57033d486f56c0f4b779443885832685d2236e4c0fd9",
+      "tamanho": 450
+    },
+    {
+      "arquivo": "frontend/src/features/auth/pages/LoginPage.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "42d4ec5cb6abf408621ae4f71a4d0543313281544b3a303434fbc93ed6a82b4f",
+      "tamanho": 895
+    },
+    {
+      "arquivo": "frontend/src/features/dashboard/pages/DashboardPage.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "688f413153e4e4f6b4a7a7bfb92251c1cff3bbabee94c07b77eb714016108c00",
+      "tamanho": 2376
+    },
+    {
+      "arquivo": "frontend/src/features/crm/pages/CrmPage.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7f0ea7b935f76ef8ad067608403340ccd3dd497cee090f73d2de167724bef508",
+      "tamanho": 483
+    },
+    {
+      "arquivo": "frontend/src/features/whatsapp/pages/WhatsappPage.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "13e295aa3943e4e79e34d6ea627ceeb5b853f885276987954800b5deb55706e9",
+      "tamanho": 512
+    },
+    {
+      "arquivo": "frontend/src/features/settings/pages/AdminPage.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "695527cacda3daa1b1bd1c2d082bfa894364e6d22120715c8ae4e0513b39ae23",
+      "tamanho": 479
+    },
+    {
+      "arquivo": "frontend/src/features/super-admin/pages/SuperAdminPage.tsx",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "a00ddaec42b0314cfec2523a2f969bd80bfd13163ac220dd7e69599b976251a3",
+      "tamanho": 466
+    },
+    {
+      "arquivo": "frontend/src/vite-env.d.ts",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "tamanho": 38
+    }
+  ],
+  "docs_obrigatorios": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "validacao": {
+    "arquivos": [
+      {
+        "arquivo": "frontend/package.json",
+        "existe": true,
+        "sha256": "76c959c1bbbf7306cc0ded2029559166ed0c13a460b58a6a760e2e620e0810d7",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/index.html",
+        "existe": true,
+        "sha256": "a09969fafdd745da5aecbfbd54e3b52d30cf34783b08055f031885e04dc077f5",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/vite.config.ts",
+        "existe": true,
+        "sha256": "0e9f5fc6ea02278af129eca0dda7e3e302ca2d2a513eeca212de56df8a8c50d0",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/tsconfig.json",
+        "existe": true,
+        "sha256": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/tsconfig.app.json",
+        "existe": true,
+        "sha256": "90f96ec972e723c2e6151f2845f02d963bcbaab5515621d4574d4caab3df9229",
+        "sem_asterisco": false,
+        "asteriscos": [
+          {
+            "arquivo": "frontend/tsconfig.app.json",
+            "linha": 20,
+            "texto": "      \"@/*\": [\"src/*\"]"
+          }
+        ],
+        "ok": false
+      },
+      {
+        "arquivo": "frontend/src/main.tsx",
+        "existe": true,
+        "sha256": "64324c7bff484307b1903aa9927a3d48d753bf71162bd5d6de96951d1fd86f59",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/app/App.tsx",
+        "existe": true,
+        "sha256": "337901221294df6b81d0139cbc707edda2c0fbe44aac26e73000a9dd2ccec3ac",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/layouts/AppShell.tsx",
+        "existe": true,
+        "sha256": "ebafb7fdb2d19b2c0667b734f9264fb944b7ee94813965cb53f7ea39254c1e19",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/routes/AppRoutes.tsx",
+        "existe": true,
+        "sha256": "10b54b92ff1ac9ba008aded04d025d4764c68d5a166fffc59532e57e09a584ea",
+        "sem_asterisco": false,
+        "asteriscos": [
+          {
+            "arquivo": "frontend/src/routes/AppRoutes.tsx",
+            "linha": 21,
+            "texto": "      <Route path=\"*\" element={<Navigate to=\"/dashboard\" replace />} />"
+          }
+        ],
+        "ok": false
+      },
+      {
+        "arquivo": "frontend/src/shared/theme/theme.ts",
+        "existe": true,
+        "sha256": "b214020e5fb1ac8f5274b9ae0344740cc4f80ad6cbda6fa84207ded0670f9e3c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/shared/services/httpClient.ts",
+        "existe": true,
+        "sha256": "d40de98cf2cb630ad04de3abe5274e43145d5593b62076abd7542458c252255c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/dashboard/pages/DashboardPage.tsx",
+        "existe": true,
+        "sha256": "688f413153e4e4f6b4a7a7bfb92251c1cff3bbabee94c07b77eb714016108c00",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/whatsapp/pages/WhatsappPage.tsx",
+        "existe": true,
+        "sha256": "13e295aa3943e4e79e34d6ea627ceeb5b853f885276987954800b5deb55706e9",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "frontend/src/features/crm/pages/CrmPage.tsx",
+        "existe": true,
+        "sha256": "7f0ea7b935f76ef8ad067608403340ccd3dd497cee090f73d2de167724bef508",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      }
+    ],
+    "checks": {
+      "tem_react": true,
+      "tem_react_dom": true,
+      "tem_mui": true,
+      "tem_emotion": true,
+      "tem_vite": true,
+      "tem_typescript": true,
+      "tem_router": true,
+      "tem_axios": true
+    },
+    "erros": [
+      {
+        "arquivo": "frontend/tsconfig.app.json",
+        "existe": true,
+        "sha256": "90f96ec972e723c2e6151f2845f02d963bcbaab5515621d4574d4caab3df9229",
+        "sem_asterisco": false,
+        "asteriscos": [
+          {
+            "arquivo": "frontend/tsconfig.app.json",
+            "linha": 20,
+            "texto": "      \"@/*\": [\"src/*\"]"
+          }
+        ],
+        "ok": false
+      },
+      {
+        "arquivo": "frontend/src/routes/AppRoutes.tsx",
+        "existe": true,
+        "sha256": "10b54b92ff1ac9ba008aded04d025d4764c68d5a166fffc59532e57e09a584ea",
+        "sem_asterisco": false,
+        "asteriscos": [
+          {
+            "arquivo": "frontend/src/routes/AppRoutes.tsx",
+            "linha": 21,
+            "texto": "      <Route path=\"*\" element={<Navigate to=\"/dashboard\" replace />} />"
+          }
+        ],
+        "ok": false
+      }
+    ],
+    "ok": false
+  },
+  "npm": {
+    "node_version": {
+      "cmd": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+      "returncode": 0,
+      "stdout": "v24.16.0",
+      "stderr": "",
+      "ok": true
+    },
+    "npm_version": {
+      "cmd": [
+        "npm",
+        "--version"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+      "returncode": 0,
+      "stdout": "11.16.0",
+      "stderr": "",
+      "ok": true
+    },
+    "install_executado": true,
+    "build_executado": true,
+    "install": {
+      "cmd": [
+        "npm",
+        "install"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp/frontend",
+      "returncode": 0,
+      "stdout": "added 130 packages, and audited 131 packages in 33s\n\n31 packages are looking for funding\n  run `npm fund` for details\n\nfound 0 vulnerabilities",
+      "stderr": "",
+      "ok": true
+    },
+    "build": {
+      "cmd": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/luizcarelo/meu-bot-whatsapp/frontend",
+      "returncode": 2,
+      "stdout": "> engeradios-crm-frontend@0.1.0 build\n> tsc -b && vite build\n\ntsconfig.app.json(18,5): error TS5101: Option 'baseUrl' is deprecated and will stop functioning in TypeScript 7.0. Specify compilerOption '\"ignoreDeprecations\": \"6.0\"' to silence this error.\n  Visit https://aka.ms/ts6 for migration information.",
+      "stderr": "",
+      "ok": false
+    },
+    "ok": false
+  }
+}
