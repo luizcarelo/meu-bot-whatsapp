@@ -1,0 +1,205 @@
+{
+  "gerado_em": "2026-07-06T20:32:39",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_08_20260706_203239",
+    "copiados": [
+      "controllers/AdminController.js",
+      "controllers/CrmController.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_08_manifesto_antes.json",
+  "scan_antes": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 146,
+      "termo": "insertId",
+      "trecho": "const empId = resEmp.insertId;"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 230,
+      "termo": "LIMIT 1",
+      "trecho": "`UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "termo": "LIMIT 1",
+      "trecho": "`UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 125,
+      "termo": "LIMIT 1",
+      "trecho": "(SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 126,
+      "termo": "LIMIT 1",
+      "trecho": "(SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 132,
+      "termo": "JSON_ARRAYAGG",
+      "trecho": "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 132,
+      "termo": "JSON_OBJECT",
+      "trecho": "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 649,
+      "termo": "GROUP_CONCAT",
+      "trecho": "(SELECT GROUP_CONCAT(s.nome SEPARATOR ', ')"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 653,
+      "termo": "GROUP_CONCAT",
+      "trecho": "(SELECT GROUP_CONCAT(s.id SEPARATOR ',')"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 683,
+      "termo": "insertId",
+      "trecho": "await conn.execute('INSERT INTO usuarios_setores (usuario_id, setor_id) VALUES (?, ?)', [resUser.insertId, sId]);"
+    }
+  ],
+  "correcoes": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "existe": true,
+      "alterado": true,
+      "substituicoes": [
+        {
+          "de": "UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1",
+          "para": "UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1",
+          "quantidade": 1
+        }
+      ],
+      "ocorrencias_antes": {
+        "GROUP_CONCAT": 0,
+        "JSON_ARRAYAGG": 0,
+        "JSON_OBJECT": 0,
+        "insertId": 1,
+        "LIMIT 1": 2
+      },
+      "ocorrencias_depois": {
+        "GROUP_CONCAT": 0,
+        "JSON_ARRAYAGG": 0,
+        "JSON_OBJECT": 0,
+        "insertId": 1,
+        "LIMIT 1": 1
+      },
+      "sha256_depois": "92f4874259809e2fa7177faae6b1364ed54d1c4593fd7eb564c5c415c53e4942"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "existe": true,
+      "alterado": true,
+      "substituicoes": [
+        {
+          "de": "SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))",
+          "para": "SELECT json_agg(json_build_object('id', e.id, 'nome', e.nome, 'cor', e.cor))",
+          "quantidade": 1
+        },
+        {
+          "de": "(SELECT GROUP_CONCAT(s.nome SEPARATOR ', ')",
+          "para": "(SELECT STRING_AGG(s.nome, ', ' ORDER BY s.nome)",
+          "quantidade": 1
+        },
+        {
+          "de": "(SELECT GROUP_CONCAT(s.id SEPARATOR ',')",
+          "para": "(SELECT STRING_AGG(s.id::text, ',' ORDER BY s.id)",
+          "quantidade": 1
+        },
+        {
+          "de": "'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'",
+          "para": "'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id'",
+          "quantidade": 1
+        },
+        {
+          "de": "resUser.insertId",
+          "para": "resUser.rows[0].id",
+          "quantidade": 1
+        }
+      ],
+      "ocorrencias_antes": {
+        "GROUP_CONCAT": 2,
+        "JSON_ARRAYAGG": 1,
+        "JSON_OBJECT": 1,
+        "insertId": 1,
+        "LIMIT 1": 2
+      },
+      "ocorrencias_depois": {
+        "GROUP_CONCAT": 0,
+        "JSON_ARRAYAGG": 0,
+        "JSON_OBJECT": 0,
+        "insertId": 0,
+        "LIMIT 1": 2
+      },
+      "sha256_depois": "6e2b09036a44f9ce3f762bff71d30abd054b1372e85c8f682a49ddd8f6dda33b"
+    }
+  ],
+  "node_check": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "scan_depois": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 146,
+      "termo": "insertId",
+      "trecho": "const empId = resEmp.insertId;"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "termo": "LIMIT 1",
+      "trecho": "`UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 125,
+      "termo": "LIMIT 1",
+      "trecho": "(SELECT conteudo FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ultima_msg,"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "linha": 126,
+      "termo": "LIMIT 1",
+      "trecho": "(SELECT data_hora FROM mensagens m WHERE m.remote_jid = c.telefone AND m.empresa_id = c.empresa_id ORDER BY id DESC LIMIT 1) as ordenacao,"
+    }
+  ],
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_08_manifesto_depois.json"
+}

@@ -111,3 +111,89 @@ Decidido nao executar migration automaticamente.
 Decidido nao imprimir credenciais nos relatorios.
 Decidido seguir para revisao de queries de media severidade somente apos runtime estar validado.
 <!-- ETAPA_07_2_FIM -->
+
+<!-- ETAPA_08_INICIO -->
+## Etapa 08 - Decisoes tecnicas
+
+Data: 2026-07-06T20:32:39
+
+Decidido corrigir apenas padroes reais e evitar mexer em template strings.
+Decidido usar STRING_AGG para agregacao textual.
+Decidido usar json_agg e json_build_object para agregacao JSON.
+Decidido usar RETURNING id para capturar id de insert no PostgreSQL.
+<!-- ETAPA_08_FIM -->
+
+<!-- ETAPA_08_1_INICIO -->
+## Etapa 08.1 - Decisoes tecnicas
+
+Data: 2026-07-06T21:08:22
+
+Decidido usar RETURNING id para capturar identificadores em PostgreSQL.
+Decidido remover LIMIT de comandos UPDATE por incompatibilidade com PostgreSQL.
+Decidido considerar SELECT com LIMIT como valido e fora do escopo desta correcao.
+<!-- ETAPA_08_1_FIM -->
+
+<!-- ETAPA_09_INICIO -->
+## Etapa 09 - Decisoes tecnicas
+
+Data: 2026-07-06T21:11:11
+
+Decidido executar apenas consultas somente leitura nesta etapa.
+Decidido validar tabelas e colunas antes de testes funcionais com escrita.
+Decidido nao executar migrations, inserts, updates ou deletes.
+Decidido tratar falhas encontradas em etapa posterior, se houver.
+<!-- ETAPA_09_FIM -->
+
+<!-- ETAPA_09_1_INICIO -->
+## Etapa 09.1 - Decisoes tecnicas
+
+Data: 2026-07-06T21:13:14
+
+Decidido preparar migration sem execucao automatica.
+Decidido usar ADD COLUMN IF NOT EXISTS e CREATE TABLE IF NOT EXISTS.
+Decidido incluir campos de almoco por compatibilidade com utilitario de atendimento.
+Decidido validar novamente em etapa posterior apos execucao controlada.
+<!-- ETAPA_09_1_FIM -->
+
+<!-- ETAPA_09_2_INICIO -->
+## Etapa 09.2 - Decisoes tecnicas
+
+Data: 2026-07-06T21:15:43
+
+Decidido executar a migration idempotente aprovada na Etapa 09.1.
+Decidido usar psql com ON_ERROR_STOP para interromper em erro.
+Decidido gerar backup logico antes da execucao quando pg_dump estiver disponivel.
+Decidido repetir validacao somente leitura apos aplicar o schema.
+<!-- ETAPA_09_2_FIM -->
+
+<!-- ETAPA_10_HOTFIX_INICIO -->
+## Hotfix Etapa 10 - Decisao tecnica
+
+Data: 2026-07-06T21:19:12
+
+Decidido aplicar hotfix minimo e localizado.
+Decidido nao executar banco ou Docker durante o hotfix.
+Decidido validar sintaxe antes de liberar nova execucao da Etapa 10.
+<!-- ETAPA_10_HOTFIX_FIM -->
+
+<!-- ETAPA_10_INICIO -->
+## Etapa 10 - Decisoes tecnicas
+
+Data: 2026-07-06T21:21:55
+
+Decidido executar testes de escrita somente dentro de transacao com rollback.
+Decidido usar dados de teste marcados com identificador da etapa.
+Decidido validar limpeza apos rollback com consultas separadas.
+Decidido manter testes sem chamadas externas ao WhatsApp ou SMTP.
+<!-- ETAPA_10_FIM -->
+
+<!-- ETAPA_10_1_INICIO -->
+## Etapa 10.1 - Decisoes tecnicas
+
+Data: 2026-07-06T21:21:38
+
+Decidido corrigir sequences antes de repetir testes funcionais de escrita.
+Decidido usar setval com GREATEST entre MAX(id) e 1.
+Decidido nao inserir dados de teste nesta etapa.
+Decidido gerar backup logico antes de alterar sequences.
+<!-- ETAPA_10_1_FIM -->

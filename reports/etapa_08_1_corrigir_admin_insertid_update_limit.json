@@ -1,0 +1,83 @@
+{
+  "gerado_em": "2026-07-06T21:08:22",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_08_1_20260706_210822",
+    "copiados": [
+      "controllers/AdminController.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_08_1_manifesto_antes.json",
+  "scan_antes": [
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 146,
+      "termo": "insertId",
+      "trecho": "const empId = resEmp.insertId;"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "linha": 239,
+      "termo": "UPDATE LIMIT 1",
+      "trecho": "`UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,"
+    }
+  ],
+  "correcao": {
+    "arquivo": "controllers/AdminController.js",
+    "existe": true,
+    "alterado": true,
+    "ocorrencias_antes": {
+      "insertId": 1,
+      "UPDATE_LIMIT_1": 1
+    },
+    "ocorrencias_depois": {
+      "insertId": 0,
+      "UPDATE_LIMIT_1": 0
+    },
+    "substituicoes": [
+      {
+        "de": "NOW(), 'DESCONECTADO')`",
+        "para": "NOW(), 'DESCONECTADO') RETURNING id`",
+        "quantidade": 1,
+        "observacao": "Adicionado RETURNING id no insert de empresas"
+      },
+      {
+        "de": "const empId = resEmp.insertId;",
+        "para": "const empId = resEmp.rows[0].id;",
+        "quantidade": 1
+      },
+      {
+        "de": "UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1",
+        "para": "UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1",
+        "quantidade": 1
+      }
+    ],
+    "sha256_depois": "ffc7732df804e00b9b8c3f1638c608b3eaeaa875c4e16cde77e515fe285f791f"
+  },
+  "node_check": {
+    "arquivo": "controllers/AdminController.js",
+    "existe": true,
+    "ok": true,
+    "stdout": "",
+    "stderr": ""
+  },
+  "scan_depois": [],
+  "validacao_final": {
+    "insertId": [],
+    "update_limit_1": [],
+    "select_limit_1": []
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_08_1_manifesto_depois.json"
+}

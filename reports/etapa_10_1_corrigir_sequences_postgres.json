@@ -1,0 +1,234 @@
+{
+  "gerado_em": "2026-07-06T21:21:38",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_10_1_20260706_212129",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_10_1_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "pg_dump": {
+    "cmd": [
+      "docker",
+      "compose",
+      "exec",
+      "-T",
+      "db",
+      "pg_dump",
+      "-U",
+      "postgres",
+      "-d",
+      "postgres",
+      "-Fc"
+    ],
+    "returncode": 0,
+    "stdout_file": "backups/etapa_10_1_20260706_212129/pg_dump_pre_etapa_10_1_20260706_212129.dump",
+    "stderr": "",
+    "ok": true,
+    "sha256": "4b1908bfdff5b5a1597a84ea7a5f73ff623c2ebf377432c0d2f82c5f23949d75",
+    "tamanho_bytes": 18912
+  },
+  "auditoria_antes": {
+    "tabelas": [
+      {
+        "tabela": "empresas",
+        "existe": true,
+        "sequence": "public.empresas_id_seq",
+        "max_id": 2,
+        "last_value": 3,
+        "is_called": true,
+        "proximo_valor_estimado": 4,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "usuarios_painel",
+        "existe": true,
+        "sequence": "public.usuarios_painel_id_seq",
+        "max_id": 1,
+        "last_value": 1,
+        "is_called": true,
+        "proximo_valor_estimado": 2,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "contatos",
+        "existe": true,
+        "sequence": "public.contatos_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "mensagens",
+        "existe": true,
+        "sequence": "public.mensagens_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "setores",
+        "existe": true,
+        "sequence": "public.setores_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "horarios_atendimento",
+        "existe": true,
+        "sequence": "public.horarios_atendimento_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      }
+    ],
+    "total_desalinhadas": 0,
+    "ok": true
+  },
+  "correcao": {
+    "necessario": false,
+    "tabelas_corrigidas_planejadas": [],
+    "executado": false,
+    "execucao": {
+      "ok": true,
+      "stdout": "Nenhuma sequence desalinhada encontrada.",
+      "stderr": "",
+      "returncode": 0
+    },
+    "sql_sha256": "0b2fc718a04857d53f7390d69ade7766282038e2459e14f223a8517902e6953f"
+  },
+  "auditoria_depois": {
+    "tabelas": [
+      {
+        "tabela": "empresas",
+        "existe": true,
+        "sequence": "public.empresas_id_seq",
+        "max_id": 2,
+        "last_value": 3,
+        "is_called": true,
+        "proximo_valor_estimado": 4,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "usuarios_painel",
+        "existe": true,
+        "sequence": "public.usuarios_painel_id_seq",
+        "max_id": 1,
+        "last_value": 1,
+        "is_called": true,
+        "proximo_valor_estimado": 2,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "contatos",
+        "existe": true,
+        "sequence": "public.contatos_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "mensagens",
+        "existe": true,
+        "sequence": "public.mensagens_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "setores",
+        "existe": true,
+        "sequence": "public.setores_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      },
+      {
+        "tabela": "horarios_atendimento",
+        "existe": true,
+        "sequence": "public.horarios_atendimento_id_seq",
+        "max_id": 0,
+        "last_value": 1,
+        "is_called": false,
+        "proximo_valor_estimado": 1,
+        "desalinhada": false,
+        "erro": null
+      }
+    ],
+    "total_desalinhadas": 0,
+    "ok": true
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_10_1_manifesto_depois.json"
+}

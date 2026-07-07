@@ -1,0 +1,400 @@
+{
+  "gerado_em": "2026-07-06T21:21:55",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_10_20260706_212153",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_10_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "pg_dump": {
+    "cmd": [
+      "docker",
+      "compose",
+      "exec",
+      "-T",
+      "db",
+      "pg_dump",
+      "-U",
+      "postgres",
+      "-d",
+      "postgres",
+      "-Fc"
+    ],
+    "returncode": 0,
+    "stdout_file": "backups/etapa_10_20260706_212153/pg_dump_pre_etapa_10_20260706_212153.dump",
+    "stderr": "",
+    "ok": true,
+    "sha256": "0f02a7f09745f5ae38806c2ede710500ddae618cd9acce70c7a9655015b7f51f",
+    "tamanho_bytes": 18912
+  },
+  "schema_minimo": {
+    "ok": true,
+    "checks": {
+      "empresas": true,
+      "usuarios_painel": true,
+      "setores": true,
+      "horarios_atendimento": true,
+      "contatos": true,
+      "mensagens": true,
+      "setores_ordem": 1,
+      "contatos_unique": 2
+    },
+    "comandos": {
+      "empresas": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.empresas') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "usuarios_painel": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.usuarios_painel') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "setores": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.setores') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_atendimento": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.horarios_atendimento') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "contatos": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.contatos') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "mensagens": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.mensagens') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "setores_ordem": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'setores' AND column_name = 'ordem'"
+        ],
+        "returncode": 0,
+        "stdout": "1",
+        "stderr": "",
+        "ok": true
+      },
+      "contatos_unique": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM pg_class t JOIN pg_index ix ON t.oid = ix.indrelid JOIN pg_class i ON i.oid = ix.indexrelid JOIN LATERAL unnest(ix.indkey) WITH ORDINALITY AS k(attnum, ord) ON true JOIN pg_attribute a ON a.attrelid = t.oid AND a.attnum = k.attnum WHERE t.relname = 'contatos' AND t.relnamespace = 'public'::regnamespace AND ix.indisunique = true GROUP BY i.relname HAVING string_agg(a.attname, ',' ORDER BY k.ord) = 'empresa_id,telefone' LIMIT 1"
+        ],
+        "returncode": 0,
+        "stdout": "2",
+        "stderr": "",
+        "ok": true
+      }
+    }
+  },
+  "testes_funcionais": {
+    "marcador": "20260706_212155",
+    "sql_sha256": "504d80894fb553458fe70cf27a92c3a841bafe643b32d17039abdc7d2e10f97e",
+    "execucao": {
+      "cmd": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "psql",
+        "-v",
+        "ON_ERROR_STOP=1",
+        "-U",
+        "postgres",
+        "-d",
+        "postgres"
+      ],
+      "returncode": 0,
+      "stdout": "BEGIN\nCREATE TABLE\nINSERT 0 1\n   ?column?   \n--------------\n empresa_id|4\n(1 row)\n\nINSERT 0 1\n   ?column?   \n--------------\n usuario_id|2\n(1 row)\n\nINSERT 0 1\n  ?column?  \n------------\n setor_id|1\n(1 row)\n\nINSERT 0 1\n   ?column?   \n--------------\n horario_id|1\n(1 row)\n\nINSERT 0 1\nINSERT 0 1\n    ?column?     \n-----------------\n contato_total|1\n(1 row)\n\nINSERT 0 1\n     ?column?      \n-------------------\n mensagens_total|1\n(1 row)\n\n        ?column?        \n------------------------\n validacao_transacao|ok\n(1 row)\n\nROLLBACK\n        ?column?         \n-------------------------\n empresas_pos_rollback|0\n(1 row)\n\n        ?column?         \n-------------------------\n usuarios_pos_rollback|0\n(1 row)\n\n        ?column?         \n-------------------------\n contatos_pos_rollback|0\n(1 row)\n\n         ?column?         \n--------------------------\n mensagens_pos_rollback|0\n(1 row)",
+      "stderr": "",
+      "ok": true
+    },
+    "parse": {
+      "linhas": [
+        "BEGIN",
+        "CREATE TABLE",
+        "INSERT 0 1",
+        "?column?",
+        "--------------",
+        "empresa_id|4",
+        "(1 row)",
+        "INSERT 0 1",
+        "?column?",
+        "--------------",
+        "usuario_id|2",
+        "(1 row)",
+        "INSERT 0 1",
+        "?column?",
+        "------------",
+        "setor_id|1",
+        "(1 row)",
+        "INSERT 0 1",
+        "?column?",
+        "--------------",
+        "horario_id|1",
+        "(1 row)",
+        "INSERT 0 1",
+        "INSERT 0 1",
+        "?column?",
+        "-----------------",
+        "contato_total|1",
+        "(1 row)",
+        "INSERT 0 1",
+        "?column?",
+        "-------------------",
+        "mensagens_total|1",
+        "(1 row)",
+        "?column?",
+        "------------------------",
+        "validacao_transacao|ok",
+        "(1 row)",
+        "ROLLBACK",
+        "?column?",
+        "-------------------------",
+        "empresas_pos_rollback|0",
+        "(1 row)",
+        "?column?",
+        "-------------------------",
+        "usuarios_pos_rollback|0",
+        "(1 row)",
+        "?column?",
+        "-------------------------",
+        "contatos_pos_rollback|0",
+        "(1 row)",
+        "?column?",
+        "--------------------------",
+        "mensagens_pos_rollback|0",
+        "(1 row)"
+      ],
+      "valores": {
+        "empresa_id": "4",
+        "usuario_id": "2",
+        "setor_id": "1",
+        "horario_id": "1",
+        "contato_total": "1",
+        "mensagens_total": "1",
+        "validacao_transacao": "ok",
+        "empresas_pos_rollback": "0",
+        "usuarios_pos_rollback": "0",
+        "contatos_pos_rollback": "0",
+        "mensagens_pos_rollback": "0"
+      },
+      "ok_logico": true,
+      "rollback_ok": true
+    },
+    "ok": true
+  },
+  "limpeza_final": {
+    "ok": true,
+    "resultados": {
+      "empresas": {
+        "ok": true,
+        "total": 0,
+        "stderr": ""
+      },
+      "usuarios": {
+        "ok": true,
+        "total": 0,
+        "stderr": ""
+      },
+      "contatos": {
+        "ok": true,
+        "total": 0,
+        "stderr": ""
+      },
+      "mensagens": {
+        "ok": true,
+        "total": 0,
+        "stderr": ""
+      }
+    }
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_10_manifesto_depois.json"
+}

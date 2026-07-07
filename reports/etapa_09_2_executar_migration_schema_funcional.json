@@ -1,0 +1,468 @@
+{
+  "gerado_em": "2026-07-06T21:15:43",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_09_2_20260706_211539",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md",
+      "database/migrations/20260706_schema_funcional_setores_horarios.sql"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_09_2_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       12 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        12 hours ago   Up 12 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "validacao_sql": {
+    "arquivo": "database/migrations/20260706_schema_funcional_setores_horarios.sql",
+    "existe": true,
+    "ok": true,
+    "erros": [],
+    "sha256": "3f4ab9aad97307e9ec05c30c77df0ec2c5504858d24b5c1cce9e32fa5d0d8e0e"
+  },
+  "runtime_antes": {
+    "checks": {
+      "ping_ok": true,
+      "setores_ordem_existe": false,
+      "horarios_atendimento_existe": false,
+      "horarios_colunas_total": 0,
+      "horarios_colunas_ok": false,
+      "indice_horarios_existe": false
+    },
+    "comandos": {
+      "ping": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT 1"
+        ],
+        "returncode": 0,
+        "stdout": "1",
+        "stderr": "",
+        "ok": true
+      },
+      "setores_ordem_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'setores' AND column_name = 'ordem'"
+        ],
+        "returncode": 0,
+        "stdout": "0",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.horarios_atendimento') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "f",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_colunas": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'horarios_atendimento' AND column_name IN ('id', 'empresa_id', 'dia_semana', 'horario_abertura', 'horario_fechamento', 'inicio_almoco', 'fim_almoco', 'ativo', 'created_at', 'updated_at')"
+        ],
+        "returncode": 0,
+        "stdout": "0",
+        "stderr": "",
+        "ok": true
+      },
+      "indice_horarios": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM pg_class t JOIN pg_index ix ON t.oid = ix.indrelid JOIN pg_class i ON i.oid = ix.indexrelid WHERE t.relname = 'horarios_atendimento' AND i.relname = 'idx_horarios_atendimento_empresa_dia'"
+        ],
+        "returncode": 0,
+        "stdout": "0",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "ok": false
+  },
+  "pg_dump": {
+    "cmd": [
+      "docker",
+      "compose",
+      "exec",
+      "-T",
+      "db",
+      "pg_dump",
+      "-U",
+      "postgres",
+      "-d",
+      "postgres",
+      "-Fc"
+    ],
+    "returncode": 0,
+    "stdout_file": "backups/etapa_09_2_20260706_211539/pg_dump_pre_etapa_09_2_20260706_211540.dump",
+    "stderr": "",
+    "ok": true,
+    "sha256": "8f9b469bfeeb3ffe0bef13105e2bf65e766f1db09806374c8e472c6edbfcc765",
+    "tamanho_bytes": 15467
+  },
+  "execucao_migration": {
+    "cmd": [
+      "docker",
+      "compose",
+      "exec",
+      "-T",
+      "db",
+      "psql",
+      "-v",
+      "ON_ERROR_STOP=1",
+      "-U",
+      "postgres",
+      "-d",
+      "postgres"
+    ],
+    "returncode": 0,
+    "stdout": "BEGIN\nALTER TABLE\nCREATE TABLE\nCREATE INDEX\nCOMMIT",
+    "stderr": "",
+    "ok": true
+  },
+  "runtime_depois": {
+    "checks": {
+      "ping_ok": true,
+      "setores_ordem_existe": true,
+      "horarios_atendimento_existe": true,
+      "horarios_colunas_total": 10,
+      "horarios_colunas_ok": true,
+      "indice_horarios_existe": true
+    },
+    "comandos": {
+      "ping": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT 1"
+        ],
+        "returncode": 0,
+        "stdout": "1",
+        "stderr": "",
+        "ok": true
+      },
+      "setores_ordem_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'setores' AND column_name = 'ordem'"
+        ],
+        "returncode": 0,
+        "stdout": "1",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.horarios_atendimento') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_colunas": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'horarios_atendimento' AND column_name IN ('id', 'empresa_id', 'dia_semana', 'horario_abertura', 'horario_fechamento', 'inicio_almoco', 'fim_almoco', 'ativo', 'created_at', 'updated_at')"
+        ],
+        "returncode": 0,
+        "stdout": "10",
+        "stderr": "",
+        "ok": true
+      },
+      "indice_horarios": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM pg_class t JOIN pg_index ix ON t.oid = ix.indrelid JOIN pg_class i ON i.oid = ix.indexrelid WHERE t.relname = 'horarios_atendimento' AND i.relname = 'idx_horarios_atendimento_empresa_dia'"
+        ],
+        "returncode": 0,
+        "stdout": "1",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "ok": true
+  },
+  "validacao_tabelas": {
+    "tabelas": [
+      {
+        "tabela": "empresas",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 2,
+        "erro_exists": "",
+        "erro_count": ""
+      },
+      {
+        "tabela": "usuarios_painel",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 1,
+        "erro_exists": "",
+        "erro_count": ""
+      },
+      {
+        "tabela": "contatos",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro_exists": "",
+        "erro_count": ""
+      },
+      {
+        "tabela": "mensagens",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro_exists": "",
+        "erro_count": ""
+      },
+      {
+        "tabela": "setores",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro_exists": "",
+        "erro_count": ""
+      },
+      {
+        "tabela": "horarios_atendimento",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro_exists": "",
+        "erro_count": ""
+      }
+    ],
+    "ok": true
+  },
+  "validacao_colunas": {
+    "tabelas": [
+      {
+        "tabela": "setores",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "nome",
+          "ordem"
+        ],
+        "encontradas": [
+          "empresa_id",
+          "id",
+          "nome",
+          "ordem"
+        ],
+        "faltantes": [],
+        "ok": true,
+        "erro": ""
+      },
+      {
+        "tabela": "horarios_atendimento",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "dia_semana",
+          "horario_abertura",
+          "horario_fechamento",
+          "inicio_almoco",
+          "fim_almoco",
+          "ativo",
+          "created_at",
+          "updated_at"
+        ],
+        "encontradas": [
+          "ativo",
+          "created_at",
+          "dia_semana",
+          "empresa_id",
+          "fim_almoco",
+          "horario_abertura",
+          "horario_fechamento",
+          "id",
+          "inicio_almoco",
+          "updated_at"
+        ],
+        "faltantes": [],
+        "ok": true,
+        "erro": ""
+      }
+    ],
+    "ok": true
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_09_2_manifesto_depois.json"
+}

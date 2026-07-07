@@ -135,7 +135,7 @@ class AdminController {
                     ) VALUES (?, ?, ?, ?, 1, ?, '#4f46e5',
                         'Olá! Nosso horário de atendimento é de segunda a sexta, das 8h às 18h.',
                         'Por favor, avalie nosso atendimento de 1 a 5.',
-                        '08:00', '18:00', ?, NOW(), 'DESCONECTADO')`,
+                        '08:00', '18:00', ?, NOW(), 'DESCONECTADO') RETURNING id`,
                     [
                         nome, nome, plano || 'pro', limite_usuarios || 5,
                         JSON.stringify(msgsPadrao),
@@ -143,7 +143,7 @@ class AdminController {
                     ]
                 );
                 
-                const empId = resEmp.insertId;
+                const empId = resEmp.rows[0].id;
 
                 // B. Criar Setores Padrão
                 const setores = [
@@ -227,7 +227,7 @@ class AdminController {
             // Atualiza Email do Admin (Busca o primeiro admin da empresa)
             if (admin_email) {
                 await this.db.run(
-                    `UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,
+                    `UPDATE usuarios_painel SET email = ? WHERE empresa_id = ? AND is_admin = 1`,
                     [admin_email, id]
                 );
             }
@@ -236,7 +236,7 @@ class AdminController {
             if (admin_senha_nova) {
                 const hash = await bcrypt.hash(admin_senha_nova, 10);
                 await this.db.run(
-                    `UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1 LIMIT 1`,
+                    `UPDATE usuarios_painel SET senha = ? WHERE empresa_id = ? AND is_admin = 1`,
                     [hash, id]
                 );
             }

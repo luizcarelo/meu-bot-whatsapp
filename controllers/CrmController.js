@@ -129,7 +129,7 @@ class CrmController {
                     u.nome as nome_atendente,
                     COALESCE(
                         (
-                            SELECT JSON_ARRAYAGG(JSON_OBJECT('id', e.id, 'nome', e.nome, 'cor', e.cor))
+                            SELECT json_agg(json_build_object('id', e.id, 'nome', e.nome, 'cor', e.cor))
                             FROM contatos_etiquetas ce
                             JOIN etiquetas e ON ce.etiqueta_id = e.id
                             WHERE ce.contato_id = c.id
@@ -646,11 +646,11 @@ class CrmController {
     async getAtendentes(req, res) {
         const [rows] = await this.db.execute(`
             SELECT u.id, u.nome, u.email, u.is_admin, u.telefone, u.cargo, u.ativo,
-            (SELECT GROUP_CONCAT(s.nome SEPARATOR ', ')
+            (SELECT STRING_AGG(s.nome, ', ' ORDER BY s.nome)
              FROM usuarios_setores us
              JOIN setores s ON us.setor_id = s.id
              WHERE us.usuario_id = u.id) as setores,
-            (SELECT GROUP_CONCAT(s.id SEPARATOR ',')
+            (SELECT STRING_AGG(s.id::text, ',' ORDER BY s.id)
              FROM usuarios_setores us
              JOIN setores s ON us.setor_id = s.id
              WHERE us.usuario_id = u.id) as setores_ids
@@ -675,12 +675,12 @@ class CrmController {
         try {
             await conn.beginTransaction();
             const [resUser] = await conn.execute(
-                'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO usuarios_painel (empresa_id, nome, email, senha, is_admin, telefone, cargo, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id',
                 [req.empresaId, nome, email, senhaHash, is_admin ? 1 : 0, telefone, cargo, ativo !== false ? 1 : 0]
             );
             if (setores && Array.isArray(setores)) {
                 for (const sId of setores) {
-                    await conn.execute('INSERT INTO usuarios_setores (usuario_id, setor_id) VALUES (?, ?)', [resUser.insertId, sId]);
+                    await conn.execute('INSERT INTO usuarios_setores (usuario_id, setor_id) VALUES (?, ?)', [resUser.rows[0].id, sId]);
                 }
             }
             await conn.commit();

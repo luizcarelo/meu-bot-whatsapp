@@ -127,3 +127,106 @@ Grupos duplicados encontrados: 0.
 Banco pronto para ON CONFLICT por empresa e telefone: True.
 Nenhuma alteracao foi aplicada ao banco.
 <!-- ETAPA_07_2_FIM -->
+
+<!-- ETAPA_08_INICIO -->
+## Etapa 08 - Queries medias PostgreSQL
+
+Data: 2026-07-06T20:32:39
+
+Foram corrigidos padroes reais de media severidade em queries PostgreSQL.
+Foram tratados agregadores, JSON agregado, retorno de insert e update com limitacao antiga.
+Arquivos alterados: controllers/AdminController.js e controllers/CrmController.js.
+Padroes focados restantes: 4.
+Falhas em node --check: 0.
+<!-- ETAPA_08_FIM -->
+
+<!-- ETAPA_08_1_INICIO -->
+## Etapa 08.1 - AdminController PostgreSQL
+
+Data: 2026-07-06T21:08:22
+
+Foram corrigidos os padroes restantes no AdminController.
+O insert de empresa passou a retornar id via RETURNING id.
+A leitura de id deixou de usar insertId.
+O update de senha deixou de usar LIMIT em comando UPDATE.
+Padroes criticos restantes no AdminController: 0.
+Node check do arquivo alterado OK: True.
+<!-- ETAPA_08_1_FIM -->
+
+<!-- ETAPA_09_INICIO -->
+## Etapa 09 - Validacao funcional PostgreSQL
+
+Data: 2026-07-06T21:11:11
+
+Foi executada validacao funcional controlada e somente leitura.
+Arquivos JS verificados: 16.
+Falhas em node --check: 0.
+Banco validado em modo somente leitura: False.
+Tabelas essenciais OK: False.
+Colunas essenciais OK: False.
+Nenhuma alteracao foi aplicada ao banco.
+<!-- ETAPA_09_FIM -->
+
+<!-- ETAPA_09_1_INICIO -->
+## Etapa 09.1 - Schema funcional preparado
+
+Data: 2026-07-06T21:13:14
+
+Foi preparada migration PostgreSQL para complementar o schema funcional.
+setores.ordem existente no runtime: False.
+horarios_atendimento existente no runtime: False.
+Migration criada: True.
+Arquivo: database/migrations/20260706_schema_funcional_setores_horarios.sql.
+A migration nao foi executada automaticamente.
+<!-- ETAPA_09_1_FIM -->
+
+<!-- ETAPA_09_2_INICIO -->
+## Etapa 09.2 - Migration funcional executada
+
+Data: 2026-07-06T21:15:43
+
+Foi executada a migration de schema funcional PostgreSQL aprovada na Etapa 09.1.
+setores.ordem antes: False.
+setores.ordem depois: True.
+horarios_atendimento antes: False.
+horarios_atendimento depois: True.
+Indice de horarios depois: True.
+Validacao runtime final OK: True.
+<!-- ETAPA_09_2_FIM -->
+
+<!-- ETAPA_10_HOTFIX_INICIO -->
+## Hotfix Etapa 10 - Sintaxe corrigida
+
+Data: 2026-07-06T21:19:12
+
+Foi corrigido erro de sintaxe no script da Etapa 10.
+A correcao ajustou a validacao de checks de schema minimo.
+Nenhuma alteracao foi aplicada ao banco.
+A Etapa 10 deve ser executada novamente apos este hotfix.
+<!-- ETAPA_10_HOTFIX_FIM -->
+
+<!-- ETAPA_10_INICIO -->
+## Etapa 10 - Testes funcionais com escrita PostgreSQL
+
+Data: 2026-07-06T21:21:55
+
+Foram executados testes funcionais com escrita controlada em transacao.
+A transacao usou dados de teste marcados e executou ROLLBACK ao final.
+Testes funcionais OK: True.
+Rollback validado: True.
+Limpeza final OK: True.
+Backup logico criado antes dos testes: True.
+<!-- ETAPA_10_FIM -->
+
+<!-- ETAPA_10_1_INICIO -->
+## Etapa 10.1 - Sequences PostgreSQL
+
+Data: 2026-07-06T21:21:38
+
+Foi executada auditoria das sequences PostgreSQL das tabelas principais.
+Sequences desalinhadas antes: 0.
+Correcao executada: False.
+Sequences desalinhadas depois: 0.
+Backup logico criado antes da correcao: True.
+A Etapa 10 deve ser repetida apos esta correcao.
+<!-- ETAPA_10_1_FIM -->

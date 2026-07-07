@@ -124,3 +124,101 @@ Executar testes funcionais de recebimento e envio de mensagens.
 Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
 Planejar rotacao de credenciais reais expostas anteriormente.
 <!-- ETAPA_07_2_FIM -->
+
+<!-- ETAPA_08_INICIO -->
+## Pendencias apos Etapa 08
+
+Data: 2026-07-06T20:32:39
+
+Investigar padroes focados restantes listados no relatorio da Etapa 08.
+Executar testes funcionais das telas de CRM, usuarios e contatos.
+Validar retorno das consultas alteradas em ambiente com dados reais.
+Revisar achados de baixa severidade, especialmente booleanos numericos.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+Planejar rotacao de credenciais reais expostas anteriormente.
+<!-- ETAPA_08_FIM -->
+
+<!-- ETAPA_08_1_INICIO -->
+## Pendencias apos Etapa 08.1
+
+Data: 2026-07-06T21:08:22
+
+Executar testes funcionais de criacao e edicao de empresas.
+Executar testes funcionais de alteracao de senha do admin da empresa.
+Validar telas do CRM que usam consultas com SELECT LIMIT.
+Revisar achados de baixa severidade, especialmente booleanos numericos.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+<!-- ETAPA_08_1_FIM -->
+
+<!-- ETAPA_09_INICIO -->
+## Pendencias apos Etapa 09
+
+Data: 2026-07-06T21:11:11
+
+Corrigir pendencias de validacao somente leitura listadas no relatorio da Etapa 09.
+Executar testes funcionais com escrita em ambiente controlado.
+Validar criacao de empresa e usuario admin.
+Validar fluxo de recebimento de mensagem e upsert de contato.
+Validar fluxo de envio de mensagem e registro no historico.
+Revisar achados de baixa severidade, especialmente booleanos numericos.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+<!-- ETAPA_09_FIM -->
+
+<!-- ETAPA_09_1_INICIO -->
+## Pendencias apos Etapa 09.1
+
+Data: 2026-07-06T21:13:14
+
+Revisar a migration criada antes de executar.
+Executar a migration em ambiente controlado.
+Repetir validacao somente leitura da Etapa 09 apos aplicar migration.
+Executar testes funcionais com escrita em ambiente controlado.
+Validar telas de setores e horarios de atendimento.
+<!-- ETAPA_09_1_FIM -->
+
+<!-- ETAPA_09_2_INICIO -->
+## Pendencias apos Etapa 09.2
+
+Data: 2026-07-06T21:15:43
+
+Executar testes funcionais com escrita em ambiente controlado.
+Validar criacao de empresa e usuario admin.
+Validar fluxo de recebimento de mensagem e upsert de contato.
+Validar fluxo de envio de mensagem e registro no historico.
+Validar telas de setores e horarios de atendimento.
+Revisar achados de baixa severidade, especialmente booleanos numericos.
+<!-- ETAPA_09_2_FIM -->
+
+<!-- ETAPA_10_HOTFIX_INICIO -->
+## Pendencias apos Hotfix Etapa 10
+
+Data: 2026-07-06T21:19:12
+
+Executar novamente a Etapa 10.
+Enviar o relatorio Markdown da Etapa 10 apos a nova execucao.
+<!-- ETAPA_10_HOTFIX_FIM -->
+
+<!-- ETAPA_10_INICIO -->
+## Pendencias apos Etapa 10
+
+Data: 2026-07-06T21:21:55
+
+Executar testes funcionais pela interface web.
+Validar fluxo real de login e painel administrativo.
+Validar envio e recebimento real de mensagens com ambiente controlado.
+Revisar achados de baixa severidade, especialmente booleanos numericos.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+Planejar rotacao de credenciais reais expostas anteriormente.
+<!-- ETAPA_10_FIM -->
+
+<!-- ETAPA_10_1_INICIO -->
+## Pendencias apos Etapa 10.1
+
+Data: 2026-07-06T21:21:38
+
+Reexecutar a Etapa 10 de testes funcionais com escrita.
+Validar se o insert em usuarios_painel avanca sem violar chave primaria.
+Executar testes funcionais pela interface web apos Etapa 10 passar.
+Revisar achados de baixa severidade, especialmente booleanos numericos.
+Planejar hardening de seguranca HTTP, CORS, rate limit e sessoes.
+<!-- ETAPA_10_1_FIM -->

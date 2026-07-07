@@ -1,0 +1,175 @@
+{
+  "gerado_em": "2026-07-06T21:13:14",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_09_1_20260706_211313",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md",
+      "database/migrations/"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_09_1_manifesto_antes.json",
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       11 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        11 hours ago   Up 11 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     12 hours ago   Up 12 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "runtime": {
+    "env_encontrado": true,
+    "db_user_configurado": true,
+    "db_name_configurado": true,
+    "checks": {
+      "setores_existe": true,
+      "setores_ordem_existe": false,
+      "horarios_atendimento_existe": false,
+      "horarios_colunas_essenciais_total": 0,
+      "horarios_colunas_essenciais_ok": false
+    },
+    "comandos": {
+      "setores_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.setores') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "t",
+        "stderr": "",
+        "ok": true
+      },
+      "setores_ordem_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'setores' AND column_name = 'ordem'"
+        ],
+        "returncode": 0,
+        "stdout": "0",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_existe": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT to_regclass('public.horarios_atendimento') IS NOT NULL"
+        ],
+        "returncode": 0,
+        "stdout": "f",
+        "stderr": "",
+        "ok": true
+      },
+      "horarios_colunas": {
+        "cmd": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "db",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-F",
+          "|",
+          "-c",
+          "SELECT COUNT(1) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'horarios_atendimento' AND column_name IN ('id', 'empresa_id', 'dia_semana', 'horario_abertura', 'horario_fechamento', 'ativo')"
+        ],
+        "returncode": 0,
+        "stdout": "0",
+        "stderr": "",
+        "ok": true
+      }
+    },
+    "ok": true
+  },
+  "migration": {
+    "arquivo": "database/migrations/20260706_schema_funcional_setores_horarios.sql",
+    "criada": true,
+    "existia_antes": false,
+    "sha256_depois": "3f4ab9aad97307e9ec05c30c77df0ec2c5504858d24b5c1cce9e32fa5d0d8e0e"
+  },
+  "validacao_migration": {
+    "ok": true,
+    "erros": []
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_09_1_manifesto_depois.json"
+}

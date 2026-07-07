@@ -1,0 +1,367 @@
+{
+  "gerado_em": "2026-07-06T21:11:11",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_09_20260706_211107",
+    "copiados": [
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_09_manifesto_antes.json",
+  "node_check": [
+    {
+      "arquivo": "server.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "routes/api.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "routes/index.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "src/middleware/auth.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "existe": true,
+      "ok": true,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "resumo_node_check": {
+    "total": 16,
+    "ok": 16,
+    "falhas": 0,
+    "ausentes": 0
+  },
+  "docker": {
+    "docker_version": {
+      "cmd": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker version 29.6.1, build 8900f1d",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_version": {
+      "cmd": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Docker Compose version v5.3.0",
+      "stderr": "",
+      "ok": true
+    },
+    "docker_compose_ps": {
+      "cmd": [
+        "docker",
+        "compose",
+        "ps"
+      ],
+      "returncode": 0,
+      "stdout": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       11 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        11 hours ago   Up 11 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     11 hours ago   Up 11 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp",
+      "stderr": "",
+      "ok": true
+    }
+  },
+  "servico_db": {
+    "servico_db_mencionado": true,
+    "parece_rodando": true,
+    "healthy": true,
+    "texto_redigido": "NAME                 IMAGE                  COMMAND                  SERVICE   CREATED        STATUS                  PORTS\nwhatsapp_bot_app     meu-bot-whatsapp-app   \"docker-entrypoint.s…\"   app       11 hours ago   Up 11 hours             0.0.0.0:50010->50010/tcp, [::]:50010->50010/tcp\nwhatsapp_bot_db      postgres:15-alpine     \"docker-entrypoint.s…\"   db        11 hours ago   Up 11 hours (healthy)   5432/tcp\nwhatsapp_bot_redis   redis:7-alpine         \"docker-entrypoint.s…\"   redis     11 hours ago   Up 11 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp\n"
+  },
+  "banco": {
+    "env_encontrado": true,
+    "db_user_configurado": true,
+    "db_name_configurado": true,
+    "db_port_configurado": true,
+    "db_host_configurado": true,
+    "tabelas": [
+      {
+        "tabela": "empresas",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 2,
+        "erro": null
+      },
+      {
+        "tabela": "usuarios_painel",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 1,
+        "erro": null
+      },
+      {
+        "tabela": "contatos",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro": null
+      },
+      {
+        "tabela": "mensagens",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro": null
+      },
+      {
+        "tabela": "setores",
+        "existe": true,
+        "count_ok": true,
+        "total_registros": 0,
+        "erro": null
+      },
+      {
+        "tabela": "horarios_atendimento",
+        "existe": false,
+        "count_ok": false,
+        "total_registros": null,
+        "erro": null
+      }
+    ],
+    "colunas": [
+      {
+        "tabela": "empresas",
+        "esperadas": [
+          "id",
+          "nome",
+          "ativo",
+          "whatsapp_status"
+        ],
+        "encontradas": [
+          "ativo",
+          "id",
+          "nome",
+          "whatsapp_status"
+        ],
+        "faltantes": [],
+        "ok": true,
+        "erro": null
+      },
+      {
+        "tabela": "usuarios_painel",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "email",
+          "senha",
+          "is_admin",
+          "ativo"
+        ],
+        "encontradas": [
+          "ativo",
+          "email",
+          "empresa_id",
+          "id",
+          "is_admin",
+          "senha"
+        ],
+        "faltantes": [],
+        "ok": true,
+        "erro": null
+      },
+      {
+        "tabela": "contatos",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "telefone",
+          "nome",
+          "status_atendimento",
+          "ultima_msg"
+        ],
+        "encontradas": [
+          "empresa_id",
+          "id",
+          "nome",
+          "status_atendimento",
+          "telefone",
+          "ultima_msg"
+        ],
+        "faltantes": [],
+        "ok": true,
+        "erro": null
+      },
+      {
+        "tabela": "mensagens",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "remote_jid",
+          "from_me",
+          "tipo",
+          "conteudo"
+        ],
+        "encontradas": [
+          "conteudo",
+          "empresa_id",
+          "from_me",
+          "id",
+          "remote_jid",
+          "tipo"
+        ],
+        "faltantes": [],
+        "ok": true,
+        "erro": null
+      },
+      {
+        "tabela": "setores",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "nome",
+          "ordem"
+        ],
+        "encontradas": [
+          "empresa_id",
+          "id",
+          "nome"
+        ],
+        "faltantes": [
+          "ordem"
+        ],
+        "ok": false,
+        "erro": null
+      },
+      {
+        "tabela": "horarios_atendimento",
+        "esperadas": [
+          "id",
+          "empresa_id",
+          "dia_semana",
+          "ativo"
+        ],
+        "encontradas": [],
+        "faltantes": [
+          "id",
+          "empresa_id",
+          "dia_semana",
+          "ativo"
+        ],
+        "ok": false,
+        "erro": null
+      }
+    ],
+    "comandos_erros": [],
+    "ok": false,
+    "ping": {
+      "ok": true,
+      "stdout": "1",
+      "stderr": "",
+      "returncode": 0
+    },
+    "tabelas_ok": false,
+    "colunas_ok": false
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_09_manifesto_depois.json"
+}
