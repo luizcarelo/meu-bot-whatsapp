@@ -1,0 +1,157 @@
+{
+  "gerado_em": "2026-07-06T23:53:24",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_21_3_20260706_235317",
+    "copiados": [
+      "controllers/AdminPanelController.js",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_21_3_manifesto_antes.json",
+  "correcao_controller": {
+    "arquivo": "controllers/AdminPanelController.js",
+    "existe_antes": true,
+    "alterado": true,
+    "consulta_antiga_encontrada": true,
+    "consulta_corrigida_presente": true,
+    "sha256_antes": "2d6c48c37c279ded160147702719a24719f44aa4d175fb3ebd31c5166771b6ad",
+    "sha256_depois": "528c0fb263c2d3a04be3a4cb2bd2968ab5e994f72b96f25315c6faef28844653"
+  },
+  "validacao_estrutura": {
+    "arquivo_existe": true,
+    "tem_render_panel": true,
+    "tem_consulta_equipe_corrigida": true,
+    "nao_tem_telefone_na_consulta_equipe": true,
+    "tem_render_admin_panel": true,
+    "ok": true
+  },
+  "node_check": {
+    "cmd": [
+      "node",
+      "--check",
+      "controllers/AdminPanelController.js"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "ok": true
+  },
+  "restart_app": {
+    "solicitado": true,
+    "executado": true,
+    "ok": true,
+    "resultado": {
+      "cmd": [
+        "docker",
+        "compose",
+        "restart",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Container whatsapp_bot_app Restarting \n Container whatsapp_bot_app Started",
+      "ok": true
+    }
+  },
+  "aguardar_app": {
+    "ok": true,
+    "tentativas": [
+      {
+        "status": null,
+        "ok": false,
+        "erro": "[Errno 104] Connection reset by peer"
+      },
+      {
+        "status": 200,
+        "ok": true,
+        "erro": null
+      }
+    ],
+    "segundos": 3
+  },
+  "logs_since": "2026-07-06T23:53:21",
+  "validacao_runtime": {
+    "executado": true,
+    "email_configurado": true,
+    "senha_configurada": true,
+    "login_ok": true,
+    "dashboard_ok": true,
+    "admin_ok": true,
+    "admin_visual_ok": false,
+    "cookies": [
+      {
+        "name": "connect.sid",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "secure": false
+      }
+    ],
+    "login": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "application/json; charset=utf-8",
+      "body_preview": "{\"success\":true,\"message\":\"Login realizado com sucesso\",\"redirectUrl\":\"/dashboard\",\"user\":{\"id\":1,\"nome\":\"Administrador\",\"email\":\"admin@saas.com\",\"is_admin\":true,\"cargo\":null,\"role\":\"user\"},\"empresa\":{\"id\":1,\"nome\":\"Super Admin\",\"logo\":null,\"cor\":\"#4f46e5\"}}"
+    },
+    "dashboard": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "text/html; charset=utf-8"
+    },
+    "admin": {
+      "status": 200,
+      "ok": true,
+      "erro": null,
+      "content_type": "text/html; charset=utf-8",
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"pt-br\" class=\"light\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Configurações da Empresa</title>\n    <link href=\"/css/style.css\" rel=\"stylesheet\">\n    <script src=\"/socket.io/socket.io.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js\"></script>\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n    <script>\n        tailwind.config = { \n            darkMode: 'class', \n            theme: { \n                extend: { \n                    colors: { primary: 'var(--color-primary)', chatbg: '#efeae2', chatbgdark: '#0b141a' } \n                } \n            } \n        }\n    </script>\n    <style>\n        :root { --color-primary: #4f46e5; }\n        body { font-family: 'Inter', sans-serif; }\n        .fade-in { animation: fadeIn 0.3s ease-in-out; }\n        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY"
+    },
+    "textos_admin": {
+      "tem_css": true,
+      "tem_marker": false,
+      "painel_administrativo": true,
+      "gestao_empresa": false,
+      "tem_fetch": true,
+      "tem_sortable": true
+    }
+  },
+  "logs_coleta": {
+    "principal": {
+      "cmd": [
+        "docker",
+        "compose",
+        "logs",
+        "--since",
+        "2026-07-06T23:53:21",
+        "app"
+      ],
+      "returncode": 0,
+      "stdout": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------",
+      "stderr": "",
+      "ok": true
+    },
+    "fallback": null,
+    "texto": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\n"
+  },
+  "logs_analise": {
+    "total_linhas": 27,
+    "linhas_session_id": 0,
+    "linhas_cookie": 0,
+    "linhas_email": 0,
+    "achados": [],
+    "amostra": "whatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: POST /api/auth/login\nwhatsapp_bot_app  | 👻 Sessão Vazia (Anônimo)\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [AUTH] Login OK usuario_id=1 empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /dashboard\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------\nwhatsapp_bot_app  | [DASHBOARD] Acesso permitido empresa_id=1\nwhatsapp_bot_app  | \nwhatsapp_bot_app  | --- 🔍 DEBUG REQUEST ---\nwhatsapp_bot_app  | 📡 URL: GET /admin/painel\nwhatsapp_bot_app  | [REQ] Usuario autenticado empresa_id=1\nwhatsapp_bot_app  | ------------------------"
+  },
+  "documentacao_atualizada": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_21_3_manifesto_depois.json"
+}

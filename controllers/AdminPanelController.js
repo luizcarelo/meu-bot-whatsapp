@@ -48,20 +48,17 @@ class AdminPanelController {
 
             // 2. Buscar dados da empresa
             const empresas = await this.db.query(
-                `SELECT nome, nome_sistema, logo_url, cor_primaria, msg_ausencia, 
-                        horario_inicio, horario_fim, dias_funcionamento,
-                        whatsapp_status, whatsapp_numero, plano, limite_usuarios
-                 FROM empresas WHERE id = ?`,
+                'SELECT id, nome FROM empresas WHERE id = ?',
                 [empresaId]
             );
             const empresa = empresas[0] || {};
             
             // Fallback visual para nome do sistema (UX)
-            empresa.nome_exibicao = empresa.nome_sistema || empresa.nome;
+            empresa.nome_exibicao = empresa.nome || 'Empresa';
 
             // 3. Buscar equipe completa (para listagem na view inicial)
             const equipe = await this.db.query(
-                'SELECT id, nome, email, is_admin, cargo, ativo, telefone FROM usuarios_painel WHERE empresa_id = ? ORDER BY nome ASC',
+                'SELECT id, nome, email, is_admin, cargo, ativo FROM usuarios_painel WHERE empresa_id = ? ORDER BY nome ASC',
                 [empresaId]
             );
 

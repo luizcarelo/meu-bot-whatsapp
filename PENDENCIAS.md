@@ -468,3 +468,47 @@ Planejar aplicacao visual em views/super-admin.ejs.
 Planejar internalizacao de dependencias externas.
 Mapear scripts inline antes de CSP forte.
 <!-- ETAPA_21_1_FIM -->
+
+<!-- ETAPA_21_2_INICIO -->
+## Pendencias apos Etapa 21.2
+
+Data: 2026-07-06T23:50:22
+
+Validar visual do painel administrativo manualmente no navegador.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_21_2_FIM -->
+
+<!-- ETAPA_21_3_INICIO -->
+## Pendencias apos Etapa 21.3
+
+Data: 2026-07-06T23:53:24
+
+Validar visual do painel administrativo manualmente no navegador.
+Planejar aplicacao visual em views/super-admin.ejs.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_21_3_FIM -->
+
+<!-- ETAPA_22_INICIO -->
+## Pendencias apos Etapa 22
+
+Data: 2026-07-06T23:57:44
+
+Validar visual do Super Admin manualmente no navegador.
+Se /super-admin nao validar em runtime, planejar Etapa 22.1 para rota ou controller.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_22_FIM -->
+
+<!-- ETAPA_22_1_INICIO -->
+## Pendencias apos Etapa 22.1
+
+Data: 2026-07-07T00:03:38
+
+Validar visual do Super Admin manualmente no navegador.
+Se houver erro de permissao, revisar regra isSuperAdmin em etapa separada.
+Planejar internalizacao de dependencias externas.
+Mapear scripts inline antes de CSP forte.
+<!-- ETAPA_22_1_FIM -->

@@ -467,3 +467,46 @@ A rota chama AdminPanelController.renderPanel.
 Executado node --check em routes/index.js.
 Validado login, dashboard e painel administrativo.
 <!-- ETAPA_21_1_FIM -->
+
+<!-- ETAPA_21_2_INICIO -->
+## Etapa 21.2 - Correcao do admin panel
+
+Data: 2026-07-06T23:50:22
+
+Substituida consulta de empresa do AdminPanelController para SELECT id, nome FROM empresas.
+Removida dependencia de colunas inexistentes como nome_sistema, logo_url e cor_primaria.
+Executado node --check em controllers/AdminPanelController.js.
+Validado login, dashboard e painel administrativo.
+<!-- ETAPA_21_2_FIM -->
+
+<!-- ETAPA_21_3_INICIO -->
+## Etapa 21.3 - Correcao da consulta de equipe
+
+Data: 2026-07-06T23:53:24
+
+Removida coluna telefone da consulta de usuarios_painel no AdminPanelController.
+Executado node --check em controllers/AdminPanelController.js.
+Validado login, dashboard e painel administrativo.
+<!-- ETAPA_21_3_FIM -->
+
+<!-- ETAPA_22_INICIO -->
+## Etapa 22 - Visual aplicado em Super Admin
+
+Data: 2026-07-06T23:57:44
+
+Incluido link para /css/style.css em views/super-admin.ejs quando ausente.
+Adicionada camada visual controlada com marcadores ETAPA22.
+Preservados fetch, formularios, botoes e logica existente.
+Validado login, dashboard e rota /super-admin quando disponivel.
+<!-- ETAPA_22_FIM -->
+
+<!-- ETAPA_22_1_INICIO -->
+## Etapa 22.1 - Registro da rota Super Admin
+
+Data: 2026-07-07T00:03:38
+
+Adicionada rota GET /super-admin protegida por isAuthenticated e isSuperAdmin.
+A rota renderiza views/super-admin.ejs.
+Executado node --check em routes/index.js.
+Validado login, dashboard e Super Admin.
+<!-- ETAPA_22_1_FIM -->

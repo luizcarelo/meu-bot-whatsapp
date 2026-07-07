@@ -1,0 +1,587 @@
+{
+  "gerado_em": "2026-07-07T00:03:38",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "total_arquivos": 116,
+  "arquivos": [
+    {
+      "arquivo": ".env",
+      "tamanho_bytes": 1704,
+      "sha256": "8152c1e92639cd8b9e44efe759095c73f77390c66209511ea9578df9ea169a7b"
+    },
+    {
+      "arquivo": ".env.example",
+      "tamanho_bytes": 675,
+      "sha256": "fc54f96bebc626c7232dff9cee17adb1044c5837c15db0f4f32269b0ef6c1572"
+    },
+    {
+      "arquivo": ".github/copilot-instructions.md",
+      "tamanho_bytes": 6072,
+      "sha256": "70497762e0be03d0d60d5babdb88fdfe7c00ed6fbaf037c886449e50a942a4a5"
+    },
+    {
+      "arquivo": ".gitignore",
+      "tamanho_bytes": 59,
+      "sha256": "acc90aa0ff081dd5d95b11ea402fc78c2c9ca81e8405054ed8eb88abe0d292c9"
+    },
+    {
+      "arquivo": ".vscode/mcp.json",
+      "tamanho_bytes": 18,
+      "sha256": "ef65639def9fe94904700c141dfaef547861d6eea44e0dabdfb60a635bf9678f"
+    },
+    {
+      "arquivo": "CHANGELOG.md",
+      "tamanho_bytes": 16367,
+      "sha256": "947766113458060a40e8ab73c118dcdad13fcb4e8a68b159ac2e5bad2071caa6"
+    },
+    {
+      "arquivo": "CONTEXTO_PROJETO.md",
+      "tamanho_bytes": 17985,
+      "sha256": "e9780d8070cabf8201e5e315172550a6f795e1f3e1bfe43783c5b0cb958ba8f7"
+    },
+    {
+      "arquivo": "DECISOES_TECNICAS.md",
+      "tamanho_bytes": 15852,
+      "sha256": "2dca0ca1ea4902607040b24049ea39680d640a300e176008c6bce39606789f20"
+    },
+    {
+      "arquivo": "Dockerfile",
+      "tamanho_bytes": 657,
+      "sha256": "1b62d7112061a6e130ac85dad55a77156e59d456c71d62e571152108a79856be"
+    },
+    {
+      "arquivo": "MELHORIAS.md",
+      "tamanho_bytes": 5874,
+      "sha256": "cf55757a65a434969fe3e347c00a6a4e3bd5917aa10e1f20033969c491ec06dc"
+    },
+    {
+      "arquivo": "PENDENCIAS.md",
+      "tamanho_bytes": 17015,
+      "sha256": "ae1180a4acf7ff56c8d9c62afb24d1fca9ee98bf42d0f8de09dd8616194d1ed0"
+    },
+    {
+      "arquivo": "README.md",
+      "tamanho_bytes": 5266,
+      "sha256": "4edf8e3a3387ddb67b76c2e747268ae349b27906ccd2bc8da989478f0d950cf2"
+    },
+    {
+      "arquivo": "controllers/AdminController.js",
+      "tamanho_bytes": 13432,
+      "sha256": "ffc7732df804e00b9b8c3f1638c608b3eaeaa875c4e16cde77e515fe285f791f"
+    },
+    {
+      "arquivo": "controllers/AdminPanelController.js",
+      "tamanho_bytes": 5171,
+      "sha256": "528c0fb263c2d3a04be3a4cb2bd2968ab5e994f72b96f25315c6faef28844653"
+    },
+    {
+      "arquivo": "controllers/AuthController.js",
+      "tamanho_bytes": 7859,
+      "sha256": "41e010687e3d1177f89de501a8d5813e659d3b96b4d09b45cb3c70bf77d2850b"
+    },
+    {
+      "arquivo": "controllers/CrmController.js",
+      "tamanho_bytes": 30318,
+      "sha256": "6e2b09036a44f9ce3f762bff71d30abd054b1372e85c8f682a49ddd8f6dda33b"
+    },
+    {
+      "arquivo": "controllers/ScheduleController.js",
+      "tamanho_bytes": 3672,
+      "sha256": "54218a2c08585eea911c9c7a9fe8b2799f159fea23ff296b1ed01235934d1c72"
+    },
+    {
+      "arquivo": "controllers/WhatsAppController.js",
+      "tamanho_bytes": 14529,
+      "sha256": "9146284709c1aa496e2940de053f0e7aa21f0744b448ef607e27b23b8ec43c47"
+    },
+    {
+      "arquivo": "database/migrations/20260706_schema_funcional_setores_horarios.sql",
+      "tamanho_bytes": 777,
+      "sha256": "3f4ab9aad97307e9ec05c30c77df0ec2c5504858d24b5c1cce9e32fa5d0d8e0e"
+    },
+    {
+      "arquivo": "docker-compose.yml",
+      "tamanho_bytes": 1187,
+      "sha256": "a6519c62daba983fb0364a506a7254cf8c52101f87a6e39ac076016c28508d5b"
+    },
+    {
+      "arquivo": "etapa_21_1_registrar_rota_admin_panel.py",
+      "tamanho_bytes": 29554,
+      "sha256": "fe213d67ea1185c7bb4d01ded1c5adf369344edf8f08777f8e7474db0db78a84"
+    },
+    {
+      "arquivo": "etapa_21_2_corrigir_admin_panel_empresa.py",
+      "tamanho_bytes": 29229,
+      "sha256": "28156741a9cb7875020444ba53d5f80772ef770636c305c0bf5d89eae73e2627"
+    },
+    {
+      "arquivo": "etapa_21_3_corrigir_admin_panel_equipe.py",
+      "tamanho_bytes": 28533,
+      "sha256": "506d0fed37cf659ff122655b5673f479c5576a594c2ee23fd225052dc147151a"
+    },
+    {
+      "arquivo": "etapa_21_aplicar_visual_admin_panel.py",
+      "tamanho_bytes": 31927,
+      "sha256": "a38a274ffdb648a7e4b660ef9073357a917f58c3b7d97d75358faac2f5cc93ed"
+    },
+    {
+      "arquivo": "etapa_22_1_registrar_rota_super_admin.py",
+      "tamanho_bytes": 29599,
+      "sha256": "07c722be2dfc5492760a1d27e5c317a9d2bef92041f1b3e582097fbd23aae247"
+    },
+    {
+      "arquivo": "etapa_22_aplicar_visual_super_admin.py",
+      "tamanho_bytes": 30853,
+      "sha256": "67d27d882f4b5c1769120c0ea3d8b1421dad74f7735bb7dd4647065b60142906"
+    },
+    {
+      "arquivo": "favicon.ico",
+      "tamanho_bytes": 630994,
+      "sha256": "e5d92feb710ede82563c6b4000ac15659dd9de0d7412da54438c0716756b8df6"
+    },
+    {
+      "arquivo": "get-docker.sh",
+      "tamanho_bytes": 22806,
+      "sha256": "37eb71347a4353a6ff7ae9a2aa3dddc71cd142f3512cb18f90d10ae4770a7bd2"
+    },
+    {
+      "arquivo": "package-lock.json",
+      "tamanho_bytes": 272258,
+      "sha256": "b3efd5b69f5981cc92cec18ddec28f624857f0536b02f71c0f64c7d78c7935a9"
+    },
+    {
+      "arquivo": "package.json",
+      "tamanho_bytes": 2162,
+      "sha256": "da10927da77c27b52ff3b0075562d2c58fcd18e009921daf56e90ec76de77bfc"
+    },
+    {
+      "arquivo": "postcss.config.js",
+      "tamanho_bytes": 81,
+      "sha256": "6bbbfd323867a78af8d7ee348a179835202fc7a71f4c2b3e3f34de6f5f895c76"
+    },
+    {
+      "arquivo": "public/css/style.css",
+      "tamanho_bytes": 5877,
+      "sha256": "18440595d600dc44d456ed97d79d518130f569f912e7ea67274687a7c03470d7"
+    },
+    {
+      "arquivo": "public/images/chatbot_logo.png",
+      "tamanho_bytes": 265659,
+      "sha256": "13a8b8b16e3b1a9fb023ff85d34e3175721681dcea290ca27923fe3518a2706e"
+    },
+    {
+      "arquivo": "public/images/lh_chatbot_favicon.png",
+      "tamanho_bytes": 158903,
+      "sha256": "81cba5c9044c73e3f577919a2bd6f55fb4a4286446011b79068cf301b0942026"
+    },
+    {
+      "arquivo": "public/images/lhsolucao_logo.png",
+      "tamanho_bytes": 204712,
+      "sha256": "f579970a9486c5695e74148826dc52e08f4e278d98e7455df72b7997a9304dc7"
+    },
+    {
+      "arquivo": "public/uploads/empresa_2/1765714023337_logo.png",
+      "tamanho_bytes": 130488,
+      "sha256": "6810ad1ff93e2e4d75a09bf2c8fdc8c1a718ff817329d9e528fa75f4c6ff9890"
+    },
+    {
+      "arquivo": "public/uploads/empresa_2/css/style.css",
+      "tamanho_bytes": 187,
+      "sha256": "c465319430765f318c1b851b3c192a6c8d69ac36c094d4184bbccbef27dc9b39"
+    },
+    {
+      "arquivo": "remover_protecao_asterisco_etapa20.py",
+      "tamanho_bytes": 2185,
+      "sha256": "543d84f41dbdecf16c94187fa7807a449534f0d055fa0bd3ef69eb8092f7ba7e"
+    },
+    {
+      "arquivo": "routes/api.js",
+      "tamanho_bytes": 10081,
+      "sha256": "af2b42e44ebe3c8360d83b54184ea710438a6eebb64b43529bd0c22650ac5da4"
+    },
+    {
+      "arquivo": "routes/index.js",
+      "tamanho_bytes": 4646,
+      "sha256": "5df22aad6f78d0c4032a40aa7f2f14036a4858f56731f9e278f132f900b4305c"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa16_imports_definitivo.py",
+      "tamanho_bytes": 1753,
+      "sha256": "4200884fd2c329ba237c63206e1cbb58ba67d80b4563478f685339dafef029bd"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa16_regex_imports.py",
+      "tamanho_bytes": 1701,
+      "sha256": "153575d7443da62795e6eb0713d8fccdc3fbc5e6412fe13f5931cc684908b677"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa20_robusto.py",
+      "tamanho_bytes": 2482,
+      "sha256": "aed88fb9f7f4e36c6d0a868dadbe75c7b1b5fc56860d239bc4c3172571a00923"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa20_syntax_email.py",
+      "tamanho_bytes": 1564,
+      "sha256": "b5bcb31c561b10ff6ce81936d9660317fbe6e45984f4a2b41d928e7b03361b6c"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa20_validacao_css_link.py",
+      "tamanho_bytes": 1731,
+      "sha256": "91ea497299f299c3208f40bbe2f27af1dfef7aea4d828383b661c4fc498a876f"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa21_1_ordem_admin_controller.py",
+      "tamanho_bytes": 2235,
+      "sha256": "988c775e1a95a5280aa10dbfa26b88a58c4ba35c51d82b9077c9a3aeed9111fa"
+    },
+    {
+      "arquivo": "script/Python/corrigir_etapa21_1_syntax_email.py",
+      "tamanho_bytes": 2106,
+      "sha256": "2a368bdbd9e5e302005f3444920c39cf086e94e6ecc4e4462f867bbe3cad419f"
+    },
+    {
+      "arquivo": "script/Python/etapa_01_auditoria_estatica.py",
+      "tamanho_bytes": 15242,
+      "sha256": "631027e8839bfd7ef8fe547440f6322b487959170bc1aa44ee80a159bb4d2bde"
+    },
+    {
+      "arquivo": "script/Python/etapa_02_saneamento_seguro.py",
+      "tamanho_bytes": 16624,
+      "sha256": "71aec6e2b0e4ded562b9f364fe3b3785e7ef149e2e920c6acfff893fee3170ca"
+    },
+    {
+      "arquivo": "script/Python/etapa_03_1_hotfix_relatorio.py",
+      "tamanho_bytes": 1665,
+      "sha256": "90149f0802a5b888ed6bde4e7dd88e3f6482fccaade6d9d2dc4661c01436300a"
+    },
+    {
+      "arquivo": "script/Python/etapa_03_1_padronizar_postgres.py",
+      "tamanho_bytes": 22467,
+      "sha256": "16ecd80444b4a0627658f3c8933d0f62314b6deaa472a6ba6900960daa0c3a47"
+    },
+    {
+      "arquivo": "script/Python/etapa_03_corrigir_docker_mysql.py",
+      "tamanho_bytes": 16381,
+      "sha256": "001f86feb93a2e54d56abf16d51bf0964363906b648e69622e3c36abdaf77736"
+    },
+    {
+      "arquivo": "script/Python/etapa_04_1_limpar_historico_mysql_docs.py",
+      "tamanho_bytes": 15300,
+      "sha256": "f21de2597e3e993fe7d30526fc0ad48b0e318b3ff20590d3e96c578d978cfe64"
+    },
+    {
+      "arquivo": "script/Python/etapa_04_hotfix_docs_asterisco.py",
+      "tamanho_bytes": 2137,
+      "sha256": "73eb35b766e031cdd88fbc9924f71a0b261f69f593b881cc82ac79f18275271e"
+    },
+    {
+      "arquivo": "script/Python/etapa_04_hotfix_indentacao.py",
+      "tamanho_bytes": 4809,
+      "sha256": "3b85a9d83a687edf4232ca77302976c2008c5b0aad2c6c58f115380f11ff8fe3"
+    },
+    {
+      "arquivo": "script/Python/etapa_04_limpar_mysql_e_validar_postgres.py",
+      "tamanho_bytes": 35384,
+      "sha256": "fd3be8a9bd9b8ec556d2a7339d1eb20d67daf9f375e921e0d9b38ed3caba7a3e"
+    },
+    {
+      "arquivo": "script/Python/etapa_05_validar_postgres_backend.py",
+      "tamanho_bytes": 28886,
+      "sha256": "32361cd76572b7ad3f8020dec190cb834439e6953448e6044073d790d7b0a378"
+    },
+    {
+      "arquivo": "script/Python/etapa_06_1_corrigir_session_upsert.py",
+      "tamanho_bytes": 17960,
+      "sha256": "0dcac0f40ded915b02f4563241fec300df77c772c901be334fb54b789da50b47"
+    },
+    {
+      "arquivo": "script/Python/etapa_06_2_corrigir_ifnull_values_postgres.py",
+      "tamanho_bytes": 17732,
+      "sha256": "7d3724829ecda346c9bc019071d43d3ef8cef72bd34bf28477bc06715d6ac5a8"
+    },
+    {
+      "arquivo": "script/Python/etapa_06_corrigir_upserts_postgres.py",
+      "tamanho_bytes": 20340,
+      "sha256": "1c2c539c3602c9f17d76d3057f86bd82c3499fc579103f1b2719b22a793cec59"
+    },
+    {
+      "arquivo": "script/Python/etapa_07_1_validar_constraint_runtime.py",
+      "tamanho_bytes": 27270,
+      "sha256": "c97bd182b14143b4e9c9da322f9539c91e2ff6b7f380116f2e4445767149550f"
+    },
+    {
+      "arquivo": "script/Python/etapa_07_2_validar_postgres_docker_runtime.py",
+      "tamanho_bytes": 23680,
+      "sha256": "236c3f7002f27bae5a1cfe0e4924e55c7832c22d3d689509d4d09c8ccaa8ecc9"
+    },
+    {
+      "arquivo": "script/Python/etapa_07_validar_schema_postgres.py",
+      "tamanho_bytes": 21478,
+      "sha256": "ec4326506182c45c19a8c9be29af7a3194d1c4f9ad4af94136178f768e75ceb1"
+    },
+    {
+      "arquivo": "script/Python/etapa_08_1_corrigir_admin_insertid_update_limit.py",
+      "tamanho_bytes": 20952,
+      "sha256": "6a4148ed8689a9763e182a1632f4c7f6e3b0204f3e4ef51d8af16906aa2e9485"
+    },
+    {
+      "arquivo": "script/Python/etapa_08_corrigir_queries_media_postgres.py",
+      "tamanho_bytes": 19744,
+      "sha256": "604bd811a1d0993058738308bf39a38a4d7ed4a3e211e9f03097f9830b24126a"
+    },
+    {
+      "arquivo": "script/Python/etapa_09_1_corrigir_schema_funcional_postgres.py",
+      "tamanho_bytes": 22707,
+      "sha256": "0a05279fbe2ef2f4984aa90bd7ac31c9402d158e8fed8585f0a64422e38cdff7"
+    },
+    {
+      "arquivo": "script/Python/etapa_09_2_executar_migration_schema_funcional.py",
+      "tamanho_bytes": 29815,
+      "sha256": "b85b0a8e2013b3a4359ef028b80dc92524ada655b35c4afd48af9957dc29a731"
+    },
+    {
+      "arquivo": "script/Python/etapa_09_validar_funcional_postgres.py",
+      "tamanho_bytes": 25436,
+      "sha256": "1f275a3c82204681d4f01e7ade13397b8fb9c0ebae6a8319e7cc33aeced52e73"
+    },
+    {
+      "arquivo": "script/Python/etapa_10_1_corrigir_sequences_postgres.py",
+      "tamanho_bytes": 25434,
+      "sha256": "373998c28e9eb9c72098c41f3c52d2e3d88eb31b0fcf3bf8d8b70a42220a9fbd"
+    },
+    {
+      "arquivo": "script/Python/etapa_10_hotfix_syntax.py",
+      "tamanho_bytes": 5358,
+      "sha256": "b4744ed68ef83080368789a93a2e5468845e0cd8f044cecc4c7757b84f48fb74"
+    },
+    {
+      "arquivo": "script/Python/etapa_10_testes_funcionais_escrita_postgres.py",
+      "tamanho_bytes": 29895,
+      "sha256": "bc852279d74c76c32837b37b015fadac0c8690f6f3bfa369d2efb74fae74d5d9"
+    },
+    {
+      "arquivo": "script/Python/etapa_11_validar_endpoints_interface.py",
+      "tamanho_bytes": 22793,
+      "sha256": "ca092dd03ae70a26e579a32254b65e38d5d1fb88a4fcf9a683f969f4cbbfa890"
+    },
+    {
+      "arquivo": "script/Python/etapa_12_1_diagnosticar_login_auth.py",
+      "tamanho_bytes": 33100,
+      "sha256": "6784bb3fafe99148edd3ea235f590b1364a7d4965f4e415dc98c075d5d17d681"
+    },
+    {
+      "arquivo": "script/Python/etapa_12_2_corrigir_script_login_payload.py",
+      "tamanho_bytes": 8944,
+      "sha256": "7e6777c86212b07b5c52cdf98b9dbe67983fcc3d147e8ce43868cedfc3386f55"
+    },
+    {
+      "arquivo": "script/Python/etapa_12_validar_login_endpoints_autenticados.py",
+      "tamanho_bytes": 29802,
+      "sha256": "f37a3da9db0e6261ec734d0f6d9ff30964f01be45d52b291a87a608bb91d2f03"
+    },
+    {
+      "arquivo": "script/Python/etapa_13_validar_fluxos_interface_logada.py",
+      "tamanho_bytes": 31179,
+      "sha256": "1ebb975d13bbf458ef91768d2b94b48698334a307bc5285c0c26834c797e8c7e"
+    },
+    {
+      "arquivo": "script/Python/etapa_14_1_validar_runtime_hardening.py",
+      "tamanho_bytes": 30815,
+      "sha256": "cfc09cedc76d2447c202eb9852770c8eb42fd64f0e628cedefae993fa6464c46"
+    },
+    {
+      "arquivo": "script/Python/etapa_14_2_sanitizar_logs_email_usuario.py",
+      "tamanho_bytes": 34182,
+      "sha256": "48600f362b2d51d298983963ee8f030e72e894f906f06fc7940b04c03fd1d704"
+    },
+    {
+      "arquivo": "script/Python/etapa_14_hardening_logs_sessao_cookies.py",
+      "tamanho_bytes": 33018,
+      "sha256": "3e1c309785e1c97e392a3a2f284923ab477854b4dbaf83c9df634029d8b52a87"
+    },
+    {
+      "arquivo": "script/Python/etapa_15_1_hotfix_syntax_cookie_server.py",
+      "tamanho_bytes": 29908,
+      "sha256": "8c113ceaf71eb436ce8327b523e968391f5dd231cb14c8b7028c7bc950bd0233"
+    },
+    {
+      "arquivo": "script/Python/etapa_15_2_auditar_cors_cookie_headers_sem_alterar.py",
+      "tamanho_bytes": 31710,
+      "sha256": "e37074b8073b0e8fd91568c2d5a41177be1b6660b9648c991a7d2db542bc54e4"
+    },
+    {
+      "arquivo": "script/Python/etapa_15_hardening_cors_cookie_headers.py",
+      "tamanho_bytes": 42465,
+      "sha256": "a9da89ed796d05bf8ea07142f544092404aa6e7205f9db1db467604bf9b7a3ec"
+    },
+    {
+      "arquivo": "script/Python/etapa_16_auditar_melhorias_frontend.py",
+      "tamanho_bytes": 29675,
+      "sha256": "d7ff690f2a9bcdcaf255a370cd723d09d0042b4e79f2ef704de7630adc5cccb4"
+    },
+    {
+      "arquivo": "script/Python/etapa_17_1_validar_runtime_login_visual.py",
+      "tamanho_bytes": 32463,
+      "sha256": "d6874acd2669ec95a56fcdb1b905980f4f6ab7df3dc88b66eb15e70fb16f1aed"
+    },
+    {
+      "arquivo": "script/Python/etapa_17_melhorar_tela_login_visual.py",
+      "tamanho_bytes": 40765,
+      "sha256": "1dc9c106a1f0e2cec4347bb1b8f74a1496206ede215f057868946701ffc4dfa7"
+    },
+    {
+      "arquivo": "script/Python/etapa_18_melhorar_dashboard_visual.py",
+      "tamanho_bytes": 37553,
+      "sha256": "ae4b8cf839dd2bfa611985258b6288bfd2d665ab0368e8b537ea6d2e4b408ef0"
+    },
+    {
+      "arquivo": "script/Python/etapa_19_criar_css_visual_compartilhado.py",
+      "tamanho_bytes": 34893,
+      "sha256": "e0944f5d129464e7a93c0f50362630583f4b4eb3d263e40d7fb681442e9b9b8c"
+    },
+    {
+      "arquivo": "script/Python/etapa_19_documentar_css_visual_compartilhado.py",
+      "tamanho_bytes": 7822,
+      "sha256": "11bc6420af3c1ac9de81e9355fdca1cb6ff99affd3367752bdd3fc61bf48a80d"
+    },
+    {
+      "arquivo": "script/Python/etapa_20_1_registrar_rota_crm.py",
+      "tamanho_bytes": 33770,
+      "sha256": "a20f368505d54a227ce0358c3eb67629b1e441e362fd7927ad839e0af5b5bc5c"
+    },
+    {
+      "arquivo": "script/Python/etapa_20_2_corrigir_rota_crm_empresa.py",
+      "tamanho_bytes": 33086,
+      "sha256": "54fe4ee9912f9373a21e114f722542cf6d9ef74dc99b8e66d22c1810681426a3"
+    },
+    {
+      "arquivo": "script/Python/etapa_20_aplicar_visual_crm.py",
+      "tamanho_bytes": 32736,
+      "sha256": "62eed5b3874a737faa09db9871d13b8e01a59ac8030bf8645961edc540fa7965"
+    },
+    {
+      "arquivo": "script/apply_branding.js",
+      "tamanho_bytes": 1182,
+      "sha256": "a9e53a45b7026c309c8f1837ef3a510b07060bc05536df6bb4f869d72558a6e0"
+    },
+    {
+      "arquivo": "script/audit_sync.js",
+      "tamanho_bytes": 1745,
+      "sha256": "d636a7815117901b14913899b15f65f7ecbeb44b0290e06b48bacd570c80d41e"
+    },
+    {
+      "arquivo": "script/backup_database.js",
+      "tamanho_bytes": 3850,
+      "sha256": "8281c89659aec2675e39f05eca3977265480499f405b95c79de4afe59113781e"
+    },
+    {
+      "arquivo": "script/check_auth.js",
+      "tamanho_bytes": 823,
+      "sha256": "b6484dbdd2c13330b637df46c460ef9ecb297328a35e62566c9ad6486a933c00"
+    },
+    {
+      "arquivo": "script/configurar_nginx.sh",
+      "tamanho_bytes": 3109,
+      "sha256": "0e2440e981747d0bcd6fafa5bc510d8e7a7e5cc4f8e9ff707a861135ab039d7a"
+    },
+    {
+      "arquivo": "script/export_full.js",
+      "tamanho_bytes": 3821,
+      "sha256": "e61a5fbcdd46856d63b2370e582e3aeb69856469ed6714f07959bfbc794a5ba6"
+    },
+    {
+      "arquivo": "script/fix_access.js",
+      "tamanho_bytes": 1052,
+      "sha256": "a060338e6e52e3e5064d5d4980e9b877e39bfb6d3cb66f0036e280168a44ddc1"
+    },
+    {
+      "arquivo": "script/force_activate.js",
+      "tamanho_bytes": 933,
+      "sha256": "da17fe4b45923fa0411c8e912828f702c41ff8d2ed98c196d3e71f3fa8f66838"
+    },
+    {
+      "arquivo": "script/force_stop.js",
+      "tamanho_bytes": 2572,
+      "sha256": "e53012ae4f0e182ad8a0b153ec27ee88c40833849dac4e1ad5846719528242c5"
+    },
+    {
+      "arquivo": "script/force_sync.js",
+      "tamanho_bytes": 2775,
+      "sha256": "5f33bb003efc04c1b29cf31d596a21c482474fa3e2bb9e218d31efbf3de52a49"
+    },
+    {
+      "arquivo": "script/seed_data.js",
+      "tamanho_bytes": 1491,
+      "sha256": "d2d6846b72a42e081d8c456c3a284fc369e9ca2d55cd583679cce436296927e2"
+    },
+    {
+      "arquivo": "script/setup_reset.js",
+      "tamanho_bytes": 6283,
+      "sha256": "5df121a81822864df8e6763b33f460886c0b3fb6ebccec8535e10dc606ef18fe"
+    },
+    {
+      "arquivo": "server.js",
+      "tamanho_bytes": 7884,
+      "sha256": "62a07cb03201b09ebc5c0bbe1aa7e1e9c082c657926fec17c9d770b317b42a99"
+    },
+    {
+      "arquivo": "src/config/db.js",
+      "tamanho_bytes": 2956,
+      "sha256": "462306eec1ce97b697ae5a2be08cb9a38c5405a21cc4914b9b94c99eb031ca87"
+    },
+    {
+      "arquivo": "src/managers/OpenAIManager.js",
+      "tamanho_bytes": 3522,
+      "sha256": "a550e4def3f037cd4ee0e23c7e0ca049dfaf0b4850b91bf89a344b6ced4b6cc1"
+    },
+    {
+      "arquivo": "src/managers/SessionManager.js",
+      "tamanho_bytes": 17090,
+      "sha256": "7b8a461533b471218630a8900075d9add1c3121686d24df157f3b0832921bcea"
+    },
+    {
+      "arquivo": "src/middleware/auth.js",
+      "tamanho_bytes": 2522,
+      "sha256": "56c288b2a3d22e347d41b0829bf4668322757fcf4fbe92b3afe76edc4e486b66"
+    },
+    {
+      "arquivo": "src/styles.css",
+      "tamanho_bytes": 394,
+      "sha256": "4032fa8f312c286a6777ae22d0fd0faae609b25de45a19987d04649cbfe8e904"
+    },
+    {
+      "arquivo": "src/utils/atendimento.js",
+      "tamanho_bytes": 3446,
+      "sha256": "abf5aedb4f83ca6512c4c739fd48f5eff61f3f7c805c42f384d5ad275d8b67ba"
+    },
+    {
+      "arquivo": "tailwind.config.js",
+      "tamanho_bytes": 693,
+      "sha256": "64c34b37b708646daffa446c898c3824832b51ff872d8069679605948c4b6f08"
+    },
+    {
+      "arquivo": "views/admin-panel.ejs",
+      "tamanho_bytes": 56060,
+      "sha256": "7b77576ad10eaa1be0f8e02e3049da64abcd4f27636300750165efca53f59ec3"
+    },
+    {
+      "arquivo": "views/crm.ejs",
+      "tamanho_bytes": 52009,
+      "sha256": "ad8a825eb3f75be33204f56614534d33096556b5fa48fe60feb62a938636a7c5"
+    },
+    {
+      "arquivo": "views/dashboard.ejs",
+      "tamanho_bytes": 32377,
+      "sha256": "cd241a80d7684da129a5af407bb72e940e6c5cd1f3d9309fc6d65d4bb4ceafa2"
+    },
+    {
+      "arquivo": "views/login.ejs",
+      "tamanho_bytes": 13975,
+      "sha256": "393be0f0bafc6d8f9768c135708ac444c9dbb218c7aa4d31dd2df07ea26aaa89"
+    },
+    {
+      "arquivo": "views/super-admin.ejs",
+      "tamanho_bytes": 24186,
+      "sha256": "f473c362bcc6d8aebf9cba0e412214ef390bf27ce61b99b0a3ef39761dfd9f5c"
+    }
+  ]
+}

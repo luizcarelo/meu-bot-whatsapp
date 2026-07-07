@@ -431,3 +431,47 @@ Decidido reutilizar AdminPanelController.renderPanel.
 Decidido nao alterar views/admin-panel.ejs nesta etapa.
 Decidido reiniciar app somente com ETAPA21_1_RESTART_APP=true.
 <!-- ETAPA_21_1_FIM -->
+
+<!-- ETAPA_21_2_INICIO -->
+## Etapa 21.2 - Decisao tecnica
+
+Data: 2026-07-06T23:50:22
+
+Decidido usar consulta minima e segura para a empresa no painel administrativo.
+Decidido nao alterar banco nesta etapa.
+Decidido nao alterar views nesta etapa.
+Decidido manter a rota /admin/painel protegida por isAuthenticated.
+<!-- ETAPA_21_2_FIM -->
+
+<!-- ETAPA_21_3_INICIO -->
+## Etapa 21.3 - Decisao tecnica
+
+Data: 2026-07-06T23:53:24
+
+Decidido remover telefone da consulta de equipe porque a coluna nao existe no banco atual.
+Decidido nao alterar banco nesta etapa.
+Decidido nao alterar views nesta etapa.
+Decidido preservar a rota /admin/painel registrada na Etapa 21.1.
+<!-- ETAPA_21_3_FIM -->
+
+<!-- ETAPA_22_INICIO -->
+## Etapa 22 - Decisoes tecnicas frontend
+
+Data: 2026-07-06T23:57:44
+
+Decidido aplicar visual em super-admin por injecao controlada.
+Decidido usar public/css/style.css criado na Etapa 19.
+Decidido nao alterar backend ou banco nesta etapa.
+Decidido tratar rota ou controller em etapa separada se /super-admin nao validar.
+<!-- ETAPA_22_FIM -->
+
+<!-- ETAPA_22_1_INICIO -->
+## Etapa 22.1 - Decisoes tecnicas
+
+Data: 2026-07-07T00:03:38
+
+Decidido registrar /super-admin em routes/index.js porque a view existia mas nao havia rota frontend.
+Decidido proteger a rota com isAuthenticated e isSuperAdmin.
+Decidido nao consultar banco nesta etapa porque a view nao usa variaveis EJS.
+Decidido nao alterar views nesta etapa.
+<!-- ETAPA_22_1_FIM -->

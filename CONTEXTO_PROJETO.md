@@ -551,3 +551,76 @@ Dashboard OK: True.
 Admin panel OK: False.
 Admin visual OK: False.
 <!-- ETAPA_21_1_FIM -->
+
+<!-- ETAPA_21_2_INICIO -->
+## Etapa 21.2 - Consulta do painel administrativo corrigida
+
+Data: 2026-07-06T23:50:22
+
+Foi corrigida a consulta de empresa em controllers/AdminPanelController.js.
+Arquivo alterado: True.
+Bloco de empresas encontrado: True.
+Nome de exibicao corrigido: True.
+Consulta corrigida presente: True.
+Validacao estrutural OK: True.
+Node check OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Admin panel OK: False.
+Admin visual OK: False.
+<!-- ETAPA_21_2_FIM -->
+
+<!-- ETAPA_21_3_INICIO -->
+## Etapa 21.3 - Consulta de equipe do painel administrativo corrigida
+
+Data: 2026-07-06T23:53:24
+
+Foi corrigida a consulta de equipe em controllers/AdminPanelController.js.
+Arquivo alterado: True.
+Consulta antiga encontrada: True.
+Consulta corrigida presente: True.
+Validacao estrutural OK: True.
+Node check OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Admin panel OK: True.
+Admin visual OK: False.
+<!-- ETAPA_21_3_FIM -->
+
+<!-- ETAPA_22_INICIO -->
+## Etapa 22 - Visual compartilhado aplicado ao Super Admin
+
+Data: 2026-07-06T23:57:44
+
+Foi aplicada melhoria visual controlada em views/super-admin.ejs.
+Arquivo alterado: True.
+CSS compartilhado adicionado: False.
+Script visual adicionado: True.
+Validacao estrutural OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Super Admin OK: False.
+Super Admin visual OK: False.
+<!-- ETAPA_22_FIM -->
+
+<!-- ETAPA_22_1_INICIO -->
+## Etapa 22.1 - Rota Super Admin registrada
+
+Data: 2026-07-07T00:03:38
+
+Foi registrada a rota GET /super-admin em routes/index.js.
+Arquivo alterado: True.
+Import isSuperAdmin corrigido: True.
+Rota adicionada: True.
+Rota ja existia: False.
+Validacao estrutural OK: True.
+Node check OK: True.
+Restart executado: True.
+Login OK: True.
+Dashboard OK: True.
+Super Admin OK: True.
+Super Admin visual OK: False.
+<!-- ETAPA_22_1_FIM -->
