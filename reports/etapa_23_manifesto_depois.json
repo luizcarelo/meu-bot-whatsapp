@@ -1,7 +1,7 @@
 {
-  "gerado_em": "2026-07-07T00:07:38",
+  "gerado_em": "2026-07-07T00:20:25",
   "raiz": "/home/luizcarelo/meu-bot-whatsapp",
-  "total_arquivos": 117,
+  "total_arquivos": 120,
   "arquivos": [
     {
       "arquivo": ".env",
@@ -30,18 +30,18 @@
     },
     {
       "arquivo": "CHANGELOG.md",
-      "tamanho_bytes": 16714,
-      "sha256": "5044bc1539d9b94ab3ccbe4a14936f1fd8eaff53413d25b3b6aead87f7a8e71a"
+      "tamanho_bytes": 17688,
+      "sha256": "96fd86dbf95051dfda38065bf66696048d009ed03220bc2b5e82ae873aa346af"
     },
     {
       "arquivo": "CONTEXTO_PROJETO.md",
-      "tamanho_bytes": 18530,
-      "sha256": "2deb268ac044e67b13aed15461ed9b5e033a0957b3fda797b42b7130a760e989"
+      "tamanho_bytes": 19861,
+      "sha256": "6e1f4aa141d1ce384e7b648f2534682fa1cade4dd4edc2306ead3fd755401889"
     },
     {
       "arquivo": "DECISOES_TECNICAS.md",
-      "tamanho_bytes": 16212,
-      "sha256": "e2c929412a6a4918f84413e69a57723ea0727edc2b806efdaaf5007eb830fa8b"
+      "tamanho_bytes": 17394,
+      "sha256": "cf329d66ce7bf4e3e69fe9459add22597d3adffffe715f3319397d08b41efecc"
     },
     {
       "arquivo": "Dockerfile",
@@ -55,8 +55,8 @@
     },
     {
       "arquivo": "PENDENCIAS.md",
-      "tamanho_bytes": 17322,
-      "sha256": "511cc2265b76c689da6f3b837fc2b069caef38d097a4cb1a917934d119068581"
+      "tamanho_bytes": 18257,
+      "sha256": "53d34e167586d7768117b54f398936e336b235c3e2c8d7b6399e4bcc7dbee8e5"
     },
     {
       "arquivo": "README.md",
@@ -102,6 +102,21 @@
       "arquivo": "docker-compose.yml",
       "tamanho_bytes": 1187,
       "sha256": "a6519c62daba983fb0364a506a7254cf8c52101f87a6e39ac076016c28508d5b"
+    },
+    {
+      "arquivo": "etapa_23_1_validar_runtime_super_admin.py",
+      "tamanho_bytes": 28547,
+      "sha256": "6cc766ee1a9897f467f9e41eb2e1fa821cca5ac1754999561ebe59aa6ed0c909"
+    },
+    {
+      "arquivo": "etapa_23_2_forcar_super_admin_sendfile.py",
+      "tamanho_bytes": 25530,
+      "sha256": "27fde76dec5a0571ca0c9bc2b67c5c32bef4b745811854e21187a8a2036ea915"
+    },
+    {
+      "arquivo": "etapa_23_3_corrigir_is_super_admin.py",
+      "tamanho_bytes": 26035,
+      "sha256": "b486af7c11fac59542dd09e35e33a898f4c012374a8331ac246385a8fbc08fc7"
     },
     {
       "arquivo": "etapa_23_auditoria_final_visual_rotas.py",
@@ -175,8 +190,8 @@
     },
     {
       "arquivo": "routes/index.js",
-      "tamanho_bytes": 4646,
-      "sha256": "5df22aad6f78d0c4032a40aa7f2f14036a4858f56731f9e278f132f900b4305c"
+      "tamanho_bytes": 4732,
+      "sha256": "f04e07592645ab300e3e1a5e7901ce3138f114b1eb86c5da8ca04a51d7e067e6"
     },
     {
       "arquivo": "script/Python/corrigir_etapa16_imports_definitivo.py",
@@ -545,8 +560,8 @@
     },
     {
       "arquivo": "src/middleware/auth.js",
-      "tamanho_bytes": 2522,
-      "sha256": "56c288b2a3d22e347d41b0829bf4668322757fcf4fbe92b3afe76edc4e486b66"
+      "tamanho_bytes": 2624,
+      "sha256": "fbc81e94578243a7fd33b47ce5e4cc441d297997f8d2814eda7eb696912a877e"
     },
     {
       "arquivo": "src/styles.css",

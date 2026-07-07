@@ -628,11 +628,11 @@ Super Admin visual OK: False.
 <!-- ETAPA_23_INICIO -->
 ## Etapa 23 - Auditoria final visual e rotas
 
-Data: 2026-07-07T00:07:38
+Data: 2026-07-07T00:20:25
 
 Auditoria final visual e de rotas das etapas 17 a 22.
-Status geral OK: False.
-Checks OK: 16 de 17.
+Status geral OK: True.
+Checks OK: 17 de 17.
 Login page OK: True.
 CSS compartilhado OK: True.
 Login API OK: True.
@@ -643,7 +643,7 @@ Super Admin OK: True.
 Dashboard visual OK: True.
 CRM visual OK: True.
 Admin visual OK: True.
-Super Admin visual OK: False.
+Super Admin visual OK: True.
 Logs Session ID: 0.
 Logs cookie: 0.
 Logs email: 0.
@@ -686,3 +686,21 @@ Logs Session ID: 0.
 Logs cookie: 0.
 Logs email: 0.
 <!-- ETAPA_23_2_FIM -->
+
+<!-- ETAPA_23_3_INICIO -->
+## Etapa 23.3 - Middleware Super Admin corrigido
+
+Data: 2026-07-07T00:20:13
+
+O middleware isSuperAdmin foi corrigido para aceitar is_admin numerico ou booleano.
+Arquivo alterado: True.
+Empresa master corrigida com Number: True.
+Privilegio corrigido: True.
+Login OK: True.
+Dashboard OK: True.
+Super Admin OK: True.
+Super Admin visual OK: True.
+Logs Session ID: 0.
+Logs cookie: 0.
+Logs email: 0.
+<!-- ETAPA_23_3_FIM -->

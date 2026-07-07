@@ -63,8 +63,13 @@ const isSuperAdmin = (req, res, next) => {
     const empresaId = req.session?.empresaId;
 
     // Regra Estrita: Deve pertencer à Empresa 1 (Master) E ter permissão elevada
-    const isMasterCompany = empresaId === 1;
-    const hasSuperPrivilege = user && (user.is_admin === 1 || user.cargo === 'Super Admin');
+    const isMasterCompany = Number(empresaId) === 1;
+    const hasSuperPrivilege = user && (
+        user.is_admin === 1 ||
+        user.is_admin === true ||
+        user.role === 'superadmin' ||
+        user.cargo === 'Super Admin'
+    );
 
     if (isMasterCompany && hasSuperPrivilege) {
         return next();

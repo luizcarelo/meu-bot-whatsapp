@@ -479,7 +479,7 @@ Decidido nao alterar views nesta etapa.
 <!-- ETAPA_23_INICIO -->
 ## Etapa 23 - Decisao tecnica
 
-Data: 2026-07-07T00:07:38
+Data: 2026-07-07T00:20:25
 
 Decidido consolidar as validacoes das etapas 17 a 22 em uma auditoria final.
 A auditoria nao altera backend, banco, views, rotas ou controllers.
@@ -505,3 +505,14 @@ Decidido servir views/super-admin.ejs diretamente na rota /super-admin para elim
 A decisao e segura porque views/super-admin.ejs nao usa variaveis EJS.
 Decidido nao alterar banco, controllers ou outras views nesta etapa.
 <!-- ETAPA_23_2_FIM -->
+
+<!-- ETAPA_23_3_INICIO -->
+## Etapa 23.3 - Decisao tecnica
+
+Data: 2026-07-07T00:20:13
+
+Decidido corrigir o middleware sem remover a protecao isSuperAdmin.
+Decidido aceitar boolean true porque o login serializa is_admin como booleano no JSON.
+Decidido manter empresa master obrigatoria para preservar seguranca multi-tenant.
+Decidido validar o HTML de /super-admin para confirmar que nao houve redirecionamento para dashboard.
+<!-- ETAPA_23_3_FIM -->

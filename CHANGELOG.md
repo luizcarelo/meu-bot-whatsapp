@@ -514,7 +514,7 @@ Validado login, dashboard e Super Admin.
 <!-- ETAPA_23_INICIO -->
 ## Etapa 23 - Auditoria final executada
 
-Data: 2026-07-07T00:07:38
+Data: 2026-07-07T00:20:25
 
 Executada auditoria final das telas login, dashboard, CRM, admin panel e super admin.
 Validadas rotas principais e marcadores visuais.
@@ -542,3 +542,14 @@ Alterada a rota /super-admin para usar res.type('html').sendFile.
 Mantidas as protecoes isAuthenticated e isSuperAdmin.
 Validado node --check, login, dashboard e Super Admin.
 <!-- ETAPA_23_2_FIM -->
+
+<!-- ETAPA_23_3_INICIO -->
+## Etapa 23.3 - Correcao isSuperAdmin
+
+Data: 2026-07-07T00:20:13
+
+Ajustado middleware isSuperAdmin para aceitar is_admin igual a 1 ou true.
+Adicionado suporte a role superadmin.
+Mantida exigencia de empresa master igual a 1.
+Validado node --check, login, dashboard e Super Admin.
+<!-- ETAPA_23_3_FIM -->
