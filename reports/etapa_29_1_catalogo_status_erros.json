@@ -1,0 +1,137 @@
+{
+  "gerado_em": "2026-07-08T20:15:43",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_29_1_catalogo_status_erros_20260708_201543",
+    "copiados": [
+      "docs/CONTRATOS_API.md",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md"
+    ],
+    "ausentes": [
+      "backend/src/shared/http/statusCodes.js",
+      "backend/src/shared/http/errorCodes.js",
+      "docs/PADRAO_RESPOSTAS_API.md"
+    ],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_29_1_manifesto_antes.json",
+  "alteracoes": [
+    {
+      "arquivo": "backend/src/shared/http/statusCodes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7b35d337d44e184c33c53f09be2413a0b3f6054120375f7ded9410b47665bf45",
+      "tamanho": 241
+    },
+    {
+      "arquivo": "backend/src/shared/http/errorCodes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7c735f7791ef616ad15293424c79cde8377fb8494f4448c18abba24e3b65a1d0",
+      "tamanho": 459
+    },
+    {
+      "arquivo": "docs/PADRAO_RESPOSTAS_API.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "eba0ede486941c3c9c99ba8fd5da57e09e09706d97ee358acda7a748ea56ae4e",
+      "tamanho": 1031
+    },
+    {
+      "arquivo": "docs/CONTRATOS_API.md",
+      "alterado": true,
+      "sha256_antes": "e96e73a756aac33eeab46c114cc304b6d94bf79d2763b6ee0841cac68b116781",
+      "sha256_depois": "de94d6173942b0106384e3ae50971f2759c9ca7a412cc2a4bdad73f59463306f",
+      "tamanho": 2466
+    }
+  ],
+  "validacao": {
+    "arquivos": [
+      {
+        "arquivo": "backend/src/shared/http/statusCodes.js",
+        "existe": true,
+        "sha256": "7b35d337d44e184c33c53f09be2413a0b3f6054120375f7ded9410b47665bf45",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/shared/http/errorCodes.js",
+        "existe": true,
+        "sha256": "7c735f7791ef616ad15293424c79cde8377fb8494f4448c18abba24e3b65a1d0",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/PADRAO_RESPOSTAS_API.md",
+        "existe": true,
+        "sha256": "eba0ede486941c3c9c99ba8fd5da57e09e09706d97ee358acda7a748ea56ae4e",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "docs/CONTRATOS_API.md",
+        "existe": true,
+        "sha256": "de94d6173942b0106384e3ae50971f2759c9ca7a412cc2a4bdad73f59463306f",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      }
+    ],
+    "checks": {
+      "tem_backend_dir": true,
+      "tem_status_codes": true,
+      "tem_error_codes": true,
+      "tem_resource_not_found": true,
+      "tem_internal_error": true,
+      "doc_tem_success": true,
+      "doc_tem_error": true,
+      "contratos_api_atualizado": true
+    },
+    "erros": [],
+    "ok": true
+  },
+  "node_check": {
+    "total": 2,
+    "resultados": [
+      {
+        "cmd": [
+          "node",
+          "--check",
+          "backend/src/shared/http/statusCodes.js"
+        ],
+        "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "ok": true
+      },
+      {
+        "cmd": [
+          "node",
+          "--check",
+          "backend/src/shared/http/errorCodes.js"
+        ],
+        "cwd": "/home/luizcarelo/meu-bot-whatsapp",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "ok": true
+      }
+    ],
+    "ok": true
+  },
+  "ok": true,
+  "docs_obrigatorios": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_29_1_manifesto_depois.json"
+}

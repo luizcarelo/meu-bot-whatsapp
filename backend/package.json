@@ -1,0 +1,16 @@
+{
+  "name": "engeradios-crm-backend-modular",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Backend modular em paralelo criado na Etapa 28",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "check": "node --check src/app.js && node --check src/server.js",
+    "check:all": "node scripts/check-syntax.js"
+  },
+  "dependencies": {
+    "express": "latest"
+  },
+  "devDependencies": {}
+}

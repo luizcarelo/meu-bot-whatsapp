@@ -674,3 +674,35 @@ Etapa 28: criar backend modular em paralelo.
 Etapa 29: padronizar respostas reais de API.
 Etapa 30: migrar login real para React.
 <!-- ETAPA_27_2_FIM -->
+
+<!-- ETAPA_28_INICIO -->
+## Pendencias apos Etapa 28
+
+Data: 2026-07-08T19:08:13
+
+Etapa 28.1: validar backend modular isolado com npm install opcional.
+Etapa 29: padronizar respostas reais de API.
+Etapa 30: migrar autenticacao para contrato novo.
+Etapa futura: conectar repositories modulares ao banco.
+<!-- ETAPA_28_FIM -->
+
+<!-- ETAPA_28_1_INICIO -->
+## Pendencias apos Etapa 28.1
+
+Data: 2026-07-08T20:00:47
+
+Etapa 29: padronizar respostas reais de API.
+Etapa 30: migrar autenticacao para contrato novo.
+Etapa futura: conectar repositories modulares ao banco.
+Etapa futura: integrar backend modular ao proxy ou Docker.
+<!-- ETAPA_28_1_FIM -->
+
+<!-- ETAPA_29_1_INICIO -->
+## Pendencias apos Etapa 29.1
+
+Data: 2026-07-08T20:15:43
+
+Etapa 29.2: reforcar apiResponse.js e errors.js.
+Etapa 29.3: padronizar errorHandler e notFoundHandler.
+Etapa 29.4: validar endpoints health com contrato padronizado.
+<!-- ETAPA_29_1_FIM -->

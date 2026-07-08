@@ -867,3 +867,42 @@ Corrigido uso do Material UI para compatibilidade de tipos.
 Substituido Grid por Box com CSS grid no dashboard.
 Build OK: True.
 <!-- ETAPA_27_2_FIM -->
+
+<!-- ETAPA_28_INICIO -->
+## Etapa 28 - Backend modular paralelo
+
+Data: 2026-07-08T19:08:13
+
+Criada estrutura backend modular em backend/ sem substituir o legado.
+Criados modulos auth, dashboard, whatsapp, crm, tenants e users.
+Criados middlewares, shared HTTP helpers e app modular independente.
+Node check OK: True.
+Validacao estrutural OK: True.
+<!-- ETAPA_28_FIM -->
+
+<!-- ETAPA_28_1_INICIO -->
+## Etapa 28.1 - Backend modular isolado validado
+
+Data: 2026-07-08T20:00:47
+
+Corrigido requireAuth.js para chamar next().
+Validada sintaxe real dos arquivos JS do backend modular.
+Node check total: 47.
+Node check OK: True.
+npm OK: True.
+Runtime isolado OK: True.
+Legado preservado.
+<!-- ETAPA_28_1_FIM -->
+
+<!-- ETAPA_29_1_INICIO -->
+## Etapa 29.1 - Catalogo de status e erros
+
+Data: 2026-07-08T20:15:43
+
+Criados statusCodes.js e errorCodes.js no backend modular.
+Criado docs/PADRAO_RESPOSTAS_API.md.
+Atualizado docs/CONTRATOS_API.md.
+Nenhum fluxo real foi alterado nesta fase.
+Validacao estrutural OK: True.
+Node check OK: True.
+<!-- ETAPA_29_1_FIM -->

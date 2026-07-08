@@ -632,3 +632,35 @@ Decidido remover path alias para evitar asteriscos em arquivos de configuracao.
 Decidido usar imports relativos nesta fase inicial.
 Decidido usar Box com CSS grid em vez de Grid item para evitar incompatibilidade de tipos com Material UI instalado.
 <!-- ETAPA_27_2_FIM -->
+
+<!-- ETAPA_28_INICIO -->
+## Etapa 28 - Decisao backend paralelo
+
+Data: 2026-07-08T19:08:13
+
+Decidido criar backend modular em paralelo para reduzir risco.
+Decidido nao conectar ainda o backend modular ao banco legado.
+Decidido nao substituir server.js legado nesta etapa.
+Decidido usar padrao success, data e error nas respostas novas.
+<!-- ETAPA_28_FIM -->
+
+<!-- ETAPA_28_1_INICIO -->
+## Etapa 28.1 - Validacao isolada do backend modular
+
+Data: 2026-07-08T20:00:47
+
+Decidido validar backend modular isoladamente antes de conectar ao legado.
+Decidido manter backend modular em porta separada.
+Decidido testar apenas endpoints health nesta fase.
+Decidido nao conectar banco nesta fase.
+<!-- ETAPA_28_1_FIM -->
+
+<!-- ETAPA_29_1_INICIO -->
+## Etapa 29.1 - Padronizacao iniciada por catalogos
+
+Data: 2026-07-08T20:15:43
+
+Decidido iniciar a padronizacao por catalogos isolados.
+Decidido nao alterar apiResponse, errorHandler ou app.js nesta fase.
+Decidido manter mensagens de erro em PT-BR.
+<!-- ETAPA_29_1_FIM -->

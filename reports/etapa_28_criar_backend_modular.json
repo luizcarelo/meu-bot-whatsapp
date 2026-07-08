@@ -1,0 +1,785 @@
+{
+  "gerado_em": "2026-07-08T19:08:13",
+  "raiz": "/home/luizcarelo/meu-bot-whatsapp",
+  "backup": {
+    "destino": "backups/etapa_28_backend_modular_20260708_190813",
+    "copiados": [
+      "backend",
+      "CONTEXTO_PROJETO.md",
+      "CHANGELOG.md",
+      "DECISOES_TECNICAS.md",
+      "PENDENCIAS.md",
+      "docs/ARQUITETURA_BACKEND_MODULAR.md",
+      "docs/CONTRATOS_API.md",
+      "docs/PLANO_MIGRACAO_REACT.md"
+    ],
+    "ausentes": [],
+    "erros": []
+  },
+  "manifesto_antes": "reports/etapa_28_manifesto_antes.json",
+  "backend_arquivos": [
+    {
+      "arquivo": "backend/package.json",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "3a09a42885151a0fc1519524dc0ec9368a2056c42a7b19b671f28c4556201858",
+      "tamanho": 429
+    },
+    {
+      "arquivo": "backend/README.md",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "037c7e71e60d01498c671739e1145406c87b12e51a1db581250cc06ed530e266",
+      "tamanho": 467
+    },
+    {
+      "arquivo": "backend/src/config/env.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "9e2d409f8cf24e20a773a0081a0500624fdb8812b78ceb341e8e119371f27a3a",
+      "tamanho": 385
+    },
+    {
+      "arquivo": "backend/src/database/db.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "84da72d7384809480aad7d45ce06c7c358d833e2709a1eebf35b65f20efd9e80",
+      "tamanho": 204
+    },
+    {
+      "arquivo": "backend/src/shared/utils/logger.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "30c1b0563a59a94c52bee603b62da375e5517b72292c4371f17e3e1698e44006",
+      "tamanho": 475
+    },
+    {
+      "arquivo": "backend/src/shared/http/apiResponse.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "ff7345e5602aec7247f1b47baca3ca3299a53fe5f4b29634cbae3208003c6fc7",
+      "tamanho": 599
+    },
+    {
+      "arquivo": "backend/src/shared/http/errors.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "bbae364e203e37aedeb508753c171340852f06fda5601289d0d87d8554c14e75",
+      "tamanho": 343
+    },
+    {
+      "arquivo": "backend/src/middlewares/asyncHandler.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "c27a4ee393c06aa3253be703ff95dc41870f43d67bcfb57fc90f1a6ebd4314c5",
+      "tamanho": 181
+    },
+    {
+      "arquivo": "backend/src/middlewares/errorHandler.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "46deb617727ae850aca618108158ce6055c293e7643ab19387e0b3e523a21d6b",
+      "tamanho": 451
+    },
+    {
+      "arquivo": "backend/src/middlewares/requireAuth.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "e852c398fcd8e11f94e91193368ebcceeadcc9c984894a33b4cf67cdf96da3f6",
+      "tamanho": 411
+    },
+    {
+      "arquivo": "backend/src/app.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "ad0d7443e6a1bccbc440abed1cd013c9d1cedeaca314394fab42a7cf76b6117d",
+      "tamanho": 1289
+    },
+    {
+      "arquivo": "backend/src/server.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "342e7c4c98ec91b629b45d8f8d227fc1298d12238cb303ee0b258dda4da706c1",
+      "tamanho": 291
+    },
+    {
+      "arquivo": "backend/scripts/check-syntax.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "947cf0065d9e793a01b51f63e3011d101c2497e83a8505dc88f3641be1f14c92",
+      "tamanho": 775
+    },
+    {
+      "arquivo": "backend/src/modules/auth/auth.routes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "a7b4ab6c24e2dc6e6ef74a22bf9c6014c9753de42651c767dd30682d563a9a6c",
+      "tamanho": 266
+    },
+    {
+      "arquivo": "backend/src/modules/auth/auth.controller.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "63ba0adb5f31a5aaee0ceb3aeac9f5e9179acfb7cd97bcb65e0ec8da70a29554",
+      "tamanho": 253
+    },
+    {
+      "arquivo": "backend/src/modules/auth/auth.service.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "22775e598b4a153410040c1b97bcb5752a9e4b29e683235522502a564b72f2e1",
+      "tamanho": 256
+    },
+    {
+      "arquivo": "backend/src/modules/auth/auth.repository.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "257c01f0168742b98b1f2cd5607ea93077b31629ab660c75bfad695421bde91c",
+      "tamanho": 162
+    },
+    {
+      "arquivo": "backend/src/modules/auth/auth.validators.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/auth/auth.types.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "4ee34683099dc0432835c42117cacdefbddd86159518a85013eac318250069d7",
+      "tamanho": 149
+    },
+    {
+      "arquivo": "backend/src/modules/dashboard/dashboard.routes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "1ea0f3e49fe8a355da7eae956763d2461279c0c4751f46a0bd71c9810aa4106a",
+      "tamanho": 271
+    },
+    {
+      "arquivo": "backend/src/modules/dashboard/dashboard.controller.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "9ce794e3c514f5d98e6c322cc9684ad4ce1745ed67b66fbb8e1269e6caa5a798",
+      "tamanho": 258
+    },
+    {
+      "arquivo": "backend/src/modules/dashboard/dashboard.service.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "41bf4526b4648c363571f718aecface79eaf3bc77320195dff56eba202629625",
+      "tamanho": 271
+    },
+    {
+      "arquivo": "backend/src/modules/dashboard/dashboard.repository.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "3f7b24a9505df6b24dd13ce7877ed9f9bcc3530d9b2c75d193859477f4cf03fb",
+      "tamanho": 167
+    },
+    {
+      "arquivo": "backend/src/modules/dashboard/dashboard.validators.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/dashboard/dashboard.types.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "3630921e601f812c26f97be70d116c399b30a7176c4ce9fa3b499f1e52410cc9",
+      "tamanho": 164
+    },
+    {
+      "arquivo": "backend/src/modules/whatsapp/whatsapp.routes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "1e68be6bd7239c98687fcceffc1fd536a992408b7445d968ee77c2f67ce18ed3",
+      "tamanho": 270
+    },
+    {
+      "arquivo": "backend/src/modules/whatsapp/whatsapp.controller.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "5aeb010543c13d7401ed8ee7b6b1202f1bc04a42b4f98272c579aea7a12d909f",
+      "tamanho": 257
+    },
+    {
+      "arquivo": "backend/src/modules/whatsapp/whatsapp.service.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "5012022d4660997a86719794847627b7c022f2183406e01fac8d8e90feacdc6d",
+      "tamanho": 268
+    },
+    {
+      "arquivo": "backend/src/modules/whatsapp/whatsapp.repository.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "d9e28423dd10f695bc9bcbacdbbd6a21568b1c3fb9fa3dfb6a39e49c7704dd8c",
+      "tamanho": 166
+    },
+    {
+      "arquivo": "backend/src/modules/whatsapp/whatsapp.validators.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/whatsapp/whatsapp.types.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "76dc6ebdd0eaa16b36f1a2bfea1b2ffad5ab666cbcbc32bc4857c62e28cbbff7",
+      "tamanho": 161
+    },
+    {
+      "arquivo": "backend/src/modules/crm/crm.routes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "16b0fec0f12380402b02f4b4914ee2ee7d52452d0c5a6ef32ee5740a62f3a9da",
+      "tamanho": 265
+    },
+    {
+      "arquivo": "backend/src/modules/crm/crm.controller.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "ca2cf0fedb0e25cc817d516b2d89c1840af5855a7715d41c71fd5c3e21e5a164",
+      "tamanho": 252
+    },
+    {
+      "arquivo": "backend/src/modules/crm/crm.service.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "64563008a4aa3540ee211651649d5cf441d87b8654f5b52cd73a100ba9d6d6b4",
+      "tamanho": 253
+    },
+    {
+      "arquivo": "backend/src/modules/crm/crm.repository.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "f392e4c36b7f7c27a9db65e2e5b5c1ca9c21029048bedb2f2d9e7abb45066433",
+      "tamanho": 161
+    },
+    {
+      "arquivo": "backend/src/modules/crm/crm.validators.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/crm/crm.types.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "f5388f3666d88b6effdf88610f5bc206cfd74c3c4d91d32a6a23f40ccfe62ada",
+      "tamanho": 146
+    },
+    {
+      "arquivo": "backend/src/modules/tenants/tenants.routes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "d898efd4c31080f7e6287a2100f1fa77055f78e63df8bb7135b7106fa5ea08b8",
+      "tamanho": 269
+    },
+    {
+      "arquivo": "backend/src/modules/tenants/tenants.controller.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7302f14fdb5fc184add92ba0bb37365e3677c26f863ad4b1d937ebde7c7ce116",
+      "tamanho": 256
+    },
+    {
+      "arquivo": "backend/src/modules/tenants/tenants.service.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "d6df3023ca11c0a288777a2c28b6a9fa04dcb47b0a72c5ca6bc373ff207c5a52",
+      "tamanho": 265
+    },
+    {
+      "arquivo": "backend/src/modules/tenants/tenants.repository.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "268a5ebf4ee93842bfc5ff710f1d3e7fe78f5676b9b5950a3d9d31e765694ce2",
+      "tamanho": 165
+    },
+    {
+      "arquivo": "backend/src/modules/tenants/tenants.validators.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/tenants/tenants.types.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "6e5cf4f88a08140c403356138a21982016ce8d85369ccf9dd0eeebd4a76673f6",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/users/users.routes.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "18ce0e63cdb57fa290d26449bb99da6086ec8797e13739a9e835623378ba3a31",
+      "tamanho": 267
+    },
+    {
+      "arquivo": "backend/src/modules/users/users.controller.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "2e7a07e86ebb8e1649f5887aefd1ea8c5389b81d55166bd9499fac0e0ed51d43",
+      "tamanho": 254
+    },
+    {
+      "arquivo": "backend/src/modules/users/users.service.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "86096a0a70f25ca43275a5a1dc21487c32dc4cee9c475ef1d041abaadb3ecf5c",
+      "tamanho": 259
+    },
+    {
+      "arquivo": "backend/src/modules/users/users.repository.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "2e6c2b82b21511cd8c1e5866037c43d5d87c578f61762d8dc4d209aee784eec5",
+      "tamanho": 163
+    },
+    {
+      "arquivo": "backend/src/modules/users/users.validators.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+      "tamanho": 158
+    },
+    {
+      "arquivo": "backend/src/modules/users/users.types.js",
+      "alterado": true,
+      "sha256_antes": null,
+      "sha256_depois": "ba88539f3759a17b7b691bec8198df06f9c6153a14d3804bb5a30206bcc42995",
+      "tamanho": 152
+    }
+  ],
+  "validacao": {
+    "arquivos": [
+      {
+        "arquivo": "backend/package.json",
+        "existe": true,
+        "sha256": "3a09a42885151a0fc1519524dc0ec9368a2056c42a7b19b671f28c4556201858",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/README.md",
+        "existe": true,
+        "sha256": "037c7e71e60d01498c671739e1145406c87b12e51a1db581250cc06ed530e266",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/config/env.js",
+        "existe": true,
+        "sha256": "9e2d409f8cf24e20a773a0081a0500624fdb8812b78ceb341e8e119371f27a3a",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/database/db.js",
+        "existe": true,
+        "sha256": "84da72d7384809480aad7d45ce06c7c358d833e2709a1eebf35b65f20efd9e80",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/shared/utils/logger.js",
+        "existe": true,
+        "sha256": "30c1b0563a59a94c52bee603b62da375e5517b72292c4371f17e3e1698e44006",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/shared/http/apiResponse.js",
+        "existe": true,
+        "sha256": "ff7345e5602aec7247f1b47baca3ca3299a53fe5f4b29634cbae3208003c6fc7",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/shared/http/errors.js",
+        "existe": true,
+        "sha256": "bbae364e203e37aedeb508753c171340852f06fda5601289d0d87d8554c14e75",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/middlewares/asyncHandler.js",
+        "existe": true,
+        "sha256": "c27a4ee393c06aa3253be703ff95dc41870f43d67bcfb57fc90f1a6ebd4314c5",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/middlewares/errorHandler.js",
+        "existe": true,
+        "sha256": "46deb617727ae850aca618108158ce6055c293e7643ab19387e0b3e523a21d6b",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/middlewares/requireAuth.js",
+        "existe": true,
+        "sha256": "e852c398fcd8e11f94e91193368ebcceeadcc9c984894a33b4cf67cdf96da3f6",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/app.js",
+        "existe": true,
+        "sha256": "ad0d7443e6a1bccbc440abed1cd013c9d1cedeaca314394fab42a7cf76b6117d",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/server.js",
+        "existe": true,
+        "sha256": "342e7c4c98ec91b629b45d8f8d227fc1298d12238cb303ee0b258dda4da706c1",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/scripts/check-syntax.js",
+        "existe": true,
+        "sha256": "947cf0065d9e793a01b51f63e3011d101c2497e83a8505dc88f3641be1f14c92",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/auth/auth.routes.js",
+        "existe": true,
+        "sha256": "a7b4ab6c24e2dc6e6ef74a22bf9c6014c9753de42651c767dd30682d563a9a6c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/auth/auth.controller.js",
+        "existe": true,
+        "sha256": "63ba0adb5f31a5aaee0ceb3aeac9f5e9179acfb7cd97bcb65e0ec8da70a29554",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/auth/auth.service.js",
+        "existe": true,
+        "sha256": "22775e598b4a153410040c1b97bcb5752a9e4b29e683235522502a564b72f2e1",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/auth/auth.repository.js",
+        "existe": true,
+        "sha256": "257c01f0168742b98b1f2cd5607ea93077b31629ab660c75bfad695421bde91c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/auth/auth.validators.js",
+        "existe": true,
+        "sha256": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/auth/auth.types.js",
+        "existe": true,
+        "sha256": "4ee34683099dc0432835c42117cacdefbddd86159518a85013eac318250069d7",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/dashboard/dashboard.routes.js",
+        "existe": true,
+        "sha256": "1ea0f3e49fe8a355da7eae956763d2461279c0c4751f46a0bd71c9810aa4106a",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/dashboard/dashboard.controller.js",
+        "existe": true,
+        "sha256": "9ce794e3c514f5d98e6c322cc9684ad4ce1745ed67b66fbb8e1269e6caa5a798",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/dashboard/dashboard.service.js",
+        "existe": true,
+        "sha256": "41bf4526b4648c363571f718aecface79eaf3bc77320195dff56eba202629625",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/dashboard/dashboard.repository.js",
+        "existe": true,
+        "sha256": "3f7b24a9505df6b24dd13ce7877ed9f9bcc3530d9b2c75d193859477f4cf03fb",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/dashboard/dashboard.validators.js",
+        "existe": true,
+        "sha256": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/dashboard/dashboard.types.js",
+        "existe": true,
+        "sha256": "3630921e601f812c26f97be70d116c399b30a7176c4ce9fa3b499f1e52410cc9",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/whatsapp/whatsapp.routes.js",
+        "existe": true,
+        "sha256": "1e68be6bd7239c98687fcceffc1fd536a992408b7445d968ee77c2f67ce18ed3",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/whatsapp/whatsapp.controller.js",
+        "existe": true,
+        "sha256": "5aeb010543c13d7401ed8ee7b6b1202f1bc04a42b4f98272c579aea7a12d909f",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/whatsapp/whatsapp.service.js",
+        "existe": true,
+        "sha256": "5012022d4660997a86719794847627b7c022f2183406e01fac8d8e90feacdc6d",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/whatsapp/whatsapp.repository.js",
+        "existe": true,
+        "sha256": "d9e28423dd10f695bc9bcbacdbbd6a21568b1c3fb9fa3dfb6a39e49c7704dd8c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/whatsapp/whatsapp.validators.js",
+        "existe": true,
+        "sha256": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/whatsapp/whatsapp.types.js",
+        "existe": true,
+        "sha256": "76dc6ebdd0eaa16b36f1a2bfea1b2ffad5ab666cbcbc32bc4857c62e28cbbff7",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/crm/crm.routes.js",
+        "existe": true,
+        "sha256": "16b0fec0f12380402b02f4b4914ee2ee7d52452d0c5a6ef32ee5740a62f3a9da",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/crm/crm.controller.js",
+        "existe": true,
+        "sha256": "ca2cf0fedb0e25cc817d516b2d89c1840af5855a7715d41c71fd5c3e21e5a164",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/crm/crm.service.js",
+        "existe": true,
+        "sha256": "64563008a4aa3540ee211651649d5cf441d87b8654f5b52cd73a100ba9d6d6b4",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/crm/crm.repository.js",
+        "existe": true,
+        "sha256": "f392e4c36b7f7c27a9db65e2e5b5c1ca9c21029048bedb2f2d9e7abb45066433",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/crm/crm.validators.js",
+        "existe": true,
+        "sha256": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/crm/crm.types.js",
+        "existe": true,
+        "sha256": "f5388f3666d88b6effdf88610f5bc206cfd74c3c4d91d32a6a23f40ccfe62ada",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/tenants/tenants.routes.js",
+        "existe": true,
+        "sha256": "d898efd4c31080f7e6287a2100f1fa77055f78e63df8bb7135b7106fa5ea08b8",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/tenants/tenants.controller.js",
+        "existe": true,
+        "sha256": "7302f14fdb5fc184add92ba0bb37365e3677c26f863ad4b1d937ebde7c7ce116",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/tenants/tenants.service.js",
+        "existe": true,
+        "sha256": "d6df3023ca11c0a288777a2c28b6a9fa04dcb47b0a72c5ca6bc373ff207c5a52",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/tenants/tenants.repository.js",
+        "existe": true,
+        "sha256": "268a5ebf4ee93842bfc5ff710f1d3e7fe78f5676b9b5950a3d9d31e765694ce2",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/tenants/tenants.validators.js",
+        "existe": true,
+        "sha256": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/tenants/tenants.types.js",
+        "existe": true,
+        "sha256": "6e5cf4f88a08140c403356138a21982016ce8d85369ccf9dd0eeebd4a76673f6",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/users/users.routes.js",
+        "existe": true,
+        "sha256": "18ce0e63cdb57fa290d26449bb99da6086ec8797e13739a9e835623378ba3a31",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/users/users.controller.js",
+        "existe": true,
+        "sha256": "2e7a07e86ebb8e1649f5887aefd1ea8c5389b81d55166bd9499fac0e0ed51d43",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/users/users.service.js",
+        "existe": true,
+        "sha256": "86096a0a70f25ca43275a5a1dc21487c32dc4cee9c475ef1d041abaadb3ecf5c",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/users/users.repository.js",
+        "existe": true,
+        "sha256": "2e6c2b82b21511cd8c1e5866037c43d5d87c578f61762d8dc4d209aee784eec5",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/users/users.validators.js",
+        "existe": true,
+        "sha256": "7e34d731c4daef8d9ecd1f0016e3d4fb1cc91415d92de0227c4800087c015776",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      },
+      {
+        "arquivo": "backend/src/modules/users/users.types.js",
+        "existe": true,
+        "sha256": "ba88539f3759a17b7b691bec8198df06f9c6153a14d3804bb5a30206bcc42995",
+        "sem_asterisco": true,
+        "asteriscos": [],
+        "ok": true
+      }
+    ],
+    "checks": {
+      "tem_backend_dir": true,
+      "tem_src_dir": true,
+      "tem_app": true,
+      "tem_server": true,
+      "tem_modules": true,
+      "legado_server_preservado": true,
+      "legado_routes_preservado": true
+    },
+    "erros": [],
+    "ok": true
+  },
+  "node_check": {
+    "total": 0,
+    "resultados": [],
+    "ok": true
+  },
+  "ok": true,
+  "docs_obrigatorios": [
+    "CONTEXTO_PROJETO.md",
+    "CHANGELOG.md",
+    "DECISOES_TECNICAS.md",
+    "PENDENCIAS.md"
+  ],
+  "manifesto_depois": "reports/etapa_28_manifesto_depois.json"
+}

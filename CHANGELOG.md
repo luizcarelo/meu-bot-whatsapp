@@ -674,3 +674,39 @@ Corrigidas propriedades de Typography usando sx.
 Removido Grid item do dashboard.
 Executado typecheck e build.
 <!-- ETAPA_27_2_FIM -->
+
+<!-- ETAPA_28_INICIO -->
+## Etapa 28 - Criacao do backend modular
+
+Data: 2026-07-08T19:08:13
+
+Adicionada pasta backend com estrutura modular.
+Adicionados app.js e server.js independentes.
+Adicionados helpers apiResponse e errors.
+Adicionados middlewares asyncHandler, errorHandler e requireAuth.
+Adicionados modulos base por dominio.
+Backend legado preservado.
+<!-- ETAPA_28_FIM -->
+
+<!-- ETAPA_28_1_INICIO -->
+## Etapa 28.1 - Validacao backend modular isolado
+
+Data: 2026-07-08T20:00:47
+
+Corrigido middleware requireAuth no backend modular.
+Executado node --check em todos os arquivos JS do backend modular.
+Executado npm run check.
+Validado backend modular isolado em porta de teste.
+Nenhum arquivo legado foi substituido.
+<!-- ETAPA_28_1_FIM -->
+
+<!-- ETAPA_29_1_INICIO -->
+## Etapa 29.1 - Catalogo base de API
+
+Data: 2026-07-08T20:15:43
+
+Adicionado catalogo de status HTTP.
+Adicionado catalogo de codigos de erro.
+Adicionada documentacao do padrao de respostas.
+Sem alteracao de rotas, handlers, banco, Docker, frontend ou legado.
+<!-- ETAPA_29_1_FIM -->

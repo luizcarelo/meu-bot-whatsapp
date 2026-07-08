@@ -122,3 +122,27 @@ Lista mensagens de um contato.
 ### POST /api/crm/enviar
 
 Envia mensagem para contato.
+
+<!-- ETAPA_29_1_INICIO -->
+## Etapa 29.1 - Catalogo de status e erros
+
+Criado catalogo inicial para padronizacao de respostas reais de API.
+
+### Arquivos criados
+
+backend/src/shared/http/statusCodes.js
+backend/src/shared/http/errorCodes.js
+docs/PADRAO_RESPOSTAS_API.md
+
+### Codigos de erro catalogados
+
+AUTH_REQUIRED
+AUTH_INVALID_CREDENTIALS
+VALIDATION_ERROR
+RESOURCE_NOT_FOUND
+WHATSAPP_DISCONNECTED
+WHATSAPP_STATUS_UNAVAILABLE
+TENANT_NOT_FOUND
+USER_NOT_FOUND
+INTERNAL_ERROR
+<!-- ETAPA_29_1_FIM -->
